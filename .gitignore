@@ -3,5 +3,10 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
-
 Gemfile.lock
+.DS_Store
+*.swp
+*.swo
+*~
+.bundle
+node_modules
