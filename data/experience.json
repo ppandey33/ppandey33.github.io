@@ -1,0 +1,43 @@
+[
+  {
+    "position": "Senior Analyst II, Software Engineering",
+    "company": "DXC Technologies",
+    "location": "Noida, India",
+    "period": "May 2016 - Present",
+    "project": "DXC Assure Claims (Insurance Domain)",
+    "achievements": [
+      "Architected and implemented microservice-based solutions improving modularity and reducing deployment time by 35%",
+      "Lead a 15-member development team, conducting code reviews, mentoring developers, and aligning architecture with business needs",
+      "Designed and developed shared core libraries (DLLs) that reduced feature development time by 25%",
+      "Integrated Google Drive, Office 365, and Gmail APIs for enterprise workflow automation",
+      "Collaborated with QA, DevOps, and Product teams for seamless CI/CD releases",
+      "Received DXC Champs Award and Collaborator Awards for technical excellence and leadership"
+    ]
+  },
+  {
+    "position": "Software Developer",
+    "company": "E-Teams (Client: Wipro & Halliburton Corporation)",
+    "location": "Noida, India",
+    "period": "Jul 2015 - Mar 2016",
+    "project": "Oil & Gas Asset Management",
+    "achievements": [
+      "Migrated legacy systems from ASP.NET to MVC 4.5 with AngularJS, enhancing maintainability by 40%",
+      "Implemented Active Directory authentication and improved access control and security",
+      "Refactored legacy modules and controllers to support updated architecture",
+      "Collaborated on unit and functional testing to ensure stability during migration"
+    ]
+  },
+  {
+    "position": "Software Developer",
+    "company": "Total Soft Solutions",
+    "location": "Gurugram, India",
+    "period": "Nov 2013 - Jun 2015",
+    "project": "School ERP & Asset Management Systems",
+    "achievements": [
+      "Developed School ERP modules including lesson plans, assessments, attendance, fee transactions and digital content management",
+      "Designed custom reporting dashboards for student and faculty performance",
+      "Built Asset Management ERP modules for property management and billing",
+      "Optimized performance with AJAX and caching techniques, improving response time by 30%"
+    ]
+  }
+]

@@ -1,0 +1,36 @@
+---
+layout: default
+title: Projects - Pawan Pandey
+custom_js: /assets/js/repos.js
+---
+
+<section class="section repos-section">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">⚡ GitHub Projects</h1>
+      <p class="page-description">Explore my open-source contributions and personal projects</p>
+    </div>
+    
+    <div class="repos-controls">
+      <div class="search-box glass-card">
+        <input type="text" id="repo-search" placeholder="🔍 Search repositories..." class="search-input">
+      </div>
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="starred">⭐ Starred</button>
+        <button class="filter-btn" data-filter="forked">🍴 Forked</button>
+      </div>
+    </div>
+    
+    <div id="repos-loading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p>Loading repositories...</p>
+    </div>
+    
+    <div id="repos-container" class="repos-grid" style="display: none;"></div>
+    
+    <div id="repos-error" class="error-state" style="display: none;">
+      <p>❌ Failed to load repositories. Please try again later.</p>
+    </div>
+  </div>
+</section>

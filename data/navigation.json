@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Home",
+    "url": "/",
+    "icon": "🏠"
+  },
+  {
+    "title": "Skills",
+    "url": "/#skills",
+    "icon": "💻"
+  },
+  {
+    "title": "Experience",
+    "url": "/#experience",
+    "icon": "💼"
+  },
+  {
+    "title": "Education",
+    "url": "/#education",
+    "icon": "🎓"
+  },
+  {
+    "title": "Achievements",
+    "url": "/#achievements",
+    "icon": "🏆"
+  },
+  {
+    "title": "Projects",
+    "url": "/repos",
+    "icon": "⚡"
+  },
+  {
+    "title": "Blog",
+    "url": "/blogs",
+    "icon": "📝"
+  }
+]

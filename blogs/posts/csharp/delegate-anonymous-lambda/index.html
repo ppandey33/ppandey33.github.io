@@ -1,0 +1,405 @@
+---
+layout: blog-post
+---
+
+<article class="blog-post">
+    <div class="post-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <h2>Introduction</h2>
+                <p>
+                    This article provides a comprehensive understanding of delegates, lambda expressions, and how to use 
+                    delegates with lambda expressions in C#. We'll explore the evolution of delegates from C# 1.0 through 
+                    to modern lambda expressions.
+                </p>
+
+                <h2>What is a Delegate?</h2>
+                <p>
+                    Delegates are classes that hold function references for .NET (specifically, the Common Language Infrastructure). 
+                    They are similar to C++ function pointers but with a crucial difference:
+                </p>
+
+                <div class="highlight-box">
+                    <strong>🔑 Key Difference:</strong>
+                    <ul>
+                        <li><strong>C++ Function Pointers:</strong> Only hold memory location of a function</li>
+                        <li><strong>C# Delegates:</strong> Type-safe classes that define return type and parameter types</li>
+                    </ul>
+                </div>
+
+                <p>
+                    Delegates allow you to pass methods as parameters to other methods, enabling powerful callback 
+                    mechanisms and event-driven programming.
+                </p>
+
+                <h2>Declaring a Delegate</h2>
+                <p>Syntax for declaring a delegate:</p>
+
+                <div class="code-block">
+                    <pre><code>&lt;Access Modifier&gt; delegate &lt;Return Type&gt; &lt;Delegate Name&gt;(&lt;Parameters&gt;)
+
+// Example
+public delegate int Del(int Value);</code></pre>
+                </div>
+
+                <h3>Initializing and Invoking Delegates</h3>
+                <div class="code-block">
+                    <pre><code>public delegate int Del(int Value);
+
+public static int AddFive(int Value)
+{
+    return Value + 5;
+}
+
+// Initialize delegate
+Del obj = new Del(AddFive);
+
+// Invoke delegate
+Console.WriteLine(obj(50)); // Output: 55
+
+// Or use Invoke method
+Console.WriteLine(obj.Invoke(50)); // Output: 55</code></pre>
+                </div>
+
+                <h3>Understanding Delegates Internally</h3>
+                <p>
+                    When you declare a delegate, the C# compiler generates a sealed class derived from 
+                    <code>System.MulticastDelegate</code>, which in turn derives from <code>System.Delegate</code>:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>public delegate int fun(int Value);
+
+fun ok = new fun(del);
+Type type = ok.GetType();
+
+Console.WriteLine("Base Class: " + type.BaseType);     // System.MulticastDelegate
+Console.WriteLine("Is Class: " + type.IsClass);        // True
+Console.WriteLine("Is Sealed: " + type.IsSealed);      // True</code></pre>
+                </div>
+
+                <h2>Types of Delegates</h2>
+                
+                <h3>1. Singlecast Delegate</h3>
+                <p>
+                    A Singlecast delegate (derived from <code>System.Delegate</code>) contains a reference for one method at a time:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>public delegate void Del();
+
+public void DisplayMessage()
+{
+    Console.WriteLine("Hello from DisplayMessage");
+}
+
+// Usage
+Del obj = new Del(DisplayMessage);
+obj.Invoke();</code></pre>
+                </div>
+
+                <h3>2. Multicast Delegate</h3>
+                <p>
+                    A Multicast delegate (derived from <code>System.MulticastDelegate</code>) can contain references for 
+                    multiple methods. Think of it like a coffee vending machine that combines ingredients:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>public delegate void Vender();
+
+public static void Milk()
+{
+    Console.Write("Milk + ");
+}
+
+public static void Tea()
+{
+    Console.Write("Tea = Tea");
+}
+
+public static void Coffee()
+{
+    Console.Write("Coffee = Coffee");
+}
+
+// Usage
+Vender vender = new Vender(Milk);
+int option = 1; // 1 for Tea, 2 for Coffee
+
+switch (option)
+{
+    case 1:
+        vender += Tea;    // Add Tea to the delegate
+        break;
+    case 2:
+        vender += Coffee; // Add Coffee to the delegate
+        break;
+}
+
+vender(); // Invokes: Milk + Tea = Tea</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <h4>📘 Multicast Delegate Operators</h4>
+                    <ul>
+                        <li><code>+</code> or <code>+=</code> - Add function reference</li>
+                        <li><code>-</code> or <code>-=</code> - Remove function reference</li>
+                    </ul>
+                </div>
+
+                <h2>Action&lt;T&gt; and Func&lt;T&gt; Delegates</h2>
+                <p>
+                    Instead of creating custom delegates, you can use predefined <code>Action&lt;T&gt;</code> and 
+                    <code>Func&lt;T&gt;</code> delegates from the <code>System</code> namespace:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>// Action&lt;T&gt; - Returns void, can have 0-16 parameters
+Action&lt;string&gt; printMessage = (msg) => Console.WriteLine(msg);
+printMessage("Hello World");
+
+// Func&lt;T&gt; - Returns a value, can have 0-16 parameters
+// Last type parameter is the return type
+Func&lt;int, int, int&gt; add = (a, b) => a + b;
+Console.WriteLine(add(5, 3)); // Output: 8</code></pre>
+                </div>
+
+                <h2>Delegate Evolution</h2>
+                <p>Delegates have evolved significantly across C# versions:</p>
+
+                <ul>
+                    <li><strong>C# 1.0:</strong> Create delegate instance with method reference</li>
+                    <li><strong>C# 2.0:</strong> Anonymous methods introduced</li>
+                    <li><strong>C# 3.0:</strong> Lambda expressions (more expressive and concise)</li>
+                </ul>
+
+                <h2>Anonymous Methods (C# 2.0)</h2>
+                <p>
+                    Anonymous methods allow you to define inline blocks of code as delegate parameters, reducing the need 
+                    for separate method declarations:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>public delegate void Del();
+
+// Without parameters
+Del obj = delegate() {
+    Console.WriteLine("Anonymous method without parameters");
+};
+obj();
+
+// With parameters
+public delegate void Del(string message);
+
+Del obj2 = delegate(string message) {
+    Console.WriteLine(message);
+};
+obj2("Hello from anonymous method");</code></pre>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>⚠️ Important:</strong> You cannot use <code>goto</code>, <code>break</code>, or <code>continue</code> 
+                    statements inside anonymous methods if the target is outside the block.
+                </div>
+
+                <h2>Lambda Expressions (C# 3.0)</h2>
+                <p>
+                    Lambda expressions are anonymous functions that provide a more concise syntax than anonymous methods. 
+                    They are especially useful for writing LINQ queries.
+                </p>
+
+                <h3>Lambda Expression Syntax</h3>
+                <div class="code-block">
+                    <pre><code>(parameters) => { expression or statement; }
+
+// Example with explicit return
+Del obj = (Value) => {
+    int x = Value * 2;
+    return x;
+};
+
+// Simplified version (single expression)
+Del obj = Value => Value * 2;</code></pre>
+                </div>
+
+                <h3>Lambda Expression Rules</h3>
+                <ul>
+                    <li>Parentheses are optional for single parameter</li>
+                    <li>Curly braces are optional for single statement</li>
+                    <li>Return keyword is optional for single expression</li>
+                    <li>Type inference determines parameter types automatically</li>
+                </ul>
+
+                <h3>Examples of Lambda Expressions</h3>
+                <div class="code-block">
+                    <pre><code>// No parameters
+() => Console.WriteLine("No parameters");
+
+// Single parameter (parentheses optional)
+x => x * x
+
+// Multiple parameters (parentheses required)
+(x, y) => x + y
+
+// Explicit type declaration
+(int x, int y) => x + y
+
+// Multiple statements (curly braces required)
+(x, y) => {
+    int sum = x + y;
+    return sum * 2;
+}</code></pre>
+                </div>
+
+                <h3>Lambda with Different Delegate Types</h3>
+                <div class="code-block">
+                    <pre><code>// With custom delegate
+public delegate int Del(int Value);
+Del obj = Value => Value * 2;
+Console.WriteLine(obj(5)); // Output: 10
+
+// With Func&lt;T&gt;
+Func&lt;int, int&gt; square = x => x * x;
+Console.WriteLine(square(5)); // Output: 25
+
+// With Action&lt;T&gt;
+Action&lt;string&gt; print = msg => Console.WriteLine(msg);
+print("Hello Lambda"); // Output: Hello Lambda
+
+// With Predicate&lt;T&gt;
+Predicate&lt;int&gt; isPositive = x => x > 0;
+Console.WriteLine(isPositive(5));  // Output: True
+Console.WriteLine(isPositive(-3)); // Output: False</code></pre>
+                </div>
+
+                <h2>Variable Scope with Lambda Expressions</h2>
+                <p>
+                    Lambda expressions can access variables declared outside their block. The compiler creates an anonymous 
+                    class to manage these captured variables:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>delegate bool Del(int z);
+
+public void Init(int Value)
+{
+    int j = 0;
+    Del del = (x) => { 
+        j = 12; 
+        return x == j; 
+    };
+    
+    Console.WriteLine("j before: " + j); // Output: 0
+    bool result = del(12);
+    Console.WriteLine("j after: " + j);  // Output: 12
+    Console.WriteLine("result: " + result); // Output: True
+}</code></pre>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>⚠️ Important:</strong> Captured variables will not be garbage-collected until the delegate that 
+                    references them goes out of scope. This can lead to unexpected behavior if not handled carefully.
+                </div>
+
+                <h2>Practical Examples</h2>
+
+                <h3>Sorting with Lambda Expressions</h3>
+                <div class="code-block">
+                    <pre><code>List&lt;int&gt; numbers = new List&lt;int&gt; { 5, 2, 8, 1, 9, 3 };
+
+// Sort ascending
+numbers.Sort((a, b) => a.CompareTo(b));
+
+// Sort descending
+numbers.Sort((a, b) => b.CompareTo(a));
+
+// Custom object sorting
+List&lt;Person&gt; people = new List&lt;Person&gt;
+{
+    new Person { Name = "Alice", Age = 30 },
+    new Person { Name = "Bob", Age = 25 },
+    new Person { Name = "Charlie", Age = 35 }
+};
+
+// Sort by age
+people.Sort((p1, p2) => p1.Age.CompareTo(p2.Age));
+
+// Sort by name
+people.Sort((p1, p2) => p1.Name.CompareTo(p2.Name));</code></pre>
+                </div>
+
+                <h3>Event Handling with Lambda Expressions</h3>
+                <div class="code-block">
+                    <pre><code>// Button click event (in WPF/WinForms)
+button.Click += (sender, e) => {
+    Console.WriteLine("Button clicked!");
+    // Handle click logic here
+};
+
+// Timer elapsed event
+timer.Elapsed += (sender, e) => {
+    Console.WriteLine("Timer elapsed at " + DateTime.Now);
+};</code></pre>
+                </div>
+
+                <h3>LINQ Queries with Lambda Expressions</h3>
+                <div class="code-block">
+                    <pre><code>List&lt;int&gt; numbers = new List&lt;int&gt; { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+// Filter even numbers
+var evenNumbers = numbers.Where(n => n % 2 == 0);
+
+// Transform data
+var squared = numbers.Select(n => n * n);
+
+// Find first element matching condition
+var firstGreaterThanFive = numbers.FirstOrDefault(n => n > 5);
+
+// Check if any element matches condition
+bool hasEvenNumber = numbers.Any(n => n % 2 == 0);
+
+// Get sum of elements matching condition
+int sumOfEvens = numbers.Where(n => n % 2 == 0).Sum();</code></pre>
+                </div>
+
+                <h2>Best Practices</h2>
+                <div class="info-box">
+                    <h4>💡 Tips for Using Delegates and Lambda Expressions</h4>
+                    <ul>
+                        <li>Prefer lambda expressions over anonymous methods for cleaner code</li>
+                        <li>Use <code>Action&lt;T&gt;</code> and <code>Func&lt;T&gt;</code> instead of custom delegates when possible</li>
+                        <li>Keep lambda expressions short and simple (ideally one line)</li>
+                        <li>Be cautious with captured variables - they can cause memory leaks</li>
+                        <li>Use explicit parameter types when type inference fails</li>
+                        <li>Consider extracting complex lambda expressions into named methods</li>
+                    </ul>
+                </div>
+
+                <h2>Common Pitfalls</h2>
+                <div class="highlight-box">
+                    <strong>⚠️ Watch Out For:</strong>
+                    <ul>
+                        <li><strong>Closure Variables:</strong> Variables captured in loops can lead to unexpected behavior</li>
+                        <li><strong>Memory Leaks:</strong> Long-lived delegates holding references to large objects</li>
+                        <li><strong>Performance:</strong> Creating many delegate instances can impact performance</li>
+                        <li><strong>Debugging:</strong> Lambda expressions can be harder to debug than named methods</li>
+                    </ul>
+                </div>
+
+                <h2>Conclusion</h2>
+                <p>
+                    Delegates, anonymous methods, and lambda expressions are powerful features in C# that enable functional 
+                    programming patterns, event-driven architectures, and clean, expressive code. Understanding their evolution 
+                    from C# 1.0 through modern versions helps developers write more maintainable and efficient applications. 
+                    Lambda expressions, in particular, are essential for LINQ queries and modern C# development.
+                </p>
+
+                <p>
+                    While delegates provide type-safe function pointers, and anonymous methods offer inline code blocks, 
+                    lambda expressions combine the best of both worlds with concise syntax and powerful capabilities. Use 
+                    them wisely to create elegant solutions to complex problems.
+                </p>
+            </div>
+        </div>
+    </div>
+</article>

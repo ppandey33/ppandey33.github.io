@@ -1,0 +1,399 @@
+---
+layout: blog-post
+---
+<article class="blog-post">
+    <div class="post-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <h2>Introduction</h2>
+                <p>
+                    Generics are a powerful feature introduced in .NET 2.0 (Visual Studio 2005) that allow you to create 
+                    type-safe and reusable code. This article explores all aspects of generics in C#, covering everything 
+                    from basic concepts to advanced implementations.
+                </p>
+
+                <h2>Overview of Generics</h2>
+                <p>
+                    Generics are deeply integrated with the Intermediate Language (IL) and can be used in any type of 
+                    .NET application - Console, Windows, Web, or Service applications. The .NET Framework provides the 
+                    <strong>System.Collections.Generic</strong> namespace with several generic-based collection classes. 
+                    Microsoft recommends using generic classes instead of older non-generic collection classes like ArrayList.
+                </p>
+
+                <h2>Why Generic Classes and Methods?</h2>
+                <p>
+                    Generic classes are especially useful for creating algorithms that provide:
+                </p>
+                <ul>
+                    <li><strong>Reusability:</strong> Write once, use with multiple types</li>
+                    <li><strong>Type Safety:</strong> Compile-time type checking</li>
+                    <li><strong>Efficiency:</strong> No boxing/unboxing overhead</li>
+                </ul>
+
+                <h3>The Problem with Non-Generic Collections</h3>
+                <p>
+                    Non-generic collection classes like ArrayList have significant limitations. ArrayList uses the Object 
+                    class internally to store values, which means:
+                </p>
+
+                <div class="highlight-box">
+                    <strong>⚠️ Key Issues:</strong>
+                    <ul>
+                        <li>Value types must be boxed when stored and unboxed when retrieved</li>
+                        <li>Boxing and unboxing causes performance loss</li>
+                        <li>No compile-time type safety</li>
+                        <li>Runtime errors instead of compile-time errors</li>
+                    </ul>
+                </div>
+
+                <p>
+                    For example, you can store mixed types in an ArrayList:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>ArrayList list = new ArrayList();
+list.Add(2);        // int
+list.Add("text");   // string - No compile error!
+
+// This will throw InvalidCastException at runtime
+foreach (int element in list)
+{
+    Console.WriteLine(element);
+}</code></pre>
+                </div>
+
+                <h2>Creating Generic Classes</h2>
+                <p>
+                    Here's an example of a generic LinkedList implementation that solves the problems mentioned above:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>public class LinkedListNode&lt;T&gt;
+{
+    public LinkedListNode(T _Value)
+    {
+        this.Value = _Value;
+    }
+
+    public T Value { get; internal set; }
+    public LinkedListNode&lt;T&gt; Next { get; internal set; }
+    public LinkedListNode&lt;T&gt; Last { get; internal set; }
+}
+
+public class LinkedList&lt;T&gt; : IEnumerable&lt;T&gt;
+{
+    public LinkedListNode&lt;T&gt; First { get; private set; }
+    public LinkedListNode&lt;T&gt; Last { get; private set; }
+
+    public void AddList(T Node)
+    {
+        LinkedListNode&lt;T&gt; NewNode = new LinkedListNode&lt;T&gt;(Node);
+        if (First == null)
+        {
+            First = NewNode;
+            Last = First;
+        }
+        else
+        {
+            Last.Next = NewNode;
+            Last = NewNode;
+        }
+    }
+
+    public IEnumerator&lt;T&gt; GetEnumerator()
+    {
+        LinkedListNode&lt;T&gt; current = First;
+        while (current != null)
+        {
+            yield return current.Value;
+            current = current.Next;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+}</code></pre>
+                </div>
+
+                <h3>Using Generic Collections</h3>
+                <div class="code-block">
+                    <pre><code>// Type-safe int collection
+LinkedList&lt;int&gt; List1 = new LinkedList&lt;int&gt;();
+List1.AddList(2);
+List1.AddList(3);
+List1.AddList(5);
+// List1.AddList("4"); // Compile error!
+
+// Type-safe string collection
+LinkedList&lt;string&gt; List2 = new LinkedList&lt;string&gt;();
+List2.AddList("2");
+List2.AddList("3");</code></pre>
+                </div>
+
+                <h2>Generic Parameters Type</h2>
+                <p>
+                    When instantiating a generic type, you specify the type argument:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>LinkedList&lt;int&gt; obj1 = new LinkedList&lt;int&gt;();
+LinkedList&lt;string&gt; obj2 = new LinkedList&lt;string&gt;();
+LinkedList&lt;MyClass&gt; obj3 = new LinkedList&lt;MyClass&gt;();</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <h4>💡 Naming Conventions for Type Parameters</h4>
+                    <ul>
+                        <li>Use <code>T</code> for a single type parameter: <code>public class LinkList&lt;T&gt;</code></li>
+                        <li>Use <code>T</code> prefix for multiple parameters: <code>public delegate TOut Con&lt;TIn, TOut&gt;(TIn from)</code></li>
+                    </ul>
+                </div>
+
+                <h2>Constraints on Type Parameters</h2>
+                <p>
+                    Constraints restrict what types can be used as type arguments. There are 6 types of constraints:
+                </p>
+
+                <table class="constraint-table">
+                    <tr>
+                        <th>Constraint</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>where T : new()</code></td>
+                        <td>Must have public parameterless constructor</td>
+                    </tr>
+                    <tr>
+                        <td><code>where T : &lt;interface&gt;</code></td>
+                        <td>Must implement specified interface</td>
+                    </tr>
+                    <tr>
+                        <td><code>where T : X</code></td>
+                        <td>Must be or derive from X</td>
+                    </tr>
+                    <tr>
+                        <td><code>where T : &lt;base class&gt;</code></td>
+                        <td>Must derive from specified base class</td>
+                    </tr>
+                    <tr>
+                        <td><code>where T : struct</code></td>
+                        <td>Must be a value type</td>
+                    </tr>
+                    <tr>
+                        <td><code>where T : class</code></td>
+                        <td>Must be a reference type</td>
+                    </tr>
+                </table>
+
+                <h3>Example with Constraints</h3>
+                <div class="code-block">
+                    <pre><code>// Only value types allowed
+public class LinkedList&lt;T&gt; : IEnumerable&lt;T&gt; where T : struct
+{
+    // Implementation
+}
+
+// Usage
+LinkedList&lt;int&gt; list1 = new LinkedList&lt;int&gt;(); // Works
+LinkedList&lt;string&gt; list2 = new LinkedList&lt;string&gt;(); // Compile error!</code></pre>
+                </div>
+
+                <h2>Inheritance with Generics</h2>
+                <p>
+                    Generic types can implement interfaces and derive from base classes:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>// Generic class implementing generic interface
+public class LinkedList&lt;T&gt; : IEnumerable&lt;T&gt; where T : struct { }
+
+// Generic class derived from generic base
+public class ParentClass&lt;T&gt; { }
+public class ChildClass&lt;T&gt; : ParentClass&lt;T&gt; { }
+
+// Abstract generic class
+public abstract class ParentClass&lt;T&gt;
+{
+    public abstract T Add(T x, T y);
+}
+
+public class ChildClass : ParentClass&lt;int&gt;
+{
+    public override int Add(int x, int y)
+    {
+        return x + y;
+    }
+}</code></pre>
+                </div>
+
+                <h2>Static Members in Generic Classes</h2>
+                <div class="highlight-box">
+                    <strong>⚠️ Important:</strong> Static members of a generic class are only shared within single instantiation of the class.
+                </div>
+
+                <div class="code-block">
+                    <pre><code>public class First&lt;T&gt;
+{
+    public static int A;
+}
+
+// Usage
+First&lt;string&gt;.A = 50;
+First&lt;int&gt;.A = 100;
+Console.WriteLine(First&lt;int&gt;.A); // Prints 100
+
+// Two separate static fields exist for different type arguments</code></pre>
+                </div>
+
+                <h2>Generic Interfaces</h2>
+                <p>
+                    Generic interfaces help avoid boxing/unboxing operations:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>interface ISwap
+{
+    void Swap&lt;T&gt;(ref T First, ref T Sec);
+}
+
+class Program : ISwap
+{
+    public void Swap&lt;T&gt;(ref T First, ref T Sec)
+    {
+        T Temp = First;
+        First = Sec;
+        Sec = Temp;
+    }
+    
+    static void Main(string[] args)
+    {
+        Program p = new Program();
+        int a = 10, b = 20;
+        p.Swap&lt;int&gt;(ref a, ref b);
+        Console.WriteLine($"a = {a}, b = {b}");
+        
+        string s1 = "Hello", s2 = "World";
+        p.Swap&lt;string&gt;(ref s1, ref s2);
+        Console.WriteLine($"s1 = {s1}, s2 = {s2}");
+    }
+}</code></pre>
+                </div>
+
+                <h2>Generic Methods</h2>
+                <p>
+                    Generic methods allow you to write a single method that works with multiple types:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>public static void Swap&lt;T&gt;(ref T First, ref T Last)
+{
+    T Temp = First;
+    First = Last;
+    Last = Temp;
+}
+
+// Usage with explicit type parameter
+Swap&lt;int&gt;(ref firstValue, ref lastValue);
+
+// Usage with type inference (compiler infers type)
+Swap(ref firstName, ref lastName);</code></pre>
+                </div>
+
+                <h3>Type Inference</h3>
+                <p>
+                    Type inference is the compiler's ability to automatically deduce the type parameter based on method arguments. 
+                    It occurs at compile time before resolving overloaded methods.
+                </p>
+
+                <h2>Generic Delegates</h2>
+                <p>
+                    Generic delegates allow you to create type-safe function pointers that work with multiple types:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>public delegate T fun&lt;T&gt;(T Value);
+
+public int MultiplyByTwo(int x) { return x * 2; }
+public string Concatenate(string xx) { return xx + " world"; }
+
+// Usage
+fun&lt;int&gt; obj = new fun&lt;int&gt;(MultiplyByTwo);
+Console.WriteLine(obj(20)); // Output: 40
+
+fun&lt;string&gt; obj1 = new fun&lt;string&gt;(Concatenate);
+Console.WriteLine(obj1("Hello")); // Output: Hello world</code></pre>
+                </div>
+
+                <h2>The Default Keyword</h2>
+                <p>
+                    Use the <code>default</code> keyword to get the default value for a type parameter:
+                </p>
+
+                <div class="code-block">
+                    <pre><code>public static void Swap&lt;T&gt;(ref T First, ref T Sec)
+{
+    T Temp = default(T); // null for reference types, 0 for value types
+    Temp = First;
+    First = Sec;
+    Sec = Temp;
+}</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <h4>📘 Default Values</h4>
+                    <ul>
+                        <li>Reference types: <code>null</code></li>
+                        <li>Numeric types: <code>0</code></li>
+                        <li>Boolean: <code>false</code></li>
+                        <li>Structures: All fields set to their defaults</li>
+                    </ul>
+                </div>
+
+                <h2>Generics at Runtime</h2>
+                <p>
+                    The .NET runtime generates different classes based on value types and reference types:
+                </p>
+
+                <ul>
+                    <li><strong>Value Types:</strong> Runtime generates separate classes for each value type</li>
+                    <li><strong>Reference Types:</strong> Runtime reuses the same class for all reference types</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code>MyClass&lt;int&gt; obj1 = new MyClass&lt;int&gt;();
+MyClass&lt;int&gt; obj2 = new MyClass&lt;int&gt;(); // Reuses same generated class
+
+MyClass&lt;byte&gt; obj3 = new MyClass&lt;byte&gt;(); // New class generated
+
+class A { }
+class B { }
+MyClass&lt;A&gt; obj4 = new MyClass&lt;A&gt;();
+MyClass&lt;B&gt; obj5 = new MyClass&lt;B&gt;(); // Reuses same class!</code></pre>
+                </div>
+
+                <h2>Best Practices</h2>
+                <div class="highlight-box">
+                    <strong>💡 Key Takeaways:</strong>
+                    <ul>
+                        <li>Always prefer generic collections over non-generic ones</li>
+                        <li>Use constraints when you need specific functionality from type parameters</li>
+                        <li>Use meaningful names for type parameters (T prefix convention)</li>
+                        <li>Consider performance implications of value vs reference types</li>
+                        <li>Leverage type inference when possible for cleaner code</li>
+                        <li>Use <code>default(T)</code> for initializing generic type variables</li>
+                    </ul>
+                </div>
+
+                <h2>Conclusion</h2>
+                <p>
+                    Generics are a fundamental feature in C# that enable type-safe, reusable, and efficient code. By 
+                    understanding how to properly use generic classes, methods, interfaces, and delegates, you can write 
+                    more maintainable and performant applications. The elimination of boxing/unboxing overhead and 
+                    compile-time type safety make generics an essential tool in every C# developer's toolkit.
+                </p>
+            </div>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,90 @@
+---
+layout: default
+title: Home
+---
+
+<section id="hero" class="hero-section">
+  <div class="container">
+    <div class="hero-content glass-card">
+      <div class="hero-text">
+        <div class="hero-left-container">
+          <p class="hero-greeting" data-config="hero.greeting"></p>
+          <h1 class="hero-title" data-config="hero.title"></h1>
+          <p class="hero-subtitle" data-config="hero.subtitle"></p>
+          <p class="hero-description" data-config="hero.description"></p>
+          <div class="hero-cta">
+            <a
+              href="#experience"
+              class="btn btn-primary"
+              data-config-text="hero.cta_primary.text"
+            ></a>
+            <a
+              href="repos"
+              class="btn btn-secondary"
+              data-config-text="hero.cta_secondary.text"
+            ></a>
+          </div>
+          <div class="hero-contact">
+            <a href="mailto:{{ site.email }}" title="Email"
+              ><i class="icon">✉</i></a
+            >
+            <a
+              href="https://linkedin.com/in/{{ site.linkedin_username }}"
+              target="_blank"
+              title="LinkedIn"
+              ><i class="icon">in</i></a
+            >
+            <a
+              href="https://github.com/{{ site.github_username }}"
+              target="_blank"
+              title="GitHub"
+              ><i class="icon">⚡</i></a
+            >
+            <span class="location">📍 Noida, India</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-avatar">
+        <div class="avatar-container">
+          <div class="avatar-glow"></div>
+          <div class="avatar-circle">
+            <img
+              src="assets/images/profile-wbg.png"
+              alt="Pawan Pandey"
+              class="profile-photo"
+            />
+            <!-- <span class="avatar-initial">PP</span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section">
+  <div class="container">
+    <h2 class="section-title">Skills & Expertise</h2>
+    <div id="skills-container" class="skills-grid"></div>
+  </div>
+</section>
+
+<section id="experience" class="section">
+  <div class="container">
+    <h2 class="section-title">Professional Experience</h2>
+    <div id="experience-container" class="experience-timeline"></div>
+  </div>
+</section>
+
+<section id="education" class="section">
+  <div class="container">
+    <h2 class="section-title">Education</h2>
+    <div id="education-container" class="education-grid"></div>
+  </div>
+</section>
+
+<section id="achievements" class="section">
+  <div class="container">
+    <h2 class="section-title">Achievements & Recognition</h2>
+    <div id="achievements-container" class="achievements-grid"></div>
+  </div>
+</section>

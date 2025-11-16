@@ -1,0 +1,98 @@
+---
+custom_js: /assets/js/posts.js
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+    <link
+      rel="stylesheet"
+      href="{{ '/assets/css/blogs.css' | relative_url }}"
+    />
+  </head>
+  <body>
+    {% include header.html %}
+
+    <article class="blog-post">
+      <header class="post-header">
+        <div class="container">
+          <nav class="breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="/blogs/">Blog</a>
+            <span>/</span>
+            <span class="current-category" data-blog-meta="category"></span>
+            <span>/</span>
+            <span class="current" data-blog-meta="title"></span>
+          </nav>
+
+          <div class="post-meta">
+            <span class="post-category" data-blog-meta="category"></span>
+
+            <a
+              class="post-date"
+              data-blog-meta="originalUrl"
+              data-blog-meta-text="dateFormatted"
+              target="_blank"
+            ></a>
+
+            <span class="post-author"
+              >✍️ <span data-blog-meta="author"></span
+            ></span>
+
+            <span class="post-reading-time"
+              >⏱️ <span data-blog-meta="readTime"></span
+            ></span>
+          </div>
+
+          <h1 class="post-title" data-blog-meta="title"></h1>
+
+          <p class="post-excerpt" data-blog-meta="excerpt"></p>
+        </div>
+      </header>
+
+      <div class="post-content">
+        <div class="container">
+          <div class="content-wrapper">{{ content }}</div>
+
+          <div class="post-footer">
+            <div class="post-tags" id="blog-tags">
+              <!-- Tags will be dynamically inserted -->
+            </div>
+
+            <div class="post-share">
+              <h4>Share this article</h4>
+              <div class="share-buttons">
+                <a href="#" class="share-btn twitter" id="share-twitter"
+                  >Twitter</a
+                >
+                <a href="#" class="share-btn linkedin" id="share-linkedin"
+                  >LinkedIn</a
+                >
+                <a href="#" class="share-btn facebook" id="share-facebook"
+                  >Facebook</a
+                >
+              </div>
+            </div>
+
+            <nav class="post-navigation">
+              <a href="#" class="nav-prev" id="prev-post" style="display: none"
+                >← Previous Post</a
+              >
+              <a href="/blogs/" class="nav-home">All Posts</a>
+              <a href="#" class="nav-next" id="next-post" style="display: none"
+                >Next Post →</a
+              >
+            </nav>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    {% include footer.html %}
+
+<q></q>
+    {% include scripts.html %}
+  </body>
+</html>

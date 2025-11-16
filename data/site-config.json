@@ -1,0 +1,32 @@
+{
+  "title": "Pawan Pandey",
+  "subtitle": "Full Stack Developer",
+  "email": "Pawan4email@gmail.com",
+  "phone": "+91-8285814645",
+  "location": "Noida, Uttar Pradesh, India",
+  "github": "ppandey33",
+  "linkedin": "pawan-pandey-48842a79",
+  "description": "Senior .NET Full Stack Developer with 11+ years of experience in designing, developing, and deploying enterprise-grade web applications.",
+  "hero": {
+    "greeting": "Hi, I'm Pawan Kumar Pandey",
+    "title": "Lead / Senior .NET Full Stack Developer",
+    "subtitle": "Advancing Toward ML & AI Solutions",
+    "description": "11+ years of experience in designing, developing, and deploying enterprise-grade web applications",
+    "cta_primary": {
+      "text": "View Experience",
+      "url": "#experience"
+    },
+    "cta_secondary": {
+      "text": "GitHub Projects",
+      "url": "repos"
+    }
+  },
+  "theme": {
+    "default": "light",
+    "colors": {
+      "primary": "#0F172A",
+      "secondary": "#1E293B",
+      "accent": "#22D3EE"
+    }
+  }
+}
