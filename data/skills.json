@@ -1,0 +1,26 @@
+[
+  {
+    "category": "Backend",
+    "skills": ["C#", ".NET Core", "ASP.NET Web API", "EF Core", "LINQ"]
+  },
+  {
+    "category": "Frontend",
+    "skills": ["Angular", "React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Bootstrap"]
+  },
+  {
+    "category": "Architecture",
+    "skills": ["Clean Architecture", "Microservices", "Design Patterns", "CQRS", "Mediator", "Micro Frontend"]
+  },
+  {
+    "category": "DevOps & Cloud",
+    "skills": ["Docker", "Kubernetes", "AWS", "Jenkins", "Kafka", "CI/CD"]
+  },
+  {
+    "category": "Databases",
+    "skills": ["SQL Server", "Oracle 11g"]
+  },
+  {
+    "category": "Methodologies",
+    "skills": ["SAFE Agile", "TDD", "Code Reviews"]
+  }
+]

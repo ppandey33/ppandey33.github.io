@@ -1,0 +1,590 @@
+---
+---
+
+<article class="blog-post">
+    <div class="post-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <h2>Introduction</h2>
+                <p>
+                    A C# collection is a group of multiple objects. The .NET Framework provides collection classes in both 
+                    <code>System.Collections</code> and <code>System.Collections.Generic</code> namespaces. As discussed in 
+                    previous articles, System.Collection classes are not type-safe. Since .NET Framework 2.0, we can use 
+                    generic collections that provide type safety, better performance, and improved code maintainability.
+                </p>
+
+                <div class="info-box">
+                    <h4>📚 Additional Collection Namespaces</h4>
+                    <ul>
+                        <li><strong>System.Collections.Specialized:</strong> For specific collection types</li>
+                        <li><strong>System.Collections.Concurrent:</strong> For thread-safe collections</li>
+                    </ul>
+                </div>
+
+                <h2>List&lt;T&gt; - Dynamic Arrays</h2>
+                <p>
+                    List&lt;T&gt; is a generic class for creating dynamic lists. It implements multiple interfaces:
+                </p>
+
+                <table class="interface-table">
+                    <tr>
+                        <th>Interface</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>IList&lt;T&gt;</code></td>
+                        <td>Index-based access, InsertAt(), RemoveAt() methods</td>
+                    </tr>
+                    <tr>
+                        <td><code>ICollection&lt;T&gt;</code></td>
+                        <td>Count property, Add(), Remove(), Clear(), CopyTo() methods</td>
+                    </tr>
+                    <tr>
+                        <td><code>IEnumerable&lt;T&gt;</code></td>
+                        <td>Required for foreach statements, defines GetEnumerator()</td>
+                    </tr>
+                </table>
+
+                <h3>Creating a List</h3>
+                <div class="code-block">
+                    <pre><code>// Default constructor (initial capacity = 4)
+List&lt;int&gt; numbers = new List&lt;int&gt;();
+
+// With specified capacity
+List&lt;int&gt; numbers = new List&lt;int&gt;(10);
+
+// With collection initializer
+List&lt;string&gt; names = new List&lt;string&gt; { "Alice", "Bob", "Charlie" };
+
+// From existing collection
+List&lt;int&gt; copy = new List&lt;int&gt;(numbers);</code></pre>
+                </div>
+
+                <h3>Adding and Accessing Elements</h3>
+                <div class="code-block">
+                    <pre><code>public class Student : IComparable&lt;Student&gt;
+{
+    public int RollNo { get; set; }
+    public string Name { get; set; }
+    public int Marks { get; set; }
+
+    public Student(string name, int marks = 0, int rollNo = 0)
+    {
+        Name = name;
+        Marks = marks;
+        RollNo = rollNo;
+    }
+
+    public int CompareTo(Student other)
+    {
+        return this.Name.CompareTo(other.Name);
+    }
+}
+
+// Create and populate list
+List&lt;Student&gt; students = new List&lt;Student&gt;()
+{
+    new Student("Jay", 80, 1),
+    new Student("Ajay", 70, 2),
+    new Student("Sanjay", 60, 3)
+};
+
+// Access elements
+foreach (Student student in students)
+{
+    Console.WriteLine($"{student.Name} - {student.RollNo} - {student.Marks}");
+}
+
+// Insert at specific position
+students.Insert(1, new Student("Vijay", 75, 4));</code></pre>
+                </div>
+
+                <h3>Capacity Management</h3>
+                <div class="highlight-box">
+                    <strong>💡 Performance Tip:</strong> List capacity doubles when exceeded (4 → 8 → 16 → 32). 
+                    If you know the size beforehand, specify capacity to avoid reallocations.
+                </div>
+
+                <div class="code-block">
+                    <pre><code>List&lt;int&gt; list = new List&lt;int&gt;();
+list.Capacity = 100; // Set capacity explicitly
+
+// After operations, remove unused capacity
+list.TrimExcess(); // Only if count > 90% of capacity</code></pre>
+                </div>
+
+                <h3>ForEach Method with Action&lt;T&gt;</h3>
+                <div class="code-block">
+                    <pre><code>List&lt;Student&gt; students = new List&lt;Student&gt;() { /* ... */ };
+
+// Using ForEach with Console.WriteLine
+students.ForEach(Console.WriteLine);
+
+// Using lambda expression
+students.ForEach(s => Console.WriteLine($"{s.Name}: {s.Marks}"));</code></pre>
+                </div>
+
+                <h3>Removing Elements</h3>
+                <div class="code-block">
+                    <pre><code>// Remove by object (uses IEquatable&lt;T&gt; or Equals())
+if (students.Remove(student))
+{
+    Console.WriteLine("Student removed");
+}
+
+// Remove by index (more efficient)
+students.RemoveAt(0);
+
+// Remove range
+students.RemoveRange(0, 2); // Remove 2 elements starting at index 0</code></pre>
+                </div>
+
+                <h3>Searching Elements</h3>
+                <div class="code-block">
+                    <pre><code>// IndexOf - returns index or -1
+int index = students.IndexOf(student);
+
+// FindIndex with predicate
+int index = students.FindIndex(s => s.RollNo == 2);
+
+// Find - returns first matching element
+Student student = students.Find(s => s.Name == "Jay");
+
+// FindAll - returns all matching elements
+List&lt;Student&gt; jays = students.FindAll(s => s.Name == "Jay");
+
+// Exists - returns bool
+bool exists = students.Exists(s => s.Marks > 70);</code></pre>
+                </div>
+
+                <h3>Sorting</h3>
+                <div class="code-block">
+                    <pre><code>// Default sort (uses IComparable&lt;T&gt;)
+students.Sort();
+
+// Custom comparer with IComparer&lt;T&gt;
+public class StudentComparer : IComparer&lt;Student&gt;
+{
+    private enum SortType { Name, RollNo, Marks }
+    private SortType type;
+
+    public StudentComparer(SortType type)
+    {
+        this.type = type;
+    }
+
+    public int Compare(Student x, Student y)
+    {
+        switch (type)
+        {
+            case SortType.Marks:
+                return x.Marks.CompareTo(y.Marks);
+            case SortType.RollNo:
+                return x.RollNo.CompareTo(y.RollNo);
+            default:
+                return x.Name.CompareTo(y.Name);
+        }
+    }
+}
+
+// Usage
+students.Sort(new StudentComparer(StudentComparer.SortType.Marks));
+
+// Lambda expression sort
+students.Sort((s1, s2) => s1.Marks.CompareTo(s2.Marks));</code></pre>
+                </div>
+
+                <h2>Queue&lt;T&gt; - FIFO Collection</h2>
+                <p>
+                    Queue implements First-In-First-Out (FIFO) processing. Elements added first are accessed first.
+                </p>
+
+                <table class="method-table">
+                    <tr>
+                        <th>Method/Property</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>Enqueue(T)</code></td>
+                        <td>Adds element to the end</td>
+                    </tr>
+                    <tr>
+                        <td><code>Dequeue()</code></td>
+                        <td>Removes and returns element from start</td>
+                    </tr>
+                    <tr>
+                        <td><code>Peek()</code></td>
+                        <td>Returns element from start without removing</td>
+                    </tr>
+                    <tr>
+                        <td><code>Count</code></td>
+                        <td>Number of items in queue</td>
+                    </tr>
+                    <tr>
+                        <td><code>TrimExcess()</code></td>
+                        <td>Reduces capacity to match count</td>
+                    </tr>
+                </table>
+
+                <h3>Queue Example: Music Player</h3>
+                <div class="code-block">
+                    <pre><code>public class Music
+{
+    public string SongName { get; set; }
+    public string Song { get; set; }
+
+    public Music(string songName, string song)
+    {
+        SongName = songName;
+        Song = song;
+    }
+}
+
+public class MusicLibrary
+{
+    private readonly Queue&lt;Music&gt; queue = new Queue&lt;Music&gt;();
+
+    public void AddSong(Music music)
+    {
+        lock (this)
+        {
+            queue.Enqueue(music);
+        }
+    }
+
+    public Music GetSong()
+    {
+        Music music = null;
+        lock (this)
+        {
+            if (queue.Count > 0)
+                music = queue.Dequeue();
+        }
+        return music;
+    }
+
+    public bool HasSongs => queue.Count > 0;
+}
+
+// Usage
+MusicLibrary library = new MusicLibrary();
+library.AddSong(new Music("Song1", "song1.mp3"));
+library.AddSong(new Music("Song2", "song2.mp3"));
+
+while (library.HasSongs)
+{
+    Music music = library.GetSong();
+    Console.WriteLine($"Playing: {music.SongName}");
+}</code></pre>
+                </div>
+
+                <h2>Stack&lt;T&gt; - LIFO Collection</h2>
+                <p>
+                    Stack implements Last-In-First-Out (LIFO) processing. The most recently added element is accessed first.
+                </p>
+
+                <table class="method-table">
+                    <tr>
+                        <th>Method/Property</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>Push(T)</code></td>
+                        <td>Adds element on top</td>
+                    </tr>
+                    <tr>
+                        <td><code>Pop()</code></td>
+                        <td>Removes and returns top element</td>
+                    </tr>
+                    <tr>
+                        <td><code>Peek()</code></td>
+                        <td>Returns top element without removing</td>
+                    </tr>
+                    <tr>
+                        <td><code>Contains(T)</code></td>
+                        <td>Checks if element exists</td>
+                    </tr>
+                    <tr>
+                        <td><code>Count</code></td>
+                        <td>Number of items in stack</td>
+                    </tr>
+                </table>
+
+                <h3>Stack Example</h3>
+                <div class="code-block">
+                    <pre><code>Stack&lt;Music&gt; stack = new Stack&lt;Music&gt;();
+
+stack.Push(new Music("Song1", "song1.mp3"));
+stack.Push(new Music("Song2", "song2.mp3"));
+stack.Push(new Music("Song3", "song3.mp3"));
+
+// Access elements (doesn't remove them)
+foreach (Music music in stack)
+{
+    Console.WriteLine($"{music.SongName} - {music.Song}");
+}
+
+// Pop removes elements
+while (stack.Count > 0)
+{
+    Music music = stack.Pop();
+    Console.WriteLine($"Popped: {music.SongName}");
+}</code></pre>
+                </div>
+
+                <h2>LinkedList&lt;T&gt; - Doubly-Linked List</h2>
+                <p>
+                    LinkedList&lt;T&gt; is a doubly-linked list where each element holds references to both next and 
+                    previous elements. Great for insertions/deletions but slower for searching.
+                </p>
+
+                <div class="highlight-box">
+                    <strong>🎯 Use When:</strong>
+                    <ul>
+                        <li>Frequent insertions/deletions at any position</li>
+                        <li>No need for index-based access</li>
+                        <li>Sequential access is acceptable</li>
+                    </ul>
+                </div>
+
+                <h3>LinkedList Methods</h3>
+                <table class="method-table">
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>AddFirst(T)</code></td>
+                        <td>Add at the beginning</td>
+                    </tr>
+                    <tr>
+                        <td><code>AddLast(T)</code></td>
+                        <td>Add at the end</td>
+                    </tr>
+                    <tr>
+                        <td><code>AddAfter(node, T)</code></td>
+                        <td>Add after specific node</td>
+                    </tr>
+                    <tr>
+                        <td><code>AddBefore(node, T)</code></td>
+                        <td>Add before specific node</td>
+                    </tr>
+                    <tr>
+                        <td><code>Remove(T)</code></td>
+                        <td>Remove specific value</td>
+                    </tr>
+                    <tr>
+                        <td><code>RemoveFirst()</code></td>
+                        <td>Remove first element</td>
+                    </tr>
+                    <tr>
+                        <td><code>RemoveLast()</code></td>
+                        <td>Remove last element</td>
+                    </tr>
+                    <tr>
+                        <td><code>Find(T)</code></td>
+                        <td>Find first occurrence</td>
+                    </tr>
+                    <tr>
+                        <td><code>FindLast(T)</code></td>
+                        <td>Find last occurrence</td>
+                    </tr>
+                </table>
+
+                <h3>LinkedList Example</h3>
+                <div class="code-block">
+                    <pre><code>LinkedList&lt;string&gt; list = new LinkedList&lt;string&gt;();
+
+// Add elements
+list.AddLast("First");
+list.AddLast("Second");
+list.AddFirst("Zero");
+
+// Navigate using nodes
+LinkedListNode&lt;string&gt; node = list.First;
+while (node != null)
+{
+    Console.WriteLine(node.Value);
+    node = node.Next;
+}
+
+// Insert relative to existing node
+LinkedListNode&lt;string&gt; secondNode = list.Find("Second");
+if (secondNode != null)
+{
+    list.AddAfter(secondNode, "After Second");
+    list.AddBefore(secondNode, "Before Second");
+}</code></pre>
+                </div>
+
+                <h2>SortedList&lt;TKey, TValue&gt;</h2>
+                <p>
+                    SortedList maintains elements sorted by key. It combines features of both lists and dictionaries.
+                </p>
+
+                <h3>Creating and Using SortedList</h3>
+                <div class="code-block">
+                    <pre><code>SortedList&lt;string, Music&gt; sortedList = new SortedList&lt;string, Music&gt;();
+
+// Add elements
+sortedList.Add("3Key", new Music("Song3", "song3.mp3"));
+sortedList.Add("1Key", new Music("Song1", "song1.mp3"));
+sortedList.Add("2Key", new Music("Song2", "song2.mp3"));
+
+// Or use indexer
+sortedList["4Key"] = new Music("Song4", "song4.mp3");
+
+// Access elements (automatically sorted by key)
+foreach (KeyValuePair&lt;string, Music&gt; item in sortedList)
+{
+    Console.WriteLine($"{item.Key}: {item.Value.SongName}");
+}
+
+// Safe access with ContainsKey
+if (sortedList.ContainsKey("1Key"))
+{
+    Music music = sortedList["1Key"];
+    Console.WriteLine($"Found: {music.SongName}");
+}
+
+// Or use TryGetValue
+Music value;
+if (sortedList.TryGetValue("2Key", out value))
+{
+    Console.WriteLine($"Found: {value.SongName}");
+}</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <h4>💡 Important Note</h4>
+                    <p>
+                        SortedList&lt;TKey, TValue&gt; stores only one value per key. If you need multiple values per 
+                        key, use <code>Lookup&lt;TKey, TElement&gt;</code> class (covered in advanced topics).
+                    </p>
+                </div>
+
+                <h2>Performance Comparison</h2>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Collection</th>
+                        <th>Add</th>
+                        <th>Insert</th>
+                        <th>Remove</th>
+                        <th>Search</th>
+                        <th>Best Use Case</th>
+                    </tr>
+                    <tr>
+                        <td><code>List&lt;T&gt;</code></td>
+                        <td>O(1)*</td>
+                        <td>O(n)</td>
+                        <td>O(n)</td>
+                        <td>O(n)</td>
+                        <td>General purpose, index access</td>
+                    </tr>
+                    <tr>
+                        <td><code>LinkedList&lt;T&gt;</code></td>
+                        <td>O(1)</td>
+                        <td>O(1)**</td>
+                        <td>O(1)**</td>
+                        <td>O(n)</td>
+                        <td>Frequent insertions/deletions</td>
+                    </tr>
+                    <tr>
+                        <td><code>Queue&lt;T&gt;</code></td>
+                        <td>O(1)</td>
+                        <td>N/A</td>
+                        <td>O(1)</td>
+                        <td>N/A</td>
+                        <td>FIFO processing</td>
+                    </tr>
+                    <tr>
+                        <td><code>Stack&lt;T&gt;</code></td>
+                        <td>O(1)</td>
+                        <td>N/A</td>
+                        <td>O(1)</td>
+                        <td>N/A</td>
+                        <td>LIFO processing</td>
+                    </tr>
+                    <tr>
+                        <td><code>SortedList&lt;K,V&gt;</code></td>
+                        <td>O(n)</td>
+                        <td>O(n)</td>
+                        <td>O(n)</td>
+                        <td>O(log n)</td>
+                        <td>Sorted key-value pairs</td>
+                    </tr>
+                </table>
+
+                <p style="font-size: 0.9rem; margin-top: 10px;">
+                    * Amortized O(1) - O(n) when capacity exceeded<br>
+                    ** When node reference is known
+                </p>
+
+                <h2>Best Practices</h2>
+                <div class="highlight-box">
+                    <strong>💡 Collection Selection Guidelines:</strong>
+                    <ul>
+                        <li><strong>List&lt;T&gt;:</strong> Default choice for most scenarios</li>
+                        <li><strong>LinkedList&lt;T&gt;:</strong> Use when frequently inserting/removing in the middle</li>
+                        <li><strong>Queue&lt;T&gt;:</strong> Use for task processing, breadth-first search</li>
+                        <li><strong>Stack&lt;T&gt;:</strong> Use for undo operations, depth-first search</li>
+                        <li><strong>SortedList&lt;K,V&gt;:</strong> Use when you need sorted key-value pairs</li>
+                        <li><strong>Dictionary&lt;K,V&gt;:</strong> Use for fast lookups (covered in Part 2)</li>
+                    </ul>
+                </div>
+
+                <h2>Common Patterns</h2>
+
+                <h3>Converting Between Collections</h3>
+                <div class="code-block">
+                    <pre><code>// List to Array
+List&lt;int&gt; list = new List&lt;int&gt; { 1, 2, 3 };
+int[] array = list.ToArray();
+
+// Array to List
+int[] numbers = { 1, 2, 3, 4, 5 };
+List&lt;int&gt; list2 = new List&lt;int&gt;(numbers);
+
+// List to Queue
+Queue&lt;int&gt; queue = new Queue&lt;int&gt;(list);
+
+// List to Stack
+Stack&lt;int&gt; stack = new Stack&lt;int&gt;(list);</code></pre>
+                </div>
+
+                <h3>Read-Only Collections</h3>
+                <div class="code-block">
+                    <pre><code>List&lt;int&gt; list = new List&lt;int&gt; { 1, 2, 3 };
+
+// Create read-only wrapper
+System.Collections.ObjectModel.ReadOnlyCollection&lt;int&gt; readOnly = list.AsReadOnly();
+
+// Modifications not allowed
+// readOnly.Add(4); // Compile error!</code></pre>
+                </div>
+
+                <h2>Conclusion</h2>
+                <p>
+                    Generic collection classes are essential tools in C# development. They provide type safety, better 
+                    performance compared to non-generic collections, and a rich set of features for managing data. 
+                    Understanding when to use each collection type is crucial for writing efficient applications.
+                </p>
+
+                <p>
+                    Arrays are fixed in size, but generic collections provide dynamic sizing. List&lt;T&gt; is the 
+                    general-purpose choice, while specialized collections like Queue, Stack, and LinkedList serve 
+                    specific use cases. Always consider your access patterns, performance requirements, and data 
+                    organization needs when choosing a collection type.
+                </p>
+
+                <div class="info-box">
+                    <h4>📚 Coming Next</h4>
+                    <p>
+                        In the next article, we'll explore Dictionary, Lookup, HashSet, ObservableCollection, and 
+                        concurrent collection classes for thread-safe operations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
