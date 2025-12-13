@@ -6,7 +6,7 @@ class Blogs extends GenerateSvg {
     this.allBlogs = [];
     this.filteredBlogs = [];
     this.currentPage = 1;
-    this.itemsPerPage = window.location.pathname.includes("/blogs") ? 2 : 3;
+    this.itemsPerPage = window.location.pathname.includes("/blogs") ? 9 : 3;
     this.searchInput = null;
     this.categorySelect = null;
     this.sortSelect = null;
