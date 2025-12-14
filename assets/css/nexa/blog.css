@@ -359,7 +359,7 @@
   display: none;
 }
 
-tr td:nth-child(odd) {
+tbody tr td:nth-child(odd) {
   display: none;
 }
 
