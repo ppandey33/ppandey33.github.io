@@ -46,6 +46,7 @@
 /* Decorative watermark */
 .contact-text::after {
   content: "📧︎";
+  font-family: 'fa';
   position: absolute;
   top: 50%;
   right: var(--space-4, 1rem);

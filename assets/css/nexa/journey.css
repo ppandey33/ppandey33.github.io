@@ -98,11 +98,12 @@
   position: relative;
   color: var(--textTertiary);
   line-height: var(--line-height-relaxed);
-  font-size: var(--fontSize-sm);
+  font-size: var(--fontSize-md);
 }
 
 .experience-description li::before {
   content: "▹";
+  font-family: 'fa';
   position: absolute;
   left: 0;
   background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));

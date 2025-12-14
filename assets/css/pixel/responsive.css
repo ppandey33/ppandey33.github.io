@@ -94,15 +94,15 @@
   }
 
   .post-header .post-header-container {
-    max-width: calc(100% - var(--space-20));
+    max-width: calc(100% - var(--space-10));
     flex-direction: column;
+    padding: 0;
   }
   .post-share-btn {
     border: none !important;
   transform: none!important;
   }
   .post-share {
-    max-height: 3rem;
     margin: 0;
     align-items: center;
   }
@@ -769,7 +769,7 @@
   }
 
   .breadcrumb {
-    font-size: var(--fontSize-xs);
+    font-size: var(--fontSize-md);
   }
 
   .post-meta {
@@ -777,6 +777,12 @@
     align-items: flex-start;
     gap: var(--gap-sm);
   }
+
+  
+ .post-date::before, .post-author::before{
+    font-size: var(--fontSize-base);
+  }
+
 
   .blog-image {
     height: 160px;

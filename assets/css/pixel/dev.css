@@ -32,6 +32,7 @@
 .search-wrapper::before {
   content: "🔍︎";
   position: absolute;
+  font-family: 'fa';
   left: var(--space-4, 1rem);
   top: 50%;
   transform: translateY(-50%);
@@ -48,7 +49,8 @@ ease-in-out);
 }
 
 .sort-wrapper::after {
-  content: "🔽︎";
+  content: "▾";
+  font-family: 'fa';
   background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -111,6 +113,7 @@ ease-in-out);
 
 .sort-wrapper::before {
   content: "⚡︎";
+  font-family: 'fa';
   position: absolute;
   left: var(--space-4, 1rem);
   top: 50%;
@@ -201,6 +204,7 @@ ease-in-out);
 /* Background watermark */
 .project-card::after {
   content: "💻︎";
+  font-family: 'fa';
   position: absolute;
   bottom: var(--space-4, 1rem);
   right: var(--space-4, 1rem);

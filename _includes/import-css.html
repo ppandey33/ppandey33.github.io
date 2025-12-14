@@ -1,3 +1,5 @@
+<link rel="preload" href="{{ site.baseurl }}/assets/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/all.min.css"></noscript>
 {% if page.stylesheets %}
   {% assign layout = page.layout | split: "/" | first %}
   {% if page.stylesheets.size %}

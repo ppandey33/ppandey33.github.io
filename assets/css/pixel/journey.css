@@ -70,6 +70,7 @@
 /* Decorative corner element */
 .experience-item::after {
   content: "💼︎";
+  font-family: 'fa';
   position: absolute;
   top: var(--space-4, 1rem);
   right: var(--space-4, 1rem);
@@ -226,6 +227,7 @@ ease-in-out);
 
 .experience-period::before {
   content: "📅︎";
+  font-family: 'fa';
   position: absolute;
   left: var(--space-2, 0.5rem);
   font-size: var(--fontSize-lg, 1.25rem);
@@ -240,6 +242,7 @@ ease-in-out);
 
 .experience-location::before {
   content: "📍︎︎";
+  font-family: 'fa';
   position: absolute;
   left: var(--space-2, 0.5rem);
   font-size: var(--fontSize-lg, 1.25rem);
@@ -283,6 +286,7 @@ ease-in-out);
 
 .experience-description-list::before {
   content: "→";
+  font-family: 'fa';
   position: absolute;
   left: 0;
   color: var(--primary, #00ffcc);

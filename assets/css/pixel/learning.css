@@ -59,6 +59,7 @@
 /* Gradient icon badge - using ::before */
 .education-item::before {
   content: "🎓︎";
+  font-family: 'fa';
   font-size: var(--fontSize-4xl, 3.052rem);
   flex-shrink: 0;
   width: 70px;
@@ -108,6 +109,7 @@
 
 .education-item .education-watermark::before {
   content: "📖︎︎";
+  font-family: 'fa';
   background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -186,6 +188,7 @@
 
 .education-institution::before {
   content: "🏛️";
+  font-family: 'fa';
   font-size: var(--fontSize-lg, 1.25rem);
   transition: transform var(--transition-base, 0.3s ease-in-out);
   background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
@@ -222,6 +225,7 @@
 
 .education-period::before {
   content: "📅︎";
+  font-family: 'fa';
   font-size: var(--fontSize-lg, 1.25rem);
   animation: float 3s ease-in-out infinite;
   background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
@@ -246,6 +250,7 @@
 
 .education-location::before {
   content: "📍︎︎";
+  font-family: 'fa';
   font-size: var(--fontSize-lg, 1.25rem);
   animation: float 3s ease-in-out infinite 1.5s;
   background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));

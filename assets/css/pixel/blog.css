@@ -10,7 +10,8 @@
 .blog-post {
   min-height: 100vh;
   background: var(--background);
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6);
+  width: 100%;
 }
 
 /* Post Header Section */
@@ -88,6 +89,7 @@
 }
 .post-date::before {
   content: "📅︎";
+  font-family: 'fa';
   font-size: var(--fontSize-base, 1rem);
 }
 
@@ -105,9 +107,11 @@
 .post-author::before {
   content: "✍︎";
   font-size: var(--fontSize-2xl, 1.953rem);
+  font-family: 'fa';
 }
 .post-reading-time::before {
   content: "⏱";font-size: var(--fontSize-lg, 1.25rem);
+  font-family: 'fa';
 }
 /* Post Title & Excerpt */
 .post-title {

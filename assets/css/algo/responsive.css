@@ -469,7 +469,7 @@
 
   .experience-description li {
     padding-left: var(--padding-md);
-    font-size: 0.75rem;
+    font-size: var(--fontSize-md);
   }
 
   .full-view-journey {
@@ -550,6 +550,11 @@
   [data-blog-filter] {
     flex-direction: column;
     gap: var(--gap-sm);
+  }
+
+  .post-container{
+    padding: 0;
+    max-width: 90%!important;
   }
 
   .search-wrapper,

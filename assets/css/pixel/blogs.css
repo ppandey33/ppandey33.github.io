@@ -33,6 +33,7 @@
 
 .blog-search-wrapper::before {
   content: "🔍︎";
+  font-family: 'fa';
   position: absolute;
   left: var(--space-4, 1rem);
   top: 50%;
@@ -54,6 +55,7 @@
 
 .blog-category-wrapper::before {
   content: "📁︎";
+  font-family: 'fa';
   position: absolute;
   left: var(--space-4, 1rem);
   top: 50%;
@@ -71,6 +73,7 @@
 
 .blog-sort-wrapper::before {
   content: "⚡︎";
+  font-family: 'fa';
   position: absolute;
   left: var(--space-4, 1rem);
   top: 50%;
@@ -137,7 +140,8 @@
 
 .blog-category-wrapper::after,
 .blog-sort-wrapper::after {
-  content: "🔽︎";
+  content: "▾";
+  font-family: 'fa';
   background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -207,6 +211,7 @@
 /* Watermark decoration */
 .blog-card::after {
   content: "📝︎";
+  font-family: 'fa';
   position: absolute;
   bottom: var(--space-20, 5rem);
   right: var(--space-4, 1rem);

@@ -11,6 +11,7 @@
   min-height: 100vh;
   background: var(--background);
   color: var(--textPrimary, #e6e6e6);
+  width: 100%;
 }
 
 /* Post Header Section */
@@ -89,6 +90,7 @@
 .post-date::before {
   content: "📅︎";
   font-size: var(--fontSize-base, 1rem);
+  font-family: 'fa';
 }
 
 .post-date:hover {
@@ -106,10 +108,12 @@
 .post-author::before {
   content: "✍︎";
   font-size: var(--fontSize-2xl, 1.953rem);
+  font-family: 'fa';
 }
 .post-reading-time::before {
   content: "⏱";
   font-size: var(--fontSize-lg, 1.25rem);
+  font-family: 'fa';
 }
 
 /* Post Title & Excerpt */
@@ -402,7 +406,6 @@ tr td:nth-child(odd) {
     border: none !important;
   }
   .post-share {
-    max-height: 3rem;
     margin: 0;
     align-items: center;
   }

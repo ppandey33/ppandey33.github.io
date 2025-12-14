@@ -52,7 +52,8 @@
 
 .blog-category-wrapper::after,
 .blog-sort-wrapper::after {
-  content: "🔽︎";
+  content: "▾";
+  font-family: 'fa';
   color: var(--primary, #00ffcc);
   position: relative;
   right: 30px;

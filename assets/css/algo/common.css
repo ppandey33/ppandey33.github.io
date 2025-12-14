@@ -463,8 +463,25 @@ body {
 
   --shimmer-opacity: rgba(251, 191, 36, 0.1);
 }
+.icon {
+    font-family: "fa";
+    font-weight: 300;
+}
 
+.icon-fa5 {
+    font-family: "fa 5";
+    font-weight: 300;
+}
 
+.icon-fa-brands {
+    font-family: "fa brands";
+    font-weight: 300;
+}
+
+.icon-fa-5brands {
+    font-family: "fa 5 brands";
+    font-weight: 300;
+}
 .image-shades {
   background: linear-gradient(
     to bottom,

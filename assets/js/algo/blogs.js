@@ -185,7 +185,7 @@ class Blogs extends GenerateSvg {
     const info = window.App.modules.util.createElement("div", "blog-info");
     const meta = window.App.modules.util.createElement("div", "blog-meta");
     const date = window.App.modules.util.createElement("span", "blog-date");
-    const dateIcon = window.App.modules.util.createElement("span", "blog-meta-icon", "︎︎📅︎");
+    const dateIcon = window.App.modules.util.createElement("span", "blog-meta-icon", "📅︎");
     date.appendChild(dateIcon);
     date.appendChild(document.createTextNode(this.formatDate(blog.dateObj)));
 

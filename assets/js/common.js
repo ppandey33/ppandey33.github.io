@@ -138,8 +138,8 @@ class CommonUtilities {
     // Insert header and overlay at the beginning of body
     document.body.insertBefore(header, document.body.firstChild);
     document.body.insertBefore(overlay, document.body.firstChild);
-  // Move network dropdown from nav-container to status-bar on mobile
-  this.moveNetworkDropdownToStatusBar();
+    // Move network dropdown from nav-container to status-bar on mobile
+    this.moveNetworkDropdownToStatusBar();
 
     // Get sidebar elements
     const leftSidebar = document.querySelector(".left-sidebar-card");
@@ -236,91 +236,56 @@ class CommonUtilities {
     // Move the entire submenu item to status bar right section
     //const statusBarRight = statusBar.querySelector(".status-bar-right");
     //if (statusBarRight) {
-      // Clone or move the element
-      statusBar.appendChild(networkSubmenu);
+    // Clone or move the element
+    statusBar.appendChild(networkSubmenu);
     //}
   }
+initScrollReveal() {
+  const revealElements = document.querySelectorAll(".reveal");
+  console.log("Total reveal elements found:", revealElements.length);
+  
+  if (revealElements.length === 0) return;
 
-  initScrollReveal() {
-    const revealElements = document.querySelectorAll(".reveal");
-    if (revealElements.length === 0) return;
+  let lastScrollTop = 0;
+  const isMobile = window.innerWidth <= 768;
 
-    let lastScrollTop = 0;
-    const isMobile = window.innerWidth <= 768;
+  const config = {
+    threshold: 0.1, // Simplified to single value
+    rootMargin: "0px 0px 0px 0px",
+  };
 
-    const config = {
-      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-      rootMargin: isMobile ? "0px 0px -50px 0px" : "-80px 0px 0px 0px",
-    };
-
-    const revealedMap = new Map();
-
-    const getElementIndex = (element) => {
-      return Array.from(revealElements).indexOf(element);
-    };
-
-    const resetAllAnimations = () => {
-      revealElements.forEach((el) => el.classList.remove("visible"));
-      revealedMap.clear();
-    };
-
-    const showFirstElement = () => {
-      if (revealElements.length > 0) {
-        requestAnimationFrame(() => {
-          revealElements[0].classList.add("visible");
-          revealedMap.set(revealElements[0], 0);
-        });
-      }
-    };
-
-    const handleScroll = () => {
-      const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const topThreshold = isMobile ? 10 : 50;
-
-      if (currentScrollTop < topThreshold && lastScrollTop >= topThreshold) {
-        resetAllAnimations();
-        showFirstElement();
-      }
-
-      lastScrollTop = currentScrollTop;
-    };
-
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        const elementIndex = getElementIndex(entry.target);
-
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealedMap.set(entry.target, elementIndex);
-
-          revealedMap.forEach((index, element) => {
-            if (Math.abs(index - elementIndex) > 1) {
-              element.classList.remove("visible");
-              revealedMap.delete(element);
-            }
-          });
-        }
+  const observerCallback = (entries) => {
+    entries.forEach((entry) => {
+      console.log("Element observed:", {
+        isIntersecting: entry.isIntersecting,
+        intersectionRatio: entry.intersectionRatio,
+        target: entry.target,
+        boundingRect: entry.boundingClientRect,
+        rootBounds: entry.rootBounds
       });
-    };
 
-    this.scrollRevealObserver = new IntersectionObserver(observerCallback, config);
-    revealElements.forEach((element) => this.scrollRevealObserver.observe(element));
-
-    const initialScroll = window.pageYOffset || document.documentElement.scrollTop;
-    if (initialScroll < (isMobile ? 10 : 50)) {
-      showFirstElement();
-    }
-
-    this.scrollHandler = () => {
-      if (this.scrollTimeout) {
-        window.cancelAnimationFrame(this.scrollTimeout);
+      if (entry.isIntersecting) {
+        console.log("✅ SHOWING element");
+        entry.target.classList.add("visible");
+      } else {
+        console.log("❌ HIDING element");
+        entry.target.classList.remove("visible");
       }
-      this.scrollTimeout = window.requestAnimationFrame(handleScroll);
-    };
+    });
+  };
 
-    window.addEventListener("scroll", this.scrollHandler, { passive: true });
+  this.scrollRevealObserver = new IntersectionObserver(observerCallback, config);
+  
+  revealElements.forEach((element, index) => {
+    console.log(`Observing element ${index}:`, element);
+    this.scrollRevealObserver.observe(element);
+  });
+
+  // Show first element immediately
+  if (revealElements[0]) {
+    revealElements[0].classList.add("visible");
   }
-
+}
   setupHeaderScroll() {
     const header = document.querySelector(".site-header");
     if (!header) return;

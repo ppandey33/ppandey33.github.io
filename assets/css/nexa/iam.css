@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 80vh;
   padding: var(--padding-xl) 0;
   position: relative;
 }

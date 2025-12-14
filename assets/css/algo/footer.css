@@ -26,6 +26,7 @@ footer {
 .social-links {
   display: flex;
   gap: var(--gap-lg);
+  margin-top: var(--margin-md);
 }
 
 .social-links a {
