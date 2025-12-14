@@ -359,8 +359,8 @@
   display: none;
 }
 
-tbody tr td:nth-child(odd) {
-  display: none;
+.x-hide-title tr td:nth-child(odd) {
+  display: none;background: var(--surface);
 }
 
 /* Responsive Design */

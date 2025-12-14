@@ -21,23 +21,29 @@
     <h2>List&lt;T&gt; - Dynamic Arrays</h2>
     <p>List&lt;T&gt; is a generic class for creating dynamic lists. It implements multiple interfaces:</p>
 
-    <table class="interface-table">
+    <table class="interface-table x-hide-title">
       <thead>
-      <tr>
-        <th>Interface</th>
-        <th>Description</th>
-      </tr>
+        <tr>
+          <th>Interface</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tr>
+        <td>Interface</td>
         <td><code>IList&lt;T&gt;</code></td>
+        <td>Description</td>
         <td>Index-based access, InsertAt(), RemoveAt() methods</td>
       </tr>
       <tr>
+        <td>Interface</td>
         <td><code>ICollection&lt;T&gt;</code></td>
+        <td>Description</td>
         <td>Count property, Add(), Remove(), Clear(), CopyTo() methods</td>
       </tr>
       <tr>
+        <td>Interface</td>
         <td><code>IEnumerable&lt;T&gt;</code></td>
+        <td>Description</td>
         <td>Required for foreach statements, defines GetEnumerator()</td>
       </tr>
     </table>
@@ -193,31 +199,41 @@ students.Sort((s1, s2) => s1.Marks.CompareTo(s2.Marks));</code></pre>
     <h2>Queue&lt;T&gt; - FIFO Collection</h2>
     <p>Queue implements First-In-First-Out (FIFO) processing. Elements added first are accessed first.</p>
 
-    <table class="method-table">
+    <table class="method-table x-hide-title">
       <thead>
-      <tr>
-        <th>Method/Property</th>
-        <th>Description</th>
-      </tr>
+        <tr>
+          <th>Method/Property</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tr>
+        <td>Method/Property</td>
         <td><code>Enqueue(T)</code></td>
+        <td>Description</td>
         <td>Adds element to the end</td>
       </tr>
       <tr>
+        <td>Method/Property</td>
         <td><code>Dequeue()</code></td>
+        <td>Description</td>
         <td>Removes and returns element from start</td>
       </tr>
       <tr>
+        <td>Method/Property</td>
         <td><code>Peek()</code></td>
+        <td>Description</td>
         <td>Returns element from start without removing</td>
       </tr>
       <tr>
+        <td>Method/Property</td>
         <td><code>Count</code></td>
+        <td>Description</td>
         <td>Number of items in queue</td>
       </tr>
       <tr>
+        <td>Method/Property</td>
         <td><code>TrimExcess()</code></td>
+        <td>Description</td>
         <td>Reduces capacity to match count</td>
       </tr>
     </table>
@@ -277,31 +293,41 @@ while (library.HasSongs)
     <h2>Stack&lt;T&gt; - LIFO Collection</h2>
     <p>Stack implements Last-In-First-Out (LIFO) processing. The most recently added element is accessed first.</p>
 
-    <table class="method-table">
+    <table class="method-table x-hide-title">
       <thead>
-      <tr>
-        <th>Method/Property</th>
-        <th>Description</th>
-      </tr>
+        <tr>
+          <th>Method/Property</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tr>
+        <td>Method/Property</td>
         <td><code>Push(T)</code></td>
+        <td>Description</td>
         <td>Adds element on top</td>
       </tr>
       <tr>
+        <td>Method/Property</td>
         <td><code>Pop()</code></td>
         <td>Removes and returns top element</td>
+        <td>Description</td>
       </tr>
       <tr>
+        <td>Method/Property</td>
         <td><code>Peek()</code></td>
         <td>Returns top element without removing</td>
+        <td>Description</td>
       </tr>
       <tr>
+        <td>Method/Property</td>
         <td><code>Contains(T)</code></td>
+        <td>Description</td>
         <td>Checks if element exists</td>
       </tr>
       <tr>
+        <td>Method/Property</td>
         <td><code>Count</code></td>
+        <td>Description</td>
         <td>Number of items in stack</td>
       </tr>
     </table>
@@ -341,47 +367,65 @@ while (stack.Count > 0)
     </div>
 
     <h3>LinkedList Methods</h3>
-    <table class="method-table">
+    <table class="method-table x-hide-title">
       <thead>
-      <tr>
-        <th>Method</th>
-        <th>Description</th>
-      </tr>
+        <tr>
+          <th>Method</th>
+          <th>Description</th>
+        </tr>
       </thead>
       <tr>
+        <td>Method</td>
         <td><code>AddFirst(T)</code></td>
+        <td>Description</td>
         <td>Add at the beginning</td>
       </tr>
       <tr>
+        <td>Method</td>
         <td><code>AddLast(T)</code></td>
+        <td>Description</td>
         <td>Add at the end</td>
       </tr>
       <tr>
+        <td>Method</td>
         <td><code>AddAfter(node, T)</code></td>
+        <td>Description</td>
         <td>Add after specific node</td>
       </tr>
       <tr>
+        <td>Method</td>
         <td><code>AddBefore(node, T)</code></td>
+        <td>Description</td>
         <td>Add before specific node</td>
       </tr>
       <tr>
+        <td>Method</td>
         <td><code>Remove(T)</code></td>
+        <td>Description</td>
         <td>Remove specific value</td>
       </tr>
       <tr>
+        <td>Method</td>
         <td><code>RemoveFirst()</code></td>
+        <td>Description</td>
         <td>Remove first element</td>
       </tr>
       <tr>
+        <td>Method</td>
         <td><code>RemoveLast()</code></td>
+        <td>Description</td>
         <td>Remove last element</td>
       </tr>
       <tr>
+        <td>Method</td>
         <td><code>Find(T)</code></td>
+        <td>Description</td>
         <td>Find first occurrence</td>
       </tr>
       <tr>
+        <td>Method</td>
         <td><code>FindLast(T)</code></td>
+        <td>Description</td>
         <td>Find last occurrence</td>
       </tr>
     </table>
@@ -454,55 +498,85 @@ if (sortedList.TryGetValue("2Key", out value))
     </div>
 
     <h2>Performance Comparison</h2>
-    <table class="comparison-table">
+    <table class="comparison-table x-hide-title">
       <thead>
-      <tr>
-        <th>Collection</th>
-        <th>Add</th>
-        <th>Insert</th>
-        <th>Remove</th>
-        <th>Search</th>
-        <th>Best Use Case</th>
-      </tr>
+        <tr>
+          <th>Collection</th>
+          <th>Add</th>
+          <th>Insert</th>
+          <th>Remove</th>
+          <th>Search</th>
+          <th>Best Use Case</th>
+        </tr>
       </thead>
       <tr>
+        <td>Collection</td>
         <td><code>List&lt;T&gt;</code></td>
+        <td>Add</td>
         <td>O(1)*</td>
+        <td>Insert</td>
         <td>O(n)</td>
+        <td>Remove</td>
         <td>O(n)</td>
+        <td>Search</td>
         <td>O(n)</td>
+        <td>Best Use Case</td>
         <td>General purpose, index access</td>
       </tr>
       <tr>
+        <td>Collection</td>
         <td><code>LinkedList&lt;T&gt;</code></td>
+        <td>Add</td>
         <td>O(1)</td>
+        <td>Insert</td>
         <td>O(1)**</td>
+        <td>Remove</td>
         <td>O(1)**</td>
+        <td>Search</td>
         <td>O(n)</td>
+        <td>Best Use Case</td>
         <td>Frequent insertions/deletions</td>
       </tr>
       <tr>
+        <td>Collection</td>
         <td><code>Queue&lt;T&gt;</code></td>
+        <td>Add</td>
         <td>O(1)</td>
+        <td>Insert</td>
         <td>N/A</td>
+        <td>Remove</td>
         <td>O(1)</td>
+        <td>Search</td>
         <td>N/A</td>
+        <td>Best Use Case</td>
         <td>FIFO processing</td>
       </tr>
       <tr>
+        <td>Collection</td>
         <td><code>Stack&lt;T&gt;</code></td>
+        <td>Add</td>
         <td>O(1)</td>
+        <td>Insert</td>
         <td>N/A</td>
+        <td>Remove</td>
         <td>O(1)</td>
+        <td>Search</td>
         <td>N/A</td>
+        <td>Best Use Case</td>
         <td>LIFO processing</td>
       </tr>
       <tr>
+        <td>Collection</td>
         <td><code>SortedList&lt;K,V&gt;</code></td>
+        <td>Add</td>
         <td>O(n)</td>
+        <td>Insert</td>
         <td>O(n)</td>
+        <td>Remove</td>
         <td>O(n)</td>
+        <td>Search</td>
         <td>O(log n)</td>
+        <td>Best Use Case</td>
         <td>Sorted key-value pairs</td>
       </tr>
     </table>
