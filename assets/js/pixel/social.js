@@ -16,7 +16,7 @@ class Social {
       this.config.social
         ?.filter((s) => s.url && s.url !== "")
         .forEach((socialData) => {
-          const aEl = window.App.modules.util.createElement("a", "contact-social zoom");
+          const aEl = window.App.modules.util.createElement("a", `contact-social zoom ${(socialData?.class || '')}`);
           aEl.target = "_blank";
           aEl.href = socialData?.url;
           aEl.innerHTML = socialData.icon;

@@ -17,6 +17,7 @@
 }
 
 .achievement-icon {
+  width: 100%;
   font-size: var(--fontSize-4xl);
   line-height: 5.6rem;
   margin-bottom: var(--margin-md);
@@ -57,10 +58,10 @@
 .achievement-title {
   font-size: var(--fontSize-lg);
   margin-bottom: var(--margin-sm);
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6);
 }
 
 .achievement-description {
   color: var(--textSecondary);
-  font-size: var(--fontSize-sm);
+  font-size: var(--fontSize-md);
 }

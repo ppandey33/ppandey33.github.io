@@ -17,7 +17,8 @@ class Info {
         const categoryCard = window.App.modules.util.createElement("div", "skill-info-category"),
         cardHeader = window.App.modules.util.createElement("div", "skill-info-header"),
         categoryName = window.App.modules.util.createElement("h3", "skill-info-category-name", skillsData.category),
-        catIcon = window.App.modules.util.createElement("span", "skill-info-category-icon", skillsData.icon);
+        catIcon = window.App.modules.util.createElement("span", `skill-info-category-icon ${(skillsData.class || '')}`);
+        catIcon.innerHTML = skillsData.icon;
         cardHeader.appendChild(catIcon), cardHeader.appendChild(categoryName), categoryCard.appendChild(cardHeader);
         const skillList = window.App.modules.util.createElement("ul", "skill-info-list");
         skillsData.skills.forEach((skill) => {

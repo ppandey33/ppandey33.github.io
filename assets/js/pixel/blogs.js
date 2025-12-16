@@ -197,18 +197,17 @@ class Blogs extends GenerateSvg {
 
     card.appendChild(imageContainer);
 
-    // Info container
-    const info = window.App.modules.util.createElement("div", "blog-info");
-
-    // Meta
-    const meta = window.App.modules.util.createElement("div", "blog-meta");
-    const date = window.App.modules.util.createElement("span", "blog-date");
-    const dateIcon = window.App.modules.util.createElement("span", "blog-meta-icon", "📅︎");
+    const info = window.App.modules.util.createElement("div", "blog-info"),
+      meta = window.App.modules.util.createElement("div", "blog-meta"),
+      date = window.App.modules.util.createElement("span", "blog-date"),
+      dateIcon = window.App.modules.util.createElement("span", "blog-meta-icon fa fa-regular");
+    dateIcon.innerHTML = "&#xf133;";
     date.appendChild(dateIcon);
     date.appendChild(document.createTextNode(this.formatDate(blog.dateObj)));
 
-    const readTime = window.App.modules.util.createElement("span", "blog-read-time");
-    const timeIcon = window.App.modules.util.createElement("span", "blog-meta-icon", "⏱︎");
+    const readTime = window.App.modules.util.createElement("span", "blog-read-time"),
+      timeIcon = window.App.modules.util.createElement("span", "blog-meta-icon fa fa-regular");
+    timeIcon.innerHTML = "&#xf34e;";
     readTime.appendChild(timeIcon);
     readTime.appendChild(document.createTextNode(blog.readTime));
 
@@ -311,7 +310,7 @@ function initBlogs() {
     window.App.modules.blogs.cleanup?.();
   }
   const blogsModule = new Blogs();
-  window.App.register("blogs", blogsModule, 'initBlogs');
+  window.App.register("blogs", blogsModule, "initBlogs");
   blogsModule.init();
 }
 

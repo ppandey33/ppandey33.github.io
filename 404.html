@@ -10,44 +10,48 @@ ignore: true
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: var(--padding-xl, 2rem);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
     position: relative;
     overflow: hidden;
   }
 
   .error-page::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background: radial-gradient(circle, var(--background) 1px, transparent 1px);
     background-size: 50px 50px;
     animation: float 20s linear infinite;
   }
 
   @keyframes float {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(50px, 50px);
+    }
   }
 
   .error-container {
-    background: white;
-    border-radius: 24px;
-    padding: 3rem 2rem;
+    background: var(--surface);
+    border-radius: var(--radius-3xl, 24px);
+    padding: var(--padding-2xl, 3rem) var(--padding-xl, 2rem);
     max-width: 600px;
     width: 100%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-2xl, 0 1.5rem 2.5rem) var(--shadow-color, rgba(0, 0, 0, 0.3));
     text-align: center;
     position: relative;
-    z-index: 1;
-    animation: slideUp 0.6s ease-out;
+    z-index: var(--z-content, 1);
+    animation: slideUp var(--animation-base, 0.6s) ease-out;
   }
 
   @keyframes slideUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(var(--translate-initial-lg, 30px));
     }
     to {
       opacity: 1;
@@ -56,197 +60,207 @@ ignore: true
   }
 
   .error-emoji {
-    font-size: 8rem;
-    margin-bottom: 1rem;
+    font-size: var(--fontSize-4xl, 8rem);
+    margin-bottom: var(--margin-md, 1rem);
     animation: bounce 2s ease-in-out infinite;
     display: inline-block;
   }
 
   @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
   }
 
   .error-code {
-    font-size: 6rem;
+    font-size: var(--fontSize-4xl, 6rem);
     font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: radial-gradient(circle, var(--background) 1px, transparent 1px);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin: 0;
-    line-height: 1;
-    letter-spacing: -2px;
+    line-height: var(--line-height-tight, 1);
+    letter-spacing: var(--letter-spacing-tight, -2px);
   }
 
   .error-title {
-    font-size: 2rem;
+    font-size: var(--fontSize-2xl, 2rem);
     font-weight: 700;
-    color: #2d3748;
-    margin: 1.5rem 0 1rem;
+    color: var(--textPrimary, #2d3748);
+    margin: var(--margin-lg, 1.5rem) 0 var(--margin-md, 1rem);
   }
 
   .error-message {
-    font-size: 1.125rem;
-    color: #4a5568;
-    margin-bottom: 2rem;
-    line-height: 1.6;
+    font-size: var(--fontSize-lg, 1.125rem);
+    color: var(--textSecondary, #4a5568);
+    margin-bottom: var(--margin-xl, 2rem);
+    line-height: var(--line-height-relaxed, 1.6);
   }
 
   .error-actions {
     display: flex;
-    gap: 1rem;
+    gap: var(--gap-md, 1rem);
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 2rem;
+    margin-top: var(--margin-xl, 2rem);
   }
 
-  .btn-primary, .btn-secondary {
-    padding: 0.875rem 2rem;
-    border-radius: 12px;
+  .btn-primary,
+  .btn-secondary {
+    padding: var(--padding-md, 0.875rem) var(--padding-xl, 2rem);
+    border-radius: var(--radius-xl, 12px);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: var(--fontSize-base, 1rem);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all var(--transition-base, 0.3s) ease;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--gap-sm, 0.5rem);
     border: none;
     cursor: pointer;
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    background: radial-gradient(circle, var(--background) 1px, transparent 1px);
+    color: var(--surface, white);
+    border: var(--border-2, 2px) solid var(--border, #e2e8f0);
   }
 
   .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    transform: translateY(var(--translate-y-hover-sm, -2px));
   }
 
   .btn-secondary {
-    background: #f7fafc;
-    color: #4a5568;
-    border: 2px solid #e2e8f0;
+    background: var(--background, #f7fafc);
+    color: var(--textSecondary, #4a5568);
+    border: var(--border-2, 2px) solid var(--border, #e2e8f0);
   }
 
   .btn-secondary:hover {
-    background: #edf2f7;
-    border-color: #cbd5e0;
-    transform: translateY(-2px);
+    background: var(--hover, #edf2f7);
+    border-color: var(--borderSecondary, #cbd5e0);
+    transform: translateY(var(--translate-y-hover-sm, -2px));
   }
 
   .suggestions {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 2px solid #e2e8f0;
+    margin-top: var(--margin-2xl, 2.5rem);
+    padding-top: var(--padding-xl, 2rem);
+    border-top: var(--border-2, 2px) solid var(--border, #e2e8f0);
   }
 
   .suggestions h3 {
-    font-size: 1.25rem;
-    color: #2d3748;
-    margin-bottom: 1rem;
+    font-size: var(--fontSize-xl, 1.25rem);
+    color: var(--textPrimary, #2d3748);
+    margin-bottom: var(--margin-md, 1rem);
     font-weight: 600;
   }
 
   .suggestions-list {
     display: grid;
-    gap: 0.75rem;
+    gap: var(--gap-md, 0.75rem);
     text-align: left;
   }
 
   .suggestion-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem;
-    background: #f7fafc;
-    border-radius: 12px;
-    transition: all 0.3s ease;
+    gap: var(--gap-md, 0.75rem);
+    padding: var(--padding-md, 1rem);
+    background: var(--background, #f7fafc);
+    border-radius: var(--radius-xl, 12px);
+    transition: all var(--transition-base, 0.3s) ease;
     text-decoration: none;
-    color: #4a5568;
+    color: var(--textSecondary, #4a5568);
   }
 
   .suggestion-item:hover {
-    background: #edf2f7;
-    transform: translateX(5px);
+    background: var(--hover, #edf2f7);
+    transform: translateX(var(--translate-x-hover-sm, 5px));
   }
 
   .suggestion-icon {
-    font-size: 1.5rem;
+    font-size: var(--fontSize-xl, 1.5rem);
     flex-shrink: 0;
   }
 
   .suggestion-text {
     font-weight: 500;
+    color: var(--link, #4e0110);
+  }
+
+  .suggestion-text:hover {
+    color: var(--linkHover, #ea580c);
   }
 
   @media (max-width: 768px) {
     .error-emoji {
-      font-size: 5rem;
+      font-size: var(--fontSize-3xl, 5rem);
     }
 
     .error-code {
-      font-size: 4rem;
+      font-size: var(--fontSize-3xl, 4rem);
     }
 
     .error-title {
-      font-size: 1.5rem;
-    }
-
-    .error-message {
-      font-size: 1rem;
+      font-size: var(--fontSize-xl, 1.5rem);
     }
 
     .error-container {
-      padding: 2rem 1.5rem;
+      padding: var(--padding-xl, 2rem) var(--padding-lg, 1.5rem);
     }
 
     .error-actions {
       flex-direction: column;
     }
 
-    .btn-primary, .btn-secondary {
+    .btn-primary,
+    .btn-secondary {
+      color: var(--link);
       width: 100%;
       justify-content: center;
     }
   }
 </style>
-
+<script>
+  (function () {
+    "use strict";
+debugger;
+    let currentTheme = localStorage.getItem("theme") || "charcoal";
+    document.body.setAttribute("data-theme", currentTheme);
+    let currentLayout = localStorage.getItem("layout") || "nexa";
+    document.body.setAttribute("data-layout", currentLayout);
+  })();
+</script>
 <div class="error-page" data-error-page>
   <div class="error-container">
-    <div class="error-emoji">🔍︎</div>
+    <div class="error-emoji fas">&#xf002;</div>
     <h1 class="error-code">404</h1>
     <h2 class="error-title">Oops! Page Not Found</h2>
-    <p class="error-message">
-      The page you're looking for seems to have wandered off into the digital void. 
-      Don't worry though, we'll help you find your way back! 🚀︎
-    </p>
+    <p class="error-message">The page you're looking for seems to have wandered off into the digital void. Don't worry though, we'll help you find your way back! <i class="fas fa-rocket"></i></p>
 
     <div class="error-actions">
-      <a href="/" class="btn-primary">
-        🏠︎ Go Home
-      </a>
-      <a href="javascript:history.back()" class="btn-secondary">
-        ← Go Back
-      </a>
+      <a href="/" class="btn-primary"> <i class="fas fa-home"></i> Go Home </a>
+      <a href="javascript:history.back()" class="btn-secondary"> <i class="fas fa-arrow-left"></i> Go Back </a>
     </div>
 
     <div class="suggestions">
-      <h3>🎯︎ Try These Instead:</h3>
+      <h3><i class="fas fa-space-shuttle"></i> Try These Instead:</h3>
       <div class="suggestions-list">
         <a href="/" class="suggestion-item">
-          <span class="suggestion-icon">🏠︎</span>
+          <span class="suggestion-icon"><i class="fas fa-home"></i></span>
           <span class="suggestion-text">Home - Start from the beginning</span>
         </a>
         <a href="/blogs/" class="suggestion-item">
-          <span class="suggestion-icon">📝︎</span>
+          <span class="suggestion-icon"><i class="fas fa-blog"></i></span>
           <span class="suggestion-text">Blog - Read latest articles</span>
         </a>
         <a href="/dev/" class="suggestion-item">
-          <span class="suggestion-icon">💼︎</span>
+          <span class="suggestion-icon"><i class="fas fa-briefcase"></i></span>
           <span class="suggestion-text">Projects - Check out my work</span>
         </a>
       </div>

@@ -40,7 +40,7 @@
     <p>For example, you can store mixed types in an ArrayList:</p>
 
     <div class="code-block">
-      <pre><code>ArrayList list = new ArrayList();
+      <pre class="dynamic-scroll"><code>ArrayList list = new ArrayList();
 list.Add(2);        // int
 list.Add("text");   // string - No compile error!
 
@@ -55,7 +55,7 @@ foreach (int element in list)
     <p>Here's an example of a generic LinkedList implementation that solves the problems mentioned above:</p>
 
     <div class="code-block">
-      <pre><code>public class LinkedListNode&lt;T&gt;
+      <pre class="dynamic-scroll"><code>public class LinkedListNode&lt;T&gt;
 {
     public LinkedListNode(T _Value)
     {
@@ -106,7 +106,7 @@ public class LinkedList&lt;T&gt; : IEnumerable&lt;T&gt;
 
     <h3>Using Generic Collections</h3>
     <div class="code-block">
-      <pre><code>// Type-safe int collection
+      <pre class="dynamic-scroll"><code>// Type-safe int collection
 LinkedList&lt;int&gt; List1 = new LinkedList&lt;int&gt;();
 List1.AddList(2);
 List1.AddList(3);
@@ -123,13 +123,13 @@ List2.AddList("3");</code></pre>
     <p>When instantiating a generic type, you specify the type argument:</p>
 
     <div class="code-block">
-      <pre><code>LinkedList&lt;int&gt; obj1 = new LinkedList&lt;int&gt;();
+      <pre class="dynamic-scroll"><code>LinkedList&lt;int&gt; obj1 = new LinkedList&lt;int&gt;();
 LinkedList&lt;string&gt; obj2 = new LinkedList&lt;string&gt;();
 LinkedList&lt;MyClass&gt; obj3 = new LinkedList&lt;MyClass&gt;();</code></pre>
     </div>
 
     <div class="info-box">
-      <h4>💡︎ Naming Conventions for Type Parameters</h4>
+      <h4><i class="far fa-lightbulb"></i> Naming Conventions for Type Parameters</h4>
       <ul>
         <li>Use <code>T</code> for a single type parameter: <code>public class LinkList&lt;T&gt;</code></li>
         <li>Use <code>T</code> prefix for multiple parameters: <code>public delegate TOut Con&lt;TIn, TOut&gt;(TIn from)</code></li>
@@ -174,7 +174,7 @@ LinkedList&lt;MyClass&gt; obj3 = new LinkedList&lt;MyClass&gt;();</code></pre>
 
     <h3>Example with Constraints</h3>
     <div class="code-block">
-      <pre><code>// Only value types allowed
+      <pre class="dynamic-scroll"><code>// Only value types allowed
 public class LinkedList&lt;T&gt; : IEnumerable&lt;T&gt; where T : struct
 {
     // Implementation
@@ -189,7 +189,7 @@ LinkedList&lt;string&gt; list2 = new LinkedList&lt;string&gt;(); // Compile erro
     <p>Generic types can implement interfaces and derive from base classes:</p>
 
     <div class="code-block">
-      <pre><code>// Generic class implementing generic interface
+      <pre class="dynamic-scroll"><code>// Generic class implementing generic interface
 public class LinkedList&lt;T&gt; : IEnumerable&lt;T&gt; where T : struct { }
 
 // Generic class derived from generic base
@@ -215,7 +215,7 @@ public class ChildClass : ParentClass&lt;int&gt;
     <div class="highlight-box"><strong>⚠︎ Important:</strong> Static members of a generic class are only shared within single instantiation of the class.</div>
 
     <div class="code-block">
-      <pre><code>public class First&lt;T&gt;
+      <pre class="dynamic-scroll"><code>public class First&lt;T&gt;
 {
     public static int A;
 }
@@ -232,7 +232,7 @@ Console.WriteLine(First&lt;int&gt;.A); // Prints 100
     <p>Generic interfaces help avoid boxing/unboxing operations:</p>
 
     <div class="code-block">
-      <pre><code>interface ISwap
+      <pre class="dynamic-scroll"><code>interface ISwap
 {
     void Swap&lt;T&gt;(ref T First, ref T Sec);
 }
@@ -264,7 +264,7 @@ class Program : ISwap
     <p>Generic methods allow you to write a single method that works with multiple types:</p>
 
     <div class="code-block">
-      <pre><code>public static void Swap&lt;T&gt;(ref T First, ref T Last)
+      <pre class="dynamic-scroll"><code>public static void Swap&lt;T&gt;(ref T First, ref T Last)
 {
     T Temp = First;
     First = Last;
@@ -285,7 +285,7 @@ Swap(ref firstName, ref lastName);</code></pre>
     <p>Generic delegates allow you to create type-safe function pointers that work with multiple types:</p>
 
     <div class="code-block">
-      <pre><code>public delegate T fun&lt;T&gt;(T Value);
+      <pre class="dynamic-scroll"><code>public delegate T fun&lt;T&gt;(T Value);
 
 public int MultiplyByTwo(int x) { return x * 2; }
 public string Concatenate(string xx) { return xx + " world"; }
@@ -302,7 +302,7 @@ Console.WriteLine(obj1("Hello")); // Output: Hello world</code></pre>
     <p>Use the <code>default</code> keyword to get the default value for a type parameter:</p>
 
     <div class="code-block">
-      <pre><code>public static void Swap&lt;T&gt;(ref T First, ref T Sec)
+      <pre class="dynamic-scroll"><code>public static void Swap&lt;T&gt;(ref T First, ref T Sec)
 {
     T Temp = default(T); // null for reference types, 0 for value types
     Temp = First;
@@ -312,7 +312,7 @@ Console.WriteLine(obj1("Hello")); // Output: Hello world</code></pre>
     </div>
 
     <div class="info-box">
-      <h4>📘︎ Default Values</h4>
+      <h4><i class="fas fa-book"></i> Default Values</h4>
       <ul>
         <li>Reference types: <code>null</code></li>
         <li>Numeric types: <code>0</code></li>
@@ -330,7 +330,7 @@ Console.WriteLine(obj1("Hello")); // Output: Hello world</code></pre>
     </ul>
 
     <div class="code-block">
-      <pre><code>MyClass&lt;int&gt; obj1 = new MyClass&lt;int&gt;();
+      <pre class="dynamic-scroll"><code>MyClass&lt;int&gt; obj1 = new MyClass&lt;int&gt;();
 MyClass&lt;int&gt; obj2 = new MyClass&lt;int&gt;(); // Reuses same generated class
 
 MyClass&lt;byte&gt; obj3 = new MyClass&lt;byte&gt;(); // New class generated
@@ -343,7 +343,7 @@ MyClass&lt;B&gt; obj5 = new MyClass&lt;B&gt;(); // Reuses same class!</code></pr
 
     <h2>Best Practices</h2>
     <div class="highlight-box">
-      <strong>💡︎ Key Takeaways:</strong>
+      <strong><i class="far fa-lightbulb"></i> Key Takeaways:</strong>
       <ul>
         <li>Always prefer generic collections over non-generic ones</li>
         <li>Use constraints when you need specific functionality from type parameters</li>

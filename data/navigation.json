@@ -3,14 +3,16 @@
     {
       "title": "I'm",
       "url": "/#iam",
-      "icon": "🏠︎",
+      "icon": "&#xf508;",
+      "class": "fa",
       "section": "iam",
       "id": "iam"
     },
     {
       "title": "Stack",
       "url": "/#stack",
-      "icon": "💻︎",
+      "icon": "&#xf5fc;",
+      "class": "fa",
       "section": "stack",
       "id": "stack",
       "full_title": "Tech DNA",
@@ -19,7 +21,8 @@
     {
       "title": "Journey",
       "url": "/#journey",
-      "icon": "💼︎",
+      "icon": "&#xf64a;",
+      "class": "fa",
       "section": "journey",
       "id": "journey",
       "full_title": "Growth As An Engineer",
@@ -28,7 +31,8 @@
     {
       "title": "Learning",
       "url": "/#learning",
-      "icon": "🎓︎",
+      "icon": "&#xf501;",
+      "class": "fa",
       "section": "learning",
       "id": "learning",
       "full_title": "Academic Timeline",
@@ -37,7 +41,8 @@
     {
       "title": "Kudos",
       "url": "/#kudos",
-      "icon": "🏆︎",
+      "icon": "&#xf6fc;",
+      "class": "fa",
       "section": "kudos",
       "id": "kudos",
       "full_title": "Where I Made an Impact",
@@ -46,7 +51,8 @@
     {
       "title": "Dev",
       "url": "/dev",
-      "icon": "🎯︎",
+      "icon": "&#xf296;",
+      "class": "fab",
       "section": "dev",
       "id": "dev",
       "full_title": "Dev Lab Projects",
@@ -55,7 +61,8 @@
     {
       "title": "Blog",
       "url": "/blogs",
-      "icon": "📝︎",
+      "icon": "&#xf781;",
+      "class": "fas",
       "section": "blogs",
       "id": "blogs",
       "full_title": "Insight Hub",
@@ -64,7 +71,8 @@
     {
       "title": "About",
       "url": "/#about",
-      "icon": "👤︎",
+      "icon": "&#xf756;",
+      "class": "fa-solid",
       "section": "about",
       "id": "about",
       "full_title": "The Mind Behind This Universe",
@@ -73,7 +81,8 @@
     {
       "title": "Contact",
       "url": "/#contact",
-      "icon": "📞︎",
+     "icon": "&#xf2b9;",
+      "class": "fa-solid",
       "section": "contact",
       "id": "contact"
     }

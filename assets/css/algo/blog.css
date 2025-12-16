@@ -47,11 +47,14 @@
 .breadcrumb a {
   color: var(--textSecondary);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transform: scale(1, 1);
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .breadcrumb a:hover {
-  color: var(--primary);
+  color: var(--linkHover);
+  transform: scale(1.1, 1.1);
+  display: inline-block;
 }
 
 .breadcrumb .current,
@@ -82,19 +85,21 @@
 }
 
 .post-date {
-  color: var(--textSecondary);
+  color: var(--link);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transform: scale(1, 1);
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .post-date::before {
-  content: "📅︎";
+  content: "";
   font-size: var(--fontSize-base, 1rem);
-  font-family: 'fa';
+  font-family: "fa";
 }
 
 .post-date:hover {
   color: var(--linkHover);
+  transform: scale(1.1, 1.1);
 }
 
 .post-author,
@@ -102,18 +107,18 @@
 .post-date {
   display: flex;
   align-items: center;
-  gap: var(--gap-xs);
+  gap: var(--gap-sm);
 }
 
 .post-author::before {
-  content: "✍︎";
+  content: "\f044";
   font-size: var(--fontSize-2xl, 1.953rem);
-  font-family: 'fa';
+  font-family: "fa";
 }
 .post-reading-time::before {
-  content: "⏱";
-  font-size: var(--fontSize-lg, 1.25rem);
-  font-family: 'fa';
+  content: "\f34e";
+  font-size: var(--fontSize-base, 1.25rem);
+  font-family: "fa";
 }
 
 /* Post Title & Excerpt */
@@ -198,6 +203,8 @@
 .content-wrapper a:hover {
   color: var(--linkHover);
   border-bottom-color: var(--linkHover);
+  transform: scale(1.1);
+  display: inline-block;
 }
 
 .content-wrapper ul,
@@ -358,12 +365,13 @@
   flex-wrap: wrap;
 }
 
-.post-share-btn span {
+.post-share-btn span:not(.icon) {
   display: none;
 }
 
 .x-hide-title tr td:nth-child(odd) {
-  display: none;background: var(--surface);
+  display: none;
+  background: var(--surface);
 }
 
 /* Responsive Design */
@@ -409,10 +417,10 @@
     margin: 0;
     align-items: center;
   }
-  .post-share-btn span {
+  .post-share-btn span:not(.icon) {
     display: block;
   }
-  .post-share-btn svg {
+  .post-share-btn .icon {
     display: none;
   }
 

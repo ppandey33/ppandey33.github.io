@@ -59,8 +59,7 @@
 
 /* Battery Icon Dynamic Fill */
 .battery-fill {
-  transition: fill var(--transition-base, 0.3s ease-in-out), 
-              width var(--transition-base, 0.3s ease-in-out);
+  transition: fill var(--transition-base, 0.3s ease-in-out), width var(--transition-base, 0.3s ease-in-out);
 }
 
 /* Network Icon Dynamic Bars */
@@ -81,11 +80,8 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(calc(-1 * var(--space-2, 0.5rem)));
-  transition: opacity var(--transition-fast, 0.15s ease-in-out),
-              visibility var(--transition-fast, 0.15s ease-in-out),
-              transform var(--transition-fast, 0.15s ease-in-out);
-  box-shadow: 0 var(--space-2, 0.5rem) var(--space-6, 1.5rem) 
-              rgb(from var(--cardHeader) r g b / 0.3);
+  transition: opacity var(--transition-fast, 0.15s ease-in-out), visibility var(--transition-fast, 0.15s ease-in-out), transform var(--transition-fast, 0.15s ease-in-out);
+  box-shadow: 0 var(--space-2, 0.5rem) var(--space-6, 1.5rem) rgb(from var(--cardHeader) r g b / 0.3);
   z-index: var(--z-dropdown, 10);
 }
 
@@ -156,8 +152,7 @@
 .progress-bar-fill {
   height: 100%;
   border-radius: var(--radius-sm, 0.25rem);
-  transition: width var(--transition-base, 0.3s ease-in-out), 
-              background var(--transition-base, 0.3s ease-in-out);
+  transition: width var(--transition-base, 0.3s ease-in-out), background var(--transition-base, 0.3s ease-in-out);
 }
 
 .quality-badge {
@@ -171,32 +166,32 @@
 
 .quality-excellent {
   background: var(--success);
-  color: var( --textPrimary, #f3e8ff);
+  color: var(--textPrimary, #f3e8ff);
 }
 
 .quality-good {
   background: var(--diamond);
-  color: var( --textPrimary, #f3e8ff);
+  color: var(--textPrimary, #f3e8ff);
 }
 
 .quality-poor {
   background: var(--warning);
-  color: var( --textPrimary, #f3e8ff);
+  color: var(--textPrimary, #f3e8ff);
 }
 
 .quality-critical {
   background: var(--danger);
-  color: var( --textPrimary, #f3e8ff);
+  color: var(--textPrimary, #f3e8ff);
 }
 
 .quality-offline {
   background: var(--textMuted, 9ca3af);
-  color: var( --textPrimary, #f3e8ff);
+  color: var(--textPrimary, #f3e8ff);
 }
 
 .quality-charging {
   background: var(--info);
-  color: var( --textPrimary, #f3e8ff);
+  color: var(--textPrimary, #f3e8ff);
 }
 
 /* Theme Toggle */
@@ -208,10 +203,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--space-10, 2.5rem);
+  width: var(--space-10, 2.5rem) !important;
   height: var(--space-10, 2.5rem);
   border-radius: var(--radius-lg, 0.5rem);
-  color: var(--textSecondary, #888888);
+  color: var(--link, #e0e0e0);
   transition: var(--transition-fast, 0.15s ease-in-out);
   background: none;
   border: none;
@@ -221,7 +216,9 @@
 .switcher.active,
 .toggle.active,
 .toggle:hover {
-  background-color: var(--hover);border-radius: var(--radius-lg, 0.5rem);
+  background-color: var(--hover);
+  border-radius: var(--radius-lg, 0.5rem);
+  color: var(--linkHov, #00ffcc);
 }
 
 .dropdown .theme-list,

@@ -24,7 +24,7 @@
 }
 
 .skill-category h3 {
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6);
   font-size: var(--fontSize-lg);
   margin-bottom: var(--margin-sm);
   padding: var(--padding-md);
@@ -40,7 +40,7 @@
 
 .skill-list li {
   padding: var(--space-1) 0;
-  font-size: var(--fontSize-sm);
+  font-size: var(--fontSize-md, 0.9rem);
   color: var(--textSecondary);
   display: flex;
   gap: var(--gap-xl);

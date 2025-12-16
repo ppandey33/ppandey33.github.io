@@ -4,8 +4,8 @@
   left: 0;
   width: 100%;
   z-index: var(--z-dropdown);
-  background-color: var(--background);
-  box-shadow: 0 var(--border-2) var(--space-2) rgb(from var(--cardHeader) r g b / 0.60) 70%;
+  background-color: var(--background, #1a1a1a);
+  box-shadow: 0 var(--border-2) var(--space-2) rgb(from var(--cardHeader, #000000) r g b / 0.60) 70%;
   transition: var(--transition-base);
 }
 
@@ -17,7 +17,7 @@
 /* When scrolling up - show header */
 .site-header.scroll-up {
   transform: translateY(0);
-  box-shadow: 0 var(--border-2) var(--space-4) rgb(from var(--cardHeader) r g b / 0.15) 70%;
+  box-shadow: 0 var(--border-2) var(--space-4) rgb(from var(--cardHeader, #000000) r g b / 0.15) 70%;
 }
 
 /* Optional: Add backdrop blur effect when scrolled */

@@ -11,7 +11,7 @@
     </p>
 
     <div class="info-box">
-      <h4>📖︎ Additional Collection Namespaces</h4>
+      <h4><i class="fas fa-book"></i> Additional Collection Namespaces</h4>
       <ul>
         <li><strong>System.Collections.Specialized:</strong> For specific collection types</li>
         <li><strong>System.Collections.Concurrent:</strong> For thread-safe collections</li>
@@ -50,7 +50,7 @@
 
     <h3>Creating a List</h3>
     <div class="code-block">
-      <pre><code>// Default constructor (initial capacity = 4)
+      <pre class="dynamic-scroll"><code>// Default constructor (initial capacity = 4)
 List&lt;int&gt; numbers = new List&lt;int&gt;();
 
 // With specified capacity
@@ -65,7 +65,7 @@ List&lt;int&gt; copy = new List&lt;int&gt;(numbers);</code></pre>
 
     <h3>Adding and Accessing Elements</h3>
     <div class="code-block">
-      <pre><code>public class Student : IComparable&lt;Student&gt;
+      <pre class="dynamic-scroll"><code>public class Student : IComparable&lt;Student&gt;
 {
     public int RollNo { get; set; }
     public string Name { get; set; }
@@ -104,11 +104,11 @@ students.Insert(1, new Student("Vijay", 75, 4));</code></pre>
 
     <h3>Capacity Management</h3>
     <div class="highlight-box">
-      <strong>💡︎ Performance Tip:</strong> List capacity doubles when exceeded (4 → 8 → 16 → 32). If you know the size beforehand, specify capacity to avoid reallocations.
+      <strong><i class="far fa-lightbulb"></i> Performance Tip:</strong> List capacity doubles when exceeded (4 → 8 → 16 → 32). If you know the size beforehand, specify capacity to avoid reallocations.
     </div>
 
     <div class="code-block">
-      <pre><code>List&lt;int&gt; list = new List&lt;int&gt;();
+      <pre class="dynamic-scroll"><code>List&lt;int&gt; list = new List&lt;int&gt;();
 list.Capacity = 100; // Set capacity explicitly
 
 // After operations, remove unused capacity
@@ -117,7 +117,7 @@ list.TrimExcess(); // Only if count > 90% of capacity</code></pre>
 
     <h3>ForEach Method with Action&lt;T&gt;</h3>
     <div class="code-block">
-      <pre><code>List&lt;Student&gt; students = new List&lt;Student&gt;() { /* ... */ };
+      <pre class="dynamic-scroll"><code>List&lt;Student&gt; students = new List&lt;Student&gt;() { /* ... */ };
 
 // Using ForEach with Console.WriteLine
 students.ForEach(Console.WriteLine);
@@ -128,7 +128,7 @@ students.ForEach(s => Console.WriteLine($"{s.Name}: {s.Marks}"));</code></pre>
 
     <h3>Removing Elements</h3>
     <div class="code-block">
-      <pre><code>// Remove by object (uses IEquatable&lt;T&gt; or Equals())
+      <pre class="dynamic-scroll"><code>// Remove by object (uses IEquatable&lt;T&gt; or Equals())
 if (students.Remove(student))
 {
     Console.WriteLine("Student removed");
@@ -143,7 +143,7 @@ students.RemoveRange(0, 2); // Remove 2 elements starting at index 0</code></pre
 
     <h3>Searching Elements</h3>
     <div class="code-block">
-      <pre><code>// IndexOf - returns index or -1
+      <pre class="dynamic-scroll"><code>// IndexOf - returns index or -1
 int index = students.IndexOf(student);
 
 // FindIndex with predicate
@@ -161,7 +161,7 @@ bool exists = students.Exists(s => s.Marks > 70);</code></pre>
 
     <h3>Sorting</h3>
     <div class="code-block">
-      <pre><code>// Default sort (uses IComparable&lt;T&gt;)
+      <pre class="dynamic-scroll"><code>// Default sort (uses IComparable&lt;T&gt;)
 students.Sort();
 
 // Custom comparer with IComparer&lt;T&gt;
@@ -240,7 +240,7 @@ students.Sort((s1, s2) => s1.Marks.CompareTo(s2.Marks));</code></pre>
 
     <h3>Queue Example: Music Player</h3>
     <div class="code-block">
-      <pre><code>public class Music
+      <pre class="dynamic-scroll"><code>public class Music
 {
     public string SongName { get; set; }
     public string Song { get; set; }
@@ -334,7 +334,7 @@ while (library.HasSongs)
 
     <h3>Stack Example</h3>
     <div class="code-block">
-      <pre><code>Stack&lt;Music&gt; stack = new Stack&lt;Music&gt;();
+      <pre class="dynamic-scroll"><code>Stack&lt;Music&gt; stack = new Stack&lt;Music&gt;();
 
 stack.Push(new Music("Song1", "song1.mp3"));
 stack.Push(new Music("Song2", "song2.mp3"));
@@ -358,7 +358,7 @@ while (stack.Count > 0)
     <p>LinkedList&lt;T&gt; is a doubly-linked list where each element holds references to both next and previous elements. Great for insertions/deletions but slower for searching.</p>
 
     <div class="highlight-box">
-      <strong>🎯︎ Use When:</strong>
+      <strong><i class="fas fa-space-shuttle"></i> Use When:</strong>
       <ul>
         <li>Frequent insertions/deletions at any position</li>
         <li>No need for index-based access</li>
@@ -432,7 +432,7 @@ while (stack.Count > 0)
 
     <h3>LinkedList Example</h3>
     <div class="code-block">
-      <pre><code>LinkedList&lt;string&gt; list = new LinkedList&lt;string&gt;();
+      <pre class="dynamic-scroll"><code>LinkedList&lt;string&gt; list = new LinkedList&lt;string&gt;();
 
 // Add elements
 list.AddLast("First");
@@ -461,7 +461,7 @@ if (secondNode != null)
 
     <h3>Creating and Using SortedList</h3>
     <div class="code-block">
-      <pre><code>SortedList&lt;string, Music&gt; sortedList = new SortedList&lt;string, Music&gt;();
+      <pre class="dynamic-scroll"><code>SortedList&lt;string, Music&gt; sortedList = new SortedList&lt;string, Music&gt;();
 
 // Add elements
 sortedList.Add("3Key", new Music("Song3", "song3.mp3"));
@@ -493,7 +493,7 @@ if (sortedList.TryGetValue("2Key", out value))
     </div>
 
     <div class="info-box">
-      <h4>💡︎ Important Note</h4>
+      <h4><i class="far fa-lightbulb"></i> Important Note</h4>
       <p>SortedList&lt;TKey, TValue&gt; stores only one value per key. If you need multiple values per key, use <code>Lookup&lt;TKey, TElement&gt;</code> class (covered in advanced topics).</p>
     </div>
 
@@ -588,7 +588,7 @@ if (sortedList.TryGetValue("2Key", out value))
 
     <h2>Best Practices</h2>
     <div class="highlight-box">
-      <strong>💡︎ Collection Selection Guidelines:</strong>
+      <strong><i class="far fa-lightbulb"></i> Collection Selection Guidelines:</strong>
       <ul>
         <li><strong>List&lt;T&gt;:</strong> Default choice for most scenarios</li>
         <li><strong>LinkedList&lt;T&gt;:</strong> Use when frequently inserting/removing in the middle</li>
@@ -603,7 +603,7 @@ if (sortedList.TryGetValue("2Key", out value))
 
     <h3>Converting Between Collections</h3>
     <div class="code-block">
-      <pre><code>// List to Array
+      <pre class="dynamic-scroll"><code>// List to Array
 List&lt;int&gt; list = new List&lt;int&gt; { 1, 2, 3 };
 int[] array = list.ToArray();
 
@@ -620,7 +620,7 @@ Stack&lt;int&gt; stack = new Stack&lt;int&gt;(list);</code></pre>
 
     <h3>Read-Only Collections</h3>
     <div class="code-block">
-      <pre><code>List&lt;int&gt; list = new List&lt;int&gt; { 1, 2, 3 };
+      <pre class="dynamic-scroll"><code>List&lt;int&gt; list = new List&lt;int&gt; { 1, 2, 3 };
 
 // Create read-only wrapper
 System.Collections.ObjectModel.ReadOnlyCollection&lt;int&gt; readOnly = list.AsReadOnly();
@@ -640,9 +640,5 @@ System.Collections.ObjectModel.ReadOnlyCollection&lt;int&gt; readOnly = list.AsR
       specific use cases. Always consider your access patterns, performance requirements, and data organization needs when choosing a collection type.
     </p>
 
-    <div class="info-box">
-      <h4>📖︎ Coming Next</h4>
-      <p>In the next article, we'll explore Dictionary, Lookup, HashSet, ObservableCollection, and concurrent collection classes for thread-safe operations.</p>
-    </div>
   </div>
 </article>

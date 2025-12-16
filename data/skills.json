@@ -1,7 +1,8 @@
 [
   {
     "category": "Language",
-    "icon": "🗣︎",
+    "icon": "&#xf1ab;",
+    "class": "fa",
     "skills": [
       { "name": "English", "level": "proficient" },
       { "name": "Hindi", "level": "expert" }
@@ -9,7 +10,8 @@
   },
   {
     "category": "Backend",
-    "icon": "🖳",
+    "icon": "&#xe4e5;",
+    "class": "fa",
     "skills": [
       { "name": "C#", "level": "proficient" },
       { "name": ".NET Core", "level": "proficient" },
@@ -20,7 +22,8 @@
   },
   {
     "category": "Frontend",
-    "icon": "⌘",
+    "icon": "&#xe51d;",
+    "class": "fa",
     "skills": [
       { "name": "Angular", "level": "expert" },
       { "name": "React", "level": "beginner" },
@@ -33,7 +36,8 @@
   },
   {
     "category": "Architecture",
-    "icon": "⌬",
+    "icon": "&#xf1b3;",
+    "class": "fa",
     "skills": [
       { "name": "Clean Architecture", "level": "proficient" },
       { "name": "Microservices", "level": "proficient" },
@@ -45,7 +49,8 @@
   },
   {
     "category": "DevOps & Cloud",
-    "icon": "☁︎",
+     "icon": "&#xf0c2;",
+    "class": "fa",
     "skills": [
       { "name": "Docker", "level": "proficient" },
       { "name": "Kubernetes", "level": "intermediate" },
@@ -57,7 +62,8 @@
   },
   {
     "category": "Databases",
-    "icon": "⟁",
+    "icon": "&#xf1c0;",
+    "class": "fa",
     "skills": [
       { "name": "SQL Server", "level": "proficient" },
       { "name": "Oracle 11g", "level": "intermediate" }
@@ -65,7 +71,8 @@
   },
   {
     "category": "Methodologies",
-    "icon": "⊟",
+    "icon": "&#xf534;",
+    "class": "fa",
     "skills": [
       { "name": "Agile / Scrum", "level": "expert" },
       { "name": "DevOps", "level": "basic" },

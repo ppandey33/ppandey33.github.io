@@ -200,7 +200,7 @@ ease-in-out);
   display: flex;
   gap: var(--gap-lg, 1.5rem);
   flex-wrap: wrap;
-  font-size: var(--fontSize-sm, 0.8rem);
+  font-size: var(--fontSize-md, 0.8rem);
   color: var(--textMuted, #8a8a8a);
 }
 
@@ -226,7 +226,7 @@ ease-in-out);
 }
 
 .experience-period::before {
-  content: "📅︎";
+  content: "\f133";
   font-family: 'fa';
   position: absolute;
   left: var(--space-2, 0.5rem);
@@ -241,7 +241,7 @@ ease-in-out);
 }
 
 .experience-location::before {
-  content: "📍︎︎";
+  content: "<i class="fas fa-map-pin"></i>︎";
   font-family: 'fa';
   position: absolute;
   left: var(--space-2, 0.5rem);

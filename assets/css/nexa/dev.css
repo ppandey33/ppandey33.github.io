@@ -24,20 +24,20 @@
 .search-input {
   width: 100%;
   padding: var(--space-3) var(--padding-lg);
-  font-size: var(--mdFontSize);
-  border: var(--border-2) solid var(--border);
-  background: var(--background);
-  color: var(--textPrimary, #e6e6e6);;
+  font-size: var(--fontSize-md, 0.9rem);
+  border: var(--border-2) solid var(--border, #2a2a2a);
+  background: var(--background, #1a1a1a);
+  color: var(--textPrimary, #e6e6e6);
   transition: var(--transition-base);
   outline: none;
 }
 
 .search-input:focus {
-  border-color: var(--borderSecondary);
+  border-color: var(--borderSecondary, #505050);
 }
 
 .search-input::placeholder {
-  color: var(--textSecondary);
+  color: var(--textSecondary, #888888);
 }
 
 /* Sort Dropdown */
@@ -49,33 +49,47 @@
 .sort-select {
   width: 100%;
   padding: var(--space-3) var(--space-10) var(--space-3) var(--padding-lg);
-  font-size: var(--mdFontSize);
-  border: var(--border-2) solid var(--border);
-  background: var(--background);
-  color: var(--textPrimary, #e6e6e6);;
+  font-size: var(--fontSize-md, 0.9rem);
+  border: var(--border-2) solid var(--border, #2a2a2a);
+  background: var(--background, #1a1a1a);
+  color: var(--textPrimary, #e6e6e6);
   cursor: pointer;
   transition: var(--transition-base);
   outline: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right var(--space-4) center;
 }
 
+.sort-wrapper::after {
+  content: "▾";
+  font-family: 'fa';
+  color: var(--primary, #00ffcc);
+  position: absolute;
+  right: 0px;
+  height: var(--space-8);
+  width: var(--space-8);
+  font-size: var(--fontSize-xl);
+  line-height: var(--line-height-loose);
+  font-weight: bolder;
+  top: 0px;
+  pointer-events: none;
+}
+
 .sort-select:hover {
-  border-color: var(--borderSecondary);
+  border-color: var(--borderSecondary, #505050);
 }
 
 .sort-select:focus {
-  border-color: var(--borderSecondary);
+  border-color: var(--borderSecondary, #505050);
 }
 
 /* No Results Message */
 .no-results {
   text-align: center;
   padding: var(--padding-2xl) var(--padding-md);
-  color: var(--textSecondary);
-  font-size: var(--lgsFontSize);
+  color: var(--textSecondary, #888888);
+  font-size: var(--fontSize-lg, 1.25rem);
 }
 
 /* Projects Grid */
@@ -86,21 +100,21 @@
 }
 
 .project-card {
-  border: var(--border-2) solid var(--border);
+  border: var(--border-2) solid var(--border, #2a2a2a);
   transition: var(--transition-base);
   overflow: hidden;
   max-width: max-content;
 }
 
 .project-card:hover {
-  border-color: var(--primary);
+  border-color: var(--primary, #00ffcc);
   transform: translateY(calc(-1 * var(--space-1))) !important;
 }
 
 .project-image {
   width: 100%;
   height: 12.5rem;
-  background: var(--background);
+  background: var(--background, #1a1a1a);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,28 +136,28 @@
 }
 
 .project-tags {
-  font-size: var(--smFontSize);
-  color: var(--textSecondary);
+  font-size: var(--fontSize-sm, 0.8rem);
+  color: var(--textSecondary, #888888);
   margin-bottom: var(--margin-sm);
 }
 
 .project-tags .project-tag {
   display: inline-block;
-  border: var(--border-1) solid var(--border);
+  border: var(--border-1) solid var(--border, #2a2a2a);
   padding: var(--space-1) var(--padding-sm);
   margin-right: var(--margin-sm);
   margin-bottom: var(--space-1);
 }
 
 .project-title {
-  color: var(--textPrimary, #e6e6e6);;
-  font-size: var(--lgsFontSize);
+  color: var(--textPrimary, #e6e6e6);
+  font-size: var(--fontSize-lg, 1.25rem);
   margin-bottom: var(--margin-sm);
 }
 
 .project-description {
-  font-size: var(--smFontSize);
-  color: var(--textMuted);
+  font-size: var(--fontSize-md, 0.9rem);
+  color: var(--textMuted, #8a8a8a);
   margin-bottom: var(--margin-md);
 }
 
@@ -154,16 +168,16 @@
 
 .project-link {
   padding: var(--padding-sm) var(--padding-md);
-  border: var(--border-1) solid var(--primary);
-  color: var(--primary);
+  border: var(--border-1) solid var(--primary, #00ffcc);
+  color: var(--primary, #00ffcc);
   text-decoration: none;
   font-size: var(--fontSize-base);
   transition: var(--transition-base);
 }
 
 .project-link:hover {
-  background: var(--primary);
-  color: var(--background);
+  background: var(--primary, #00ffcc);
+  color: var(--background, #1a1a1a);
 }
 
 /* Decorators */

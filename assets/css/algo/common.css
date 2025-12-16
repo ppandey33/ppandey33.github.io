@@ -1,3 +1,9 @@
+---
+---
+
+@import url("{{ '/assets/fonts/fira_code.css' | absolute_url }}");
+@import url("{{ '/assets/css/all.min.css' | absolute_url }}");
+
 * {
   margin: 0;
   padding: 0;
@@ -12,6 +18,10 @@ body {
   position: relative;
   line-height: var(--line-height-normal, 1.5);
   font-size: var(--fontSize-base, 1rem);
+  text-shadow: 0 0 0 currentColor;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 :root {
@@ -306,7 +316,7 @@ body {
   --accent: #00d9a8;
   --background: #1a1a1a;
   --surface: #151b23;
-  --link: #e0e0e0;
+  --link: #c8fcea;
   --textPrimary: #e6e6e6;
   --textSecondary: #888888;
   --textMuted: #8a8a8a;
@@ -338,7 +348,7 @@ body {
   --accent: #c1ff90;
   --background: #1a1a1a;
   --surface: #151b23;
-  --link: #e0e0e0;
+  --link: #c8fcea;
   --textPrimary: #e6e6e6;
   --textSecondary: #888888;
   --textMuted: #8a8a8a;
@@ -426,7 +436,7 @@ body {
   --accent: #b94d26;
   --background: #f0f4f8;
   --surface: #f8fafb;
-  --link: #f59e0b;
+  --link: #4e0110;
   --textPrimary: #2c3e50;
   --textSecondary: #546e7a;
   --textMuted: #90a4ae;
@@ -463,25 +473,65 @@ body {
 
   --shimmer-opacity: rgba(251, 191, 36, 0.1);
 }
+
+/* ========= Firefox ========= */
+* {
+  scrollbar-width: thin; /* closest to 0.75rem */
+  scrollbar-color: var(--primary) var(--surface);
+}
+
+/* ========= Chromium / Safari ========= */
+*::-webkit-scrollbar {
+  width: var(--space-3);
+  height: var(--space-3);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary), var(--accent));
+  border: var(--border-2) solid var(--surface);
+  transition: background var(--transition-base);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent), var(--primary));
+}
+
+.dynamic-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color var(--transition-fast);
+  scrollbar-gutter: stable;
+}
+
+.dynamic-scroll:hover {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--surface);
+}
+
 .icon {
-    font-family: "fa";
-    font-weight: 300;
+  font-family: "fa";
+  font-weight: 300;
 }
 
 .icon-fa5 {
-    font-family: "fa 5";
-    font-weight: 300;
+  font-family: "fa 5";
+  font-weight: 300;
 }
 
 .icon-fa-brands {
-    font-family: "fa brands";
-    font-weight: 300;
+  font-family: "fa brands";
+  font-weight: 300;
 }
 
 .icon-fa-5brands {
-    font-family: "fa 5 brands";
-    font-weight: 300;
+  font-family: "fa 5 brands";
+  font-weight: 300;
 }
+
 .image-shades {
   background: linear-gradient(
     to bottom,
@@ -523,13 +573,17 @@ body {
   font-size: var(--fontSize-sm);
   padding: var(--padding-md);
   min-width: fit-content;
+  transform: scale(1, 1);
+  display: inline-block;
+  transition: transform var(--transition-base), color var(--transition-base);
 }
 .view-all:hover {
-  color: var(--primary);
+  color: var(--linkHover);
+  transform: scale(1.1, 1.1);
 }
 
 .page-container {
-   display: flex;
+  display: flex;
   gap: var(--gap-md, 1rem);
   position: relative;
 }
@@ -670,7 +724,7 @@ section[data-service-card] {
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--padding-lg, 1.5rem);
-   z-index: calc(var(--z-fixed, 1000) + 2);
+  z-index: calc(var(--z-fixed, 1000) + 2);
   box-shadow: 0 var(--space-2, 0.5rem) var(--space-6, 1.5rem) rgb(from var(--cardHeader) r g b / 0.3);
 }
 
@@ -714,7 +768,7 @@ section[data-service-card] {
   background: var(--surface);
 }
 
-.status-icon svg {
+.status-icon .icon {
   display: block;
   transition: opacity var(--transition-base, 0.3s ease-in-out);
 }
@@ -755,7 +809,7 @@ section[data-service-card] {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  
+
   height: max-content;
 }
 
@@ -872,14 +926,16 @@ section[data-service-card] {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--space-10, 2.5rem);
+  width: var(--space-10, 2.5rem) !important;
   height: var(--space-10, 2.5rem);
   border-radius: var(--radius-lg, 0.5rem);
-  color: var(--textSecondary, #888888);
+  color: var(--link, #e0e0e0);
   transition: var(--transition-fast, 0.15s ease-in-out);
   background: none;
   border: none;
   cursor: pointer;
+  transform: scale(1, 1);
+  transition: transform var(--transition-fast, 0.15s ease-in-out), color var(--transition-fast, 0.15s ease-in-out), background-color var(--transition-fast, 0.15s ease-in-out);
 }
 
 .switcher.active,
@@ -887,6 +943,9 @@ section[data-service-card] {
 .toggle:hover {
   background-color: var(--hover);
   border-radius: var(--radius-lg, 0.5rem);
+  color: var(--linkHover, #00ffcc);
+  transform: scale(1.1, 1.1);
+  display: inline-block;
 }
 
 .dropdown .theme-list,
@@ -1096,14 +1155,3 @@ section[data-service-card] {
 /* ============================================
    ANIMATION PERFORMANCE
    ============================================ */
-.left-sidebar-card,
-.right-sidebar-card,
-.sidebar-overlay {
-  will-change: transform, opacity;
-}
-
-.left-sidebar-card.active,
-.right-sidebar-card.active,
-.sidebar-overlay.active {
-  will-change: auto;
-}

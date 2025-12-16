@@ -21,27 +21,32 @@
 
 .education-institution {
   color: var(--textTertiary);
-  font-size: var(--fontSize-sm);
+  font-size: var(--fontSize-base);
 }
 
 .education-period {
   color: var(--textSecondary);
-  font-size: var(--fontSize-sm);
+  font-size: var(--fontSize-md);
+}
+
+.education-score {
+  font-size: var(--fontSize-lg, 1.5rem);
+  font-style: italic;
 }
 
 .education-info {
   list-style: none;
   padding: var(--padding-lg);
-  font-size: var(--fontSize-sm);
+  font-size: var(--fontSize-md);
   display: flex;
   flex-direction: column;
   gap: var(--gap-sm);
 }
 
-.education-meta{
+.education-meta {
   display: flex;
-    gap: var(--gap-sm);
-    justify-content: space-between;
+  gap: var(--gap-sm);
+  justify-content: space-between;
 }
 
 .education-content {

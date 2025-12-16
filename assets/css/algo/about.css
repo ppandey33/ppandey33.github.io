@@ -10,7 +10,7 @@
 }
 
 .about-text h2 {
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6);
   font-size: var(--fontSize-3xl);
   margin-bottom: var(--margin-lg);
 }
@@ -18,9 +18,14 @@
 .about-paragraph {
   margin-bottom: var(--margin-lg);
   color: var(--textSecondary);
-  font-size: var(--fontSize-sm);
+  font-size: var(--fontSize-base, 1rem);
+  text-align: justify;
 }
-
+.about-paragraph:first-child {
+  font-size: calc(var(--fontSize-lg) - 0.1rem);
+  color: var(--textSecondary);
+  font-weight: 500;
+}
 .about-image {
   flex: 4;
   position: relative;

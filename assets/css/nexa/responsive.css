@@ -62,9 +62,7 @@
     padding: 0 var(--padding-sm);
     width: 100%;
   }
-  .hero {
-    /* min-height: 80vh; */
-  }
+
   .main-content {
     overflow: hidden;
   }
@@ -144,13 +142,13 @@
     left: 0;
     right: 0;
     z-index: var(--z-fixed);
-    background-color: var(--background);
-    box-shadow: 0 var(--border-2) var(--space-2) rgb(from var(--cardHeader) r g b / 0.1);
+    background-color: var(--background, #1a1a1a);
+    box-shadow: 0 var(--border-2) var(--space-2) rgb(from var(--cardHeader, #000000) r g b / 0.1);
   }
 
   /* Navigation Menu */
   .site-nav {
-    border-bottom: var(--border-1) solid var(--border);
+    border-bottom: var(--border-1) solid var(--border, #2a2a2a);
     transform: translateX(100%);
     opacity: 0;
     transition: all var(--transition-base);
@@ -176,7 +174,7 @@
     padding: var(--padding-xl) var(--padding-lg);
     gap: var(--gap-md);
     width: 100%;
-    background: rgb(from var(--surfaceOpacity) r g b / 0.95);
+    background: rgb(from var(--surfaceOpacity, #151b239a) r g b / 0.95);
     backdrop-filter: blur(var(--space-2));
     -webkit-backdrop-filter: blur(var(--space-2));
     height: max-content;
@@ -241,7 +239,7 @@
   tr {
     display: block;
     margin-bottom: 1rem;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border, #2a2a2a);
     padding: 10px;
     border-radius: 8px;
   }
@@ -275,10 +273,10 @@
     margin: 0;
     align-items: center;
   }
-  .post-share-btn span {
-    display: block;
+  .post-share-btn span:not(.icon) {
+    display: block !important;
   }
-  .post-share-btn svg {
+  .post-share-btn .icon {
     display: none;
   }
 
@@ -448,7 +446,7 @@
   }
 
   .blog-meta {
-    font-size: var(--fontSize-xs);
+    font-size: var(--fontSize-sm);
   }
 }
 
@@ -600,11 +598,11 @@
   }
 
   .experience-company {
-    font-size: var(--fontSize-xs);
+    font-size: var(--fontSize-md);
   }
 
   .experience-description li {
-    font-size: var(--fontSize-xs);
+    font-size: var(--fontSize-md);
   }
 
   .education-degree {
@@ -612,7 +610,7 @@
   }
 
   .education-institution {
-    font-size: var(--fontSize-sm);
+    font-size: var(--fontSize-md);
   }
 
   .achievement-item {
@@ -628,7 +626,7 @@
   }
 
   .about-paragraph {
-    font-size: var(--fontSize-sm);
+    font-size: var(--fontSize-md);
   }
 
   .contact-item {
@@ -669,6 +667,27 @@
     flex-direction: column;
     align-items: flex-start;
     gap: var(--gap-sm);
+  }
+  .contact-info {
+    width: 100%;
+  }
+
+  .project-links {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-item {
+    font-size: var(--fontSize-md);
+    width: 100%;
+    padding: var(--padding-sm, 0.5rem) var(--padding-md, 1rem);
+  }
+
+  .nav-item .nav-link{
+    justify-content: start;
+    height: var(--space-6);
+    width: 100%;
+
   }
 }
 
@@ -757,7 +776,7 @@
 
   .experience-company,
   .education-institution {
-    font-size: var(--fontSize-xs);
+    font-size: var(--fontSize-md);
   }
 
   .contact-item {
@@ -787,6 +806,11 @@
 
   .layout-option-desc {
     font-size: var(--fontSize-xs);
+  }
+
+  .nav-item {
+    font-size: var(--fontSize-md);
+    width: 100%;
   }
 }
 
@@ -837,7 +861,6 @@
 @media (max-width: 971px) {
   /* Enhanced touch targets */
   .btn,
-  .nav-link,
   .contact-social,
   .theme-toggle,
   .layout-toggle,
@@ -1004,7 +1027,7 @@
    ================================================================= */
 @media (prefers-color-scheme: dark) {
   .site-header {
-    background-color: var(--background);
+    background-color: var(--background, #1a1a1a);
   }
 
   .site-header.scroll-up,
@@ -1014,7 +1037,7 @@
 
   @media (max-width: 971px) {
     .nav-list {
-      background: rgb(from var(--surfaceOpacity) r g b / 0.98);
+      background: rgb(from var(--surfaceOpacity, #151b239a) r g b / 0.98);
     }
   }
 }
@@ -1062,7 +1085,7 @@
   .experience-item,
   .education-item,
   .achievement-item {
-    border: var(--border-1) solid var(--border);
+    border: var(--border-1) solid var(--border, #2a2a2a);
     page-break-inside: avoid;
   }
 }

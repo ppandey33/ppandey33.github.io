@@ -26,12 +26,13 @@ class Contacts extends HideComponent {
     if (container && config?.contacts?.details) {
       container.innerHTML = "";
       config.contacts.details.forEach((contact) => {
-        const contactItem = window.App.modules.util.createElement("div", "contact-item");
-        const icon = window.App.modules.util.createElement("i", "icon", contact.icon);
+        const contactItem = window.App.modules.util.createElement("div", "contact-item"),
+        icon = window.App.modules.util.createElement("i", `icon ${(contact?.class || '')}`);
+        icon.innerHTML = contact.icon;
         let value = null;
         if (contact?.link) {
           value = window.App.modules.util.createElement("a", "contact-value", contact.value);
-          value.setAttribute("_target", "blank");
+          value.setAttribute("target", "_blank");
           value.href = contact.link || "#";
         } else {
           value = window.App.modules.util.createElement("span", "contact-value", contact?.value);

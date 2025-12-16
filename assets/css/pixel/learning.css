@@ -108,7 +108,7 @@
 }
 
 .education-item .education-watermark::before {
-  content: "📖︎︎";
+  content: "\f02d";
   font-family: 'fa';
   background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
   -webkit-background-clip: text;
@@ -214,7 +214,7 @@
   display: flex;
   align-items: center;
   gap: var(--gap-sm, 0.5rem);
-  font-size: var(--fontSize-sm, 0.8rem);
+  font-size: var(--fontSize-md, 0.9rem);
   font-weight: 400;
   background: var(--surfaceOpacity, rgba(21, 27, 35, 0.5));
   border-radius: var(--radius-sm, 0.25rem);
@@ -224,7 +224,7 @@
 }
 
 .education-period::before {
-  content: "📅︎";
+  content: "\f133";
   font-family: 'fa';
   font-size: var(--fontSize-lg, 1.25rem);
   animation: float 3s ease-in-out infinite;
@@ -249,7 +249,7 @@
 }
 
 .education-location::before {
-  content: "📍︎︎";
+  content: "<i class="fas fa-map-pin"></i>︎";
   font-family: 'fa';
   font-size: var(--fontSize-lg, 1.25rem);
   animation: float 3s ease-in-out infinite 1.5s;

@@ -27,7 +27,7 @@
   font-size: var(--fontSize-base);
   border: var(--border-2) solid var(--border);
   background: var(--background);
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6);
   transition: var(--transition-base);
   outline: none;
 }
@@ -55,14 +55,14 @@
   content: "▾";
   font-family: 'fa';
   color: var(--primary, #00ffcc);
-  position: relative;
-  right: 30px;
-  height: 30px;
-  width: 30px;
+  position: absolute;
+  right: 0px;
+  height: var(--space-8);
+  width: var(--space-8);
   font-size: var(--fontSize-xl);
   line-height: var(--line-height-loose);
   font-weight: bolder;
-  bottom: 8px;
+  top: 0px;
   pointer-events: none;
 }
 
@@ -72,7 +72,7 @@
   font-size: var(--fontSize-base);
   border: var(--border-2) solid var(--border);
   background: var(--background);
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6);
   cursor: pointer;
   transition: var(--transition-base);
   outline: none;
@@ -98,7 +98,7 @@
   font-size: var(--fontSize-base);
   border: var(--border-2) solid var(--border);
   background: var(--background);
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6);
   cursor: pointer;
   transition: var(--transition-base);
   outline: none;
@@ -192,7 +192,7 @@
   align-items: center;
   gap: var(--gap-md);
   margin-bottom: var(--margin-md);
-  font-size: var(--fontSize-sm);
+  font-size: var(--fontSize-md);
   color: var(--textSecondary);
   flex-wrap: wrap;
 }
@@ -211,7 +211,7 @@
 
 /* Blog Title */
 .blog-title {
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6);
   font-size: var(--fontSize-xl);
   margin-bottom: var(--margin-md);
   line-height: var(--line-height-tight);
@@ -224,7 +224,7 @@
 
 /* Blog Excerpt */
 .blog-excerpt {
-  font-size: var(--fontSize-sm);
+  font-size: var(--fontSize-md);
   color: var(--textMuted);
   margin-bottom: var(--margin-lg);
   line-height: var(--line-height-relaxed);

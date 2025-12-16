@@ -184,7 +184,7 @@ class Blog {
             .replace('{url}', url)
             .replace('{title}', title);
 
-          const button = window.App.modules.util.createElement('a', `share-btn ${platform.id} contact-social glass-card`);
+          const button = window.App.modules.util.createElement('a', `share-btn ${platform.id} contact-social glass-card ${(platform?.class || '')}`);
           button.href = shareLink;
           button.id = `share-${platform.id}`;
           button.title = platform.title;

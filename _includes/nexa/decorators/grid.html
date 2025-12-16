@@ -3,7 +3,7 @@
 {% assign size = include.size | default: 4 %}
 {% assign radius = include.radius | default: 2 %}
 {% assign gap   = include.gap | default: 6 %}
-{% assign color = include.color | default: "var(--primary)" %}
+{% assign color = include.color | default: "var(--primary, #00ffcc)" %}
 
 {% assign svg_width  = cols | times: gap %}
 {% assign svg_height = rows | times: gap %}

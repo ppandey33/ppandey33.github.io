@@ -33,9 +33,9 @@ class Contacts {
 
     container.innerHTML = "";
     this.config.contacts.details.forEach((contact) => {
-      const contactItem = window.App.modules.util.createElement("div", "contact-item");
-      const icon = window.App.modules.util.createElement("i", "icon", contact.icon);
-
+      const contactItem = window.App.modules.util.createElement("div", "contact-item"),
+        icon = window.App.modules.util.createElement("i", `icon ${contact?.class || ""}`);
+      icon.innerHTML = contact.icon;
       let value;
       if (contact?.link) {
         value = window.App.modules.util.createElement("a", "contact-value", contact.value);

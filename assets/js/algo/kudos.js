@@ -17,12 +17,12 @@ class Kudos extends HideComponent {
     if (container) {
       container.innerHTML = "";
       data.forEach((achievement, index, list) => {
-        const animationClass = index === 0 ? "fade-left" : index === list.length - 1 ? "fade-right" : "zoom";
-        const card = window.App.modules.util.createElement("div", `achievement-item glass-card ${animationClass}`);
-        const icon = window.App.modules.util.createElement("span", "achievement-icon", achievement.icon);
-        const title = window.App.modules.util.createElement("h3", "achievement-title", achievement.title);
-        const description = window.App.modules.util.createElement("p", "achievement-description", achievement.description);
-
+        const animationClass = index === 0 ? "fade-left" : index === list.length - 1 ? "fade-right" : "zoom",
+          card = window.App.modules.util.createElement("div", `achievement-item glass-card ${animationClass}`),
+          icon = window.App.modules.util.createElement("span", `achievement-icon ${(achievement?.class || '')}`),
+          title = window.App.modules.util.createElement("h3", "achievement-title", achievement.title),
+          description = window.App.modules.util.createElement("p", "achievement-description", achievement.description);
+        icon.innerHTML = achievement.icon;
         card.appendChild(icon);
         card.appendChild(title);
         card.appendChild(description);
@@ -43,7 +43,7 @@ function initKudos() {
     window.App.modules.kudos.cleanup?.();
   }
   const kudosModule = new Kudos();
-  window.App.register("kudos", kudosModule, 'initKudos');
+  window.App.register("kudos", kudosModule, "initKudos");
   kudosModule.init();
 }
 

@@ -32,8 +32,8 @@
 }
 
 .blog-search-wrapper::before {
-  content: "🔍︎";
-  font-family: 'fa';
+  content: "\f002";
+  font-family: 'fas';
   position: absolute;
   left: var(--space-4, 1rem);
   top: 50%;
@@ -322,7 +322,7 @@
   display: flex;
   gap: var(--gap-lg, 1.5rem);
   flex-wrap: wrap;
-  font-size: var(--fontSize-sm, 0.8rem);
+  font-size: var(--fontSize-md, 0.8rem);
   color: var(--textMuted, #8a8a8a);
   position: relative;
   z-index: 1;

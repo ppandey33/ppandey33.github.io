@@ -1,5 +1,3 @@
-.profile-container {
-}
 .avatar-container {
   display: flex;
 }
@@ -105,21 +103,27 @@
   height: max-content;
   width: max-content;
   color: var(--textPrimary, #e6e6e6);
-  min-height: var(--space-15);
-  min-width: var(--space-15);
+  font-size: var(--fontSize-lg);
   border-radius: 20%;
   padding: var(--padding-md, 1rem);
   border: var(--border-1) solid var(--primary);
   transition: transform var(--transition-base, 0.3s ease-in-out);
   text-decoration: none;
 }
-
 .social-links a:hover {
+  box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
+  border-color: var(--border);
+  background: var(--primary, #00ffcc);
+  color: var(--background, #1a1a1a);
+}
+.social-links a:nth-child(even):hover {
   transform: scale(1.1) rotate(-5deg);
+}
+
+.social-links a:nth-child(odd):hover {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .social-links a:active {
   transform: scale(1.1) rotate(-5deg);
 }
-
-

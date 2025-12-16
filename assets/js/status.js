@@ -16,7 +16,7 @@ class Status extends Device {
 
     // Store interval ID for cleanup
     this.updateInterval = null;
-    
+
     // Submenu placeholder handling
     this.submenuPlaceholder = null;
     this.networkOriginalParent = null;
@@ -30,17 +30,17 @@ class Status extends Device {
     this.networkBars = this.networkContainer.querySelectorAll(".network-bar");
     this.networkDropdown = this.networkContainer.querySelector(".dropdown");
     this.batteryDropdown = this.batteryContainer.querySelector(".dropdown");
-    
+
     this.networkOriginalParent = this.networkDropdown.parentElement;
     this.batteryOriginalParent = this.batteryDropdown.parentElement;
-    
-    this.submenuPlaceholder = document.querySelector('[data-submenu-item]');
-    
+
+    this.submenuPlaceholder = document.querySelector("[data-submenu-item]");
+
     if (this.submenuPlaceholder) {
       this.resizeHandler = () => this.positionActiveSubmenu();
       this.scrollHandler = () => this.positionActiveSubmenu();
-      window.addEventListener('resize', this.resizeHandler);
-      window.addEventListener('scroll', this.scrollHandler, true);
+      window.addEventListener("resize", this.resizeHandler);
+      window.addEventListener("scroll", this.scrollHandler, true);
     }
   }
 
@@ -49,23 +49,23 @@ class Status extends Device {
 
     const triggerRect = trigger.getBoundingClientRect();
     const submenuRect = submenu.getBoundingClientRect();
-    
+
     // Get computed styles for margins
     const triggerStyle = window.getComputedStyle(trigger);
     const submenuStyle = window.getComputedStyle(submenu);
-    
+
     const triggerMargin = {
       top: parseFloat(triggerStyle.marginTop) || 0,
       right: parseFloat(triggerStyle.marginRight) || 0,
       bottom: parseFloat(triggerStyle.marginBottom) || 0,
-      left: parseFloat(triggerStyle.marginLeft) || 0
+      left: parseFloat(triggerStyle.marginLeft) || 0,
     };
-    
+
     const submenuMargin = {
       top: parseFloat(submenuStyle.marginTop) || 0,
       right: parseFloat(submenuStyle.marginRight) || 0,
       bottom: parseFloat(submenuStyle.marginBottom) || 0,
-      left: parseFloat(submenuStyle.marginLeft) || 0
+      left: parseFloat(submenuStyle.marginLeft) || 0,
     };
 
     const viewportWidth = window.innerWidth;
@@ -78,17 +78,17 @@ class Status extends Device {
       this.submenuPlaceholder.appendChild(submenu);
     }
 
-    submenu.style.position = 'fixed';
-    submenu.style.zIndex = '9999';
+    submenu.style.position = "fixed";
+    submenu.style.zIndex = "9999";
 
     // Calculate horizontal position (prefer right side of trigger)
     let left = triggerRect.right + triggerMargin.right + gap - submenuMargin.left;
-    
+
     // Check if submenu would overflow right edge
     if (left + submenuRect.width + submenuMargin.right > viewportWidth - viewportMargin) {
       // Try left side of trigger
       left = triggerRect.left - triggerMargin.left - gap - submenuRect.width - submenuMargin.right;
-      
+
       // If still overflows, align to right edge of viewport
       if (left < viewportMargin) {
         left = viewportWidth - submenuRect.width - submenuMargin.right - viewportMargin;
@@ -97,12 +97,12 @@ class Status extends Device {
 
     // Calculate vertical position (align with trigger top)
     let top = triggerRect.top - triggerMargin.top - submenuMargin.top;
-    
+
     // Check if submenu would overflow bottom edge
     if (top + submenuRect.height + submenuMargin.bottom > viewportHeight - viewportMargin) {
       // Align to bottom of trigger
       top = triggerRect.bottom + triggerMargin.bottom - submenuRect.height + submenuMargin.top;
-      
+
       // If still overflows, align to bottom of viewport
       if (top < viewportMargin) {
         top = viewportHeight - submenuRect.height - submenuMargin.bottom - viewportMargin;
@@ -127,11 +127,12 @@ class Status extends Device {
 
   generateNetworkUI() {
     const icon = this.createNetworkIcon();
-    const spanEl = window.App.modules.util.createElement('span', 'toggle');
+    const spanEl = window.App.modules.util.createElement("span", "toggle");
     spanEl.appendChild(icon);
     this.networkContainer.appendChild(spanEl);
     const dropdown = this.createDropdown("network", {
-      icon: "🌐︎",
+      icon: "&#xf012;",
+      class: 'fa',
       title: "Network Status",
       subtitle: "Checking...",
     });
@@ -150,11 +151,12 @@ class Status extends Device {
 
   generateBatteryUI() {
     const icon = this.createBatteryIcon();
-    const spanEl = window.App.modules.util.createElement('span', 'toggle');
+    const spanEl = window.App.modules.util.createElement("span", "toggle");
     spanEl.appendChild(icon);
     this.batteryContainer.appendChild(spanEl);
     const dropdown = this.createDropdown("battery", {
-      icon: "🔋︎",
+      icon: "&#xf240;",
+      class: "fa",
       title: "Battery Status",
       subtitle: "Checking...",
     });
@@ -185,10 +187,7 @@ class Status extends Device {
     // Document click handler - close dropdowns when clicking outside
     this.eventHandlers.documentClick = (e) => {
       // Check if click is outside both containers
-      if (!this.networkContainer.contains(e.target) && 
-          !this.batteryContainer.contains(e.target) &&
-          !this.networkDropdown.contains(e.target) &&
-          !this.batteryDropdown.contains(e.target)) {
+      if (!this.networkContainer.contains(e.target) && !this.batteryContainer.contains(e.target) && !this.networkDropdown.contains(e.target) && !this.batteryDropdown.contains(e.target)) {
         this.closeAllDropdowns();
       }
     };
@@ -205,7 +204,7 @@ class Status extends Device {
       this.closeAllDropdowns();
       return;
     }
-    
+
     // Remove active state from both dropdowns
     if (this.networkDropdown) {
       this.networkDropdown.classList.remove("show");
@@ -221,10 +220,10 @@ class Status extends Device {
         this.batteryOriginalParent.appendChild(this.batteryDropdown);
       }
     }
-    
+
     // Set new active dropdown
     this.activeDropdown = type;
-    
+
     // Add active state to selected dropdown
     if (type === "network") {
       this.networkDropdown.classList.add("show");
@@ -457,10 +456,11 @@ class Status extends Device {
     const dropdown = window.App.modules.util.createElement("div", "dropdown");
     dropdown.setAttribute("data-dropdown", type);
     const header = window.App.modules.util.createElement("div", "dropdown-header"),
-      ddHeader = window.App.modules.util.createElement("div", "dropdown-header-icon", data.icon),
+      ddHeader = window.App.modules.util.createElement("div", `dropdown-header-icon ${(data.class || '')}`),
       ddHeaderTxt = window.App.modules.util.createElement("div", "dropdown-header-text"),
       ddHeaderTitle = window.App.modules.util.createElement("h3", "", data.title),
       ddHeaderSub = window.App.modules.util.createElement("p", "", data.subtitle);
+    ddHeader.innerHTML = data.icon;
     ddHeaderTxt.appendChild(ddHeaderTitle), ddHeaderTxt.appendChild(ddHeaderSub), header.appendChild(ddHeader), header.appendChild(ddHeaderTxt), dropdown.appendChild(header);
     const body = window.App.modules.util.createElement("div", "dropdown-body");
     body.setAttribute("data-dropdown-body", type);
@@ -500,11 +500,11 @@ class Status extends Device {
     }
 
     if (this.resizeHandler) {
-      window.removeEventListener('resize', this.resizeHandler);
+      window.removeEventListener("resize", this.resizeHandler);
       this.resizeHandler = null;
     }
     if (this.scrollHandler) {
-      window.removeEventListener('scroll', this.scrollHandler, true);
+      window.removeEventListener("scroll", this.scrollHandler, true);
       this.scrollHandler = null;
     }
 

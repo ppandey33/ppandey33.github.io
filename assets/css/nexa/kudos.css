@@ -7,16 +7,17 @@
 .achievement-item {
   padding: var(--padding-xl);
   text-align: center;
-  border: var(--border-2) solid var(--border);
+  border: var(--border-2) solid var(--border, #2a2a2a);
   transition: var(--transition-base);
 }
 
 .achievement-item:hover {
-  border-color: var(--primary);
+  border-color: var(--primary, #00ffcc);
   transform: translateY(calc(-1 * var(--space-1))) !important;
 }
 
 .achievement-icon {
+  width: 100%;
   font-size: var(--fontSize-4xl);
   line-height: 5.6rem;
   margin-bottom: var(--margin-md);
@@ -57,10 +58,10 @@
 .achievement-title {
   font-size: var(--fontSize-lg);
   margin-bottom: var(--margin-sm);
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6)
 }
 
 .achievement-description {
-  color: var(--textSecondary);
-  font-size: var(--fontSize-sm);
+  color: var(--textSecondary, #888888);
+  font-size: var(--fontSize-md);
 }

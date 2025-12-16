@@ -106,10 +106,10 @@
     margin: 0;
     align-items: center;
   }
-  .post-share-btn span {
-    display: block;
+  .post-share-btn span:not(.icon) {
+    display: block!important;
   }
-  .post-share-btn svg {
+  .post-share-btn .icon {
     display: none;
   }
 
@@ -196,7 +196,7 @@
   }
 
   .about-paragraph {
-    font-size: var(--fontSize-sm, 0.8rem);
+    font-size: var(--fontSize-md, 0.8rem);
     text-align: left;
     padding-left: var(--padding-md, 1rem);
   }
@@ -316,7 +316,7 @@
   }
 
   .achievement-description {
-    font-size: var(--fontSize-sm, 0.8rem);
+    font-size: var(--fontSize-md, 0.9rem);
   }
 
   /* Learning Section */

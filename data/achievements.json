@@ -1,16 +1,19 @@
 [
   {
-    "icon": "🏆︎",
+    "icon": "&#xf091;",
+    "class": "fa",
     "title": "DXC Champs Award",
     "description": "Received multiple quarters for exceptional performance and technical contributions"
   },
   {
-    "icon": "🤝︎",
+    "icon": "&#xf2b5;",
+    "class": "fa",
     "title": "Collaborator Award",
     "description": "Recognized in H1 & H2 at DXC India for outstanding teamwork and collaboration"
   },
   {
-    "icon": "🛠︎",
+    "icon": "&#xf7d9;",
+    "class": "fa",
     "title": "Architectural Excellence",
     "description": "Acknowledged for introducing clean code frameworks and architectural best practices"
   }

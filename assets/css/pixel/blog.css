@@ -52,7 +52,7 @@
 }
 
 .breadcrumb a:hover {
-  color: var(--primary);
+  color: var(--linkHover);
 }
 
 .breadcrumb .current,
@@ -83,12 +83,12 @@
 }
 
 .post-date {
-  color: var(--textSecondary);
+  color: var(--link);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 .post-date::before {
-  content: "📅︎";
+  content: "\f133";
   font-family: "fa";
   font-size: var(--fontSize-base, 1rem);
 }
@@ -105,13 +105,13 @@
   gap: var(--gap-xs);
 }
 .post-author::before {
-  content: "✍︎";
+  content: "\f044";
   font-size: var(--fontSize-2xl, 1.953rem);
   font-family: "fa";
 }
 .post-reading-time::before {
-  content: "⏱";
-  font-size: var(--fontSize-lg, 1.25rem);
+  content: "\f34e";
+  font-size: var(--fontSize-base, 1.25rem);
   font-family: "fa";
 }
 /* Post Title & Excerpt */
@@ -356,7 +356,7 @@
   flex-wrap: wrap;
 }
 
-.post-share-btn span {
+.post-share-btn span:not(.icon) {
   display: none;
 }
 

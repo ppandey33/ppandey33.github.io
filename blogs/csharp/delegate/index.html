@@ -13,7 +13,7 @@
     <p>Delegates are classes that hold function references for .NET (specifically, the Common Language Infrastructure). They are similar to C++ function pointers but with a crucial difference:</p>
 
     <div class="highlight-box">
-      <strong>🔑︎ Key Difference:</strong>
+      <strong><i class="fab fa-keycdn"></i> Key Difference:</strong>
       <ul>
         <li><strong>C++ Function Pointers:</strong> Only hold memory location of a function</li>
         <li><strong>C# Delegates:</strong> Type-safe classes that define return type and parameter types</li>
@@ -26,7 +26,7 @@
     <p>Syntax for declaring a delegate:</p>
 
     <div class="code-block">
-      <pre><code>&lt;Access Modifier&gt; delegate &lt;Return Type&gt; &lt;Delegate Name&gt;(&lt;Parameters&gt;)
+      <pre class="dynamic-scroll"><code>&lt;Access Modifier&gt; delegate &lt;Return Type&gt; &lt;Delegate Name&gt;(&lt;Parameters&gt;)
 
 // Example
 public delegate int Del(int Value);</code></pre>
@@ -34,7 +34,7 @@ public delegate int Del(int Value);</code></pre>
 
     <h3>Initializing and Invoking Delegates</h3>
     <div class="code-block">
-      <pre><code>public delegate int Del(int Value);
+      <pre class="dynamic-scroll"><code>public delegate int Del(int Value);
 
 public static int AddFive(int Value)
 {
@@ -58,7 +58,7 @@ Console.WriteLine(obj.Invoke(50)); // Output: 55</code></pre>
     </p>
 
     <div class="code-block">
-      <pre><code>public delegate int fun(int Value);
+      <pre class="dynamic-scroll"><code>public delegate int fun(int Value);
 
 fun ok = new fun(del);
 Type type = ok.GetType();
@@ -74,7 +74,7 @@ Console.WriteLine("Is Sealed: " + type.IsSealed);      // True</code></pre>
     <p>A Singlecast delegate (derived from <code>System.Delegate</code>) contains a reference for one method at a time:</p>
 
     <div class="code-block">
-      <pre><code>public delegate void Del();
+      <pre class="dynamic-scroll"><code>public delegate void Del();
 
 public void DisplayMessage()
 {
@@ -90,7 +90,7 @@ obj.Invoke();</code></pre>
     <p>A Multicast delegate (derived from <code>System.MulticastDelegate</code>) can contain references for multiple methods. Think of it like a coffee vending machine that combines ingredients:</p>
 
     <div class="code-block">
-      <pre><code>public delegate void Vender();
+      <pre class="dynamic-scroll"><code>public delegate void Vender();
 
 public static void Milk()
 {
@@ -125,7 +125,7 @@ vender(); // Invokes: Milk + Tea = Tea</code></pre>
     </div>
 
     <div class="info-box">
-      <h4>📘︎ Multicast Delegate Operators</h4>
+      <h4><i class="fab fa-sellcast"></i> Multicast Delegate Operators</h4>
       <ul>
         <li><code>+</code> or <code>+=</code> - Add function reference</li>
         <li><code>-</code> or <code>-=</code> - Remove function reference</li>
@@ -136,7 +136,7 @@ vender(); // Invokes: Milk + Tea = Tea</code></pre>
     <p>Instead of creating custom delegates, you can use predefined <code>Action&lt;T&gt;</code> and <code>Func&lt;T&gt;</code> delegates from the <code>System</code> namespace:</p>
 
     <div class="code-block">
-      <pre><code>// Action&lt;T&gt; - Returns void, can have 0-16 parameters
+      <pre class="dynamic-scroll"><code>// Action&lt;T&gt; - Returns void, can have 0-16 parameters
 Action&lt;string&gt; printMessage = (msg) => Console.WriteLine(msg);
 printMessage("Hello World");
 
@@ -159,7 +159,7 @@ Console.WriteLine(add(5, 3)); // Output: 8</code></pre>
     <p>Anonymous methods allow you to define inline blocks of code as delegate parameters, reducing the need for separate method declarations:</p>
 
     <div class="code-block">
-      <pre><code>public delegate void Del();
+      <pre class="dynamic-scroll"><code>public delegate void Del();
 
 // Without parameters
 Del obj = delegate() {
@@ -186,7 +186,7 @@ obj2("Hello from anonymous method");</code></pre>
 
     <h3>Lambda Expression Syntax</h3>
     <div class="code-block">
-      <pre><code>(parameters) => { expression or statement; }
+      <pre class="dynamic-scroll"><code>(parameters) => { expression or statement; }
 
 // Example with explicit return
 Del obj = (Value) => {
@@ -208,7 +208,7 @@ Del obj = Value => Value * 2;</code></pre>
 
     <h3>Examples of Lambda Expressions</h3>
     <div class="code-block">
-      <pre><code>// No parameters
+      <pre class="dynamic-scroll"><code>// No parameters
 () => Console.WriteLine("No parameters");
 
 // Single parameter (parentheses optional)
@@ -229,7 +229,7 @@ x => x * x
 
     <h3>Lambda with Different Delegate Types</h3>
     <div class="code-block">
-      <pre><code>// With custom delegate
+      <pre class="dynamic-scroll"><code>// With custom delegate
 public delegate int Del(int Value);
 Del obj = Value => Value * 2;
 Console.WriteLine(obj(5)); // Output: 10
@@ -252,7 +252,7 @@ Console.WriteLine(isPositive(-3)); // Output: False</code></pre>
     <p>Lambda expressions can access variables declared outside their block. The compiler creates an anonymous class to manage these captured variables:</p>
 
     <div class="code-block">
-      <pre><code>delegate bool Del(int z);
+      <pre class="dynamic-scroll"><code>delegate bool Del(int z);
 
 public void Init(int Value)
 {
@@ -278,7 +278,7 @@ public void Init(int Value)
 
     <h3>Sorting with Lambda Expressions</h3>
     <div class="code-block">
-      <pre><code>List&lt;int&gt; numbers = new List&lt;int&gt; { 5, 2, 8, 1, 9, 3 };
+      <pre class="dynamic-scroll"><code>List&lt;int&gt; numbers = new List&lt;int&gt; { 5, 2, 8, 1, 9, 3 };
 
 // Sort ascending
 numbers.Sort((a, b) => a.CompareTo(b));
@@ -303,7 +303,7 @@ people.Sort((p1, p2) => p1.Name.CompareTo(p2.Name));</code></pre>
 
     <h3>Event Handling with Lambda Expressions</h3>
     <div class="code-block">
-      <pre><code>// Button click event (in WPF/WinForms)
+      <pre class="dynamic-scroll"><code>// Button click event (in WPF/WinForms)
 button.Click += (sender, e) => {
     Console.WriteLine("Button clicked!");
     // Handle click logic here
@@ -317,7 +317,7 @@ timer.Elapsed += (sender, e) => {
 
     <h3>LINQ Queries with Lambda Expressions</h3>
     <div class="code-block">
-      <pre><code>List&lt;int&gt; numbers = new List&lt;int&gt; { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+      <pre class="dynamic-scroll"><code>List&lt;int&gt; numbers = new List&lt;int&gt; { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 // Filter even numbers
 var evenNumbers = numbers.Where(n => n % 2 == 0);
@@ -337,7 +337,7 @@ int sumOfEvens = numbers.Where(n => n % 2 == 0).Sum();</code></pre>
 
     <h2>Best Practices</h2>
     <div class="info-box">
-      <h4>💡︎ Tips for Using Delegates and Lambda Expressions</h4>
+      <h4><i class="far fa-lightbulb"></i> Tips for Using Delegates and Lambda Expressions</h4>
       <ul>
         <li>Prefer lambda expressions over anonymous methods for cleaner code</li>
         <li>Use <code>Action&lt;T&gt;</code> and <code>Func&lt;T&gt;</code> instead of custom delegates when possible</li>

@@ -34,7 +34,7 @@
 }
 
 .about-content [data-about]::after {
-  content: "💡︎︎";
+  content: "︎\f0eb";
   font-family: 'fa';
   position: absolute;
   bottom: var(--space-4);

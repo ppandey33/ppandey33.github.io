@@ -30,9 +30,9 @@
 }
 
 .search-wrapper::before {
-  content: "🔍︎";
+  content: "\f002";
   position: absolute;
-  font-family: 'fa';
+  font-family: 'fas';
   left: var(--space-4, 1rem);
   top: 50%;
   transform: translateY(-50%);

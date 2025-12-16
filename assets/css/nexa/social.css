@@ -13,7 +13,7 @@
 .social-container p {
   width: var(--space-1);
   height: 9.375rem;
-  background: linear-gradient(to top, rgb(from var(--border) r g b / 0.1), var(--borderSecondary));
+  background: linear-gradient(to top, rgb(from var(--border, #2a2a2a) r g b / 0.1), var(--borderSecondary, #505050));
 }
 
 .icons {
@@ -27,12 +27,12 @@
 .contact-social {
   min-width: fit-content;
   text-decoration: none;
-  color: var(--textPrimary, #e6e6e6);;
+  color: var(--textPrimary, #e6e6e6)
   min-height: var(--space-11);
   min-width: var(--space-11);
   border-radius: 20%;
   padding: var(--padding-sm);
-  border: var(--border-1) solid var(--primary);
+  border: var(--border-1) solid var(--primary, #00ffcc);
   font-size: var(--fontSize-lg);
 }
 

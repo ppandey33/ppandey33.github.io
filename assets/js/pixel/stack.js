@@ -24,8 +24,9 @@ class Stack {
   }
 
   createSkillCard(skillsData) {
-    const skillCard = window.App.modules.util.createElement("div", "skill-card");
-    const icon = window.App.modules.util.createElement("div", "skill-cat-icon", skillsData.icon);
+    const skillCard = window.App.modules.util.createElement("div", "skill-card"),
+      icon = window.App.modules.util.createElement("div", `skill-cat-icon ${(skillsData?.class || '')}`);
+    icon.innerHTML = skillsData.icon;
     skillCard.appendChild(icon);
 
     const categoryCard = window.App.modules.util.createElement("div", "skill-category zoom");
@@ -66,7 +67,7 @@ function initStack() {
     window.App.modules.stack.cleanup?.();
   }
   const stackModule = new Stack();
-  window.App.register("stack", stackModule, 'initStack');
+  window.App.register("stack", stackModule, "initStack");
   stackModule.init();
 }
 

@@ -9,15 +9,15 @@
 /* Blog Post Container */
 .blog-post {
   min-height: 100vh;
-  background: var(--background);
+  background: var(--background, #1a1a1a);
   color: var(--textPrimary, #e6e6e6);
   width: 100%;
 }
 
 /* Post Header Section */
 .post-header {
-  background: var(--surface);
-  border-bottom: var(--border-1) solid var(--border);
+  background: var(--surface, #151b23);
+  border-bottom: var(--border-1) solid var(--border, #2a2a2a);
   padding: var(--space-8) 0;
 }
 
@@ -39,20 +39,22 @@
   align-items: center;
   gap: var(--gap-sm);
   font-size: var(--fontSize-sm);
-  color: var(--textSecondary);
+  color: var(--textSecondary, #888888);
   margin-bottom: var(--space-6);
   flex-wrap: wrap;
   justify-content: flex-start;
 }
-
 .breadcrumb a {
   color: var(--textSecondary);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  transform: scale(1, 1);
 }
 
 .breadcrumb a:hover {
-  color: var(--primary);
+  color: var(--linkHover);
+  transform: scale(1.1, 1.1);
+  display: inline-block;
 }
 
 .breadcrumb .current,
@@ -68,14 +70,14 @@
   flex-wrap: wrap;
   margin-bottom: var(--space-6);
   font-size: var(--fontSize-sm);
-  color: var(--textSecondary);
+  color: var(--textSecondary, #888888);
 }
 
 .post-category {
   display: inline-block;
   padding: var(--padding-xs) var(--padding-md);
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: var(--background);
+  background: linear-gradient(135deg, var(--primary, #00ffcc), var(--secondary, #00ccff));
+  color: var(--background, #1a1a1a);
   font-weight: 600;
   font-size: var(--fontSize-xs);
   text-transform: uppercase;
@@ -83,35 +85,37 @@
 }
 
 .post-date {
-  color: var(--textSecondary);
+  color: var(--link, #888888);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  transform: scale(1, 1);
 }
 .post-date::before {
-  content: "📅︎";
+  content: "\f133";
   font-size: var(--fontSize-base, 1rem);
-  font-family: 'fa';
+  font-family: "fa";
 }
 
 .post-date:hover {
   color: var(--linkHover);
+  transform: scale(1.1, 1.1);
 }
-
 .post-author,
 .post-reading-time,
 .post-date {
   display: flex;
   align-items: center;
-  gap: var(--gap-xs);
+  gap: var(--gap-sm);
 }
 .post-author::before {
-  content: "✍︎";
+  content: "\f044";
   font-size: var(--fontSize-2xl, 1.953rem);
-  font-family: 'fa';
+  font-family: "fa";
 }
 .post-reading-time::before {
-  content: "⏱";font-size: var(--fontSize-lg, 1.25rem);
-  font-family: 'fa';
+  content: "\f34e";
+  font-size: var(--fontSize-base, 1.25rem);
+  font-family: "fa";
 }
 
 /* Post Title & Excerpt */
@@ -127,7 +131,7 @@
 .post-excerpt {
   font-size: var(--fontSize-lg);
   line-height: var(--line-height-relaxed);
-  color: var(--textSecondary);
+  color: var(--textSecondary, #888888);
   margin-bottom: 0;
 }
 
@@ -170,7 +174,7 @@
 
 .content-wrapper h2 {
   font-size: var(--fontSize-2xl);
-  border-bottom: var(--border-1) solid var(--border);
+  border-bottom: var(--border-1) solid var(--border, #2a2a2a);
   padding-bottom: var(--space-3);
 }
 
@@ -190,12 +194,15 @@
   color: var(--primary);
   text-decoration: none;
   border-bottom: var(--border-1) solid transparent;
+  transform: scale(1, 1);
   transition: all var(--transition-fast);
 }
 
 .content-wrapper a:hover {
   color: var(--linkHover);
   border-bottom-color: var(--linkHover);
+  transform: scale(1.1, 1.1);
+    display: inline-block;
 }
 
 .content-wrapper ul,
@@ -209,16 +216,16 @@
 }
 
 .content-wrapper code {
-  background: var(--cardBg);
+  background: var(--cardBg, #151b23);
   padding: var(--padding-xs) var(--padding-sm);
   font-family: "Courier New", monospace;
   font-size: 0.9em;
-  color: var(--primary);
+  color: var(--primary, #00ffcc);
 }
 
 .content-wrapper pre {
-  background: var(--cardBg);
-  border: var(--border-1) solid var(--border);
+  background: var(--cardBg, #151b23);
+  border: var(--border-1) solid var(--border, #2a2a2a);
   padding: var(--padding-lg);
   overflow-x: auto;
   margin-bottom: var(--space-6);
@@ -231,11 +238,11 @@
 }
 
 .content-wrapper blockquote {
-  border-left: var(--border-4) solid var(--primary);
+  border-left: var(--border-4) solid var(--primary, #00ffcc);
   padding-left: var(--space-6);
   margin: var(--space-8) 0;
   font-style: italic;
-  color: var(--textSecondary);
+  color: var(--textSecondary, #888888);
 }
 
 .content-wrapper img {
@@ -252,19 +259,19 @@
 
 .content-wrapper th,
 .content-wrapper td {
-  border: var(--border-1) solid var(--border);
+  border: var(--border-1) solid var(--border, #2a2a2a);
   padding: var(--padding-md);
   text-align: left;
 }
 
 .content-wrapper th {
-  background: var(--surface);
+  background: var(--surface, #151b23);
   font-weight: 600;
 }
 
 /* Post Footer */
 .post-footer {
-  border-top: var(--border-1) solid var(--border);
+  border-top: var(--border-1) solid var(--border, #2a2a2a);
   padding-top: var(--space-10);
 }
 
@@ -279,17 +286,17 @@
 .post-tags .tag {
   display: inline-block;
   padding: var(--padding-xs) var(--padding-md);
-  background: var(--surface);
-  color: var(--textSecondary);
-  border: var(--border-1) solid var(--border);
+  background: var(--surface, #151b23);
+  color: var(--textSecondary, #888888);
+  border: var(--border-1) solid var(--border, #2a2a2a);
   font-size: var(--fontSize-sm);
   transition: all var(--transition-fast);
 }
 
 .post-tags .tag:hover {
-  background: var(--hover);
-  color: var(--primary);
-  border-color: var(--primary);
+  background: var(--hover, #1f2933);
+  color: var(--primary, #00ffcc);
+  border-color: var(--primary, #00ffcc);
   transform: translateY(-2px);
 }
 
@@ -355,12 +362,13 @@
   flex-wrap: wrap;
 }
 
-.post-share-btn span {
+.post-share-btn span:not(.icon) {
   display: none;
 }
 
 .x-hide-title tr td:nth-child(odd) {
-  display: none;background: var(--surface);
+  display: none;
+  background: var(--surface, #151b23);
 }
 
 /* Responsive Design */
@@ -368,5 +376,4 @@
 }
 
 @media (max-width: 480px) {
- 
 }

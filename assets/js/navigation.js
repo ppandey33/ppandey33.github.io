@@ -65,18 +65,13 @@ class Navigation {
         const a = window.App.modules.util.createElement("a", "nav-link");
         a.href = this.resolvePath(item.url);
         a.setAttribute("data-section", item.section);
-        
-        // ADD: Close mobile sidebar on click
         a.addEventListener("click", () => {
           this.closeMobileSidebars();
         });
-        
-        const txtSpan = window.App.modules.util.createElement("span", "nav-link-text", item.title);
-        const iconSpan = window.App.modules.util.createElement("span", "nav-link-icon", item.icon);
-        a.appendChild(iconSpan);
-        a.appendChild(txtSpan);
-        li.appendChild(a);
-        navList.appendChild(li);
+        const txtSpan = window.App.modules.util.createElement("span", "nav-link-text", item.title),
+          iconSpan = window.App.modules.util.createElement("span", `nav-link-icon ${item?.class || ""}`);
+        iconSpan.innerHTML = item.icon;
+        a.appendChild(iconSpan), a.appendChild(txtSpan), li.appendChild(a), navList.appendChild(li);
       });
     }
   }
@@ -90,12 +85,12 @@ class Navigation {
         const a = window.App.modules.util.createElement("a", "section-nav-link", section.replace(/-/g, " "));
         a.href = `#${section}`;
         a.setAttribute("data-section", section);
-        
+
         // ADD: Close mobile sidebar on click
         a.addEventListener("click", () => {
           this.closeMobileSidebars();
         });
-        
+
         li.appendChild(a);
         sectionNavList.appendChild(li);
       });
@@ -207,7 +202,7 @@ class Navigation {
 
         // Close mobile sidebars - UPDATED
         this.closeMobileSidebars();
-        
+
         // Close mobile menu if open (legacy support)
         document.querySelector("[data-nav]")?.classList.remove("active");
       }
@@ -227,7 +222,7 @@ class Navigation {
           this.returnToUniverse();
         }
       }
-      
+
       // Close mobile sidebars on hash change
       this.closeMobileSidebars();
     });
@@ -430,7 +425,7 @@ class Navigation {
         this.performRegularNavigation(sectionId, animate);
       }
     }
-    
+
     // Close mobile sidebars after navigation
     this.closeMobileSidebars();
   }
@@ -511,7 +506,7 @@ class Navigation {
         siteConfig?.social
           ?.filter((s) => s.url && s.url !== "")
           .forEach((socialData) => {
-            const aEl = window.App.modules.util.createElement("a", "contact-social zoom");
+            const aEl = window.App.modules.util.createElement("a", `contact-social zoom ${socialData?.class || ""}`);
             aEl.target = "_blank";
             aEl.href = socialData?.url;
             aEl.innerHTML = socialData.icon;
