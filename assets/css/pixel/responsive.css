@@ -585,7 +585,7 @@
   }
 
   .hero-desc {
-    font-size: var(--fontSize-sm, 0.8rem);
+    font-size: var(--fontSize-md, 0.8rem);
   }
 
   .info-item {

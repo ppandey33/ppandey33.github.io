@@ -489,7 +489,7 @@
   }
 
   .hero-desc {
-    font-size: var(--fontSize-sm) !important;
+    font-size: var(--fontSize-md) !important;
   }
 
   .btn {
@@ -548,7 +548,7 @@
   }
 
   .hero-desc {
-    font-size: var(--fontSize-xs) !important;
+    font-size: var(--fontSize-md) !important;
     max-width: 95%;
   }
 
@@ -727,7 +727,7 @@
   }
 
   .hero-desc {
-    font-size: var(--fontSize-xs) !important;
+    font-size: var(--fontSize-md) !important;
   }
 
   .status-badge {
@@ -823,7 +823,7 @@
   }
 
   .hero-desc {
-    font-size: var(--fontSize-xs) !important;
+    font-size: var(--fontSize-md) !important;
   }
 
   .section-title {
