@@ -61,6 +61,8 @@
       })();
     </script>
     {% endif %}
+    <link rel="preload" href="{{ site.baseurl }}/assets/css/variables.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+    <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/variables.css"></noscript>
     {% include import-css.html %}
      {% assign layout = page.layout | split: "/" | first %}
   </head>

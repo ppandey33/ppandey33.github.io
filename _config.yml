@@ -6,7 +6,7 @@ description: >-
   developing, and deploying enterprise-grade web applications.
 baseurl: ""
 url: "https://pawan.net.in"
-og_image: "https://pawan5hub.vercel.app/api/images/?"
+og_image: "https://pawan5hub.vercel.app/api/images"
 github_username: pawan5hub
 linkedin_username: pawan-pandey-48842a79
 location: "Noida, Uttar Pradesh, India"
@@ -236,7 +236,7 @@ defaults:
       layout: algo/default
       # baseModules: []
       modules: [iam, info, stack, universe, contact, about, learning, kudos, journey, dev, blogs]
-      stylesheets: [iam, info, stack, universe, contact, footer, about, learning, kudos, journey, dev, blogs]
+      stylesheets: [iam, info, stack, universe, contact, about, learning, kudos, journey, dev, blogs]
   - scope:
       path: "pages/algo/stack"
       type: "pages"
@@ -244,7 +244,7 @@ defaults:
       permalink: /algo/stack/
       layout: algo/default
       modules: [stack, info, iam, contact ]
-      stylesheets: [stack, info, contact, footer]
+      stylesheets: [stack, info, contact]
   - scope:
       path: "pages/algo/journey"
       type: "pages"
@@ -252,7 +252,7 @@ defaults:
       permalink: /algo/journey/
       layout: algo/default
       modules: [journey, info, iam, contact]
-      stylesheets: [journey, info, contact, footer]
+      stylesheets: [journey, info, contact]
   - scope:
       path: "pages/algo/learning"
       type: "pages"
@@ -260,7 +260,7 @@ defaults:
       permalink: /algo/learning/
       layout: algo/default
       modules: [learning, info, iam, contact]
-      stylesheets: [learning, info, contact, footer]
+      stylesheets: [learning, info, contact]
   - scope:
       path: "pages/algo/kudos"
       type: "pages"
@@ -268,7 +268,7 @@ defaults:
       permalink: /algo/kudos/
       layout: algo/default
       modules: [kudos, info, iam, contact]
-      stylesheets: [kudos, info, contact, footer]
+      stylesheets: [kudos, info, contact]
   - scope:
       path: "pages/algo/about"
       type: "pages"
@@ -276,7 +276,7 @@ defaults:
       permalink: /algo/about/
       layout: algo/default
       modules: [about, info, iam, contact]
-      stylesheets: [about, info, contact, footer]
+      stylesheets: [about, info, contact]
   - scope:
       path: "pages/algo/contact"
       type: "pages"
@@ -284,7 +284,7 @@ defaults:
       permalink: /algo/contact/
       layout: algo/default
       modules: [contact, info]
-      stylesheets: [contact, info, iam, footer]
+      stylesheets: [contact, info, iam]
   - scope:
       path: "pages/algo/dev"
       type: "pages"
@@ -293,7 +293,7 @@ defaults:
       layout: algo/default
       # baseModules: [observable, paginator]
       modules: [dev, info, iam, contact]
-      stylesheets: [dev, info, contact, footer]
+      stylesheets: [dev, info, contact]
   - scope:
       path: "pages/algo/blogs"
       type: "pages"
@@ -302,7 +302,7 @@ defaults:
       layout: algo/blogs
       # baseModules: [gen-svg, observable, paginator]
       modules: [blogs, info, iam, contact]
-      stylesheets: [blogs, info, contact, footer]
+      stylesheets: [blogs, info, contact]
  
   # Blog Post Setup
   - scope:
@@ -334,7 +334,7 @@ defaults:
       permalink: /blogs/algo.html
       layout: algo/blog
       modules: blog
-      stylesheets: [blog, info, contact, footer]
+      stylesheets: [blog, info, contact]
 
 # Exclude from build
 exclude:

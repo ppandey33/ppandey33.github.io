@@ -46,8 +46,8 @@ class Contacts extends HideComponent {
   }
 
   cleanup() {
-    const containerInfo = document.querySelector("[data-contacts-info]");
-    const container = document.querySelector("[data-contacts]");
+    const containerInfo = document.querySelector("[data-contacts-info]"),
+    container = document.querySelector("[data-contacts]");
     if (containerInfo) containerInfo.innerHTML = "";
     if (container) container.innerHTML = "";
   }

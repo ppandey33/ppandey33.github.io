@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="module" src="{{ site.baseurl }}/assets/js/init.js"></script>
-    <script type="module" src="{{ site.baseurl }}/assets/js/redirect.js"></script>
+    {% assign layout = page.layout | split: "/" | first %}
+    <script type="module" src="{{ site.baseurl }}/assets/js/init.js?v={{ layout }}"></script>
+    <script type="module" src="{{ site.baseurl }}/assets/js/redirect.js?v={{ layout }}"></script>
     <script>
       (function () {
         "use strict";

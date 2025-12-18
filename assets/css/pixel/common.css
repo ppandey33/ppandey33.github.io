@@ -1,3 +1,5 @@
+@import url("../variables.css");
+
 body {
   background: linear-gradient(180deg, var(--bg-gradient-start, #1f2d2d) 0%, var(--bg-gradient-mid, #1a2424) 45%, var(--bg-gradient-end, #1a1a1a) 100%);
 }

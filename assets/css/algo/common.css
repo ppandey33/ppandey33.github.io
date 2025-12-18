@@ -1,3 +1,5 @@
+@import url("../variables.css");
+
 .image-shades {
   background: linear-gradient(
     to bottom,

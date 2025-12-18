@@ -1,17 +1,18 @@
-<script src="{{ site.baseurl }}/assets/js/service-worker.js"></script>
-<script src="{{ site.baseurl }}/assets/js/init.js"></script>
-<script type="module" src="{{ site.baseurl }}/assets/js/loader.js"></script>
-<script type="module" src="{{ site.baseurl }}/assets/js/common.js"></script>
-<!-- <script type="module" src="{{ site.baseurl }}/assets/js/hide-component.js"></script> -->
-<script type="module" src="{{ site.baseurl }}/assets/js/themes.js"></script>
-<script type="module" src="{{ site.baseurl }}/assets/js/layouts.js"></script>
 {% assign layout = page.layout | split: "/" | first %}
+<script src="{{ site.baseurl }}/assets/js/service-worker.js?v={{ layout }}"></script>
+<script src="{{ site.baseurl }}/assets/js/init.js?v={{ layout }}"></script>
+<script type="module" src="{{ site.baseurl }}/assets/js/loader.js?v={{ layout }}"></script>
+<script type="module" src="{{ site.baseurl }}/assets/js/common.js?v={{ layout }}"></script>
+<!-- <script type="module" src="{{ site.baseurl }}/assets/js/hide-component.js"></script> -->
+<script type="module" src="{{ site.baseurl }}/assets/js/themes.js?v={{ layout }}"></script>
+<script type="module" src="{{ site.baseurl }}/assets/js/layouts.js?v={{ layout }}"></script>
+
 {% if page.baseModules %}
   {% if page.baseModules.size %}
     {% for scriptFile in page.baseModules %}
-     <script type="module" src="{{ site.baseurl }}/assets/js/{{ scriptFile }}.js"></script>
+     <script type="module" src="{{ site.baseurl }}/assets/js/{{ scriptFile }}.js?v={{ layout }}"></script>
     {% endfor %}
   {% else %}
-    <script type="module" src="{{ site.baseurl }}/assets/js/{{ page.baseModules }}.js"></script>
+    <script type="module" src="{{ site.baseurl }}/assets/js/{{ page.baseModules }}.js?v={{ layout }}"></script>
   {% endif %}
 {% endif %}

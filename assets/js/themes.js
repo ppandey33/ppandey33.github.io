@@ -36,7 +36,38 @@ class ThemeManager {
     document.body.setAttribute("data-theme", themeId);
     this.currentTheme = themeId;
     localStorage.setItem("theme", themeId);
-    this.updateUI();
+    
+    // Update root CSS variables for immediate effect
+    requestAnimationFrame(() => {
+      //this.updateRootVariables();
+      this.updateUI();
+    });
+  }
+
+  updateRootVariables() {
+    // Get computed style from body (which has the data-theme attribute)
+    const computedStyle = getComputedStyle(document.body);
+    
+    // Get all theme-specific variables
+    const primary = computedStyle.getPropertyValue('--primary').trim();
+    const secondary = computedStyle.getPropertyValue('--secondary').trim();
+    const accent = computedStyle.getPropertyValue('--accent').trim();
+    const background = computedStyle.getPropertyValue('--background').trim();
+    const surface = computedStyle.getPropertyValue('--surface').trim();
+    const textPrimary = computedStyle.getPropertyValue('--textPrimary').trim();
+    const textSecondary = computedStyle.getPropertyValue('--textSecondary').trim();
+    const textMuted = computedStyle.getPropertyValue('--textMuted').trim();
+    
+    // Update :root variables so scrollbar and other global styles use the new theme colors
+    const root = document.documentElement;
+    root.style.setProperty('--primary', primary);
+    root.style.setProperty('--secondary', secondary);
+    root.style.setProperty('--accent', accent);
+    root.style.setProperty('--background', background);
+    root.style.setProperty('--surface', surface);
+    root.style.setProperty('--textPrimary', textPrimary);
+    root.style.setProperty('--textSecondary', textSecondary);
+    root.style.setProperty('--textMuted', textMuted);
   }
 
   positionSubmenu() {

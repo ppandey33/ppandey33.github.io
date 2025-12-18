@@ -7,11 +7,12 @@
 <meta charset="UTF-8" />
 <meta http-equiv="Cache-Control" content="max-age=31536000, public" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- replaceable start -->
 
-<meta name="description" content="{{ page.description | default: site.description }}" />
-<meta name="author" content="{{ site.title }}" />
-<meta name="theme-color" content="#0F172A" />
-<title data-keep>{{ page.title }} | {{ site.title }}</title>
+<meta name="description"  content="{{ page.params.desc | default: page.desc }} | {{ site.description }}" />
+<meta name="author" content="{{ page.params.author | default: page.title }} | {{ site.title }}" />
+<meta name="theme" content="charcoal" />
+<title>{{ page.params.title | default: page.title }} | {{ site.title }}</title>
 <!-- SEO Tags -->
 {% seo %}
 
@@ -19,23 +20,34 @@
 <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | absolute_url }}" />
 
 <!-- Open Graph Meta Tags -->
-<meta property="og:title" content="{{ page.title }} | {{ site.title }}" />
-<meta property="og:description" content="{{ page.description | default: site.description }}" />
+<meta property="og:title" content="{{ page.params.title | default: page.title }} | {{ site.title }}" />
+<meta property="og:description"  content="{{ page.params.desc | default: page.desc }} | {{ site.description }}" />
 <meta property="og:type" content="{{ page.type | default: 'website' }}" />
 <meta property="og:url" content="{{ page.url | absolute_url }}" />
 {% assign query = "" %}
-{% for p in include.params %}
-  {% assign key = p[0] | url_encode %}
-  {% assign value = p[1] | url_encode %}
-  {% assign query = query | append: forloop.first | ternary: "?", "&" | append: key | append: "=" | append: value %}
-{% endfor %}
-<meta property="og:image" content="{{ site.og_image | append: query}}" />
+
+{% if page.params %}
+  {% for p in page.params %}
+    {% assign key = p[0] | url_encode %}
+    {% assign value = p[1] | url_encode %}
+    {% if forloop.first %}
+      {% assign query = query | append: "?" %}
+    {% else %}
+      {% assign query = query | append: "&" %}
+    {% endif %}
+    {% assign query = query | append: key | append: "=" | append: value %}
+  {% endfor %}
+{% endif %}
+
+<meta property="og:image" content="{{ site.og_image | append: query | absolute_url }}">
 
 <!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="{{ page.title }} | {{ site.title }}" />
-<meta name="twitter:description" content="{{ page.description | default: site.description }}" />
-<meta name="twitter:image" content="{{ '/assets/images/og-image.png' | absolute_url }}" />
+<meta name="twitter:title" content="{{ page.params.title | default: page.title }} | {{ site.title }}" />
+<meta name="twitter:description"  content="{{ page.params.desc | default: page.desc }} | {{ site.description }}" /> 
+<meta name="twitter:image" content="{{ site.og_image | append: query}}" />
+
+<!-- replaceable end -->
 
 <!-- Stylesheets -->
 

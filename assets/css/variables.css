@@ -484,12 +484,6 @@ body {
   --shimmer-opacity: rgba(251, 191, 36, 0.1);
 }
 
-/* ========= Firefox ========= */
-* {
-  scrollbar-width: thin; /* closest to 0.75rem */
-  scrollbar-color: var(--primary) var(--surface);
-}
-
 /* ========= Chromium / Safari ========= */
 *::-webkit-scrollbar {
   width: var(--space-3);
@@ -504,20 +498,21 @@ body {
   background: linear-gradient(180deg, var(--primary), var(--accent));
   border: var(--border-2) solid var(--surface);
   transition: background var(--transition-base);
+  border-radius: 0;
 }
 
 *::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, var(--accent), var(--primary));
 }
 
-.dynamic-scroll {
-  scrollbar-width: thin;
+.dynamic-scroll{
   scrollbar-color: transparent transparent;
   transition: scrollbar-color var(--transition-fast);
   scrollbar-gutter: stable;
 }
 
 .dynamic-scroll:hover {
-  scrollbar-width: thin;
+  scrollbar-width: var(--space-3, thin)yy;
   scrollbar-color: var(--primary) var(--surface);
 }
+

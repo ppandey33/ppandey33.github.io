@@ -1,11 +1,11 @@
-<link rel="preload" href="{{ site.baseurl }}/assets/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
-<noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/all.min.css"></noscript>
 
-<link rel="preload" href="{{ site.baseurl }}/assets/css/variables.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-<noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/variables.css?v={{ site.version }}" /></noscript>
+<!-- <link rel="preload" href="{{ site.baseurl }}/assets/css/variables.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/variables.css?v={{ site.version }}" /></noscript> -->
+ {% assign layout = page.layout | split: "/" | first %}
+<link rel="preload" href="{{ site.baseurl }}/assets/css/all.min.css?v={{ layout }}" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/all.min.css?v={{ layout }}"></noscript>
 
 {% if page.stylesheets %}
-  {% assign layout = page.layout | split: "/" | first %}
   {% if page.stylesheets.size %}
     {% for stylesheetFile in page.stylesheets %}
       <link rel="preload" href="{{ site.baseurl }}/assets/css/{{layout}}/{{ stylesheetFile }}.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
@@ -17,5 +17,9 @@
   {% endif %}
 {% endif %}
 
+{% if layout != 'common' && layout != '' %}
+<link rel="preload" href="{{ site.baseurl }}/assets/css/{{layout}}/common.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{layout}}/common.css?v={{ site.version }}"></noscript>
 <link rel="preload" href="{{ site.baseurl }}/assets/css/{{layout}}/responsive.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
 <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{layout}}/responsive.css?v={{ site.version }}"></noscript>
+{% endif %}

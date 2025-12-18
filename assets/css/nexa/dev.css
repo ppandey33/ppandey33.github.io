@@ -163,7 +163,14 @@
 
 .project-links {
   display: flex;
-  gap: var(--gap-md);
+  gap: var(--gap-sm);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-links:has(> .project-link:only-child) {
+  justify-content: flex-start;
 }
 
 .project-link {
@@ -171,8 +178,9 @@
   border: var(--border-1) solid var(--primary, #00ffcc);
   color: var(--primary, #00ffcc);
   text-decoration: none;
-  font-size: var(--fontSize-base);
+  font-size: var(--fontSize-md, 0.9rem);
   transition: var(--transition-base);
+  white-space: nowrap;
 }
 
 .project-link:hover {

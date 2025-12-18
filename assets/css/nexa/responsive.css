@@ -78,6 +78,10 @@
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .hero-content{
+    padding-left: 7rem;
+  }
 }
 
 /* =================================================================
@@ -220,6 +224,10 @@
   .hamburger::after {
     top: var(--space-2);
   }
+
+  .hero-content{
+    padding-left: 1rem;
+  }
 }
 
 @media (max-width: 971px) and (orientation: landscape) {
@@ -349,6 +357,7 @@
 
   .hero-content {
     text-align: center;
+    padding: 0;
   }
 
   .hero-desc {

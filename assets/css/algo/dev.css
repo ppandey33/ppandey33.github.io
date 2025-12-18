@@ -163,7 +163,10 @@
 
 .project-links {
   display: flex;
-  gap: var(--gap-md);
+  gap: var(--gap-sm);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-link {
@@ -171,7 +174,7 @@
   border: var(--border-1) solid var(--primary);
   color: var(--primary);
   text-decoration: none;
-  font-size: var(--fontSize-base);
+  font-size: var(--fontSize-md, 0.9rem);
   transition: var(--transition-base);
 }
 
