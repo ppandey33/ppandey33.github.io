@@ -41,19 +41,19 @@ class Navigation {
     return path;
   }
 
-  // NEW METHOD: Close mobile sidebars
   closeMobileSidebars() {
-    const leftSidebar = document.querySelector(".left-sidebar-card");
-    const rightSidebar = document.querySelector(".right-sidebar-card");
-    const leftBtn = document.querySelector('[data-sidebar-toggle="left"]');
-    const rightBtn = document.querySelector('[data-sidebar-toggle="right"]');
-    const overlay = document.querySelector(".sidebar-overlay");
-
+    const leftSidebar = document.querySelector(".left-sidebar-card"),
+      rightSidebar = document.querySelector(".right-sidebar-card"),
+      leftBtn = document.querySelector('[data-sidebar-toggle="left"]'),
+      rightBtn = document.querySelector('[data-sidebar-toggle="right"]'),
+      overlay = document.querySelector(".sidebar-overlay"),
+      hamburger = document.querySelector(".mobile-menu-toggle");
     if (leftSidebar) leftSidebar.classList.remove("active");
     if (rightSidebar) rightSidebar.classList.remove("active");
     if (leftBtn) leftBtn.classList.remove("active");
     if (rightBtn) rightBtn.classList.remove("active");
     if (overlay) overlay.classList.remove("active");
+    if (hamburger) hamburger.classList.remove("active");
   }
 
   renderNavigation() {

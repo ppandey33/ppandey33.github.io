@@ -1,35 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      html,
-      body {
-        background-color: var(--background, #1a1a1a);
-      }
-    </style>
     <script type="module" src="{{ site.baseurl }}/assets/js/init.js"></script>
-
     <script type="module" src="{{ site.baseurl }}/assets/js/redirect.js"></script>
     <script>
       (function () {
         "use strict";
         window.APP_BASEURL = "";
-
         window?.App?.initModuleFile && window?.App?.initModuleFile?.();
       })();
     </script>
-    <meta charset="UTF-8" />
-    <meta http-equiv="Cache-Control" content="max-age=31536000, public" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="{{ page.description | default: site.description }}" />
-    <meta name="author" content="{{ site.title }}" />
-    <meta name="theme-color" content="#0F172A" />
-    <title data-keep>{{ page.title }} | {{ site.title }}</title>
-    <!-- SEO Tags -->
-    {% seo %}
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | absolute_url }}" />
+    {% include head.html %}
   </head>
   <body data-layout="nexa" data-theme="charcoal" style="opacity: 0">
     <div data-layout-content="">{{content}}</div>

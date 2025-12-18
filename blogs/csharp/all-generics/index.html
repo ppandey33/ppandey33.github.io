@@ -1,5 +1,15 @@
 ---
+type: blog
+url: /blogs/csharp/all-generics/
+params:
+  title: Generics in C# [A - Z]
+  subtitle: All About Generics in C#
+  desc: A comprehensive guide to understanding and using generics in C# for type-safe and reusable code.
+  author: Pawan Kumar
+  date: Sep-02-2013
+  readtime: 15 mins
 ---
+
 <article class="blog-post">
   <div class="content-wrapper">
     <h2>Introduction</h2>
@@ -147,28 +157,40 @@ LinkedList&lt;MyClass&gt; obj3 = new LinkedList&lt;MyClass&gt;();</code></pre>
         </tr>
       </thead>
       <tr>
-        <td>Constraint</td><td><code>where T : new()</code></td>
-        <td>Description</td><td>Must have public parameterless constructor</td>
+        <td>Constraint</td>
+        <td><code>where T : new()</code></td>
+        <td>Description</td>
+        <td>Must have public parameterless constructor</td>
       </tr>
       <tr>
-        <td>Constraint</td><td><code>where T : &lt;interface&gt;</code></td>
-        <td>Description</td><td>Must implement specified interface</td>
+        <td>Constraint</td>
+        <td><code>where T : &lt;interface&gt;</code></td>
+        <td>Description</td>
+        <td>Must implement specified interface</td>
       </tr>
       <tr>
-        <td>Constraint</td><td><code>where T : X</code></td>
-        <td>Description</td><td>Must be or derive from X</td>
+        <td>Constraint</td>
+        <td><code>where T : X</code></td>
+        <td>Description</td>
+        <td>Must be or derive from X</td>
       </tr>
       <tr>
-        <td>Constraint</td><td><code>where T : &lt;base class&gt;</code></td>
-        <td>Description</td><td>Must derive from specified base class</td>
+        <td>Constraint</td>
+        <td><code>where T : &lt;base class&gt;</code></td>
+        <td>Description</td>
+        <td>Must derive from specified base class</td>
       </tr>
       <tr>
-        <td>Constraint</td><td><code>where T : struct</code></td>
-        <td>Description</td><td>Must be a value type</td>
+        <td>Constraint</td>
+        <td><code>where T : struct</code></td>
+        <td>Description</td>
+        <td>Must be a value type</td>
       </tr>
       <tr>
-        <td>Constraint</td><td><code>where T : class</code></td>
-        <td>Description</td><td>Must be a reference type</td>
+        <td>Constraint</td>
+        <td><code>where T : class</code></td>
+        <td>Description</td>
+        <td>Must be a reference type</td>
       </tr>
     </table>
 

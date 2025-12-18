@@ -2,50 +2,52 @@
 layout: pixel/default
 ---
 
-<article class="blog-post">
-  <header class="post-header">
-    <div class="post-header-container">
-      <div>
-        <nav class="breadcrumb">
-          <a href="/">Home</a>
-          <span>/</span>
-          <a href="/blogs/">Blog</a>
-          <span>/</span>
-          <a href="/blogs/" data-blog-meta="categorySlug"></a>
-          <span>/</span>
-          <span class="current" data-blog-meta="title"></span>
-        </nav>
-        <div class="post-meta">
-          <span class="post-category" data-blog-meta="category"></span>
-          <a class="post-date" data-blog-meta="originalUrl" data-blog-meta-text="dateFormatted" target="_blank"></a>
-          <span class="post-author"><span data-blog-meta="author"></span></span>
-          <span class="post-reading-time"><span data-blog-meta="readTime"></span></span>
+<section class="section blog-post" id="blogs">
+  <article class="blog-post">
+    <header class="post-header">
+      <div class="post-header-container">
+        <div>
+          <nav class="breadcrumb">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="/blogs/">Blog</a>
+            <span>/</span>
+            <a href="/blogs/" data-blog-meta="categorySlug"></a>
+            <span>/</span>
+            <span class="current" data-blog-meta="title"></span>
+          </nav>
+          <div class="post-meta">
+            <span class="post-category" data-blog-meta="category"></span>
+            <a class="post-date" data-blog-meta="originalUrl" data-blog-meta-text="dateFormatted" target="_blank"></a>
+            <span class="post-author"><span data-blog-meta="author"></span></span>
+            <span class="post-reading-time"><span data-blog-meta="readTime"></span></span>
+          </div>
+          <h1 class="post-title" data-blog-meta="title"></h1>
+          <p class="post-excerpt" data-blog-meta="excerpt"></p>
         </div>
-        <h1 class="post-title" data-blog-meta="title"></h1>
-        <p class="post-excerpt" data-blog-meta="excerpt"></p>
+        <div class="post-share social-links">
+          <span class="contact-social post-share-btn">
+            <span class="icon fa">&#xf1e0;</span>
+            <span>Share on</span>
+          </span>
+          <div class="share-buttons" data-blog-share></div>
+        </div>
       </div>
-      <div class="post-share social-links">
-        <span class="contact-social post-share-btn">
-          <span class="icon fa">&#xf1e0;</span>
-          <span>Share on</span>
-        </span>
-        <div class="share-buttons" data-blog-share></div>
+    </header>
+    <div class="post-content">
+      <div class="post-container">
+        {{ content }}
+        <div class="post-footer">
+          <div class="post-tags" id="blog-tags" data-main-content>
+            <!-- Tags will be dynamically inserted -->
+          </div>
+          <nav class="post-navigation">
+            <a href="#" class="btn" id="prev-post" style="display: none">Previous Post</a>
+            <a href="/blogs/" class="btn">All Posts</a>
+            <a href="#" class="btn" id="next-post" style="display: none">Next Post</a>
+          </nav>
+        </div>
       </div>
     </div>
-  </header>
-  <div class="post-content">
-    <div class="post-container">
-      {{ content }}
-      <div class="post-footer">
-        <div class="post-tags" id="blog-tags" data-main-content>
-          <!-- Tags will be dynamically inserted -->
-        </div>
-        <nav class="post-navigation">
-          <a href="#" class="btn" id="prev-post" style="display: none">Previous Post</a>
-          <a href="/blogs/" class="btn">All Posts</a>
-          <a href="#" class="btn" id="next-post" style="display: none">Next Post</a>
-        </nav>
-      </div>
-    </div>
-  </div>
-</article>
+  </article>
+</section>

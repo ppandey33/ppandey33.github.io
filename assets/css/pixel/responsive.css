@@ -780,7 +780,7 @@
 
   
  .post-date::before, .post-author::before{
-    font-size: var(--fontSize-base);
+    font-size: var(--fontSize-base, 1rem);
   }
 
 

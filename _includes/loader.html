@@ -60,31 +60,60 @@
       transform: scale(0.4);
     }
   }
-  .msg-rotate{
+
+  .msg-rotate {
     min-width: 25rch;
   }
-.msg-rotate span {
-  position:absolute;
-  opacity:0;
-  transform:translateY(-20px);
-  animation:matrixDrop 10s infinite;
-  color: var(--primary, #00ffcc);
-  font-size: var(--fontSize-base, 1rem);
-}
-.msg-rotate span:nth-child(1){animation-delay:0s;}
-.msg-rotate span:nth-child(2){animation-delay:2s;}
-.msg-rotate span:nth-child(3){animation-delay:4s;}
-.msg-rotate span:nth-child(4){animation-delay:6s;}
-.msg-rotate span:nth-child(5){animation-delay:8s;}
 
-@keyframes matrixDrop {
-  0% {opacity:0; transform:translateY(-20px);}
-  10% {opacity:1; transform:translateY(0);}
-  20% {opacity:1;}
-  35% {opacity:0; transform:translateY(20px);}
-  100%{opacity:0;}
-}
+  .msg-rotate span {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: matrixDrop 10s infinite;
+    color: var(--primary, #00ffcc);
+    font-size: var(--fontSize-base, 1rem);
+  }
 
+  .msg-rotate span:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .msg-rotate span:nth-child(2) {
+    animation-delay: 2s;
+  }
+
+  .msg-rotate span:nth-child(3) {
+    animation-delay: 4s;
+  }
+
+  .msg-rotate span:nth-child(4) {
+    animation-delay: 6s;
+  }
+  
+  .msg-rotate span:nth-child(5) {
+    animation-delay: 8s;
+  }
+
+  @keyframes matrixDrop {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    20% {
+      opacity: 1;
+    }
+    35% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 </style>
 <div class="spiral-container" data-app-loader>
   {% assign size = include.size | default: 7 %}
@@ -227,10 +256,10 @@
     {% endfor %}
   </svg>
   <div class="msg-rotate">
-    <span>🔮︎ Summoning pixels…</span>
+    <span>✴ Summoning pixels…</span>
     <span>✨︎ Charging creativity…</span>
-    <span>🔭︎ Stirring the code cauldron…</span>
+    <span>⎘ Stirring the code cauldron…</span>
     <span>⚙︎ Polishing the interface…</span>
-    <span>🌌︎ Unfolding the universe…</span>
+    <span>⌬ Unfolding the universe…</span>
   </div>
 </div>

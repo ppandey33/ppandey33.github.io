@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <style>
-      html,
-      body {
-        background-color: var(--background, #1a1a1a);
-      }
-    </style>
-    <!-- {% include style.html %} -->
     <!-- -->
-    {% include nexa/import-css.html %}
+    {% include head.html %}
     <!-- -->
     {% include import-css.html %}
     <!-- -->
-    {% include head.html %}
+    {% include nexa/import-css.html %}
   </head>
   <body data-layout="nexa" data-theme="charcoal">
-    {% include nexa/loader.html size=7 gap=10 radius=3 %} {% include nexa/decorators/social.html %}
+    {% include loader.html size=7 gap=10 radius=3 %} {% include nexa/decorators/social.html %}
     <div class="page-container">
       {% include nexa/header.html %}
       <main class="main-content">{{ content }}</main>

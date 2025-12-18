@@ -1,5 +1,9 @@
 <link rel="preload" href="{{ site.baseurl }}/assets/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
 <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/all.min.css"></noscript>
+
+<link rel="preload" href="{{ site.baseurl }}/assets/css/variables.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/variables.css?v={{ site.version }}" /></noscript>
+
 {% if page.stylesheets %}
   {% assign layout = page.layout | split: "/" | first %}
   {% if page.stylesheets.size %}
@@ -12,5 +16,6 @@
      <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{layout}}/{{ page.stylesheets }}.css?v={{ site.version }}"></noscript>
   {% endif %}
 {% endif %}
+
 <link rel="preload" href="{{ site.baseurl }}/assets/css/{{layout}}/responsive.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
 <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{layout}}/responsive.css?v={{ site.version }}"></noscript>

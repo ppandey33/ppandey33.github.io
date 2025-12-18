@@ -103,11 +103,13 @@ class CommonUtilities {
 
     this.mobileMenuClickHandler = () => {
       this.siteNav.classList.toggle("active");
+      this.mobileMenuToggle.classList.toggle("active");
     };
 
     this.documentClickHandler = (e) => {
       if (!this.mobileMenuToggle.contains(e.target) && !this.siteNav.contains(e.target)) {
         this.siteNav.classList.remove("active");
+        this.mobileMenuToggle.classList.remove("active");
       }
     };
 
@@ -116,82 +118,47 @@ class CommonUtilities {
   }
 
   createMobileSidebarControls() {
-    // Check if controls already exist
     if (document.querySelector(".mobile-sidebar-controls")) return;
-
-    // Create header element
     const header = this.createElement("div", "mobile-sidebar-controls");
-
-    // Create left sidebar button
     const leftBtn = this.createElement("button", "mobile-sidebar-btn", "👤︎ℹ︎");
-    // Create right sidebar button
     const rightBtn = this.createElement("button", "mobile-sidebar-btn", "≣");
-
-    // Append buttons to header
     header.appendChild(leftBtn);
     header.appendChild(rightBtn);
-
-    // Create overlay backdrop
     const overlay = this.createElement("div");
     overlay.className = "sidebar-overlay";
-
-    // Insert header and overlay at the beginning of body
     document.body.insertBefore(header, document.body.firstChild);
     document.body.insertBefore(overlay, document.body.firstChild);
-    // Move network dropdown from nav-container to status-bar on mobile
     this.moveNetworkDropdownToStatusBar();
-
-    // Get sidebar elements
     const leftSidebar = document.querySelector(".left-sidebar-card");
     const rightSidebar = document.querySelector(".right-sidebar-card");
-
     if (!leftSidebar || !rightSidebar) return;
-
-    // Store references
     this.leftSidebarBtn = leftBtn;
     this.rightSidebarBtn = rightBtn;
     this.leftSidebar = leftSidebar;
     this.rightSidebar = rightSidebar;
     this.sidebarOverlay = overlay;
-
-    // Setup event listeners
     this.setupSidebarToggleListeners();
   }
 
   setupSidebarToggleListeners() {
-    // Left sidebar toggle
     this.leftSidebarBtn.addEventListener("click", () => {
       const isActive = this.leftSidebar.classList.contains("active");
-
-      // Close right sidebar if open
       this.rightSidebar.classList.remove("active");
       this.rightSidebarBtn.classList.remove("active");
-
-      // Toggle left sidebar
       this.leftSidebar.classList.toggle("active");
       this.leftSidebarBtn.classList.toggle("active");
-
-      // Toggle overlay
       if (!isActive) {
         this.sidebarOverlay.classList.add("active");
       } else {
         this.sidebarOverlay.classList.remove("active");
       }
     });
-
-    // Right sidebar toggle
     this.rightSidebarBtn.addEventListener("click", () => {
       const isActive = this.rightSidebar.classList.contains("active");
-
-      // Close left sidebar if open
       this.leftSidebar.classList.remove("active");
       this.leftSidebarBtn.classList.remove("active");
-
-      // Toggle right sidebar
       this.rightSidebar.classList.toggle("active");
       this.rightSidebarBtn.classList.toggle("active");
-
-      // Toggle overlay
       if (!isActive) {
         this.sidebarOverlay.classList.add("active");
       } else {
@@ -199,7 +166,6 @@ class CommonUtilities {
       }
     });
 
-    // Close sidebars when clicking overlay
     this.sidebarOverlay.addEventListener("click", () => {
       this.leftSidebar.classList.remove("active");
       this.rightSidebar.classList.remove("active");
@@ -208,7 +174,6 @@ class CommonUtilities {
       this.sidebarOverlay.classList.remove("active");
     });
 
-    // Close sidebars on ESC key
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         this.leftSidebar.classList.remove("active");
@@ -222,70 +187,52 @@ class CommonUtilities {
 
   moveNetworkDropdownToStatusBar() {
     if (window.innerWidth > 768) return;
-
-    // Find network submenu item in nav-container
     const navContainer = document.querySelector(".nav-container");
     const networkSubmenu = navContainer?.querySelector("[data-submenu-item]");
-
     if (!networkSubmenu) return;
-
-    // Find status bar
     const statusBar = document.querySelector(".page-container");
     if (!statusBar) return;
-
-    // Move the entire submenu item to status bar right section
-    //const statusBarRight = statusBar.querySelector(".status-bar-right");
-    //if (statusBarRight) {
-    // Clone or move the element
     statusBar.appendChild(networkSubmenu);
-    //}
   }
-initScrollReveal() {
-  const revealElements = document.querySelectorAll(".reveal");
-  console.log("Total reveal elements found:", revealElements.length);
-  
-  if (revealElements.length === 0) return;
 
-  let lastScrollTop = 0;
-  const isMobile = window.innerWidth <= 768;
-
-  const config = {
-    threshold: 0.1, // Simplified to single value
-    rootMargin: "0px 0px 0px 0px",
-  };
-
-  const observerCallback = (entries) => {
-    entries.forEach((entry) => {
-      console.log("Element observed:", {
-        isIntersecting: entry.isIntersecting,
-        intersectionRatio: entry.intersectionRatio,
-        target: entry.target,
-        boundingRect: entry.boundingClientRect,
-        rootBounds: entry.rootBounds
+  initScrollReveal() {
+    const revealElements = document.querySelectorAll(".reveal");
+    console.log("Total reveal elements found:", revealElements.length);
+    if (revealElements.length === 0) return;
+    let lastScrollTop = 0;
+    const isMobile = window.innerWidth <= 768;
+    const config = {
+      threshold: 0.1,
+      rootMargin: "0px 0px 0px 0px",
+    };
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        console.log("Element observed:", {
+          isIntersecting: entry.isIntersecting,
+          intersectionRatio: entry.intersectionRatio,
+          target: entry.target,
+          boundingRect: entry.boundingClientRect,
+          rootBounds: entry.rootBounds,
+        });
+        if (entry.isIntersecting) {
+          console.log("✅ SHOWING element");
+          entry.target.classList.add("visible");
+        } else {
+          console.log("❌ HIDING element");
+          entry.target.classList.remove("visible");
+        }
       });
-
-      if (entry.isIntersecting) {
-        console.log("✅ SHOWING element");
-        entry.target.classList.add("visible");
-      } else {
-        console.log("❌ HIDING element");
-        entry.target.classList.remove("visible");
-      }
+    };
+    this.scrollRevealObserver = new IntersectionObserver(observerCallback, config);
+    revealElements.forEach((element, index) => {
+      console.log(`Observing element ${index}:`, element);
+      this.scrollRevealObserver.observe(element);
     });
-  };
-
-  this.scrollRevealObserver = new IntersectionObserver(observerCallback, config);
-  
-  revealElements.forEach((element, index) => {
-    console.log(`Observing element ${index}:`, element);
-    this.scrollRevealObserver.observe(element);
-  });
-
-  // Show first element immediately
-  if (revealElements[0]) {
-    revealElements[0].classList.add("visible");
+    if (revealElements[0]) {
+      revealElements[0].classList.add("visible");
+    }
   }
-}
+  
   setupHeaderScroll() {
     const header = document.querySelector(".site-header");
     if (!header) return;
@@ -315,7 +262,6 @@ initScrollReveal() {
   }
 
   cleanup() {
-    // Remove mobile menu listeners
     if (this.mobileMenuToggle && this.mobileMenuClickHandler) {
       this.mobileMenuToggle.removeEventListener("click", this.mobileMenuClickHandler);
     }
@@ -326,25 +272,18 @@ initScrollReveal() {
     const overlay = document.querySelector(".sidebar-overlay");
     if (mobileControls) mobileControls.remove();
     if (overlay) overlay.remove();
-    // Disconnect scroll reveal observer
     if (this.scrollRevealObserver) {
       this.scrollRevealObserver.disconnect();
     }
-
-    // Remove scroll handlers
     if (this.scrollHandler) {
       window.removeEventListener("scroll", this.scrollHandler);
     }
     if (this.headerScrollHandler) {
       window.removeEventListener("scroll", this.headerScrollHandler);
     }
-
-    // Cancel animation frame
     if (this.scrollTimeout) {
       window.cancelAnimationFrame(this.scrollTimeout);
     }
-
-    // Clear references
     this.mobileMenuToggle = null;
     this.siteNav = null;
     this.scrollRevealObserver = null;

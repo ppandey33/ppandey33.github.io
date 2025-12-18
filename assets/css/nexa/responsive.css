@@ -191,7 +191,7 @@
   .hamburger {
     width: var(--space-6);
     height: var(--border-2);
-    background: var(--textPrimary, #e6e6e6);
+    background: var(--link, #e6e6e6);
     display: block;
     position: relative;
     transition: var(--transition-base);
@@ -203,9 +203,14 @@
     position: absolute;
     width: 100%;
     height: var(--border-2);
-    background: var(--textPrimary, #e6e6e6);
+    background: var(--link, #e6e6e6);
     transition: var(--transition-base);
     left: 0;
+  }
+  .mobile-menu-toggle.active .hamburger,
+  .mobile-menu-toggle.active .hamburger::before,
+  .mobile-menu-toggle.active .hamburger::after {
+    background: var(--linkHover);
   }
 
   .hamburger::before {
@@ -660,7 +665,7 @@
 
   .post-date::before,
   .post-author::before {
-    font-size: var(--fontSize-base);
+    font-size: var(--fontSize-base, 1rem);
   }
 
   .post-meta {
@@ -683,11 +688,10 @@
     padding: var(--padding-sm, 0.5rem) var(--padding-md, 1rem);
   }
 
-  .nav-item .nav-link{
+  .nav-item .nav-link {
     justify-content: start;
     height: var(--space-6);
     width: 100%;
-
   }
 }
 
@@ -1059,6 +1063,7 @@
    PRINT STYLES
    ================================================================= */
 @media print {
+  .mobile-sidebar-controls,
   .site-header,
   .mobile-menu-toggle,
   .theme-switcher,

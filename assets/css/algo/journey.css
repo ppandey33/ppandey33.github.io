@@ -77,7 +77,6 @@
   width: var(--border-4);
   height: 100%;
   background: linear-gradient(to top, rgb(from var(--border) r g b / 0.1), var(--borderSecondary));
-  border-radius: 100%;
 }
 
 .experience-description::after {

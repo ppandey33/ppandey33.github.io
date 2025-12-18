@@ -3,10 +3,18 @@
 
 @import url("{{ '/assets/fonts/fira_code.css' | absolute_url }}");
 
-* {
+*,
+html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased; /* Chrome / Safari */
+  -moz-osx-font-smoothing: grayscale; /* macOS Firefox */
+  text-rendering: optimizeLegibility; /* Kerning & ligatures */
+  font-smooth: always;
 }
 
 body {
@@ -18,12 +26,15 @@ body {
   line-height: var(--line-height-normal, 1.5);
   font-size: var(--fontSize-base, 1rem);
   text-shadow: 0 0 0 currentColor;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-smooth: always;
 }
 
-:root {
+:host, :root {
   /* ============================================
      SPACING SCALE (8px base = 0.5rem)
      ============================================ */

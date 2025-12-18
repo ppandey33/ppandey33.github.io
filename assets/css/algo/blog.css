@@ -112,12 +112,12 @@
 
 .post-author::before {
   content: "\f044";
-  font-size: var(--fontSize-2xl, 1.953rem);
+font-size: var(--fontSize-base, 1rem);
   font-family: "fa";
 }
 .post-reading-time::before {
   content: "\f34e";
-  font-size: var(--fontSize-base, 1.25rem);
+  font-size: var(--fontSize-base, 1rem);
   font-family: "fa";
 }
 
