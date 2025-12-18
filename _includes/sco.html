@@ -1,0 +1,77 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": {{ page.params.title | default: page.title | default: site.title | jsonify }},
+  "jobTitle": {{ site.job_title | jsonify }},
+  "url": {{ site.url | jsonify }},
+  "image": {{ site.url | append: '/assets/images/profile-wbg2.png' | jsonify }},
+  "email": {{ site.email | jsonify }},
+  "telephone": {{ site.phone | jsonify }},
+  "address": {
+    "@type": "274001",
+    "addressLocality": "Deoria",
+    "addressRegion": "Uttar Pradesh",
+    "addressCountry": "IN"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/{{ site.social_handle }}",
+    "https://github.com/{{ site.social_handle }}",
+    "https://twitter.com/{{ site.social_handle }}",
+    "https://stackoverflow.com/users/{{ site.social_handle }}"
+    "https://www.instagram.com/{{ site.social_handle }}",
+    "https://www.facebook.com/{{ site.social_handle }}",
+    "https://www.youtube.com/@{{ site.social_handle }}"
+  ],
+  "description": {{ site.description | jsonify }},
+  "knowsAbout": {{ site.skills | jsonify }},
+  "alumniOf": {
+    "@type": "EducationalOrganization",
+    "name": {{ site.last_edu | jsonify }}
+  },
+  "award": [
+    "Multiple DXC Champs Award",
+    "Multiple DXC Collaborator Award",
+    "Architectural Excellence Award"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": {{ site.job_org | jsonify }}
+  }
+}
+</script>
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="{{ page.params.title | default: page.title | default: site.title }}" />
+<meta property="og:locale" content="en_US">
+<meta property="og:description"  content="{{ page.params.desc | default: page.desc | default: site.description }}" />
+<link rel="canonical" href="{{site.url}}{{ page.url }}" />
+<meta property="og:url" content="{{site.url}}{{ page.url }}">
+<meta property="og:site_name" content="{{ page.params.title | default: page.title | default: site.title }}">
+<meta property="og:type" content="{{ page.type | default: 'website' }}" />
+{% assign query = "" %}
+
+{% if page.params %}
+  {% for p in page.params %}
+    {% assign key = p[0] | url_encode %}
+    {% assign value = p[1] | url_encode %}
+    {% if forloop.first %}
+      {% assign query = query | append: "?" %}
+    {% else %}
+      {% assign query = query | append: "&" %}
+    {% endif %}
+    {% assign query = query | append: key | append: "=" | append: value %}
+  {% endfor %}
+{% endif %}
+<meta property="fb:app_id" content="3784825495152994" />
+<meta property="fb:admins" content="100002167644707" />
+<meta property="og:image" content="{{ site.og_image | append: query | absolute_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="{{ page.params.title | default: page.title | default: site.title }}">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ page.params.title | default: page.title | default: site.title }}" />
+<meta name="twitter:description"  content="{{ page.params.desc | default: page.desc | default: site.description }}" /> 
+<meta name="twitter:image" content="{{ site.og_image | append: query}}" />

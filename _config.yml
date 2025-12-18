@@ -1,16 +1,58 @@
 title: Pawan Pandey - Lead .Net Full Stack Developer
 short_name: Pawan
 email: Pawan4email@gmail.com
+job_title: Sr. Analyst || Software engineering
+job_org: DXC Technology
 description: >-
   Lead .NET Full stack Developer with 11+ years of experience in designing,
   developing, and deploying enterprise-grade web applications.
 baseurl: ""
 url: "https://pawan.net.in"
 og_image: "https://pawan5hub.vercel.app/api/images"
+social_handle: pawan5hub
 github_username: pawan5hub
 linkedin_username: pawan-pandey-48842a79
 location: "Noida, Uttar Pradesh, India"
 phone: "+91-8285814645"
+skills:
+  - .NET Core
+  - C#
+  - ASP.NET MVC
+  - JavaScript
+  - TypeScript
+  - React
+  - Azure
+  - SQL Server
+  - Microservices
+  - RESTful APIs
+  - Agile Methodologies
+  - DevOps
+  - Unit Testing
+  - HTML5
+  - CSS3
+  - Entity Framework
+  - Git
+  - Docker
+  - Kubernetes
+  - CI/CD
+  - TDD
+  - Design Patterns
+  - Web Services
+  - jQuery
+  - Bootstrap
+  - Angular
+  - RabbitMQ
+  - Redis
+  - Elasticsearch
+  - SignalR
+  - LINQ
+  - Web API
+  - OAuth
+  - JWT
+  - Scrum
+  - Kanban
+  - Visual Studio
+last_edu: "Lovely Professional University (2014 - 2016)"
 version: "1.0.0"
 # Build settings
 theme: minima
