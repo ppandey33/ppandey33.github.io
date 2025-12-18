@@ -18,7 +18,7 @@
     "https://www.linkedin.com/in/{{ site.social_handle }}",
     "https://github.com/{{ site.social_handle }}",
     "https://twitter.com/{{ site.social_handle }}",
-    "https://stackoverflow.com/users/{{ site.social_handle }}"
+    "https://stackoverflow.com/users/{{ site.social_handle }}",
     "https://www.instagram.com/{{ site.social_handle }}",
     "https://www.facebook.com/{{ site.social_handle }}",
     "https://www.youtube.com/@{{ site.social_handle }}"
@@ -75,3 +75,7 @@
 <meta name="twitter:title" content="{{ page.params.title | default: page.title | default: site.title }}" />
 <meta name="twitter:description"  content="{{ page.params.desc | default: page.desc | default: site.description }}" /> 
 <meta name="twitter:image" content="{{ site.og_image | append: query}}" />
+<meta name="twitter:site" content="@{{site.social_handle}}" />
+<meta name="twitter:creator" content="@{{site.social_handle}}" />
+<meta name="twitter:url" content="https://pawan.net.in/" />
+<meta name="twitter:image:alt" content="{{ page.params.title | default: page.title | default: site.title }}">
