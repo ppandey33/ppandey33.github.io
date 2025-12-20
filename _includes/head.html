@@ -8,13 +8,13 @@
 <meta http-equiv="Cache-Control" content="max-age=31536000, public" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | absolute_url }}" />
-
+{% include favicons.html %}
 <!-- replaceable start -->
 <meta name="description"  content="{{ page.params.desc | default: page.desc | default: site.description }}" />
 <meta name="author" content="{{ page.params.author | default: page.title | default: site.title }}" />
 <meta name="theme" content="charcoal" />
 <title>{{ page.params.title | default: page.title | default: site.title }} | {{ page.params.desc | default: page.desc | default: site.description }}</title>
+
 {% include sco.html %}
 
 <!-- replaceable end -->

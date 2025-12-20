@@ -4,7 +4,7 @@ email: Pawan4email@gmail.com
 job_title: Sr. Analyst || Software engineering
 job_org: DXC Technology
 description: >-
-  Lead .NET Full stack Developer with 11+ years of experience in designing,
+  11+ years of experience in designing,
   developing, and deploying enterprise-grade web applications.
 baseurl: ""
 url: "https://pawan.net.in"
@@ -69,54 +69,63 @@ defaults:
       type: "pages"
     values:
       layout: common
+      pagename: home
   - scope:
       path: "pages/stack"
       type: "pages"
     values:
       permalink: "/stack/"
       layout: "common"
+      pagename: skills
   - scope:
       path: "pages/journey"
       type: "pages"
     values:
       permalink: "/journey/"
       layout: "common"
+      pagename: experience
   - scope:
       path: "pages/learning"
       type: "pages"
     values:
       permalink: "/learning/"
       layout: "common"
+      pagename: education
   - scope:
       path: "pages/kudos"
       type: "pages"
     values:
       permalink: "/kudos/"
       layout: "common"
+      pagename: achievements
   - scope:
       path: "pages/about"
       type: "pages"
     values:
       permalink: "/about/"
       layout: "common"
+      pagename: about
   - scope:
       path: "pages/contact"
       type: "pages"
     values:
       permalink: "/contact/"
       layout: "common"
+      pagename: contact
   - scope:
       path: "pages/dev"
       type: "pages"
     values:
       permalink: "/dev/"
       layout: "common"
+      pagename: github projects
   - scope:
       path: "pages/blogs"
       type: "pages"
     values:
       permalink: "/blogs/"
       layout: "common"
+      pagename: blogs
   # Nexa Setup
   - scope:
       path: "pages/nexa"

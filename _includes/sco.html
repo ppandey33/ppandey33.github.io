@@ -2,6 +2,41 @@
 {
   "@context": "https://schema.org",
   "@type": "Person",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site.url }}"
+    }
+    {% assign url_parts = page.url | split: "/" | compact %}
+    {% assign position = 2 %}
+    {% assign cumulative_path = "" %}
+    
+    {% for part in url_parts %}
+      {% unless part == "index.html" or part == "" %}
+        {% assign cumulative_path = cumulative_path | append: "/" | append: part %}
+        
+        {% comment %} Get readable name from navigation.json if possible {% endcomment %}
+        {% assign nav_item = site.data.navigation.items | where: "id", part | first %}
+        {% assign breadcrumb_name = nav_item.title | default: part | capitalize %}
+        
+        {% comment %} Special handling for last item (current page) {% endcomment %}
+        {% if forloop.last %}
+          {% assign breadcrumb_name = page.params.title | default: page.pagenames | default: breadcrumb_name %}
+        {% endif %}
+        
+        ,{
+          "@type": "ListItem",
+          "position": {{ position }},
+          "name": "{{ breadcrumb_name }}",
+          "item": "{{ site.url }}{{ cumulative_path }}"
+        }
+        
+        {% assign position = position | plus: 1 %}
+      {% endunless %}
+    {% endfor %}
+  ],
   "name": {{ page.params.title | default: page.title | default: site.title | jsonify }},
   "jobTitle": {{ site.job_title | jsonify }},
   "url": {{ site.url | jsonify }},
@@ -48,23 +83,46 @@
 <meta property="og:url" content="{{site.url}}{{ page.url }}">
 <meta property="og:site_name" content="{{ page.params.title | default: page.title | default: site.title }}">
 <meta property="og:type" content="{{ page.type | default: 'website' }}" />
-{% assign query = "" %}
 
-{% if page.params %}
-  {% for p in page.params %}
-    {% assign key = p[0] | url_encode %}
-    {% assign value = p[1] | url_encode %}
-    {% if forloop.first %}
-      {% assign query = query | append: "?" %}
-    {% else %}
-      {% assign query = query | append: "&" %}
-    {% endif %}
-    {% assign query = query | append: key | append: "=" | append: value %}
-  {% endfor %}
-{% endif %}
+{% if page.path == "blogs" or page.url contains "/blogs/" %}
+    {% comment %}
+    Extract slug from URL path
+    Example: /blogs/csharp/all-generics/index.html → csharp-all-generics
+    {% endcomment %}
+    
+    {% assign url_parts = page.url | split: "/" %}
+    {% assign slug_parts = "" | split: "" %}
+    {% assign in_blogs = false %}
+    
+    {% for part in url_parts %}
+      {% if part == "blogs" %}
+        {% assign in_blogs = true %}
+      {% elsif in_blogs and part != "" and part != "index.html" %}
+        {% assign slug_parts = slug_parts | push: part %}
+      {% endif %}
+    {% endfor %}
+    
+    {% assign page_slug = slug_parts | join: "-" %}
+    {% assign encoded_token = site.data.og_tokens[page_slug] %}
+    
+    {% comment %}Debug - Remove in production{% endcomment %}
+    <!-- Generated slug: {{ page_slug }} -->
+    <!-- Token found: {{ encoded_token | slice: 0, 20 }}... -->
+    
+    <meta property="og:image" content="{{ site.og_image}}/{{ encoded_token | default: 'default' }}.png"/>
+    <meta property="og:image:secure_url" content="{{ site.og_image}}/{{ encoded_token | default: 'default' }}.png"/>
+    <meta name="twitter:image" content="{{ site.og_image}}/{{ encoded_token | default: 'default' }}.png" />
+    <meta name="twitter:image:secure_url" content="{{ site.og_image}}/{{ encoded_token | default: 'default' }}.png" />
+  {% else %}
+    <!-- Default OG image for non-blog pages -->
+    <meta property="og:image" content="{{ site.og_image}}/default.png">
+    <meta property="og:image:secure_url" content="{{ site.og_image}}/default.png">
+    <meta name="twitter:image" content="{{ site.og_image}}/default.png" />
+    <meta name="twitter:image:secure_url" content="{{ site.og_image}}/default.png" />
+  {% endif %}
+
 <meta property="fb:app_id" content="3784825495152994" />
 <meta property="fb:admins" content="100002167644707" />
-<meta property="og:image" content="{{ site.og_image | append: query | absolute_url }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
@@ -74,7 +132,6 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ page.params.title | default: page.title | default: site.title }}" />
 <meta name="twitter:description"  content="{{ page.params.desc | default: page.desc | default: site.description }}" /> 
-<meta name="twitter:image" content="{{ site.og_image | append: query}}" />
 <meta name="twitter:site" content="@{{site.social_handle}}" />
 <meta name="twitter:creator" content="@{{site.social_handle}}" />
 <meta name="twitter:url" content="https://pawan.net.in/" />
