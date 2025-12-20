@@ -1,12 +1,11 @@
 name: Deploy Jekyll with OG Tokens
-
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
 
 permissions:
-  contents: write  # Safe - only for GitHub Actions bot in this workflow
+  contents: read
   pages: write
   id-token: write
 
@@ -21,42 +20,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0  # Full history for better git operations
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
+      # Generate OG tokens BEFORE building
       - name: Generate OG Tokens
         run: |
+          # Ensure _data directory exists
+          mkdir -p _data
+          
+          # Run the generation script
           node assets/js/generate-og.js
-          echo "✅ Tokens generated"
-          ls -la _data/
-
-      - name: Commit generated tokens (bot only)
-        run: |
-          # Configure git with bot identity
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
           
-          # Add only the specific file (not everything)
-          git add _data/og-tokens.json
-          
-          # Only commit if there are actual changes
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
+          # Verify the file was created
+          if [ -f "_data/og-tokens.json" ]; then
+            echo "✅ OG tokens generated successfully"
+            cat _data/og-tokens.json
           else
-            git commit -m "chore: update OG tokens [skip ci]"
-            
-            # Push with error handling
-            if git push; then
-              echo "✅ Changes pushed successfully"
-            else
-              echo "⚠️ Push failed (possibly due to branch protection or conflicts)"
-              exit 1
-            fi
+            echo "❌ Failed to generate OG tokens"
+            exit 1
           fi
 
       - name: Setup Ruby
@@ -68,10 +54,20 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      # Build Jekyll (this will include the generated og-tokens.json)
       - name: Build with Jekyll
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
+
+      # Verify og-tokens.json is in the build
+      - name: Verify OG tokens in build
+        run: |
+          if [ -f "_site/_data/og-tokens.json" ] || [ -f "_data/og-tokens.json" ]; then
+            echo "✅ OG tokens found in build"
+          else
+            echo "⚠️ OG tokens not found, but continuing..."
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
