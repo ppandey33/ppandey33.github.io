@@ -516,3 +516,16 @@ body {
   scrollbar-color: var(--primary) var(--surface);
 }
 
+.charcoal-icon, .lavender-icon, .pearl-icon {
+   display: none;
+}
+
+[data-theme="charcoal"] .charcoal-icon {
+  display: inline!important;
+}
+[data-theme="lavender"] .lavender-icon {
+  display: inline!important;
+}
+[data-theme="pearl"] .pearl-icon {
+  display: inline!important;
+}
