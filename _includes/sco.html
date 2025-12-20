@@ -103,7 +103,7 @@
     {% endfor %}
     
     {% assign page_slug = slug_parts | join: "-" %}
-    {% assign encoded_token = site.data.og_tokens[page_slug] %}
+    {% assign encoded_token = site.data.og-tokens[page_slug] %}
     
     {% comment %}Debug - Remove in production{% endcomment %}
     <!-- Generated slug: {{ page_slug }} -->
