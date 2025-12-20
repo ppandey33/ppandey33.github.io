@@ -2,11 +2,11 @@ name: Deploy Jekyll with OG Tokens
 
 on:
   push:
-    branches: ["main"]  # or "master"
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # Safe - only for GitHub Actions bot in this workflow
   pages: write
   id-token: write
 
@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Full history for better git operations
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,9 +31,33 @@ jobs:
 
       - name: Generate OG Tokens
         run: |
-          node scripts/generate-og.js
+          node assets/js/generate-og.js
           echo "✅ Tokens generated"
           ls -la _data/
+
+      - name: Commit generated tokens (bot only)
+        run: |
+          # Configure git with bot identity
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Add only the specific file (not everything)
+          git add _data/og-tokens.json
+          
+          # Only commit if there are actual changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update OG tokens [skip ci]"
+            
+            # Push with error handling
+            if git push; then
+              echo "✅ Changes pushed successfully"
+            else
+              echo "⚠️ Push failed (possibly due to branch protection or conflicts)"
+              exit 1
+            fi
+          fi
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
