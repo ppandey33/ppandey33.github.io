@@ -1,0 +1,40 @@
+---
+---
+@media (prefers-color-scheme: dark) {
+  :host,
+  :root {
+    --primary: #fb923c;
+    --secondary: #ea580c;
+    --accent: #f97316;
+    --background: #1a1410;
+    --surface: #2a1f18;
+    --link: #fdba74;
+    --textPrimary: #f5e6d3;
+    --textSecondary: #d4a574;
+    --textMuted: #9a8574;
+    --textTertiary: #c9a27b;
+    --border: #3d2a1a;
+    --borderSecondary: #4a3422;
+    --hover: #3d2a1a;
+    --cardHeader: #3d2a1a;
+    --cardBg: #2a1f18;
+    --linkHover: #fb923c;
+    --surfaceOpacity: #2a1f18a0;
+    --bg-gradient-start: #2a1f18;
+    --bg-gradient-mid: #221a13;
+    --bg-gradient-end: #1a1410;
+    --card-bg-start: rgba(42, 31, 24, 0.95);
+    --card-bg-mid: rgba(42, 31, 24, 0.9);
+    --card-bg-end: rgba(42, 31, 24, 0.85);
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --shadow-primary-subtle: rgba(251, 146, 60, 0.22);
+    --shadow-primary-light: rgba(251, 146, 60, 0.33);
+    --shadow-primary-medium: rgba(251, 146, 60, 0.44);
+    --shadow-primary-strong: rgba(251, 146, 60, 0.55);
+    --glow-primary-subtle: rgba(251, 146, 60, 0.2);
+    --glow-primary-medium: rgba(251, 146, 60, 0.4);
+    --glow-primary-strong: rgba(251, 146, 60, 0.6);
+    --shimmer-opacity: rgba(251, 146, 60, 0.1);
+  }
+}
+@import url("{{ '/assets/css/giscus-theme.css' | absolute_url }}");
