@@ -1,5 +1,6 @@
 ---
 ---
+@import url("{{ '/assets/css/giscus-theme.css' | absolute_url }}");
 @media (prefers-color-scheme: dark) {
   :host,
   :root {
@@ -37,4 +38,3 @@
     --shimmer-opacity: rgba(251, 146, 60, 0.1);
   }
 }
-@import url("{{ '/assets/css/giscus-theme.css' | absolute_url }}");
