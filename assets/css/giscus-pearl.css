@@ -1,5 +1,6 @@
 ---
 ---
+@import url("{{ '/assets/css/giscus-theme.css' | absolute_url }}");
 :host,
 :root {
   --primary: #f59e0b;
@@ -35,4 +36,3 @@
   --glow-primary-strong: rgba(245, 158, 11, 0.5);
   --shimmer-opacity: rgba(251, 191, 36, 0.1);
 }
-@import url("{{ '/assets/css/giscus-theme.css' | absolute_url }}");
