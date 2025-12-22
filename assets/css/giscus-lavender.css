@@ -1,7 +1,3 @@
-/*!
- * Custom Giscus Theme
- * Integrates with Fira Code theme system
- */
 :host,
 :root {
   --space-0: 0;
@@ -212,8 +208,44 @@
   --glow-primary-strong: rgba(192, 132, 252, 0.6);
   --shimmer-opacity: rgba(192, 132, 252, 0.1);
 }
+@media (prefers-color-scheme: light) {
+  :host,
+  :root {
+    --primary: #9333ea;
+    --secondary: #ddd6fe;
+    --accent: #e879f9;
+    --background: #faf5ff;
+    --surface: #ffffff;
+    --link: #7c3aed;
+    --textPrimary: #2d1f47;
+    --textSecondary: #6b21a8;
+    --textMuted: #9ca3af;
+    --textTertiary: #7c3aed;
+    --border: #e9d5ff;
+    --borderSecondary: #ddd6fe;
+    --hover: #f3e8ff;
+    --cardHeader: #f3ebff;
+    --cardBg: #faf7fd;
+    --linkHover: #a855f7;
+    --surfaceOpacity: #ffffffa0;
+    --bg-gradient-start: #f0e7fc;
+    --bg-gradient-mid: #f5f0fd;
+    --bg-gradient-end: #faf5ff;
+    --card-bg-start: rgba(250, 247, 253, 0.95);
+    --card-bg-mid: rgba(250, 247, 253, 0.9);
+    --card-bg-end: rgba(250, 247, 253, 0.85);
+    --shadow-color: rgba(147, 51, 234, 0.08);
+    --shadow-primary-subtle: rgba(147, 51, 234, 0.15);
+    --shadow-primary-light: rgba(147, 51, 234, 0.22);
+    --shadow-primary-medium: rgba(147, 51, 234, 0.3);
+    --shadow-primary-strong: rgba(147, 51, 234, 0.4);
+    --glow-primary-subtle: rgba(147, 51, 234, 0.15);
+    --glow-primary-medium: rgba(147, 51, 234, 0.25);
+    --glow-primary-strong: rgba(147, 51, 234, 0.35);
+    --shimmer-opacity: rgba(147, 51, 234, 0.08);
+  }
+}
 main {
-  /* Syntax highlighting colors */
   --color-prettylights-syntax-comment: var(--textSecondary);
   --color-prettylights-syntax-constant: var(--primary);
   --color-prettylights-syntax-entity: var(--accent);
@@ -244,9 +276,7 @@ main {
   --color-prettylights-syntax-brackethighlighter-angle: var(--textSecondary);
   --color-prettylights-syntax-sublimelinter-gutter-mark: var(--border);
   --color-prettylights-syntax-constant-other-reference-link: var(--link);
-
-  /* Button colors */
-  --color-btn-text: var(--textPrimary);
+    --color-btn-text: var(--textPrimary);
   --color-btn-bg: var(--surface);
   --color-btn-border: var(--border);
   --color-btn-shadow: 0 0 transparent;
@@ -256,9 +286,7 @@ main {
   --color-btn-active-bg: var(--surface);
   --color-btn-active-border: var(--primary);
   --color-btn-selected-bg: var(--hover);
-
-  /* Primary button colors */
-  --color-btn-primary-text: var(--background);
+    --color-btn-primary-text: var(--background);
   --color-btn-primary-bg: var(--primary);
   --color-btn-primary-border: var(--primary);
   --color-btn-primary-shadow: 0 0 transparent;
@@ -270,124 +298,75 @@ main {
   --color-btn-primary-disabled-text: var(--textMuted);
   --color-btn-primary-disabled-bg: var(--border);
   --color-btn-primary-disabled-border: var(--border);
-
-  /* Action list */
-  --color-action-list-item-default-hover-bg: var(--hover);
-
-  /* Segmented control */
-  --color-segmented-control-bg: var(--surface);
+    --color-action-list-item-default-hover-bg: var(--hover);
+    --color-segmented-control-bg: var(--surface);
   --color-segmented-control-button-bg: var(--background);
   --color-segmented-control-button-selected-border: var(--primary);
-
-  /* Foreground colors */
-  --color-fg-default: var(--textPrimary);
+    --color-fg-default: var(--textPrimary);
   --color-fg-muted: var(--textSecondary);
   --color-fg-subtle: var(--textMuted);
-
-  /* Canvas/background colors */
-  --color-canvas-default: var(--background);
+    --color-canvas-default: var(--background);
   --color-canvas-overlay: var(--surface);
   --color-canvas-inset: var(--cardBg);
   --color-canvas-subtle: var(--surface);
-
-  /* Border colors */
-  --color-border-default: var(--border);
+    --color-border-default: var(--border);
   --color-border-muted: var(--borderSecondary);
-
-  /* Neutral colors */
-  --color-neutral-muted: var(--textMuted);
-
-  /* Accent colors */
-  --color-accent-fg: var(--primary);
+    --color-neutral-muted: var(--textMuted);
+    --color-accent-fg: var(--primary);
   --color-accent-emphasis: var(--accent);
   --color-accent-muted: var(--primary);
   --color-accent-subtle: var(--primary);
-
-  /* Success colors */
-  --color-success-fg: var(--success);
-
-  /* Attention/warning colors */
-  --color-attention-fg: var(--warning);
+    --color-success-fg: var(--success);
+    --color-attention-fg: var(--warning);
   --color-attention-muted: var(--warning);
   --color-attention-subtle: var(--warning);
-
-  /* Danger colors */
-  --color-danger-fg: var(--danger);
+    --color-danger-fg: var(--danger);
   --color-danger-muted: var(--danger);
   --color-danger-subtle: var(--danger);
-
-  /* Shadows */
-  --color-primer-shadow-inset: 0 0 transparent;
-
-  /* Scale colors */
-  --color-scale-gray-7: var(--surface);
+    --color-primer-shadow-inset: 0 0 transparent;
+    --color-scale-gray-7: var(--surface);
   --color-scale-blue-8: var(--primary);
-
-  /* Extensions for reactions */
-  --color-social-reaction-bg-hover: var(--hover);
+    --color-social-reaction-bg-hover: var(--hover);
   --color-social-reaction-bg-reacted-hover: var(--primary);
 }
-
 main .pagination-loader-container {
   background-image: none;
   background: var(--surface);
 }
-
-/*! Custom CSS */
-
-/* Hide reaction counts if you prefer */
 .gsc-reactions-count {
   display: none;
 }
-
-/* Timeline layout */
 .gsc-timeline {
   flex-direction: column-reverse;
 }
-
-/* Header spacing */
 .gsc-header {
   padding-bottom: var(--padding-md);
   border-bottom: var(--border-1) solid var(--border);
 }
-
-/* Comment box order */
 .gsc-comments > .gsc-header {
   order: 1;
 }
-
 .gsc-comments > .gsc-comment-box {
   margin-bottom: var(--margin-md);
   order: 2;
 }
-
 .gsc-comments > .gsc-timeline {
   order: 3;
 }
-
-/* Background color */
 .gsc-homepage-bg {
   background-color: var(--background);
 }
-
-/* Loading image - uses theme-aware color */
 main .gsc-loading-image {
   background-image: url(https://github.githubassets.com/images/mona-loading-dimmed.gif);
   filter: hue-rotate(180deg) saturate(1.5);
 }
-
-/* Additional custom styling */
-
-/* Main container */
 main {
-  font-family: "Fira Code", "Courier New", monospace !important;
+  font-family: "Fira Code", monospace, "Courier New" !important;
   background-color: var(--background);
   color: var(--textPrimary);
   border-radius: var(--radius-lg);
   padding: var(--padding-lg);
 }
-
-/* Comments */
 .gsc-comment {
   background: var(--cardBg);
   border: var(--border-1) solid var(--border);
@@ -396,39 +375,29 @@ main {
   margin-bottom: var(--margin-md);
   transition: all var(--transition-base);
 }
-
 .gsc-comment:hover {
   border-color: var(--primary);
   box-shadow: 0 0 var(--space-2) var(--shadow-primary-subtle);
 }
-
-/* Comment author */
 .gsc-comment-author {
   color: var(--primary);
   font-weight: 600;
   transition: color var(--transition-fast);
 }
-
 .gsc-comment-author:hover {
   color: var(--linkHover);
 }
-
-/* Comment content */
 .gsc-comment-content {
   color: var(--textPrimary);
   line-height: var(--line-height-relaxed);
 }
-
 .gsc-comment-content a {
   color: var(--link);
   transition: color var(--transition-fast);
 }
-
 .gsc-comment-content a:hover {
   color: var(--linkHover);
 }
-
-/* Code blocks */
 .gsc-comment-content pre,
 .gsc-comment-content code {
   font-family: "Fira Code", "Courier New", monospace;
@@ -436,24 +405,19 @@ main {
   border: var(--border-1) solid var(--border);
   border-radius: var(--radius-sm);
 }
-
 .gsc-comment-content pre {
   padding: var(--padding-sm);
   overflow-x: auto;
 }
-
 .gsc-comment-content code {
   padding: var(--padding-xs) var(--padding-sm);
   color: var(--primary);
   font-size: var(--fontSize-sm);
 }
-
 .gsc-comment-content pre code {
   padding: 0;
   border: none;
 }
-
-/* Blockquotes */
 .gsc-comment-content blockquote {
   border-left: var(--border-4) solid var(--primary);
   padding-left: var(--padding-md);
@@ -461,8 +425,6 @@ main {
   color: var(--textSecondary);
   font-style: italic;
 }
-
-/* Textarea */
 .gsc-comment-box-textarea,
 textarea {
   font-family: "Fira Code", "Courier New", monospace;
@@ -474,15 +436,12 @@ textarea {
   line-height: var(--line-height-relaxed);
   transition: all var(--transition-fast);
 }
-
 .gsc-comment-box-textarea:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 var(--border-2) var(--shadow-primary-subtle);
 }
-
-/* Buttons */
 .gsc-comment-box-submit,
 button[type="submit"] {
   background: var(--primary);
@@ -495,15 +454,12 @@ button[type="submit"] {
   transition: all var(--transition-fast);
   cursor: pointer;
 }
-
 .gsc-comment-box-submit:hover,
 button[type="submit"]:hover {
   background: var(--accent);
   transform: translateY(var(--translate-y-hover-sm));
   box-shadow: 0 var(--space-1) var(--space-3) var(--shadow-primary-light);
 }
-
-/* Reactions */
 .gsc-reactions-button {
   background: var(--surface);
   border: var(--border-1) solid var(--border);
@@ -511,21 +467,17 @@ button[type="submit"]:hover {
   padding: var(--padding-xs) var(--padding-sm);
   transition: all var(--transition-fast);
 }
-
 .gsc-reactions-button:hover {
   background: var(--hover);
   border-color: var(--primary);
   transform: scale(var(--scale-hover-small));
 }
-
 .gsc-reactions-button[data-reacted="true"],
 .gsc-social-reaction-summary-item[aria-pressed="true"] {
   background: var(--primary);
   color: var(--background);
   border-color: var(--primary);
 }
-
-/* Reply box */
 .gsc-reply-box {
   background: var(--surface);
   border: var(--border-1) solid var(--border);
@@ -533,32 +485,24 @@ button[type="submit"]:hover {
   padding: var(--padding-md);
   margin-top: var(--margin-sm);
 }
-
-/* Pagination */
 .gsc-pagination {
   margin-top: var(--margin-lg);
   gap: var(--gap-sm);
 }
-
 .gsc-pagination button {
   font-family: "Fira Code", "Courier New", monospace;
 }
-
-/* Avatar */
 .gsc-comment-author-avatar,
 .gsc-avatar {
   border-radius: var(--radius-sm);
   border: var(--border-2) solid var(--border);
   transition: all var(--transition-fast);
 }
-
 .gsc-comment-author-avatar:hover,
 .gsc-avatar:hover {
   border-color: var(--primary);
   box-shadow: 0 0 var(--space-2) var(--shadow-primary-light);
 }
-
-/* Headers in comments */
 .gsc-comment-content h1,
 .gsc-comment-content h2,
 .gsc-comment-content h3,
@@ -570,53 +514,57 @@ button[type="submit"]:hover {
   margin-bottom: var(--margin-sm);
   font-weight: 600;
 }
-
-/* Tables */
 .gsc-comment-content table {
   border-collapse: collapse;
   width: 100%;
 }
-
 .gsc-comment-content th,
 .gsc-comment-content td {
   border: var(--border-1) solid var(--border);
   padding: var(--padding-sm);
 }
-
 .gsc-comment-content th {
   background: var(--surface);
   color: var(--primary);
   font-weight: 600;
 }
-
-/* Reduced motion support */
 [data-reduced-motion="true"] .gsc-comment,
 [data-reduced-motion="true"] button,
 [data-reduced-motion="true"] .gsc-reactions-button {
   transition: none !important;
   animation: none !important;
 }
-
 [data-reduced-motion="true"] button:hover,
 [data-reduced-motion="true"] .gsc-reactions-button:hover {
   transform: none !important;
 }
-
-/* Scrollbar */
 .gsc-comment-content::-webkit-scrollbar {
   width: var(--space-3);
   height: var(--space-3);
 }
-
 .gsc-comment-content::-webkit-scrollbar-track {
   background: var(--surface);
 }
-
 .gsc-comment-content::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--primary), var(--accent));
   border: var(--border-2) solid var(--surface);
 }
-
 .gsc-comment-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent), var(--primary));
+}
+*::-webkit-scrollbar {
+  width: var(--space-3);
+  height: var(--space-3);
+}
+*::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary), var(--accent));
+  border: var(--border-2) solid var(--surface);
+  transition: background var(--transition-base);
+  border-radius: 0;
+}
+*::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, var(--accent), var(--primary));
 }
