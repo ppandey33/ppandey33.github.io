@@ -367,6 +367,9 @@ main {
   border-radius: var(--radius-lg);
   padding: var(--padding-lg);
 }
+.gsc-left-header em.color-text-secondary.text-sm {
+  display: none;
+}
 .gsc-comment {
   background: var(--cardBg);
   border: var(--border-1) solid var(--border);

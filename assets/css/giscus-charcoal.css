@@ -211,38 +211,38 @@
 @media (prefers-color-scheme: light) {
   :host,
   :root {
-    --primary: #9333ea;
-    --secondary: #ddd6fe;
-    --accent: #e879f9;
-    --background: #faf5ff;
+    --primary: #00ccaa;
+    --secondary: #d4e9e9;
+    --accent: #88cc00;
+    --background: #f5f5f5;
     --surface: #ffffff;
-    --link: #7c3aed;
-    --textPrimary: #2d1f47;
-    --textSecondary: #6b21a8;
-    --textMuted: #9ca3af;
-    --textTertiary: #7c3aed;
-    --border: #e9d5ff;
-    --borderSecondary: #ddd6fe;
-    --hover: #f3e8ff;
-    --cardHeader: #f3ebff;
-    --cardBg: #faf7fd;
-    --linkHover: #a855f7;
+    --link: #008866;
+    --textPrimary: #1a1a1a;
+    --textSecondary: #555555;
+    --textMuted: #777777;
+    --textTertiary: #444444;
+    --border: #e0e0e0;
+    --borderSecondary: #d0d0d0;
+    --hover: #f0f0f0;
+    --cardHeader: #fafafa;
+    --cardBg: #ffffff;
+    --linkHover: #00aa88;
     --surfaceOpacity: #ffffffa0;
-    --bg-gradient-start: #f0e7fc;
-    --bg-gradient-mid: #f5f0fd;
-    --bg-gradient-end: #faf5ff;
-    --card-bg-start: rgba(250, 247, 253, 0.95);
-    --card-bg-mid: rgba(250, 247, 253, 0.9);
-    --card-bg-end: rgba(250, 247, 253, 0.85);
-    --shadow-color: rgba(147, 51, 234, 0.08);
-    --shadow-primary-subtle: rgba(147, 51, 234, 0.15);
-    --shadow-primary-light: rgba(147, 51, 234, 0.22);
-    --shadow-primary-medium: rgba(147, 51, 234, 0.3);
-    --shadow-primary-strong: rgba(147, 51, 234, 0.4);
-    --glow-primary-subtle: rgba(147, 51, 234, 0.15);
-    --glow-primary-medium: rgba(147, 51, 234, 0.25);
-    --glow-primary-strong: rgba(147, 51, 234, 0.35);
-    --shimmer-opacity: rgba(147, 51, 234, 0.08);
+    --bg-gradient-start: #e8e8e8;
+    --bg-gradient-mid: #f0f0f0;
+    --bg-gradient-end: #f5f5f5;
+    --card-bg-start: rgba(255, 255, 255, 0.95);
+    --card-bg-mid: rgba(255, 255, 255, 0.9);
+    --card-bg-end: rgba(255, 255, 255, 0.85);
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --shadow-primary-subtle: rgba(0, 204, 170, 0.15);
+    --shadow-primary-light: rgba(0, 204, 170, 0.22);
+    --shadow-primary-medium: rgba(0, 204, 170, 0.3);
+    --shadow-primary-strong: rgba(0, 204, 170, 0.4);
+    --glow-primary-subtle: rgba(0, 204, 170, 0.15);
+    --glow-primary-medium: rgba(0, 204, 170, 0.25);
+    --glow-primary-strong: rgba(0, 204, 170, 0.35);
+    --shimmer-opacity: rgba(0, 204, 170, 0.08);
   }
 }
 main {
@@ -366,6 +366,9 @@ main {
   color: var(--textPrimary);
   border-radius: var(--radius-lg);
   padding: var(--padding-lg);
+}
+.gsc-left-header em.color-text-secondary.text-sm {
+  display: none;
 }
 .gsc-comment {
   background: var(--cardBg);
