@@ -13,7 +13,7 @@ class Layouts {
     this.originalParent = null;
     this.resizeHandler = null;
     this.scrollHandler = null;
-    this.unsubscribe = null;
+    this.subscription = null;
   }
 
   async init() {
@@ -23,8 +23,8 @@ class Layouts {
     window.addEventListener("storage", (event) => {
       this.handleLayoutChange(event);
     });
-    this.unsubscribe = handleURLEvent.subscribe((event) => {
-      this.handleLayoutChange(event);
+    this.subscription = handleURLEvent.subscribe((event) => {
+      event.layout && this.handleLayoutChange(event.layout);
     });
   }
 
@@ -325,9 +325,9 @@ class Layouts {
     if (this.layoutList) {
       this.layoutList.innerHTML = "";
     }
-    if (this.unsubscribe) {
-      this.unsubscribe();
-      this.unsubscribe = null;
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
     }
     this.layoutToggle = null;
     this.layoutDropdown = null;

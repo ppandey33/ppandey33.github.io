@@ -6,7 +6,7 @@ class Universe {
     this.filteredItems = [];
     this.backButtonListeners = [];
     this.currentSection = null;
-    this.unsubscribe = null;
+    this.subscription = null;
   }
 
   async init() {
@@ -15,7 +15,7 @@ class Universe {
   }
 
   setupNavigationListener() {
-    this.unsubscribeonNavigation.subscribe({
+    this.subscription = onNavigation.subscribe({
       next: (data) => {
         if (!data) return;
         if (data.type === "universe" && data.section) {
@@ -163,9 +163,9 @@ class Universe {
   }
 
   cleanup() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-      this.unsubscribe = null;
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
     }
     this.listeners.forEach(({ target, event, handler }) => {
       target.removeEventListener(event, handler);

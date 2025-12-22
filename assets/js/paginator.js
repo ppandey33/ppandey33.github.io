@@ -3,7 +3,7 @@ const onComponentLoaded = new Observable();
 class Paginator {
   constructor() {
     this.instances = new Map();
-    this.unsubscribe = null;
+    this.subscription = null;
   }
   
   create(config) {
@@ -379,9 +379,9 @@ class Paginator {
   }
 
   cleanup() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-      this.unsubscribe = null;
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
     }
     this.instances.forEach((instance, id) => {
       this.cleanupInstance(id);
@@ -390,7 +390,7 @@ class Paginator {
   }
 
   subscribeLoad() {
-    this.unsubscribe = onComponentLoaded.subscribe({
+    this.subscription = onComponentLoaded.subscribe({
       next: (value) => {
         if (value.id) {
           this.create(value);
