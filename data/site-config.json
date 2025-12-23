@@ -5,7 +5,7 @@
   "gitApi": "https://api.github.com",
   "gitUser": "pawan5hub",
   "gitThumb": "https://opengraph.githubassets.com/1/",
-  "filter": ["pawan5hub"],
+  "filter": ["pawan5hub", "try"],
   "hero": {
     "short_name": "Pawan",
     "calling_name": "Pawan Pandey",
@@ -97,7 +97,67 @@
         "class": "fa",
         "value": "Noida, Uttar Pradesh, India"
       }
-    ]
+    ],
+    "contact": {
+      "on": "https://formspree.io/f/xnjawaql",
+      "title": "Send me a message",
+      "sub-title": "I'll get back to you as soon as possible",
+      "group": [
+        {
+          "id": "contact-name",
+          "name": "name",
+          "label": "Your Name",
+          "type": "text",
+          "placeholder": "John Doe",
+          "icon": "&#xf007;",
+          "class": "fa",
+          "required": true
+        },
+        {
+          "id": "contact-email",
+          "name": "email",
+          "label": "Email Address",
+          "type": "email",
+          "placeholder": "john@example.com",
+          "class": "fa",
+          "icon": "&#x40;",
+          "required": true
+        },
+        {
+          "id": "contact-subject",
+          "name": "subject",
+          "label": "Subject",
+          "type": "text",
+          "placeholder": "Project Inquiry",
+          "icon": "&#xf02b;",
+          "class": "fa"
+        },
+        {
+          "id": "contact-message",
+          "name": "message",
+          "label": "Message",
+          "type": "textarea",
+          "placeholder": "Tell me about your project or inquiry...",
+          "icon": "&#xf27a;",
+          "class": "fa",
+          "required": true,
+          "validator": [{ "min-length": 25, "max-length": "500" }]
+        }
+      ],
+      "buttons": [
+        {
+          "id": "submit",
+          "text": "Send Message",
+          "icon": "&#xe4e8;",
+          "class": "fa",
+          "type": "submit"
+        }
+      ],
+      "messages": [
+        { "type": "success", "message": "Thanks for your message! I'll get back to you soon.", "icon": "&#xf164;" },
+        { "type": "error", "message": "Oops! There was a problem submitting your form", "icon": "&#xf5b4;" }
+      ]
+    }
   },
   "social": [
     {

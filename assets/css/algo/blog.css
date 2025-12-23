@@ -92,7 +92,7 @@
 }
 .post-author::before {
   content: "\f044";
-font-size: var(--fontSize-base, 1rem);
+  font-size: var(--fontSize-base, 1rem);
   font-family: "fa";
 }
 .post-reading-time::before {
@@ -219,6 +219,7 @@ font-size: var(--fontSize-base, 1rem);
   border: var(--border-1) solid var(--border);
   padding: var(--padding-md);
   text-align: left;
+  color: var(--textPrimary);
 }
 .content-wrapper th {
   background: var(--surface);
@@ -266,24 +267,7 @@ font-size: var(--fontSize-base, 1rem);
   display: flex;
   gap: var(--gap-md);
   flex-direction: column;
-  opacity: 0;
-  width: 0px;
-  transition: opacity var(--transition-slow);
-  overflow: hidden;
   padding: var(--padding-md, 1rem) 0;
-}
-.post-share-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: none !important;
-}
-.post-share-btn:hover + .share-buttons,
-.share-buttons:hover {
-  opacity: 1;
-  width: auto;
-  min-width: 5rem;
-  align-items: center;
 }
 .share-btn {
   display: inline-flex;
@@ -303,9 +287,6 @@ font-size: var(--fontSize-base, 1rem);
   gap: var(--gap-md);
   flex-wrap: wrap;
 }
-.post-share-btn span:not(.icon) {
-  display: none;
-}
 .x-hide-title tr td:nth-child(odd) {
   display: none;
   background: var(--surface);
@@ -316,7 +297,8 @@ font-size: var(--fontSize-base, 1rem);
     border-collapse: collapse;
   }
   thead {
-    display: none;   }
+    display: none;
+  }
   tr {
     display: block;
     margin-bottom: 1rem;
@@ -339,18 +321,9 @@ font-size: var(--fontSize-base, 1rem);
     max-width: calc(100% - var(--space-20));
     flex-direction: column;
   }
-  .post-share-btn {
-    border: none !important;
-  }
   .post-share {
     margin: 0;
     align-items: center;
-  }
-  .post-share-btn span:not(.icon) {
-    display: block;
-  }
-  .post-share-btn .icon {
-    display: none;
   }
   .post-header {
     padding: var(--space-6) 0;

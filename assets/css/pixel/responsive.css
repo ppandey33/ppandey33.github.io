@@ -67,19 +67,9 @@
     flex-direction: column;
     padding: 0;
   }
-  .post-share-btn {
-    border: none !important;
-  transform: none!important;
-  }
   .post-share {
     margin: 0;
     align-items: center;
-  }
-  .post-share-btn span:not(.icon) {
-    display: block!important;
-  }
-  .post-share-btn .icon {
-    display: none;
   }
   .post-header {
     padding: var(--space-6) 0;

@@ -2,39 +2,15 @@
   "themes": [
     {
       "id": "charcoal",
-      "label": "Charcoal",
-      "colors": {
-        "primary": "#2E3A3A",
-        "background": "#FFFFFF",
-        "text": "#2E3A3A",
-        "title": "#1A2121",
-        "button": "#2E3A3A",
-        "buttonText": "#FFFFFF"
-      }
+      "label": "Charcoal"
     },
     {
       "id": "pearl",
-      "label": "Pearl White",
-      "colors": {
-        "primary": "#FDFDF9",
-        "background": "#FDFDF9",
-        "text": "#2E2E2E",
-        "title": "#1C1C1C",
-        "button": "#E0E0E0",
-        "buttonText": "#2E2E2E"
-      }
+      "label": "Pearl"
     },
     {
       "id": "lavender",
-      "label": "Light Lavender",
-      "colors": {
-        "primary": "#EAE4FF",
-        "background": "#FFFFFF",
-        "text": "#3A3650",
-        "title": "#2C2840",
-        "button": "#EAE4FF",
-        "buttonText": "#2C2840"
-      }
+      "label": "Lavender"
     }
   ]
 }

@@ -1,0 +1,255 @@
+{
+  "personal": {
+    "name": "Pawan Kumar Pandey",
+    "title": "Senior Analyst II - Software Engineering",
+    "subtitle": "Lead .NET Full Stack Developer | 11+ Years Experience",
+    "tagline": "Advancing Toward ML & AI Solutions",
+    "email": "pawan4email@gmail.com",
+    "phone": "+91-8285814645",
+    "location": "Noida, Uttar Pradesh, India",
+    "address": "19/419 Kailash Puri Lane No.6, Deoria, Uttar Pradesh, India",
+    "linkedin": "https://linkedin.pawan.net.in",
+    "github": "https://github.pawan.net.in",
+    "website": "https://pawan.net.in",
+    "dob": "19 April 1990",
+    "maritalStatus": "Married",
+    "passport": "Available"
+  },
+  "objective": "Enthusiastic about coding and designing software architecture that is both visually stunning and intuitive. Always strive to develop and design software that delights and engages end users. Result-driven and detail-oriented software developer seeking a challenging role to leverage technical expertise and passion for problem-solving in contributing to cutting-edge software development projects.",
+  "summary": "Lead .NET Full Stack Developer with 11+ years of experience in designing, implementing, testing, and maintaining innovative software solutions across insurance, oil & gas, and education domains. Expert in architecting microservice-based solutions using Clean Architecture, CQRS, and Mediator patterns. Proven track record of leading 15-member development teams, reducing deployment time by 35%, and improving maintainability by 40%. Proficient in .NET Core, C#, Angular, React, and cloud technologies. Strong analytical, diagnostic, and troubleshooting skills with ability to work in fast-paced team-oriented environments. Currently expanding expertise into ML and AI-based solutions.",
+  "keyStrengths": [
+    "Capable to meet project deadlines, handle projects independently, and lead & motivate teams",
+    "Adept in web development using Microsoft technologies; always ready to learn new technologies",
+    "Strong analytical, diagnostic, and troubleshooting skills",
+    "Ability to be creative, take self-initiatives, and execute multiple projects in parallel during time-critical situations",
+    "Very good team player, self-motivated, hardworking professional with excellent organizational, leadership, interpersonal and communication skills",
+    "Developed multiple web applications in Microsoft technologies across various domains"
+  ],
+  "experience": [
+    {
+      "title": "Senior Analyst II, Software Engineering",
+      "company": "DXC Technologies",
+      "location": "Noida, Uttar Pradesh, India",
+      "period": "May 2016 - Present",
+      "duration": "8+ years",
+      "project": "DXC Assure Claims (Insurance Domain)",
+      "teamSize": 15,
+      "environment": "C#, ASP.NET Web API, EF, AngularJS, .NET Core, Angular 4/8/15, SQL Server 2019, React, jQuery, JavaScript, Bootstrap, CSS, SCSS, Docker, GitHub, SAFE Agile, Identity Server, Gmail, Google Maps, Google Drive, Office 365 Drive Integration",
+      "description": "Insurance domain project dealing with all aspects of claims management including General claim, Vehicle, Non-Occ, Life, Property, Workers Claim, and Health Claim.",
+      "achievements": [
+        "Architected and implemented microservice-based solutions improving modularity and reducing deployment time by 35%",
+        "Defined, developed, and guided implementation of software architecture and base libraries (DLLs) helping developers write minimum code to achieve functionality",
+        "Lead a 15-member development team, conducting code reviews, mentoring developers, and aligning architecture with business needs",
+        "Designed and developed shared core libraries that reduced feature development time by 25%",
+        "Integrated Google Drive, Office 365, and Gmail APIs for enterprise workflow automation",
+        "Established processes to ensure code quality, performance, and reliability",
+        "Collaborated with QA, DevOps, and Product Management teams for seamless CI/CD releases",
+        "Addressed technical challenges, roadblocks, and critical issues faced by the team",
+        "Conducted regular team meetings to discuss progress, challenges, and next steps",
+        "Communicated effectively with clients to manage expectations and address concerns",
+        "Identified risks early in projects and developed mitigation strategies",
+        "Helped team members enhance their technical and soft skills",
+        "Ensured successful deployment and support for delivered solutions",
+        "Received DXC Champs Award and multiple H1 & H2 Collaborator Awards for technical excellence and leadership"
+      ]
+    },
+    {
+      "title": "Software Developer",
+      "company": "E-Teams (Wipro on E-teams Payroll)",
+      "client": "Halliburton Corporation",
+      "location": "Noida, Uttar Pradesh, India",
+      "period": "Jul 2015 - Mar 2016",
+      "duration": "9 months",
+      "project": "Oil & Gas Asset Management",
+      "teamSize": 12,
+      "environment": "ASP.NET Framework 4.5, C#, ASP.NET MVC, EF, AngularJS, SQL Server 2012, AJAX, jQuery, JavaScript, Bootstrap, CSS",
+      "description": "Web-based application to manage resources and assets of Halliburton with Active Directory authentication.",
+      "achievements": [
+        "Migrated legacy systems from ASP.NET to MVC 4.5 with AngularJS, enhancing maintainability by 40%",
+        "Understood and analyzed legacy system architecture and dependencies",
+        "Prepared comprehensive migration strategy and documentation",
+        "Performed code refactoring and updates to adapt legacy code for compatibility with new platform",
+        "Updated and rewrote modules, controllers, and scripts to meet modern standards",
+        "Implemented Active Directory authentication improving access control and security",
+        "Conducted unit and functional testing to ensure migrated system behaved as expected",
+        "Collaborated on validation and stability testing during migration"
+      ]
+    },
+    {
+      "title": "Software Developer",
+      "company": "Total Soft Solutions",
+      "location": "Gurugram, Haryana, India",
+      "period": "Nov 2013 - Jun 2015",
+      "duration": "1 year 8 months",
+      "project": "School ERP & Asset Management Systems, Learning Portals",
+      "teamSize": 8,
+      "environment": "C#, ASP.NET MVC, AngularJS, SQL Server 2008, AJAX, jQuery, JavaScript, CSS",
+      "description": "Multiple ERP systems including School Management, Asset Management for property managers, and Learning Portals.",
+      "achievements": [
+        "Developed comprehensive School ERP modules including detailed lesson plans, topic-wise question banks, and digital learning resources",
+        "Created assignment management system with upload and tracking capabilities",
+        "Built syllabus management and custom question paper generation (both on-screen and manual marking)",
+        "Implemented marks upload system and generated reports on student performance and progress",
+        "Developed program-wise newsletter system for students",
+        "Designed custom reporting dashboards for student and faculty performance tracking",
+        "Built Asset Management ERP modules for property managers, apartment owners, and tenants",
+        "Streamlined rent accounting and operations through web-based software",
+        "Optimized performance with AJAX and caching techniques, improving response time by 30%",
+        "Participated in meetings including stand-ups, planning sessions, and code reviews",
+        "Worked closely with senior developers, designers, and testers to deliver high-quality solutions",
+        "Applied feedback from code reviews to improve coding practices",
+        "Assisted in resolving issues reported by testers and end-users",
+        "Worked on feature enhancements and performance optimizations"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "LL.B (Bachelor of Laws)",
+      "school": "Veer Bahadur Singh Purvanchal University",
+      "location": "Jaunpur, Uttar Pradesh, India",
+      "year": "2020 - 2023",
+      "score": "59.63%"
+    },
+    {
+      "degree": "MCA (Master of Computer Applications)",
+      "school": "Lovely Professional University",
+      "location": "Phagwara, Punjab, India",
+      "year": "2014 - 2016",
+      "score": "60.30%"
+    },
+    {
+      "degree": "B.Sc. (Information Technology)",
+      "school": "Kuvempu University (Karnataka University)",
+      "location": "Shimoga Dist., Karnataka, India",
+      "year": "2010 - 2013",
+      "score": "64.10%"
+    },
+    {
+      "degree": "GNIIT (3-Year Software Engineering Diploma)",
+      "school": "NIIT",
+      "location": "Janakpuri Centre, New Delhi, India",
+      "year": "2010 - 2014",
+      "score": "79%"
+    },
+    {
+      "degree": "Senior Secondary (12th)",
+      "school": "MSDIC",
+      "location": "Deoria, Uttar Pradesh, India",
+      "year": "2008 - 2010",
+      "score": "57.4%"
+    },
+    {
+      "degree": "Secondary School (10th)",
+      "school": "GIC",
+      "location": "Deoria, Uttar Pradesh, India",
+      "year": "2006 - 2008",
+      "score": "52.5%"
+    }
+  ],
+  "skills": {
+    "Architecture & Design Patterns": [
+      "Multilayer Architecture",
+      "Clean Architecture",
+      "CQRS Pattern",
+      "Mediator Pattern",
+      "Microservices Architecture",
+      "Dependency Injection",
+      "Separation of Concerns"
+    ],
+    "Backend Technologies": [
+      ".NET Core",
+      "C#.NET",
+      "ASP.NET Web API",
+      "Entity Framework (EF)",
+      "LINQ"
+    ],
+    "Frontend Technologies": [
+      "Angular (4, 8, 15)",
+      "AngularJS",
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "jQuery",
+      "HTML5",
+      "CSS3",
+      "SCSS",
+      "Bootstrap"
+    ],
+    "Databases": [
+      "SQL Server (2005-2019)",
+      "Oracle 11g"
+    ],
+    "DevOps & Cloud": [
+      "Docker",
+      "Kubernetes (K8s)",
+      "Jenkins",
+      "GitHub",
+      "Kafka",
+      "CI/CD",
+      "Artifactory",
+      "NuGet",
+      "NPM"
+    ],
+    "Tools & IDEs": [
+      "Visual Studio 2019",
+      "Visual Studio Code",
+      "JIRA",
+      "PowerShell Scripts"
+    ],
+    "Integration & APIs": [
+      "RESTful API Design",
+      "Identity Server",
+      "JWT Authentication",
+      "OAuth 2.0",
+      "API Versioning",
+      "API Documentation",
+      "Gmail API",
+      "Google Maps API",
+      "Google Drive API",
+      "Office 365 Drive Integration",
+      "RESTful Web Services"
+    ],
+    "Methodologies": [
+      "SAFE Agile",
+      "Agile/Scrum",
+      "DevOps",
+      ".NET Development SDLC"
+    ],
+    "Other Technologies": [
+      "JSON",
+      "XML",
+      "AJAX",
+      "Active Directory",
+      "Security Best Practices"
+    ],
+    "Languages": [
+      "English (Proficient)",
+      "Hindi (Expert)"
+    ]
+  },
+  "achievements": [
+    {
+      "title": "DXC Champs Award",
+      "description": "Received for multiple quarters for exceptional performance and technical contributions",
+      "issuer": "DXC Technology"
+    },
+    {
+      "title": "Collaborator Award - H1 & H2",
+      "description": "Awarded multiple yearly H1 & H2 Collaborator Awards at DXC India for outstanding teamwork and collaboration",
+      "issuer": "DXC Technology India"
+    },
+    {
+      "title": "Architectural Excellence",
+      "description": "Acknowledged for introducing clean code frameworks, architectural best practices, and shared libraries that significantly improved development efficiency",
+      "issuer": ""
+    }
+  ],
+  "personalDetails": {
+    "dateOfBirth": "19 April 1990",
+    "maritalStatus": "Married",
+    "fatherName": "Mr. Hari Narayan Pandey",
+    "passport": "Available",
+    "nationality": "Indian"
+  }
+}

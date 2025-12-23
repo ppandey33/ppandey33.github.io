@@ -180,8 +180,6 @@ class Blog {
         shareContainer.appendChild(button);
         this.shareButtons.push(button);
       });
-
-
     } catch (error) {
       console.error("Error loading share platforms:", error);
     }

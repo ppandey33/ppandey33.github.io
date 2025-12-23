@@ -370,6 +370,7 @@ defaults:
       layout: nexa/blog
       modules: blog
       stylesheets: [blog, social]
+      basestyle: [giscus, coffee]
   - scope:
       path: "blogs/layouts/pixel.html"
       type: "pages"
@@ -378,6 +379,7 @@ defaults:
       layout: pixel/blog
       modules: blog
       stylesheets: [blog, profile, tab]
+      basestyle: [giscus, coffee]
   - scope:
       path: "blogs/layouts/algo.html"
       type: "pages"
@@ -386,6 +388,7 @@ defaults:
       layout: algo/blog
       modules: blog
       stylesheets: [blog, info, contact]
+      basestyle: [giscus, coffee]
 
 # Exclude from build
 exclude:

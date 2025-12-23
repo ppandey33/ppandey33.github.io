@@ -8,6 +8,7 @@ class CommonUtilities {
     this.headerScrollHandler = null;
     this.mobileMenuClickHandler = null;
     this.documentClickHandler = null;
+    this.dropdownEventListeners = [];
   }
 
   init() {
@@ -206,7 +207,7 @@ class CommonUtilities {
       revealElements[0].classList.add("visible");
     }
   }
-  
+
   setupHeaderScroll() {
     const header = document.querySelector(".site-header");
     if (!header) return;
@@ -235,7 +236,171 @@ class CommonUtilities {
     window.addEventListener("scroll", this.headerScrollHandler);
   }
 
+  createSimpleButton(button, type) {
+    const btn = this.createElement("a");
+    btn.className = `btn btn-${button.style}`;
+    if (button.url) {
+      btn.href = button.url;
+    } else if (button.rel) {
+      btn.href = "#";
+    }
+    if (type === "icon" && button.icon) {
+      const icon = this.createElement("i");
+      icon.className = button.class || "fa";
+      icon.innerHTML = button.icon;
+      btn.appendChild(icon);
+      btn.classList.add("btn-icon-only");
+      btn.setAttribute("data-tooltip", button.text);
+      btn.setAttribute("aria-label", button.text);
+    } else {
+      if (button.icon) {
+        const icon = this.createElement("i");
+        icon.className = button.class || "fa";
+        icon.innerHTML = button.icon;
+        btn.appendChild(icon);
+        btn.appendChild(document.createTextNode(" "));
+      }
+      btn.appendChild(document.createTextNode(button.text));
+    }
+    return btn;
+  }
+
+  createDropdownButton(button, type) {
+    const dropdownWrapper = this.createElement("div", "btn-dropdown");
+    const defaultChild = button.child.find((child) => child.default) || button.child[0];
+    let selectedChild = defaultChild;
+    const mainBtn = this.createElement("a", `btn btn-${button.style} btn-dropdown-main`);
+    mainBtn.href = "#";
+    mainBtn.setAttribute("data-selected-value", selectedChild.text);
+    const contentWrapper = this.createElement("span", "btn-content");
+    if (type === "icon" && button.icon) {
+      this.updateButtonContent(contentWrapper, button.icon, selectedChild.text, type);
+      mainBtn.classList.add("btn-icon-with-text");
+      mainBtn.setAttribute("data-tooltip", button.text);
+      mainBtn.setAttribute("aria-label", button.text);
+    } else {
+      this.updateButtonContent(contentWrapper, selectedChild.icon, selectedChild.text, type);
+    }
+    mainBtn.appendChild(contentWrapper);
+    const toggleBtn = this.createElement("button", `btn btn-${button.style} btn-dropdown-toggle`);
+    toggleBtn.innerHTML = '<i class="fa">&#xf078;</i>';
+    toggleBtn.setAttribute("aria-label", "Toggle dropdown");
+    const dropdownMenu = this.createElement("div", "dropdown-menu");
+    button.child.forEach((childBtn) => {
+      const childLink = this.createElement("a", "dropdown-item");
+      childLink.href = "#";
+      if (childBtn === selectedChild) {
+        childLink.classList.add("selected");
+      }
+      if (childBtn.icon) {
+        const icon = this.createElement("i", "fa");
+        icon.innerHTML = childBtn.icon;
+        childLink.appendChild(icon);
+        childLink.appendChild(document.createTextNode(" "));
+      }
+
+      childLink.appendChild(document.createTextNode(childBtn.text));
+      const checkmark = this.createElement("i", "fa checkmark");
+      checkmark.innerHTML = "&#xf00c;";
+      childLink.appendChild(checkmark);
+      const clickHandler = (e) => {
+        e.preventDefault();
+        selectedChild = childBtn;
+        contentWrapper.innerHTML = "";
+        if (type === "icon" && button.icon) {
+          this.updateButtonContent(contentWrapper, button.icon, selectedChild.text, type);
+        } else {
+          this.updateButtonContent(contentWrapper, selectedChild.icon, selectedChild.text, type);
+        }
+        mainBtn.setAttribute("data-selected-value", selectedChild.text);
+        dropdownMenu.querySelectorAll(".dropdown-item").forEach((item) => {
+          item.classList.remove("selected");
+        });
+        childLink.classList.add("selected");
+        dropdownWrapper.classList.remove("open");
+      };
+      childLink.addEventListener("click", clickHandler);
+      dropdownMenu.appendChild(childLink);
+    });
+    const toggleHandler = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropdownWrapper.classList.toggle("open");
+    };
+    toggleBtn.addEventListener("click", toggleHandler);
+    const outsideClickHandler = (e) => {
+      if (!dropdownWrapper.contains(e.target)) {
+        dropdownWrapper.classList.remove("open");
+      }
+    };
+    document.addEventListener("click", outsideClickHandler);
+    this.dropdownEventListeners.push({
+      element: document,
+      type: "click",
+      handler: outsideClickHandler,
+    });
+
+    dropdownWrapper.appendChild(mainBtn);
+    dropdownWrapper.appendChild(toggleBtn);
+    dropdownWrapper.appendChild(dropdownMenu);
+
+    return dropdownWrapper;
+  }
+
+  updateButtonContent(container, button, text, type) {
+    if (button?.icon && type == "icon") {
+      const iconElement = this.createElement("i", button.class || "fa");
+      iconElement.innerHTML = icon;
+      container.appendChild(iconElement);
+      container.appendChild(document.createTextNode(" "));
+    }
+    container.appendChild(document.createTextNode(text));
+  }
+
+  async closeDialog(e, type) {
+    const modal = document.getElementById(`${type}Modal`);
+    if (modal) {
+      modal.classList.remove("active");
+      document.body.style.removeProperty("overflow");
+      return true;
+    }
+    return false;
+  }
+
+  async openDialog(type) {
+    const modal = document.getElementById(`${type}Modal`);
+    if (modal) {
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+      return true;
+    }
+    return false;
+  }
+
+  share(title) {
+    const preferences = {
+      t: localStorage.getItem("theme") || "charcoal",
+      l: localStorage.getItem("layout") || "nexa",
+      s: localStorage.getItem("sysTheme") ?? true,
+    };
+    const json = JSON.stringify(preferences);
+    const base64 = btoa(encodeURIComponent(json).replace(/%([0-9A-F]{2})/g, (_, p1) => String.fromCharCode("0x" + p1)));
+    const urlSafeBase64 = base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    const url = new URL(window.location.href);
+    url.searchParams.set("b", urlSafeBase64);
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        url: url,
+      });
+    }
+  }
+
   cleanup() {
+    this.dropdownEventListeners.forEach(({ element, type, handler }) => {
+      element.removeEventListener(type, handler);
+    });
+    this.dropdownEventListeners = [];
     if (this.mobileMenuToggle && this.mobileMenuClickHandler) {
       this.mobileMenuToggle.removeEventListener("click", this.mobileMenuClickHandler);
     }

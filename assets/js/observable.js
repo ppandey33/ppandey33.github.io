@@ -3,6 +3,7 @@ class Observable {
     this.subscribers = [];
     this.isCompleted = false;
     this.cleanupFn = null;
+    this.lastValue = undefined;
   }
 
   subscribe(callbacks) {
@@ -17,7 +18,9 @@ class Observable {
     };
 
     this.subscribers.push(subscriber);
-
+    if (this.lastValue !== undefined) {
+      subscriber.next(this.lastValue);
+    }
     return {
       unsubscribe: () => {
         this.subscribers = this.subscribers.filter(s => s !== subscriber);
@@ -36,6 +39,7 @@ class Observable {
 
   next(value) {
     if (this.isCompleted) return;
+    this.lastValue = value;
     this.subscribers.forEach(s => s.next(value));
   }
 

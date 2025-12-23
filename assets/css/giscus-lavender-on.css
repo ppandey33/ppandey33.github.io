@@ -1,6 +1,5 @@
 ---
 ---
-
 @import url("{{ '/assets/css/giscus-theme.css' | absolute_url }}");
 @media (prefers-color-scheme: light) {
   :host,

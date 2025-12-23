@@ -11,8 +11,6 @@ OR
 Use https://chocolatey.org:
 
     choco install firacode
-
-
 macOS
 -----
 
@@ -28,37 +26,27 @@ Use http://brew.sh:
 
     `brew tap homebrew/cask-fonts`
     `brew install font-fira-code`
-
-
 Ubuntu Zesty (17.04), Debian Stretch (9) or newer
 -------------------------------------------------
 
 1. Make sure that the `universe` (for Ubuntu) or `contrib` (for Debian) repository is enabled (see https://askubuntu.com/questions/148638/how-do-i-enable-the-universe-repository or https://wiki.debian.org/SourcesList#Component)
 2. Install `fonts-firacode` package either by executing `sudo apt install fonts-firacode` in the terminal or via GUI tool (like “Software Center”)
-
-
 Arch Linux
 ----------
 
 Fira Code package is available in the official repository: https://www.archlinux.org/packages/community/any/ttf-fira-code/.
 
 Variant of Fira Code package is available in the AUR: https://aur.archlinux.org/packages/otf-fira-code-git/.
-
-
 Gentoo
 ------
 
     emerge -av media-fonts/fira-code
-
-
 Fedora
 ------
 
 To install, perform the following commands:
 
     dnf install fira-code-fonts
-
-
 Solus
 -----
 
@@ -66,14 +54,10 @@ Fira Code package is available in the official repository: `font-firacode-ttf` a
 They can be installed by running:
 
     sudo eopkg install font-firacode-ttf font-firacode-otf
-
-
 Void linux
 ----------
 
     xbps-install font-firacode
-
-
 Linux Manual Installation
 -------------------------
 
@@ -104,8 +88,6 @@ With most desktop-oriented distributions, double-clicking each font file in the 
     fc-cache -f
 
 More details: https://github.com/tonsky/FiraCode/issues/4
-
-
 FreeBSD
 -------
 
@@ -118,8 +100,6 @@ OR
 Using ports:
 
     cd /usr/ports/x11-fonts/firacode && make install clean
-
-
 Enabling ligatures
 ==================
 
@@ -131,8 +111,6 @@ To change your font to Fira Code, open Atom's preferences (`cmd + ,` on a Mac, `
 If you wish to specify a font weight, for example, Light, use `Fira Code Light` as a font name (Windows) or `FiraCode-Light` (macOS).
 
 Ligatures are enabled by default in Atom 1.9 and above.
-
-
 VS Code
 -------
 
@@ -141,8 +119,6 @@ To open the settings editor, first from the File menu choose Preferences, Settin
 To enable FiraCode in the settings editor, under "Commonly Used", expand the "Text Editor" settings and then click on "Font". In the "Font Family" input box type `Fira Code`, replacing any content. Tick the check box "Enables/Disables font ligatures" under "Font Ligatures" to enable the special ligatures.
 
 If you wish to specify a font weight, for example, Light, use `Fira Code Light` as a font name (Windows) or `FiraCode-Light` (macOS).
-
-
 IntelliJ products
 -----------------
 
@@ -153,8 +129,6 @@ Additionally, if a Color Scheme is selected:
 
 3. Enable in Settings → Editor → Color Scheme → Color Scheme Font → Enable Font Ligatures
 4. Select Fira Code as "Primary font" under Settings → Editor → Color Scheme → Color Scheme Font
-
-
 BBEdit, TextWrangler
 --------------------
 
@@ -163,15 +137,11 @@ Run in your terminal:
     defaults write com.barebones.bbedit "EnableFontLigatures_Fira Code" -bool YES
 
 Source: https://www.barebones.com/support/bbedit/ExpertPreferences.html
-
-
 Brackets
 --------
 
 1. From the `View` menu choose `Themes....`
 2. Paste `'Fira Code'`, at the beginning of `Font Family`
-
-
 Emacs
 -----
 
@@ -448,8 +418,6 @@ On some systems, `==` will appear incorrectly as a blank space in certain modes 
 
     (set-language-environment "UTF-8")
     (set-default-coding-systems 'utf-8)
-
-
 GoormIDE
 --------
 
@@ -478,8 +446,6 @@ In a workspace:
 
 4. Click Aplly or OK
 5. Happy coding!
-
-
 Cloud9
 ------
 
@@ -509,8 +475,6 @@ In a workspace:
 4. Back in Preferences tab, click on User Settings, then click on Code Editor (Ace)
 5. In Font Family field, enter Fira Code
 6. Optionally, repeat step 5 for Preferences > User Settings > Terminal, if you want Fira Code font in C9 terminal.
-
-
 MacVim
 ------
 
@@ -520,8 +484,6 @@ Add this to ~/.gvimrc:
     set guifont=Fira\ Code:h12
 
 MacVim supports ligatures starting from version 7.4.
-
-
 RStudio
 -------
 
@@ -530,8 +492,6 @@ In RStudio:
 1. Go to Tools > Global Options > Appearance
 2. Select "Fira Code" as Editor Font. In older versions of RStudio, check "Use Ligatures".
 3. Hit "OK" and enjoy
-
-
 Sublime Text
 ------------
 
@@ -543,8 +503,6 @@ Add before "ignored_packages":
     "font_options": ["subpixel_antialias"],
 
 If you want enable antialias, add in font_options: "gray_antialias"
-
-
 Visual Studio
 -------------
 
@@ -555,8 +513,6 @@ Visual Studio
 5. Restart Visual Studio.
 
 Now, most FiraCode ligatures will work. A notable exception is the hyphen-based ligatures (e.g. the C++ dereference '->'). See https://github.com/tonsky/FiraCode/issues/422 for details.
-
-
 Troubleshooting
 ===============
 
