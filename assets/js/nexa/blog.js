@@ -41,13 +41,24 @@ class Blog {
   async getGoatCount(page) {
     try {
       const res = await window.App.modules.apiClient.loadJSON(page);
-      if (res?.count && res?.count_unique) {
-        const data = await res.json();
-        return data.count;
-      }
+      let value = res?.count_unique ?? res?.count;
+      value = typeof value === "string" ? Number(value.replace(/[,_\s]/g, "")) : value;
+      const format = (v) =>
+        v == null || !Number.isFinite(v)
+          ? "∞"
+          : v < 100
+          ? `${v}+`
+          : v >= 1e12
+          ? `${(v / 1e12).toFixed(1).replace(/\.0$/, "")}t+`
+          : v >= 1e6
+          ? `${(v / 1e6).toFixed(1).replace(/\.0$/, "")}m+`
+          : v >= 1e3
+          ? `${(v / 1e3).toFixed(1).replace(/\.0$/, "")}k+`
+          : `${v}+`;
+      return format(value);
     } catch (error) {
       console.error("Error fetching GoatCounter data:", error);
-      return null;
+      return "∞";
     }
   }
 
@@ -144,7 +155,10 @@ class Blog {
           container.appendChild(btn);
           if (button?.data?.goat) {
             await this.getGoatCount(`${button?.data?.goat}${encodeURIComponent(window.location.pathname)}.json`).then((res) => {
-              btn.appendChild(window.App.modules.util.createElement("span", 'reader Count', `${res?.count_unique || res?.count || '∞'} Reads`));
+              const countEl = window.App.modules.util.createElement("i", "", res),
+                msg = window.App.modules.util.createElement("span", "read-Count", ` Reads`);
+              countEl.setAttribute("data-value", res);
+              msg.appendChild(countEl), container.appendChild(msg);
             });
           }
         }
