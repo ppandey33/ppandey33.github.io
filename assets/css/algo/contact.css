@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--padding-sm);
-  }
+}
 .contact-text {
   flex: 1;
 }
@@ -23,7 +23,7 @@
 }
 .contact-info:hover {
   border-color: var(--primary);
-  transform: translateY(calc(-1 * var(--space-1)))!important;
+  transform: translateY(calc(-1 * var(--space-1))) !important;
 }
 .contact-text h2 {
   margin-bottom: var(--margin-lg);
@@ -37,10 +37,10 @@
   margin-bottom: var(--margin-md);
   font-size: var(--fontSize-sm);
 }
-.contact-item a.contact-value:hover{
+.contact-item a.contact-value:hover {
   color: var(--linkHover);
   transform: scale(1.1, 1.1);
-    display: inline-block;
+  display: inline-block;
 }
 .contact-item .icon {
   font-size: var(--fontSize-lg);
@@ -49,7 +49,7 @@
 }
 .contact-item a.contact-value {
   color: var(--link);
-  transform: scale(1,1);
+  transform: scale(1, 1);
   text-decoration: none;
   transition: color var(--transition-fast), transform var(--transition-fast);
 }

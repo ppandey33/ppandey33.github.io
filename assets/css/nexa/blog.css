@@ -93,7 +93,7 @@
 }
 .post-author::before {
   content: "\f044";
-font-size: var(--fontSize-base, 1rem);
+  font-size: var(--fontSize-base, 1rem);
   font-family: "fa";
 }
 .post-reading-time::before {
@@ -170,7 +170,7 @@ font-size: var(--fontSize-base, 1rem);
   color: var(--linkHover);
   border-bottom-color: var(--linkHover);
   transform: scale(1.1, 1.1);
-    display: inline-block;
+  display: inline-block;
 }
 .content-wrapper ul,
 .content-wrapper ol {
@@ -221,6 +221,7 @@ font-size: var(--fontSize-base, 1rem);
   border: var(--border-1) solid var(--border, #2a2a2a);
   padding: var(--padding-md);
   text-align: left;
+  color: var(--textPrimary);
 }
 .content-wrapper th {
   background: var(--surface, #151b23);
@@ -268,23 +269,7 @@ font-size: var(--fontSize-base, 1rem);
   display: flex;
   gap: var(--gap-md);
   flex-direction: column;
-  opacity: 0;
-  width: 0px;
-  transition: opacity var(--transition-slow);
-  overflow: hidden;
   padding: var(--padding-md, 1rem) 0;
-}
-.post-share-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: none !important;
-}
-.post-share-btn:hover + .share-buttons,
-.share-buttons:hover {
-  opacity: 1;
-  width: auto;
-  align-items: center;
 }
 .share-btn {
   display: inline-flex;
@@ -303,9 +288,6 @@ font-size: var(--fontSize-base, 1rem);
   align-items: center;
   gap: var(--gap-md);
   flex-wrap: wrap;
-}
-.post-share-btn span:not(.icon) {
-  display: none;
 }
 .x-hide-title tr td:nth-child(odd) {
   display: none;

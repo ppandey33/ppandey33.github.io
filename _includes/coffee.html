@@ -1,0 +1,28 @@
+{% if page.comments != false %}
+<div class="modal-overlay" id="supportModal">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2 class="sub-heading">Writing takes time, passion, and coffee</h2>
+      <button class="close-button" onclick="window.App.modules.util.closeDialog(event, 'support')" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-content support-content" id="modalContainer" data-support-content>
+       
+      </div>
+    </div>
+  </div>
+</div>
+<script
+  data-name="BMC-Widget"
+  data-cfasync="false"
+  src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+  data-id="pawan5hub"
+  data-amount="5"
+  data-description="Support me on Buy me a coffee!"
+  data-message="Helpful? Buy me a coffee ☕︎"
+  data-color="var(--primary, #b8b8b8)"
+  data-position="Right"
+  data-x_margin="18"
+  data-y_margin="18"
+></script>
+{% endif %}

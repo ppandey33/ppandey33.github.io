@@ -3,28 +3,25 @@ const handleURLEvent = new Observable();
 
 class HandleUrl {
   constructor() {
-    this.decodedParams = {};
-    this.init();
+    this.decodedParams = new Map();
   }
 
   decodeBase64Url(token) {
     try {
-      let base64 = token.replace(/-/g, "+").replace(/_/g, "/");
-      while (base64.length % 4) {
-        base64 += "=";
-      }
-      const decoded = atob(base64);
-      const params = {};
-      decoded.split("&").forEach((pair) => {
-        const [key, value] = pair.split("=");
-        if (key && value) {
-          params[decodeURIComponent(key)] = decodeURIComponent(value);
-        }
-      });
-      return params;
+      const base64 = token.replace(/-/g, "+").replace(/_/g, "/");
+      const json = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map((c) => "%" + c.charCodeAt(0).toString(16).padStart(2, "0"))
+          .join("")
+      );
+
+      const preferences = JSON.parse(json);
+
+      return new Map(Object.entries(preferences));
     } catch (error) {
       console.error("Failed to decode base64:", error);
-      return {};
+      return new Map();
     }
   }
 
@@ -38,6 +35,7 @@ class HandleUrl {
   }
 
   handleURLParams() {
+    const payload = {};
     const { params, isHashURL, pathPart } = this.parseURL();
     if (!params) {
       return;
@@ -49,16 +47,20 @@ class HandleUrl {
     }
     let modified = false;
     if (this.decodedParams.has("t") || params.has("t")) {
-      handleURLEvent.next({ key: "theme", newValue: (this.decodedParams || params).get("t"), oldValue: localStorage.getItem("theme") });
+      payload.theme = { key: "theme", newValue: (this.decodedParams || params).get("t"), oldValue: localStorage.getItem("theme") };
+      modified = true;
     }
     if (this.decodedParams.has("s")) {
-      handleURLEvent.next({ key: "sysTheme", newValue: (this.decodedParams || params).get("s"), oldValue: localStorage.getItem("sysTheme") });
+      payload.sysTheme = { key: "sysTheme", newValue: (this.decodedParams || params).get("s"), oldValue: localStorage.getItem("sysTheme") };
+      modified = true;
     }
     if (this.decodedParams.has("l")) {
-      handleURLEvent.next({ key: "layout", newValue: (this.decodedParams || params).get("l"), oldValue: localStorage.getItem("layout") });
+      payload.layout = { key: "layout", newValue: (this.decodedParams || params).get("l"), oldValue: localStorage.getItem("layout") };
+      modified = true;
     }
     if (modified) {
       this.cleanURL(params, isHashURL, pathPart);
+      handleURLEvent.next(payload);
     }
   }
 
@@ -82,15 +84,14 @@ class HandleUrl {
     return { params: null, isHashURL: false, pathPart: null };
   }
 
-  cleanURL(params, isHashURL, pathPart) {
-    const remaining = params.toString();
-    if (isHashURL) {
-      const newHash = remaining ? `${pathPart}?${remaining}` : pathPart;
-      window.history.replaceState(null, "", newHash);
-    } else {
-      const newURL = remaining ? `${pathPart}?${remaining}${window.location.hash}` : `${pathPart}${window.location.hash}`;
-      window.history.replaceState(null, "", newURL);
-    }
+  cleanURL(params, isHashURL = false, pathPart = window.location.pathname) {
+    const url = new URL(window.location.href);
+
+    params.forEach((_value, key) => {
+      url.searchParams.delete(key);
+    });
+
+    window.history.replaceState(null, "", url.pathname + url.hash);
   }
 
   cleanup() {
@@ -98,7 +99,7 @@ class HandleUrl {
       window.removeEventListener("hashchange", this.hashChangeHandler);
       this.hashChangeHandler = null;
     }
-    this.decodedParams = {};
+    this.decodedParams = new Map();
   }
 }
 

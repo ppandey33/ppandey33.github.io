@@ -16,6 +16,17 @@
      <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{layout}}/{{ page.stylesheets }}.css?v={{ site.version }}"></noscript>
   {% endif %}
 {% endif %}
+{% if page.basestyle %}
+  {% if page.basestyle.size %}
+    {% for stylesheetFile in page.basestyle %}
+      <link rel="preload" href="{{ site.baseurl }}/assets/css/{{ stylesheetFile }}.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+      <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{ stylesheetFile }}.css?v={{ site.version }}"></noscript>
+    {% endfor %}
+  {% else %}
+     <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{ page.basestyle }}.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+     <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/{{ page.basestyle }}.css?v={{ site.version }}"></noscript>
+  {% endif %}
+{% endif %}
 
 {% if layout != 'common' && layout != '' %}
 <link rel="preload" href="{{ site.baseurl }}/assets/css/{{layout}}/common.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'"/>

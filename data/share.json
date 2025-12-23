@@ -1,23 +1,43 @@
 [
   {
-    "id": "x",
-    "title": "Share on X",
-    "icon": "&#xf099;",
-    "class": "fab",
-    "link": "https://twitter.com/intent/tweet?url=${url}&text=${title}"
+    "id": "share",
+    "text": "Share",
+    "icon": "&#xf14d;",
+    "rel": "share",
+    "class": "fa"
   },
   {
-    "id": "linkedin",
-    "title": "Share on LinkedIn",
-    "icon": "&#xf0e1;",
-    "class": "fab",
-    "link": "https://www.linkedin.com/sharing/share-offsite/?url=${url}"
+    "id": "comments",
+    "text": "Comments & Reaction",
+    "icon": "&#xf086;",
+    "class": "fa",
+    "rel": "comments",
+    "data": {
+      "src": "https://giscus.app/client.js",
+      "data-repo": "pawan5hub/Writing-Desk",
+      "data-mapping": "pathname",
+      "data-strict": "0",
+      "data-reactions-enabled": "1",
+      "data-emit-metadata": "1",
+      "data-input-position": "top",
+      "data-theme": "https://pawan.net.in/assets/css/giscus-",
+      "data-lang": "en",
+      "data-loading": "lazy",
+      "crossorigin": "anonymous",
+      "async": true,
+      "goat": "https://pawan.goatcounter.com/counter/"
+    }    
   },
   {
-    "id": "facebook",
-    "title": "Share on Facebook",
-    "icon": "&#xf39e;",
-    "class": "fab",
-    "link": "https://www.facebook.com/sharer/sharer.php?u=${url}"
+    "id": "coffee",
+    "text": "Support",
+    "icon": "&#xf7b6;",
+    "class": "fa",
+    "rel": "coffee",
+    "data": {
+      "msg": "Fuel my writing journey — support the blog and get a handwritten copy sent straight to your email.",
+      "url": "https://www.buymeacoffee.com/widget/page/pawan5hub",
+      "footer": "Thank you for your support! 💛"
+    }
   }
 ]

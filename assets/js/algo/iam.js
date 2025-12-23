@@ -31,14 +31,10 @@ class Iam {
     if (!this.decorativeShapes) return;
 
     this.shapes = Array.from(this.decorativeShapes.querySelectorAll(".shape"));
-
-    // Set initial styles
     this.shapes.forEach((shape) => {
       shape.style.opacity = "0.6";
       shape.style.transition = "transform 0.3s ease, opacity 0.3s ease";
     });
-
-    // Bind event handlers
     this.mouseMoveHandler = this.handleMouseMove.bind(this);
     this.mouseLeaveHandler = this.handleMouseLeave.bind(this);
 
@@ -48,14 +44,10 @@ class Iam {
 
   handleMouseMove(e) {
     if (!this.decorativeShapes || !this.shapes.length) return;
-
-    // Check if the decorative shapes container is actually visible in viewport
     const containerRect = this.decorativeShapes.getBoundingClientRect();
     const isInViewport = containerRect.top < window.innerHeight && containerRect.bottom > 0 && containerRect.left < window.innerWidth && containerRect.right > 0;
 
     if (!isInViewport) return;
-
-    // Additional check: ensure the container has actual dimensions
     if (containerRect.width === 0 || containerRect.height === 0) return;
 
     const rect = this.decorativeShapes.getBoundingClientRect();
@@ -65,11 +57,8 @@ class Iam {
     const centerY = rect.height / 2;
 
     this.shapes.forEach((shape, index) => {
-      // Calculate distance from center
       const deltaX = (mouseX - centerX) / centerX;
       const deltaY = (mouseY - centerY) / centerY;
-
-      // Different movement intensity for each shape (based on index)
       const intensity = (index + 1) * 5;
 
       const moveX = deltaX * intensity;
@@ -79,6 +68,7 @@ class Iam {
       shape.style.opacity = "1";
     });
   }
+  
   handleMouseLeave() {
     if (!this.shapes.length) return;
 
@@ -95,7 +85,6 @@ class Iam {
   }
 
   cleanup() {
-    // Remove event listeners
     if (this.decorativeShapes) {
       if (this.mouseMoveHandler) {
         this.decorativeShapes.removeEventListener("mousemove", this.mouseMoveHandler);
@@ -104,22 +93,16 @@ class Iam {
         this.decorativeShapes.removeEventListener("mouseleave", this.mouseLeaveHandler);
       }
     }
-
-    // Reset shapes
     this.shapes.forEach((shape) => {
       shape.style.transform = "";
       shape.style.opacity = "";
       shape.style.transition = "";
     });
-
-    // Clear references
     this.decorativeShapes = null;
     this.shapes = [];
     this.mouseMoveHandler = null;
     this.mouseLeaveHandler = null;
     this.config = null;
-
-    // Clear IAM elements
     const iamElements = document.querySelectorAll("[data-iam]");
     iamElements.forEach((el) => (el.textContent = ""));
   }

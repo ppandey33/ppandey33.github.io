@@ -1,7 +1,10 @@
-class ThemeManager {
+import { handleURLEvent } from "./handle-url.js";
+
+class Themes {
   constructor() {
     this.themes = [];
     this.currentTheme = localStorage.getItem("theme") || "charcoal";
+    this.sysTheme = localStorage.getItem("sysTheme") === "true";
     this.themeToggle = null;
     this.themeDropdown = null;
     this.themeList = null;
@@ -12,62 +15,132 @@ class ThemeManager {
     this.originalParent = null;
     this.resizeHandler = null;
     this.scrollHandler = null;
+    this.subscription = null;
+    this.mediaQueryListener = null;
+    this.contrastQueryListener = null;
+    this.motionQueryListener = null;
   }
 
   async init() {
     const dateElem = document.querySelector("[data-date-time]");
     if (dateElem) {
-      dateElem.textContent = new Date().toLocaleString('en-IN', { dateStyle: 'short', timeStyle: 'short' });
+      dateElem.textContent = new Date().toLocaleString("en-IN", { dateStyle: "short", timeStyle: "short" });
     }
-
     await this.loadThemes();
+    this.setupMediaQueryListeners();
     this.applyTheme(this.currentTheme);
+    if (this.sysTheme) {
+      this.applySystemOverlay();
+    }
+    
     this.setupUI();
+    
+    window.addEventListener("storage", (event) => {
+      this.handleThemeChange(event);
+    });
+    
+    this.subscription = handleURLEvent.subscribe((event) => {
+      event.theme && this.handleThemeChange(event.theme);
+    });
+  }
+
+  setupMediaQueryListeners() {
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    this.mediaQueryListener = (e) => {
+      if (this.sysTheme) {
+        this.applySystemOverlay();
+      }
+    };
+    darkModeQuery.addEventListener("change", this.mediaQueryListener);
+    const contrastQuery = window.matchMedia("(prefers-contrast: high)");
+    this.contrastQueryListener = (e) => {
+      if (this.sysTheme) {
+        document.body.setAttribute("data-high-contrast", e.matches ? "true" : "false");
+      }
+    };
+    contrastQuery.addEventListener("change", this.contrastQueryListener);
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    this.motionQueryListener = (e) => {
+      if (this.sysTheme) {
+        document.body.setAttribute("data-reduced-motion", e.matches ? "true" : "false");
+      }
+    };
+    motionQuery.addEventListener("change", this.motionQueryListener);
+  }
+
+  applySystemOverlay() {
+    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const contrastQuery = window.matchMedia("(prefers-contrast: high)");
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    document.body.setAttribute("data-sys-theme", "true");
+    document.body.setAttribute("data-color-scheme", darkModeQuery.matches ? "dark" : "light");
+    document.body.setAttribute("data-high-contrast", contrastQuery.matches ? "true" : "false");
+    document.body.setAttribute("data-reduced-motion", motionQuery.matches ? "true" : "false");
+  }
+
+  removeSystemOverlay() {
+    document.body.removeAttribute("data-sys-theme");
+    document.body.removeAttribute("data-color-scheme");
+    document.body.removeAttribute("data-high-contrast");
+    document.body.removeAttribute("data-reduced-motion");
+  }
+
+  handleThemeChange(event) {
+    if (event.key === "theme" && event.newValue && event.newValue !== this.currentTheme) {
+      if (this.themes.find((t) => t.id === event.newValue)) {
+        this.applyTheme(event.newValue);
+      } else if (event.oldValue && this.themes.find((t) => t.id === event.oldValue)) {
+        this.applyTheme(event.oldValue);
+      } else {
+        this.loadThemes();
+        this.applyTheme(this.themes && this.themes.length > 0 ? this.themes[0].id : "charcoal");
+        this.setupUI();
+      }
+    }
+    
+    if (event.key === "sysTheme") {
+      this.sysTheme = event.newValue === "true";
+      if (this.sysTheme) {
+        this.applySystemOverlay();
+      } else {
+        this.removeSystemOverlay();
+      }
+      this.updateUI();
+    }
   }
 
   async loadThemes() {
+    if (this.themes && this.themes.length > 0) return;
     const data = await window.App.modules.apiClient.loadJSON("/data/themes.json");
     if (data && data.themes) {
       this.themes = data.themes;
     }
   }
 
-  applyTheme(themeId) {
+  async applyTheme(themeId) {
     document.body.setAttribute("data-theme", themeId);
     this.currentTheme = themeId;
     localStorage.setItem("theme", themeId);
+    if (this.sysTheme) {
+      this.applySystemOverlay();
+    }
     
-    // Update root CSS variables for immediate effect
     requestAnimationFrame(() => {
-      //this.updateRootVariables();
       this.updateUI();
     });
   }
 
-  updateRootVariables() {
-    // Get computed style from body (which has the data-theme attribute)
-    const computedStyle = getComputedStyle(document.body);
+  toggleSystemTheme(enabled) {
+    this.sysTheme = enabled;
+    localStorage.setItem("sysTheme", enabled.toString());
     
-    // Get all theme-specific variables
-    const primary = computedStyle.getPropertyValue('--primary').trim();
-    const secondary = computedStyle.getPropertyValue('--secondary').trim();
-    const accent = computedStyle.getPropertyValue('--accent').trim();
-    const background = computedStyle.getPropertyValue('--background').trim();
-    const surface = computedStyle.getPropertyValue('--surface').trim();
-    const textPrimary = computedStyle.getPropertyValue('--textPrimary').trim();
-    const textSecondary = computedStyle.getPropertyValue('--textSecondary').trim();
-    const textMuted = computedStyle.getPropertyValue('--textMuted').trim();
+    if (enabled) {
+      this.applySystemOverlay();
+    } else {
+      this.removeSystemOverlay();
+    }
     
-    // Update :root variables so scrollbar and other global styles use the new theme colors
-    const root = document.documentElement;
-    root.style.setProperty('--primary', primary);
-    root.style.setProperty('--secondary', secondary);
-    root.style.setProperty('--accent', accent);
-    root.style.setProperty('--background', background);
-    root.style.setProperty('--surface', surface);
-    root.style.setProperty('--textPrimary', textPrimary);
-    root.style.setProperty('--textSecondary', textSecondary);
-    root.style.setProperty('--textMuted', textMuted);
+    this.updateUI();
   }
 
   positionSubmenu() {
@@ -75,67 +148,47 @@ class ThemeManager {
 
     const triggerRect = this.themeToggle.getBoundingClientRect();
     const dropdownRect = this.themeDropdown.getBoundingClientRect();
-    
-    // Get computed styles for margins
     const triggerStyle = window.getComputedStyle(this.themeToggle);
     const dropdownStyle = window.getComputedStyle(this.themeDropdown);
-    
+
     const triggerMargin = {
       top: parseFloat(triggerStyle.marginTop) || 0,
       right: parseFloat(triggerStyle.marginRight) || 0,
       bottom: parseFloat(triggerStyle.marginBottom) || 0,
-      left: parseFloat(triggerStyle.marginLeft) || 0
+      left: parseFloat(triggerStyle.marginLeft) || 0,
     };
-    
+
     const dropdownMargin = {
       top: parseFloat(dropdownStyle.marginTop) || 0,
       right: parseFloat(dropdownStyle.marginRight) || 0,
       bottom: parseFloat(dropdownStyle.marginBottom) || 0,
-      left: parseFloat(dropdownStyle.marginLeft) || 0
+      left: parseFloat(dropdownStyle.marginLeft) || 0,
     };
 
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     const gap = 8;
     const viewportMargin = 16;
-
-    // Move to placeholder if not already there
     if (this.themeDropdown.parentElement !== this.submenuPlaceholder) {
       this.submenuPlaceholder.appendChild(this.themeDropdown);
     }
 
-    this.themeDropdown.style.position = 'fixed';
-    this.themeDropdown.style.zIndex = '9999';
-
-    // Calculate horizontal position (prefer right side of trigger)
+    this.themeDropdown.style.position = "fixed";
+    this.themeDropdown.style.zIndex = "9999";
     let left = triggerRect.right + triggerMargin.right + gap - dropdownMargin.left;
-    
-    // Check if dropdown would overflow right edge
     if (left + dropdownRect.width + dropdownMargin.right > viewportWidth - viewportMargin) {
-      // Try left side of trigger
       left = triggerRect.left - triggerMargin.left - gap - dropdownRect.width - dropdownMargin.right;
-      
-      // If still overflows, align to right edge of viewport
       if (left < viewportMargin) {
         left = viewportWidth - dropdownRect.width - dropdownMargin.right - viewportMargin;
       }
     }
-
-    // Calculate vertical position (align with trigger top)
     let top = triggerRect.top - triggerMargin.top - dropdownMargin.top;
-    
-    // Check if dropdown would overflow bottom edge
     if (top + dropdownRect.height + dropdownMargin.bottom > viewportHeight - viewportMargin) {
-      // Align to bottom of trigger
       top = triggerRect.bottom + triggerMargin.bottom - dropdownRect.height + dropdownMargin.top;
-      
-      // If still overflows, align to bottom of viewport
       if (top < viewportMargin) {
         top = viewportHeight - dropdownRect.height - dropdownMargin.bottom - viewportMargin;
       }
     }
-
-    // Ensure minimum margins
     left = Math.max(viewportMargin, Math.min(left, viewportWidth - dropdownRect.width - dropdownMargin.right - viewportMargin));
     top = Math.max(viewportMargin, Math.min(top, viewportHeight - dropdownRect.height - dropdownMargin.bottom - viewportMargin));
 
@@ -151,13 +204,13 @@ class ThemeManager {
     if (!this.themeToggle || !this.themeDropdown || !this.themeList) return;
 
     this.originalParent = this.themeDropdown.parentElement;
-    this.submenuPlaceholder = document.querySelector('[data-submenu-item]');
+    this.submenuPlaceholder = document.querySelector("[data-submenu-item]");
 
     if (this.submenuPlaceholder) {
       this.resizeHandler = () => this.positionSubmenu();
       this.scrollHandler = () => this.positionSubmenu();
-      window.addEventListener('resize', this.resizeHandler);
-      window.addEventListener('scroll', this.scrollHandler, true);
+      window.addEventListener("resize", this.resizeHandler);
+      window.addEventListener("scroll", this.scrollHandler, true);
     }
 
     this.renderThemeList(this.themeList);
@@ -166,14 +219,14 @@ class ThemeManager {
       if (this.themeDropdown.classList.contains("show")) {
         this.themeDropdown.classList.remove("show");
         this.themeToggle.classList.remove("active");
-        
+
         if (this.submenuPlaceholder && this.themeDropdown.parentElement === this.submenuPlaceholder) {
           this.originalParent.appendChild(this.themeDropdown);
         }
       } else {
         this.themeDropdown.classList.add("show");
         this.themeToggle.classList.add("active");
-        
+
         if (this.submenuPlaceholder) {
           this.positionSubmenu();
         }
@@ -184,7 +237,7 @@ class ThemeManager {
       if (e.target !== this.themeToggle && !this.themeDropdown.contains(e.target)) {
         this.themeDropdown.classList.remove("show");
         this.themeToggle.classList.remove("active");
-        
+
         if (this.submenuPlaceholder && this.themeDropdown.parentElement === this.submenuPlaceholder) {
           this.originalParent.appendChild(this.themeDropdown);
         }
@@ -202,11 +255,9 @@ class ThemeManager {
 
   renderThemeList(container) {
     container.innerHTML = "";
-
     this.themes.forEach((theme) => {
       const option = window.App.modules.util.createElement("div", "option");
       option.setAttribute("data-theme-id", theme.id);
-
       if (theme.id === this.currentTheme) {
         option.classList.add("show");
       }
@@ -217,11 +268,11 @@ class ThemeManager {
       option.appendChild(name);
       option.appendChild(check);
 
-      option.addEventListener("click", () => {
-        this.applyTheme(theme.id);
+      option.addEventListener("click", async () => {
+        await this.applyTheme(theme.id);
         this.themeDropdown.classList.remove("show");
         this.themeToggle.classList.remove("active");
-        
+
         if (this.submenuPlaceholder && this.themeDropdown.parentElement === this.submenuPlaceholder) {
           this.originalParent.appendChild(this.themeDropdown);
         }
@@ -229,6 +280,40 @@ class ThemeManager {
 
       container.appendChild(option);
     });
+    const separator = window.App.modules.util.createElement("div", "option-separator");
+    container.appendChild(separator);
+    const sysThemeOption = window.App.modules.util.createElement("div", "option sys-theme-toggle");
+    
+    const label = window.App.modules.util.createElement("span", "option-name", "OS Theme Sync");
+    
+    const toggleWrapper = window.App.modules.util.createElement("label", "toggle-switch");
+    const checkbox = window.App.modules.util.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = this.sysTheme;
+    checkbox.setAttribute("data-sys-theme-checkbox", "");
+    
+    const slider = window.App.modules.util.createElement("span", "toggle-slider");
+    
+    toggleWrapper.appendChild(checkbox);
+    toggleWrapper.appendChild(slider);
+    
+    sysThemeOption.appendChild(label);
+    sysThemeOption.appendChild(toggleWrapper);
+
+    checkbox.addEventListener("change", (e) => {
+      e.stopPropagation();
+      this.toggleSystemTheme(checkbox.checked);
+    });
+
+    sysThemeOption.addEventListener("click", (e) => {
+      if (e.target !== checkbox) {
+        e.stopPropagation();
+        checkbox.checked = !checkbox.checked;
+        this.toggleSystemTheme(checkbox.checked);
+      }
+    });
+
+    container.appendChild(sysThemeOption);
   }
 
   updateUI() {
@@ -240,15 +325,37 @@ class ThemeManager {
         option.classList.remove("show");
       }
     });
+    const sysThemeCheckbox = document.querySelector("[data-sys-theme-checkbox]");
+    if (sysThemeCheckbox) {
+      sysThemeCheckbox.checked = this.sysTheme;
+    }
   }
 
   cleanup() {
+    if (this.mediaQueryListener) {
+      const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      darkModeQuery.removeEventListener("change", this.mediaQueryListener);
+      this.mediaQueryListener = null;
+    }
+
+    if (this.contrastQueryListener) {
+      const contrastQuery = window.matchMedia("(prefers-contrast: high)");
+      contrastQuery.removeEventListener("change", this.contrastQueryListener);
+      this.contrastQueryListener = null;
+    }
+
+    if (this.motionQueryListener) {
+      const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      motionQuery.removeEventListener("change", this.motionQueryListener);
+      this.motionQueryListener = null;
+    }
+
     if (this.resizeHandler) {
-      window.removeEventListener('resize', this.resizeHandler);
+      window.removeEventListener("resize", this.resizeHandler);
       this.resizeHandler = null;
     }
     if (this.scrollHandler) {
-      window.removeEventListener('scroll', this.scrollHandler, true);
+      window.removeEventListener("scroll", this.scrollHandler, true);
       this.scrollHandler = null;
     }
 
@@ -270,6 +377,10 @@ class ThemeManager {
       this.themeList.innerHTML = "";
     }
 
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
+    }
     this.themeToggle = null;
     this.themeDropdown = null;
     this.themeList = null;
@@ -282,8 +393,8 @@ function initThemes() {
   if (window.App?.modules?.theme) {
     window.App.modules.theme.cleanup?.();
   }
-  const themeModule = new ThemeManager();
-  window.App.register("theme", themeModule, 'initThemes');
+  const themeModule = new Themes();
+  window.App.register("theme", themeModule, "initThemes");
   themeModule.init();
 }
 
@@ -293,4 +404,4 @@ if (document.readyState === "loading") {
   initThemes();
 }
 
-export { ThemeManager, initThemes };
+export { Themes, initThemes }

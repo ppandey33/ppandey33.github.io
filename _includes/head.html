@@ -7,10 +7,12 @@
 <meta charset="UTF-8" />
 <meta http-equiv="Cache-Control" content="max-age=31536000, public" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script data-goatcounter="https://pawan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!-- Favicon -->
 {% include favicons.html %}
 <!-- replaceable start -->
-<meta name="description"  content="{{ page.params.desc | default: page.desc | default: site.description }}" />
+<meta name="description" content="{{ page.params.desc | default: page.desc | default: site.description }}" />
 <meta name="author" content="{{ page.params.author | default: page.title | default: site.title }}" />
 <meta name="theme" content="charcoal" />
 <title>{{ page.params.title | default: page.title | default: site.title }} | {{ page.params.desc | default: page.desc | default: site.description }}</title>

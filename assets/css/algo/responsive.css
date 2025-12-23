@@ -702,10 +702,3 @@
     border-width: var(--border-3);
   }
 }
-@media (prefers-color-scheme: dark) {
-  [data-theme="pearl"] {
-    --primary: #f59e0b;
-    --background: #1a1a1a;
-    --textPrimary: #e6e6e6;
-  }
-}
