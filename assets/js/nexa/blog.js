@@ -41,10 +41,8 @@ class Blog {
   async getGoatCount(page) {
     try {
       const res = await window.App.modules.apiClient.loadJSON(page);
-      if (res.ok) {
+      if (res?.count && res?.count_unique) {
         const data = await res.json();
-        
-        console.log(`${JSON.stringify(data)}`);
         return data.count;
       }
     } catch (error) {
@@ -145,7 +143,9 @@ class Blog {
           this.eventListeners.push({ el: btn, type: "click", handler });
           container.appendChild(btn);
           if (button?.data?.goat) {
-            await this.getGoatCount(`${button?.data?.goat}${encodeURIComponent(window.location.pathname)}.json`);
+            await this.getGoatCount(`${button?.data?.goat}${encodeURIComponent(window.location.pathname)}.json`).then((res) => {
+              btn.appendChild(window.App.modules.util.createElement("span", 'reader Count', `${res?.count_unique || res?.count || '∞'} Reads`));
+            });
           }
         }
       });
@@ -190,8 +190,7 @@ class Blog {
 
     script.async = data["script.async"] || true;
     const loadHandler = () => {
-      setTimeout(() => {
-      }, 500);
+      setTimeout(() => {}, 500);
     };
     const errorHandler = () => {
       console.error("Failed to load Giscus");
@@ -271,8 +270,7 @@ class Blog {
     }, 300);
   }
 
-  onIframeError(iframe) {
-  }
+  onIframeError(iframe) {}
 
   escapeHtml(text) {
     const div = window.App.modules.util.createElement("div");
