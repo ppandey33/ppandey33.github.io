@@ -2,52 +2,32 @@ class Blog {
   constructor() {
     this.prefix = this.getDataPathPrefix();
     this.BLOGS_PATH = `${this.prefix}data/blogs.json`;
-    this.allBlogs = [];
-    this.shareButtons = [];
+    this.SHARE_PATH = `${this.prefix}data/share.json`;
+    this.eventListeners = [];
   }
 
   getDataPathPrefix() {
     const path = window.location.pathname;
     const depth = path.split("/").filter((p) => p && p !== "index.html").length;
-    if (depth === 0 || path === "/" || path === "/index.html") {
-      return "";
-    }
-    return "../".repeat(depth);
+    return depth === 0 || path === "/" || path === "/index.html" ? "" : "../".repeat(depth);
   }
 
   getCurrentBlogInfo() {
-    const path = window.location.pathname;
-    const segments = path.split("/").filter((s) => s && s !== "index.html");
+    const segments = window.location.pathname.split("/").filter((s) => s && s !== "index.html");
     const postsIndex = segments.indexOf("blogs");
-
-    if (postsIndex !== -1 && segments.length > postsIndex + 2) {
-      return {
-        categorySlug: segments[postsIndex + 1],
-        slug: segments[postsIndex + 2],
-      };
-    }
-    return null;
+    return postsIndex !== -1 && segments.length > postsIndex + 2 ? { categorySlug: segments[postsIndex + 1], slug: segments[postsIndex + 2] } : null;
   }
 
   async initBlogPostPage() {
     try {
       const blogs = await window.App.modules.apiClient.loadJSON(this.BLOGS_PATH);
-      if (!blogs) {
-        throw new Error("Failed to load blogs");
-      }
+      if (!blogs) throw new Error("Failed to load blogs");
 
       const blogInfo = this.getCurrentBlogInfo();
-      if (!blogInfo) {
-        console.error("Could not determine blog info from URL");
-        return;
-      }
+      if (!blogInfo) return console.error("Could not determine blog info from URL");
 
-      const currentBlog = blogs.find((blog) => blog.slug === blogInfo.slug && blog.categorySlug === blogInfo.categorySlug);
-
-      if (!currentBlog) {
-        console.error("Blog not found");
-        return;
-      }
+      const currentBlog = blogs.find((b) => b.slug === blogInfo.slug && b.categorySlug === blogInfo.categorySlug);
+      if (!currentBlog) return console.error("Blog not found");
 
       this.populateMetadata(currentBlog);
       this.populateTags(currentBlog.tags);
@@ -58,132 +38,253 @@ class Blog {
     }
   }
 
+  async getGoatCount(page) {
+    try {
+      const res = await window.App.modules.apiClient.loadJSON(page);
+      let value = res?.count_unique ?? res?.count;
+      value = typeof value === "string" ? Number(value.replace(/[,_\s]/g, "")) : value;
+      const format = (v) =>
+        v == null || !Number.isFinite(v)
+          ? "∞"
+          : v < 100
+          ? `${v}+`
+          : v >= 1e12
+          ? `${(v / 1e12).toFixed(1).replace(/\.0$/, "")}t+`
+          : v >= 1e6
+          ? `${(v / 1e6).toFixed(1).replace(/\.0$/, "")}m+`
+          : v >= 1e3
+          ? `${(v / 1e3).toFixed(1).replace(/\.0$/, "")}k+`
+          : `${v}+`;
+      return format(value);
+    } catch (error) {
+      console.error("Error fetching GoatCounter data:", error);
+      return "∞";
+    }
+  }
+
   populateMetadata(blog) {
-    document.querySelectorAll("[data-blog-meta]").forEach((element) => {
-      const field = element.getAttribute("data-blog-meta");
-      let value = blog[field];
-      const textField = element.getAttribute("data-blog-meta-text");
+    document.querySelectorAll("[data-blog-meta]").forEach((el) => {
+      const field = el.getAttribute("data-blog-meta");
+      const value = blog[field];
 
-      if (textField) {
-        if (field === "originalUrl") {
-          const date = new Date(blog.date);
-          const formattedDate = date.toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          });
-
-          if (value) {
-            element.href = value;
-            element.textContent = `${formattedDate}, Published on C# Corner`;
-            element.target = "_blank";
-            element.rel = "noopener noreferrer";
-          } else {
-            element.href = "#";
-            element.textContent = `${formattedDate}`;
-            element.style.pointerEvents = "none";
-            element.style.cursor = "default";
-            element.style.textDecoration = "none";
-          }
+      if (el.getAttribute("data-blog-meta-text") && field === "originalUrl") {
+        const date = new Date(blog.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+        el.href = value || "#";
+        el.textContent = value ? `${date}, Published on C# Corner` : date;
+        if (value) {
+          el.target = "_blank";
+          el.rel = "noopener noreferrer";
+        } else {
+          Object.assign(el.style, { pointerEvents: "none", cursor: "default", textDecoration: "none" });
         }
       } else {
-        element.textContent = value;
+        el.textContent = value;
       }
     });
-
     document.title = `${blog.title} | Pawan Pandey`;
   }
 
   populateTags(tags) {
-    const tagsContainer = document.querySelector("blog-tags");
-    if (!tagsContainer || !tags || tags.length === 0) return;
-    tagsContainer.innerHTML = tags.map((tag) => `<span class="tag">${this.escapeHtml(tag)}</span>`).join("");
+    const container = document.querySelector("blog-tags");
+    if (container && tags?.length) {
+      container.innerHTML = tags.map((tag) => `<span class="tag">${this.escapeHtml(tag)}</span>`).join("");
+    }
   }
 
   setupNavigation(blogs, currentBlog, categorySlug) {
     const categoryBlogs = blogs.filter((b) => b.categorySlug === categorySlug);
-    const currentIndex = categoryBlogs.findIndex((b) => b.slug === currentBlog.slug);
+    const idx = categoryBlogs.findIndex((b) => b.slug === currentBlog.slug);
+    if (idx === -1) return console.error("Current blog not found in category!");
 
-    if (currentIndex === -1) {
-      console.error("Current blog not found in category!");
-      return;
-    }
+    const nav = { prev: document.getElementById("prev-post"), next: document.getElementById("next-post") };
+    Object.values(nav).forEach((btn) => btn && ((btn.style.display = "none"), (btn.onclick = null)));
 
-    const prevBtn = document.getElementById("prev-post");
-    const nextBtn = document.getElementById("next-post");
+    if (idx > 0 && nav.prev) this.setNavButton(nav.prev, categoryBlogs[idx - 1]);
+    if (idx < categoryBlogs.length - 1 && nav.next) this.setNavButton(nav.next, categoryBlogs[idx + 1]);
+  }
 
-    if (prevBtn) {
-      prevBtn.style.display = "none";
-      prevBtn.onclick = null;
-    }
-    if (nextBtn) {
-      nextBtn.style.display = "none";
-      nextBtn.onclick = null;
-    }
-
-    if (currentIndex > 0) {
-      const prevPost = categoryBlogs[currentIndex - 1];
-      if (prevBtn) {
-        prevBtn.style.display = "inline-flex";
-        prevBtn.title = prevPost.title;
-        prevBtn.onclick = (e) => {
-          e.preventDefault();
-          window.location.href = `/blogs/${prevPost.categorySlug}/${prevPost.slug}/`;
-        };
-      }
-    }
-
-    if (currentIndex < categoryBlogs.length - 1) {
-      const nextPost = categoryBlogs[currentIndex + 1];
-      if (nextBtn) {
-        nextBtn.style.display = "inline-flex";
-        nextBtn.title = nextPost.title;
-        nextBtn.onclick = (e) => {
-          e.preventDefault();
-          window.location.href = `/blogs/${nextPost.categorySlug}/${nextPost.slug}/`;
-        };
-      }
-    }
+  setNavButton(btn, post) {
+    btn.style.display = "inline-flex";
+    btn.title = post.title;
+    const handler = (e) => {
+      e.preventDefault();
+      window.location.href = `/blogs/${post.categorySlug}/${post.slug}/`;
+    };
+    btn.onclick = handler;
+    this.eventListeners.push({ el: btn, type: "click", handler });
   }
 
   async setupShareButtons(blog) {
-    const currentUrl = window.location.href;
-    const title = encodeURIComponent(blog.title);
-    const url = encodeURIComponent(currentUrl);
-
     try {
-      const sharePlatforms = await window.App.modules.apiClient.loadJSON(`${this.prefix}data/share.json`);
-      if (!sharePlatforms || !Array.isArray(sharePlatforms)) {
-        console.error("Invalid share platforms data");
-        return;
-      }
+      const buttons = await window.App.modules.apiClient.loadJSON(this.SHARE_PATH);
+      if (!Array.isArray(buttons)) return console.error("Invalid share platforms data");
 
-      const shareContainer = document.querySelector("[data-blog-share]");
-      if (!shareContainer) {
-        console.error("Share buttons container not found");
-        return;
-      }
+      const container = document.querySelector("[data-blog-share]");
+      if (!container) return console.error("Share buttons container not found");
 
-      shareContainer.innerHTML = "";
-      sharePlatforms.forEach((platform) => {
-        let shareLink = platform.link.replace("{url}", url).replace("{title}", title);
+      container.innerHTML = "";
+      const indices = (container.getAttribute("data-blog-share") || [...Array(buttons.length).keys()].join(",")).split(",").map(Number);
+      const type = container.getAttribute("type") || "icon";
 
-        const button = window.App.modules.util.createElement("a", `share-btn ${platform.id} contact-social glass-card ${(platform?.class || '')}`);
-        button.href = shareLink;
-        button.id = `share-${platform.id}`;
-        button.title = platform.title;
-        button.target = "_blank";
-        button.rel = "noopener noreferrer";
-        button.setAttribute("aria-label", platform.title);
-        button.innerHTML = `${platform.icon}`;
+      indices.forEach(async (i) => {
+        const button = buttons[i];
+        if (!button) return;
 
-        shareContainer.appendChild(button);
-        this.shareButtons.push(button);
+        if (button.child?.length) {
+          const dropdown = window.App.modules.util.createDropdownButton(button, type);
+          const mainBtn = dropdown?.querySelector("[data-selected-value]");
+          if (mainBtn) {
+            const handler = (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const val = e.target.getAttribute("data-selected-value");
+              if (val) this.handleButtonAction(button.rel, button.data, val);
+            };
+            mainBtn.addEventListener("click", handler);
+            this.eventListeners.push({ el: mainBtn, type: "click", handler });
+            container.appendChild(dropdown);
+          }
+        } else {
+          const btn = window.App.modules.util.createSimpleButton(button, type);
+          const handler = (e) => {
+            e.preventDefault();
+            this.handleButtonAction(button.rel, button.data);
+          };
+          btn.addEventListener("click", handler);
+          this.eventListeners.push({ el: btn, type: "click", handler });
+          container.appendChild(btn);
+          if (button?.data?.goat) {
+            await this.getGoatCount(`${button?.data?.goat}${encodeURIComponent(window.location.pathname)}.json`).then((res) => {
+              const countEl = window.App.modules.util.createElement("i", "", res),
+                msg = window.App.modules.util.createElement("span", "read-Count", ` Reads`);
+              countEl.setAttribute("data-value", res);
+              msg.appendChild(countEl), container.appendChild(msg);
+            });
+          }
+        }
       });
     } catch (error) {
       console.error("Error loading share platforms:", error);
     }
   }
+
+  handleButtonAction(rel, data, childText) {
+    const actions = {
+      share: () => window.App.modules.util.share("Pawan Portfolio"),
+      coffee: () => this.openModal("support", data),
+      comments: () => this.openModal("comments", data),
+    };
+    actions[rel]?.();
+  }
+
+  openModal(type, data) {
+    let opened = false;
+    window.App.modules.util.openDialog(type).then((res) => {
+      if (res && !opened) {
+        opened = true;
+        type === "support" ? this.generateCoffee(data) : this.loadGiscus(data);
+      }
+    });
+  }
+
+  async loadGiscus(data) {
+    const container = document.querySelector("[data-giscus-content]");
+    if (!container || !data) return;
+    container.innerHTML = "";
+
+    const theme = this.getThemeUrl(data["data-theme"]);
+    const script = document.createElement("script");
+    script.src = data.src;
+
+    Object.entries(data).forEach(([key, val]) => {
+      if (key !== "src" && !key.startsWith("script.")) {
+        script.setAttribute(key, key === "data-theme" ? theme : val);
+      }
+    });
+
+    script.async = data["script.async"] || true;
+    const loadHandler = () => {
+      setTimeout(() => {}, 500);
+    };
+    const errorHandler = () => {
+      console.error("Failed to load Giscus");
+    };
+    script.addEventListener("load", loadHandler);
+    script.addEventListener("error", errorHandler);
+    this.eventListeners.push({ el: script, type: "load", handler: loadHandler }, { el: script, type: "error", handler: errorHandler });
+    container.appendChild(script);
+  }
+
+  getThemeUrl(baseUrl) {
+    const dataset = document.querySelector("body")?.dataset || {};
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const selectedTheme = dataset.theme || localStorage.getItem("theme") || "charcoal";
+    const sysTheme = dataset.sysTheme === "true";
+
+    const suffix = sysTheme && this.needsThemeSuffix(selectedTheme, isDark) ? "-on" : "";
+
+    return `${baseUrl}${selectedTheme}${suffix}.css`;
+  }
+
+  needsThemeSuffix(theme, isDark) {
+    const lightThemes = ["lavender", "charcoal"];
+    const darkThemes = ["pearl"];
+
+    return (lightThemes.includes(theme) && !isDark) || (darkThemes.includes(theme) && isDark);
+  }
+
+  async generateCoffee(data) {
+    const container = document.querySelector("[data-support-content]");
+    if (!container || !data) return;
+    container.innerHTML = "";
+
+    const introPara = window.App.modules.util.createElement("p", "modal-msg", data.msg);
+    container.appendChild(introPara);
+
+    const color = getComputedStyle(document.body).getPropertyValue("--primary").trim() || getComputedStyle(document.documentElement).getPropertyValue("--primary").trim() || "#00ffcc";
+    const url = `${data.url}?${new URLSearchParams({ color }).toString()}`;
+
+    await this.generateCoffeePage(url);
+
+    const footerText = window.App.modules.util.createElement("p", "footer-text", data.footer);
+    container.appendChild(footerText);
+  }
+
+  async generateCoffeePage(url) {
+    const container = document.querySelector("[data-support-content]");
+    if (!container) return;
+
+    const wrapper = window.App.modules.util.createElement("div", "coffee-iframe-wrapper");
+    const iframe = window.App.modules.util.createElement("iframe");
+
+    Object.assign(iframe, { id: "coffee-support-iframe", src: url });
+    iframe.style.display = "none";
+    iframe.setAttribute("class", "support-frame");
+    iframe.setAttribute("frameborder", "0");
+    iframe.setAttribute("scrolling", "auto");
+    iframe.setAttribute("allowtransparency", "true");
+
+    const loadHandler = () => this.onIframeLoad(iframe);
+    const errorHandler = () => this.onIframeError(iframe);
+
+    iframe.addEventListener("load", loadHandler);
+    iframe.addEventListener("error", errorHandler);
+    this.eventListeners.push({ el: iframe, type: "load", handler: loadHandler }, { el: iframe, type: "error", handler: errorHandler });
+
+    setTimeout(() => window.App.modules.loader.isLoaderOn && this.onIframeLoad(iframe), 5000);
+
+    wrapper.appendChild(iframe);
+    container.appendChild(wrapper);
+  }
+
+  onIframeLoad(iframe) {
+    setTimeout(() => {
+      Object.assign(iframe.style, { display: "block", opacity: "0", transition: "opacity 0.3s ease" });
+      setTimeout(() => (iframe.style.opacity = "1"), 10);
+    }, 300);
+  }
+
+  onIframeError(iframe) {}
 
   escapeHtml(text) {
     const div = window.App.modules.util.createElement("div");
@@ -196,11 +297,31 @@ class Blog {
   }
 
   cleanup() {
+    this.eventListeners.forEach(({ el, type, handler }) => {
+      el?.removeEventListener(type, handler);
+    });
+    this.eventListeners = [];
     const shareContainer = document.querySelector("[data-blog-share]");
     if (shareContainer) shareContainer.innerHTML = "";
+
     const tagsContainer = document.querySelector("blog-tags");
     if (tagsContainer) tagsContainer.innerHTML = "";
-    this.shareButtons = [];
+
+    const giscusContainer = document.querySelector("[data-giscus-content]");
+    if (giscusContainer) giscusContainer.innerHTML = "";
+
+    const supportContainer = document.querySelector("[data-support-content]");
+    if (supportContainer) supportContainer.innerHTML = "";
+    const prevBtn = document.getElementById("prev-post");
+    const nextBtn = document.getElementById("next-post");
+    if (prevBtn) {
+      prevBtn.style.display = "none";
+      prevBtn.onclick = null;
+    }
+    if (nextBtn) {
+      nextBtn.style.display = "none";
+      nextBtn.onclick = null;
+    }
   }
 }
 
@@ -209,7 +330,7 @@ function initBlog() {
     window.App.modules.blog.cleanup?.();
   }
   const blogModule = new Blog();
-  window.App.register("blog", blogModule, 'initBlog');
+  window.App.register("blog", blogModule, "initBlog");
   blogModule.init();
 }
 
@@ -218,4 +339,5 @@ if (document.readyState === "loading") {
 } else {
   initBlog();
 }
+
 export { Blog, initBlog };

@@ -1,9 +1,11 @@
 class Info {
   constructor() {
+    this.config = null;
   }
 
   async init() {
     await this.loadSkills();
+    await this.updateSiteInfo();
   }
 
   async loadSkills() {
@@ -40,9 +42,31 @@ class Info {
     }
   }
 
+  async updateSiteInfo() {
+    this.config = await window.App.modules.apiClient.loadJSON("/data/site-config.json");
+    if (!this.config) return;
+
+    document.querySelectorAll("[data-social]").forEach((el) => {
+      el.innerHTML = "";
+      this.config.social
+        ?.filter((s) => s.url && s.url !== "")
+        .forEach((socialData) => {
+          const aEl = window.App.modules.util.createElement("a", `contact-social  ${(socialData?.class || '')}`);
+          aEl.target = "_blank";
+          aEl.href = socialData?.url;
+          aEl.innerHTML = socialData.icon;
+          el.appendChild(aEl);
+        });
+    });
+  }
+
   cleanup() {
     const container = document.querySelector("[data-skills-info]");
     if (container) container.innerHTML = "";
+    document.querySelectorAll("[data-social]").forEach((el) => {
+      el.innerHTML = "";
+    });
+    this.config = null;
   }
 }
 

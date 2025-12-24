@@ -1,5 +1,5 @@
-import { onNavigation } from "../navigation.js";
-
+import { createObservable } from "../observable.js";
+const onNavigation = createObservable('onNavigation');
 class Universe {
   constructor() {
     this.listeners = [];

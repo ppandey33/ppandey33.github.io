@@ -13,20 +13,18 @@
     <div class="page-container">
       <aside class="left-sidebar-card">{% include algo/details/info.html %}</aside>
       <main class="main-content">
-        {{ content }}  
-        {% unless page.url == "/algo/contact/" %}
-          <section class="section last-section" id="contact">
-            <!-- Universe Section -->
-            {% include algo/details/contact.html %}
-            <!-- Universe Section -->
-            {% include algo/details/footer.html %}
-          </section> 
-        {% else %}
+        {{ content }} {% unless page.url == "/algo/contact/" or page.url contains '/blogs/' %}
+        <section class="section last-section" id="contact">
+          <!-- Universe Section -->
+          {% include algo/details/contact.html %}
+          <!-- Universe Section -->
           {% include algo/details/footer.html %}
-        {% endunless %}
+        </section>
+        {% else %} {% include algo/details/footer.html %} {% endunless %}
       </main>
       <aside class="right-sidebar-card">{% include algo/header.html %}</aside>
     </div>
+    <div data-submenu-item></div>
     <!-- -->
     {% include import-js.html %}
     <!-- -->

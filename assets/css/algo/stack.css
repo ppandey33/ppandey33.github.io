@@ -8,6 +8,7 @@
   flex-wrap: wrap;
   gap: var(--gap-xl);
   flex: 9;
+  justify-content: center;
 }
 .skill-category {
   border: var(--border-2) solid var(--border);

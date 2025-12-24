@@ -8,6 +8,7 @@
   background: var(--background);
   color: var(--textPrimary, #e6e6e6);
   width: 100%;
+  padding: 0!important;
 }
 .post-header {
   background: var(--surface);

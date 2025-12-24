@@ -296,7 +296,7 @@
   background: var(--surface, #151b23);
 }
 .read-Count {
-  background: var(--primary);
+  background: var(--secondary);
   border-radius: var(--radius-2xl);
   padding: var(--padding-sm);
   font-size: var(--fontSize-md);
@@ -310,11 +310,11 @@
   transform: scale(1);
   transition: transform var(--transition-slow), background var(--transition-slow);
 }
-.read-Count:hover{
+.read-Count:hover {
   transform: scale(1.1);
   background: transparent;
 }
-.read-Count:hover i{
+.read-Count:hover i {
   color: var(--primary);
 }
 .read-Count i {
@@ -322,8 +322,4 @@
 }
 .read-Count i[data-value="∞"] {
   font-size: var(--fontSize-2xl);
-}
-@media (max-width: 768px) {
-}
-@media (max-width: 480px) {
 }

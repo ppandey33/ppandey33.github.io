@@ -294,7 +294,7 @@ defaults:
     values:
       permalink: /algo/stack/
       layout: algo/default
-      modules: [stack, info, iam, contact ]
+      modules: [stack, info, iam, contact]
       stylesheets: [stack, info, contact]
   - scope:
       path: "pages/algo/journey"
@@ -352,9 +352,9 @@ defaults:
       permalink: /algo/blogs/
       layout: algo/blogs
       # baseModules: [gen-svg, observable, paginator]
-      modules: [blogs, info, iam, contact]
-      stylesheets: [blogs, info, contact]
- 
+      modules: [blogs, info, iam]
+      stylesheets: [blogs, info]
+
   # Blog Post Setup
   - scope:
       path: "blogs"

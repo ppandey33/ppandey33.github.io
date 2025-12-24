@@ -1,5 +1,6 @@
-import { Observable } from "./observable.js";
-const onNavigation = new Observable();
+import { createObservable } from "./observable.js";
+
+const onNavigation = createObservable('onNavigation');
 
 class Navigation {
   constructor() {
@@ -389,6 +390,9 @@ class Navigation {
     if (navList) navList.innerHTML = "";
     const sectionNavList = document.querySelector("[data-section-nav-items]");
     if (sectionNavList) sectionNavList.innerHTML = "";
+    document.querySelectorAll("[data-footer-links]").forEach((el) => {
+      el.innerHTML = "";
+    });
   }
 
   async updateSiteInfo() {
@@ -441,4 +445,4 @@ if (document.readyState === "loading") {
   initNavigation();
 }
 
-export { Navigation, initNavigation, onNavigation };
+export { Navigation, initNavigation };

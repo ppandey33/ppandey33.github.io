@@ -52,8 +52,9 @@
   align-self: stretch;
 }
 .education-text {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: var(--gap-lg);
   flex: 7;

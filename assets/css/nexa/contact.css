@@ -139,10 +139,12 @@
   transform: none;
   align-self: start;
 }
-.form-input {
+.form-input,
+input:-internal-autofill-selected {
   width: 100%;
   font-size: var(--fontSize-base, 1rem);
   color: var(--textSecondary);
+  background-color: transparent !important;
   background: transparent;
   transition: all var(--transition-base, 0.3s ease-in-out);
   font-family: inherit;
@@ -153,7 +155,8 @@
   resize: vertical;
   min-height: var(--space-24);
 }
-.input-wrapper:focus, .input-wrapper:focus-within {
+.input-wrapper:focus,
+.input-wrapper:focus-within {
   border-color: var(--primary);
   box-shadow: 0 0 0 var(--shadow-primary-light) var(--shadow-primary-medium);
   transform: translateY(calc(-1 * var(--space-1, 0.25rem)));
@@ -177,8 +180,8 @@
   margin-top: var(--margin-xl, 2rem);
   animation: slideInLeft var(--animation-fast, 0.5s) ease-out 0.5s both;
 }
-.btn-submit{
-  display: flex!important;
+.btn-submit {
+  display: flex !important;
   gap: var(--gap-md);
   align-items: center;
   justify-content: center;
@@ -192,7 +195,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, var(--background), transparent);
-  transition: left 2s ease;
+  transition: left var(--transition-base);
 }
 .btn-submit:hover {
   transform: translateY(calc(-1 * var(--space-1, 0.25rem)));
@@ -272,22 +275,6 @@
 }
 .form-status.error .status-icon {
   animation: shake var(--animation-fast, 0.5s) ease-out;
-}
-@media (max-width: 768px) {
-  .contact-form-wrapper {
-    padding: var(--padding-lg, 1.5rem);
-    margin: var(--margin-md, 1rem);
-  }
-  .contact-form {
-    padding: var(--padding-lg, 1.5rem);
-  }
-  .contact-form-title {
-    font-size: var(--fontSize-xl, 1.5rem);
-  }
-  .btn-submit {
-    width: 100%;
-    justify-content: center;
-  }
 }
 @keyframes fadeInUp {
   from {

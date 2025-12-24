@@ -14,7 +14,7 @@ class Observable {
     const subscriber = {
       next: callbacks.next || (() => {}),
       error: callbacks.error || (() => {}),
-      complete: callbacks.complete || (() => {})
+      complete: callbacks.complete || (() => {}),
     };
 
     this.subscribers.push(subscriber);
@@ -23,8 +23,8 @@ class Observable {
     }
     return {
       unsubscribe: () => {
-        this.subscribers = this.subscribers.filter(s => s !== subscriber);
-      }
+        this.subscribers = this.subscribers.filter((s) => s !== subscriber);
+      },
     };
   }
 
@@ -33,26 +33,26 @@ class Observable {
       next: (value) => {
         callback(value);
         tempSub.unsubscribe();
-      }
+      },
     });
   }
 
   next(value) {
     if (this.isCompleted) return;
     this.lastValue = value;
-    this.subscribers.forEach(s => s.next(value));
+    this.subscribers.forEach((s) => s.next(value));
   }
 
   error(err) {
     if (this.isCompleted) return;
-    this.subscribers.forEach(s => s.error(err));
+    this.subscribers.forEach((s) => s.error(err));
     this.subscribers = [];
     this.isCompleted = true;
   }
 
   complete() {
     if (this.isCompleted) return;
-    this.subscribers.forEach(s => s.complete());
+    this.subscribers.forEach((s) => s.complete());
     this.subscribers = [];
     this.isCompleted = true;
   }
@@ -87,7 +87,16 @@ function initObservable() {
     window.App.modules.observer.cleanup?.();
   }
   const observableModule = new Observable();
-  window.App.register("observer", observableModule, 'initObservable');
+  window.App.register("observer", observableModule, "initObservable");
 }
 
-export { Observable, initObservable };
+const instances = {};
+
+function createObservable(name) {
+  if (!instances[name]) {
+    instances[name] = new Observable();
+  }
+  return instances[name];
+}
+
+export { Observable, initObservable, createObservable };

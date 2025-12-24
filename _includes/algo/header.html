@@ -1,4 +1,14 @@
 <div class="nav-container dynamic-scroll">
+  <div class="header-brand">
+    <a href="/" class="brand-link">
+      <span class="brand-symbol">
+        <img class="charcoal-icon" src="{{ '/assets/images/icons/charcoal_32x32.png' | relative_url }}" alt="Pawan Portfolio" />
+        <img class="lavender-icon" src="{{ '/assets/images/icons/lavender_32x32.png' | relative_url }}" alt="Pawan Portfolio" />
+        <img class="pearl-icon" src="{{ '/assets/images/icons/pearl_32x32.png' | relative_url }}" alt="Pawan Portfolio" />
+      </span>
+      <span class="brand-name" data-site-name></span>
+    </a>
+  </div>
   {% include nexa/nav.html %}
   <div class="status-icons">
     <div data-status-network class="switcher"></div>
@@ -8,5 +18,5 @@
     <!-- -->
     {% include layout-switcher.html %}
   </div>
-  <div data-submenu-item></div>
+
 </div>

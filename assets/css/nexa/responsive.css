@@ -230,6 +230,20 @@
   .post-meta {
     gap: var(--gap-md);
   }
+  .contact-form-wrapper {
+    padding: var(--padding-sm, 1.5rem);
+    margin: 0 auto;
+  }
+  .contact-form {
+    padding: var(--padding-sm, 1.5rem);
+  }
+  .contact-form-title {
+    font-size: var(--fontSize-xl, 1.5rem);
+  }
+  .btn-submit {
+    width: 100%;
+    justify-content: center;
+  }
   .content-wrapper {
     margin-bottom: var(--space-12);
   }

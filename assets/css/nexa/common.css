@@ -94,6 +94,7 @@ body {
 .dropdown .option .option-name {
   font-weight: 600;
   margin-bottom: var(--space-1);
+  white-space: nowrap;
 }
 .dropdown .option .option-desc {
   font-size: var(--fontSize-xs);
@@ -226,6 +227,8 @@ body {
 }
 .btn-container {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: var(--gap-md);
   flex-wrap: wrap;
 }
