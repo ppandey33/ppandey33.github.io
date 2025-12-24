@@ -227,8 +227,6 @@ body {
 }
 .btn-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: var(--gap-md);
   flex-wrap: wrap;
 }

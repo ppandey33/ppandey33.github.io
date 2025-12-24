@@ -243,6 +243,8 @@
   .btn-submit {
     width: 100%;
     justify-content: center;
+  } .btn-container {
+    justify-content: center;
   }
   .content-wrapper {
     margin-bottom: var(--space-12);
