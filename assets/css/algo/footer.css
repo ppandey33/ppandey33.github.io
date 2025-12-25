@@ -1,5 +1,5 @@
 footer {
-  border-top: var(--border-1) solid var(--border);
+  border-top: var(--border-1) solid var(--border, #333333);
   padding: var(--padding-lg);
   margin-top: var(--margin-2xl);
 }
@@ -10,14 +10,14 @@ footer {
 }
 .footer-text {
   font-size: var(--fontSize-sm);
-  color: var(--textTertiary);
+  color: var(--textTertiary, #d0d0d0);
   max-width: 37.5rem;
   padding: var(--padding-xl) 0;
 }
 .footer-msg {
   text-align: center;
   font-size: var(--fontSize-sm, 0.8rem);
-  color: var(--textSecondary, #888888);
+  color: var(--textSecondary, #b0b0b0);
 }
 .social-links {
   display: flex;
@@ -25,7 +25,7 @@ footer {
   margin-top: var(--margin-md);
 }
 .social-links a {
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
   text-decoration: none;
   font-size: var(--fontSize-lg);
   transition: var(--transition-base);

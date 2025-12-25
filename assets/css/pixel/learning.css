@@ -5,7 +5,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, transparent, var(--primary, #00ffcc), var(--accent, #ff00ff), transparent);
+  background: linear-gradient(180deg, transparent, var(--primary, #ffffff), var(--accent, #e0e0e0), transparent);
   transform: translateX(-50%);
   opacity: var(--opacity-line, 0.15);
   z-index: 0;
@@ -25,7 +25,7 @@
   background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-mid), var(--card-bg-end));
   border-radius: var(--radius-xl, 0.75rem);
   padding: var(--padding-xl, 2rem);
-  border: var(--border-1, 0.0625rem) solid var(--border, #2a2a2a);
+  border: var(--border-1, 0.0625rem) solid var(--border, #333333);
   transition: transform var(--transition-base, 0.3s ease-in-out), box-shadow var(--transition-base, 0.3s ease-in-out), border-color var(--transition-base, 0.3s ease-in-out);
   position: relative;
   display: flex;
@@ -57,12 +57,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, var(--accent, #ff00ff), var(--primary, #00ffcc));
+  background: linear-gradient(90deg, var(--accent, #e0e0e0), var(--primary, #ffffff));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   border-radius: var(--radius-full, 50%);
-  border: var(--border-1, 0.125rem) solid var(--borderSecondary, #505050);
+  border: var(--border-1, 0.125rem) solid var(--borderSecondary, #4a4a4a);
   transition: transform var(--transition-base, 0.3s ease-in-out), background var(--transition-base, 0.3s ease-in-out), box-shadow var(--transition-base, 0.3s ease-in-out),
     border-color var(--transition-base, 0.3s ease-in-out);
   position: relative;
@@ -75,7 +75,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   border-radius: var(--radius-xl, 0.75rem) var(--radius-xl, 0.75rem) 0 0;
   transform: scaleX(0);
   transform-origin: left;
@@ -95,7 +95,7 @@
 .education-item .education-watermark::before {
   content: "\f02d";
   font-family: 'fa';
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -103,13 +103,13 @@
 }
 .education-item:hover {
   transform: translateY(-4px) scale(1.01);
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
   box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
 }
 .education-item:hover::before {
   transform: scale(1.15) rotate(360deg);
   box-shadow: var(--shadow-sm) var(--shadow-primary-subtle);
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
 }
 .education-item:hover::after {
   transform: scaleX(1);
@@ -145,14 +145,14 @@
   transition: background var(--transition-base, 0.3s ease-in-out);
   position: relative;
   z-index: 1;
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
 }
 .education-item:hover .education-degree {
-  color: var(--primary, #00ffcc);
+  color: var(--primary, #ffffff);
 }
 .education-institution {
   font-size: var(--fontSize-lg, 1.25rem);
-  color: var(--textSecondary, #888888);
+  color: var(--textSecondary, #b0b0b0);
   font-weight: 500;
   line-height: var(--line-height-normal, 1.5);
   display: flex;
@@ -166,7 +166,7 @@
   font-family: 'fa';
   font-size: var(--fontSize-lg, 1.25rem);
   transition: transform var(--transition-base, 0.3s ease-in-out);
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -176,7 +176,7 @@
 .education-item:hover .education-location,
 .education-item:hover .education-meta
  {
-  color: var(--textTertiary, #b0b0b0);
+  color: var(--textTertiary, #d0d0d0);
   padding-left: calc(var(--padding-xs, 0.25rem) + var(--space-2, 0.5rem));
 }
 .education-item:hover .education-institution::before {
@@ -188,7 +188,7 @@
   gap: var(--gap-sm, 0.5rem);
   font-size: var(--fontSize-md, 0.9rem);
   font-weight: 400;
-  background: var(--surfaceOpacity, rgba(21, 27, 35, 0.5));
+  background: var(--surfaceOpacity, #25252599));
   border-radius: var(--radius-sm, 0.25rem);
   border: var(--border-1, 0.0625rem) solid transparent;
   position: relative;
@@ -199,7 +199,7 @@
   font-family: 'fa';
   font-size: var(--fontSize-lg, 1.25rem);
   animation: float 3s ease-in-out infinite;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -210,8 +210,8 @@
   align-items: center;
   gap: var(--gap-sm, 0.5rem);
   font-size: var(--fontSize-sm, 0.8rem);
-  color: var(--textMuted, #8a8a8a);
-  background: var(--surfaceOpacity, rgba(21, 27, 35, 0.5));
+  color: var(--textMuted, #888888);
+  background: var(--surfaceOpacity, #25252599));
   border-radius: var(--radius-sm, 0.25rem);
   border: var(--border-1, 0.0625rem) solid transparent;
   position: relative;
@@ -222,7 +222,7 @@
   font-family: 'fa';
   font-size: var(--fontSize-lg, 1.25rem);
   animation: float 3s ease-in-out infinite 1.5s;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -232,8 +232,8 @@
   display: none;
 }
 .education-item:hover .education-location, .education-item:hover .education-meta {
-  border-color: var(--borderSecondary, #505050);
-  background: var(--surface, #151b23);
+  border-color: var(--borderSecondary, #4a4a4a);
+  background: var(--surface, #252525);
 }
 .education-meta:empty {
   display: none;

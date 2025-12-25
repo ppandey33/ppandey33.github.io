@@ -5,7 +5,7 @@
   width: 100%;
   z-index: var(--z-dropdown);
   background-color: var(--background, #1a1a1a);
-  box-shadow: 0 var(--border-2) var(--space-2) rgb(from var(--cardHeader, #000000) r g b / 0.60) 70%;
+  box-shadow: 0 var(--border-2) var(--space-2) rgb(from var(--cardHeader, #0a0a0a) r g b / 0.60) 70%;
   transition: var(--transition-base);
 }
 .site-header.scroll-down {
@@ -13,12 +13,12 @@
 }
 .site-header.scroll-up {
   transform: translateY(0);
-  box-shadow: 0 var(--border-2) var(--space-4) rgb(from var(--cardHeader, #000000) r g b / 0.15) 70%;
+  box-shadow: 0 var(--border-2) var(--space-4) rgb(from var(--cardHeader, #0a0a0a) r g b / 0.15) 70%;
 }
 .site-header.scroll-up,
 .site-header.scroll-down {
   backdrop-filter: blur(var(--space-2));
-  background-color: rgb(from var(--background) r g b / 0.60) 70%;
+  background-color: rgb(from var(--background, #1a1a1a) r g b / 0.60) 70%;
 }
 body {
   padding-top: var(--space-15); }

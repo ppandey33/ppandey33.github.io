@@ -1,27 +1,27 @@
 .education-item {
-  border: var(--border-2) solid var(--border);
+  border: var(--border-2) solid var(--border, #333333);
   transition: var(--transition-base);
   min-width: 8.75rem;
   max-width: fit-content;
 }
 .education-item:hover {
-  border-color: var(--primary);
+  border-color: var(--primary, #ffffff);
   transform: translateY(calc(-1 * var(--space-1))) !important;
 }
 .education-item h3 {
   margin-bottom: var(--margin-sm);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
   font-size: var(--fontSize-lg);
   padding: var(--padding-md);
-  background: rgb(from var(--cardHeader) r g b / 0.2);
-  border-bottom: var(--border-1) var(--border) solid;
+  background: rgb(from var(--cardHeader, #0a0a0a) r g b / 0.2);
+  border-bottom: var(--border-1) var(--border, #333333) solid;
 }
 .education-institution {
-  color: var(--textTertiary);
+  color: var(--textTertiary, #d0d0d0);
   font-size: var(--fontSize-base);
 }
 .education-period {
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
   font-size: var(--fontSize-md);
 }
 .education-score {

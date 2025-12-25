@@ -24,8 +24,7 @@
       "data-lang": "en",
       "data-loading": "lazy",
       "crossorigin": "anonymous",
-      "async": true,
-      "goat": "https://pawan.goatcounter.com/counter/"
+      "async": true
     }    
   },
   {

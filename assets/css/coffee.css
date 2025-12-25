@@ -20,7 +20,7 @@
 }
 .coffee-btn {
   background: linear-gradient(135deg, var(----card-bg-start) 0%, var(--card-bg-mid) 50%, var(--card-bg-end) 100%);
-  color: var(--textPrimary);
+  color: var(--textPrimary, #ffffff);
   border: none;
   padding: var(--padding-md);
   font-size: var(--fontSize-lg);
@@ -41,7 +41,7 @@
   background: linear-gradient(135deg, var(--card-bg-end) 0%, var(--card-bg-mid) 50%, var(----card-bg-start) 100%);
 }
 .custom-section {
-  border-top: var(--border-1) solid var(--border);
+  border-top: var(--border-1) solid var(--border, #333333);
   padding-top: var(--padding-md);
   max-width: max-content;
   margin: var(--margin-lg) auto;
@@ -50,7 +50,7 @@
   display: block;
   font-size: var(fontSize-md);
   font-weight: 500;
-  color: var(--textPrimary);
+  color: var(--textPrimary, #ffffff);
   margin-bottom: var(--margin-sm);
 }
 .input-group {
@@ -60,19 +60,19 @@
 .custom-input {
   flex: 1;
   padding: var(--padding-md);
-  border: var(--border-1) solid var(--border);
+  border: var(--border-1) solid var(--border, #333333);
   border-radius: var(--radius-sm);
   font-size: var(--fontSize-md);
   transition: border-color var(--transition-slow);
 }
 .custom-input:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: var(--primary, #ffffff);
   box-shadow: 0 0 var(--space-5) var(--shadow-primary-subtle);
 }
 .send-btn {
-  background: var(--primary);
-  color: var(--textPrimary);
+  background: var(--primary, #ffffff);
+  color: var(--textPrimary, #ffffff);
   border: none;
   padding: var(--padding-md);
   border-radius: var(--radius-sm);
@@ -86,7 +86,7 @@
 }
 .modal-container .footer-text {
   text-align: center;
-  color: var(--textMuted);
+  color: var(--textMuted, #888888);
   font-size: var(--fontSize-md);
   margin: var(--margin-sm) auto;
 }

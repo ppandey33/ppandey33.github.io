@@ -11,7 +11,7 @@
   background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-mid), var(--card-bg-end));
   border-radius: var(--radius-xl, 0.75rem);
   padding: var(--padding-xl, 2rem);
-  border: var(--border-1, 0.0625rem) solid var(--border, #2a2a2a);
+  border: var(--border-1, 0.0625rem) solid var(--border, #333333);
   transition: transform var(--transition-base, 0.3s ease-in-out), box-shadow var(--transition-base, 0.3s ease-in-out), border-color var(--transition-base, 0.3s ease-in-out);
   display: flex;
   flex-direction: column;
@@ -27,14 +27,14 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff), var(--primary, #00ffcc));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0), var(--primary, #ffffff));
   transform: scaleX(0);
   transition: transform var(--transition-base, 0.3s ease-in-out);
 }
 .achievement-item:hover {
   transform: translateY(-4px) scale(1.01);
   box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
 }
 .achievement-item:hover::before {
   transform: scaleX(1);
@@ -49,16 +49,16 @@
   width: 80px;
   height: 80px;
   border-radius: var(--radius-full, 50%);
-  background: linear-gradient(90deg, var(--accent, #ff00ff), var(--primary, #00ffcc));
+  background: linear-gradient(90deg, var(--accent, #e0e0e0), var(--primary, #ffffff));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  border: var(--border-1, 0.0625rem) solid var(--borderSecondary, #505050);
+  border: var(--border-1, 0.0625rem) solid var(--borderSecondary, #4a4a4a);
   transition: transform var(--transition-base, 0.3s ease-in-out), background var(--transition-base, 0.3s ease-in-out);
 }
 .achievement-item:hover .achievement-icon {
    transform: scale(var(--scale-hover-medium, 1.1)) rotate(var(--rotate-large, 360deg));
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
   box-shadow: var(--shadow-sm) var(--shadow-primary-subtle);
 }
 .achievement-title {
@@ -69,8 +69,8 @@
   line-height: var(--line-height-tight, 1.2);
   background: linear-gradient(
     90deg,
-    var(--primary, #00ffcc),
-    var(--accent, #ff00ff)
+    var(--primary, #ffffff),
+    var(--accent, #e0e0e0)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -81,8 +81,8 @@
 .achievement-item:hover .achievement-title {
   background: linear-gradient(
     90deg,
-    var(--accent, #ff00ff),
-    var(--primary, #00ffcc)
+    var(--accent, #e0e0e0),
+    var(--primary, #ffffff)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -91,12 +91,12 @@
 .achievement-description {
   font-size: var(--fontSize-base, 1rem);
   line-height: var(--line-height-relaxed, 1.6);
-  color: var(--textSecondary, #888888);
+  color: var(--textSecondary, #b0b0b0);
   margin: 0;
   transition: color var(--transition-base, 0.3s ease-in-out);
 }
 .achievement-item:hover .achievement-description {
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
 }
 .zoom {
   animation: zoomIn var(--transition-slow, 0.5s ease-in-out);

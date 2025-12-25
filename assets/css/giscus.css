@@ -5,7 +5,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--surfaceOpacity);
+  background: var(--surfaceOpacity, #25252599);
   z-index: var(--z-modal);
   animation: fadeIn var(--animation-slow) ease;
   align-items: center;
@@ -17,7 +17,7 @@
   align-items: center;
 }
 .modal-container {
-  background: var(--surface);
+  background: var(--surface, #252525);
   width: 90%;
   max-width: 75rem;
   max-height: 90vh;
@@ -30,7 +30,7 @@
 }
 .modal-header {
   padding: var(--padding-lg);
-  border-bottom: var(--border-1) solid var(--border);
+  border-bottom: var(--border-1) solid var(--border, #333333);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,14 +39,14 @@
 .modal-header h2 {
   font-size: var(--fontSize-lg);
   font-weight: 600;
-  color: var(--primary);
+  color: var(--primary, #ffffff);
   margin: 0;
 }
 .close-button {
   background: none;
   border: none;
   font-size: var(--fontSize-3xl);
-  color: var(--primary);
+  color: var(--primary, #ffffff);
   cursor: pointer;
   padding: 0;
   width: var(--space-8);
@@ -58,8 +58,8 @@
   transition: all 0.2s;
 }
 .close-button:hover {
-  background: var(--primary);
-  color: var(--textPrimary);
+  background: var(--primary, #ffffff);
+  color: var(--textPrimary, #ffffff);
 }
 .modal-body {
   padding: var(--padding-lg);

@@ -22,7 +22,7 @@
   );
   border-radius: var(--radius-xl, 0.75rem);
   padding: var(--padding-xl, 2rem);
-  border: var(--border-1, 0.0625rem) solid var(--border, #2a2a2a);
+  border: var(--border-1, 0.0625rem) solid var(--border, #333333);
   transition: transform var(--transition-base, 0.3s ease-in-out),
               box-shadow var(--transition-base, 0.3s ease-in-out),
               border-color var(--transition-base, 0.3s ease-in-out);
@@ -48,8 +48,8 @@
   width: 4px;
   background: linear-gradient(
     180deg,
-    var(--primary, #00ffcc),
-    var(--accent, #ff00ff)
+    var(--primary, #ffffff),
+    var(--accent, #e0e0e0)
   );
   transform: scaleY(0);
   transform-origin: top;
@@ -65,7 +65,7 @@
   opacity: var(--opacity-decorative, 0.05);
   transition: opacity var(--transition-base, 0.3s ease-in-out),
               transform var(--transition-base, 0.3s ease-in-out);
-              background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+              background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -75,7 +75,7 @@ ease-in-out);
 .experience-item:hover {
   transform: translateX(-4px) scale(1.01);
   box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
 }
 .experience-item:hover::before {
   transform: scaleY(1);
@@ -90,7 +90,7 @@ ease-in-out);
   top: var(--space-8, 2rem);
   width: 16px;
   height: 16px;
-  background: var(--primary, #00ffcc);
+  background: var(--primary, #ffffff);
   border-radius: 50%;
   border: 3px solid var(--background, #1a1a1a);
   box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
@@ -100,8 +100,8 @@ ease-in-out);
   margin-bottom: var(--margin-lg, 1.5rem);
   padding: var(--padding-lg, 1.5rem);
   border-radius: var(--radius-lg, 0.5rem);
-  background: var(--surface, #151b23);
-  border: var(--border-1, 0.0625rem) solid var(--borderSecondary, #505050);
+  background: var(--surface, #252525);
+  border: var(--border-1, 0.0625rem) solid var(--borderSecondary, #4a4a4a);
   transition: border-color var(--transition-base, 0.3s ease-in-out),
               transform var(--transition-base, 0.3s ease-in-out);
   position: relative;
@@ -123,7 +123,7 @@ ease-in-out);
   transition: left 0.6s ease;
 }
 .experience-item:hover .experience-header-container {
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
   transform: translateY(-2px);
 }
 .experience-item:hover .experience-header-container::before {
@@ -139,8 +139,8 @@ ease-in-out);
   line-height: var(--line-height-tight, 1.2);
   background: linear-gradient(
     90deg,
-    var(--primary, #00ffcc),
-    var(--accent, #ff00ff)
+    var(--primary, #ffffff),
+    var(--accent, #e0e0e0)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -150,8 +150,8 @@ ease-in-out);
 .experience-item:hover .experience-title {
   background: linear-gradient(
     90deg,
-    var(--accent, #ff00ff),
-    var(--primary, #00ffcc)
+    var(--accent, #e0e0e0),
+    var(--primary, #ffffff)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -159,20 +159,20 @@ ease-in-out);
 }
 .experience-company {
   font-size: var(--fontSize-lg, 1.25rem);
-  color: var(--textSecondary, #888888);
+  color: var(--textSecondary, #b0b0b0);
   font-weight: 500;
   line-height: var(--line-height-normal, 1.5);
   transition: color var(--transition-base, 0.3s ease-in-out);
 }
 .experience-item:hover .experience-company {
-  color: var(--textTertiary, #b0b0b0);
+  color: var(--textTertiary, #d0d0d0);
 }
 .experience-meta {
   display: flex;
   gap: var(--gap-lg, 1.5rem);
   flex-wrap: wrap;
   font-size: var(--fontSize-md, 0.8rem);
-  color: var(--textMuted, #8a8a8a);
+  color: var(--textMuted, #888888);
 }
 .experience-period,
 .experience-location {
@@ -182,7 +182,7 @@ ease-in-out);
   position: relative;
   padding: var(--padding-xs, 0.25rem) var(--padding-sm, 0.5rem);
   padding-left: var(--padding-xl, 2rem);
-  background: var(--surfaceOpacity, rgba(21, 27, 35, 0.5));
+  background: var(--surfaceOpacity, #25252599));
   border-radius: var(--radius-sm, 0.25rem);
   border: var(--border-1, 0.0625rem) solid transparent;
   transition: border-color var(--transition-base, 0.3s ease-in-out),
@@ -190,8 +190,8 @@ ease-in-out);
 }
 .experience-item:hover .experience-period,
 .experience-item:hover .experience-location {
-  border-color: var(--borderSecondary, #505050);
-  background: var(--surface, #151b23);
+  border-color: var(--borderSecondary, #4a4a4a);
+  background: var(--surface, #252525);
 }
 .experience-period::before {
   content: "\f133";
@@ -200,7 +200,7 @@ ease-in-out);
   left: var(--space-2, 0.5rem);
   font-size: var(--fontSize-lg, 1.25rem);
   animation: float 3s ease-in-out infinite;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -214,7 +214,7 @@ ease-in-out);
   left: var(--space-2, 0.5rem);
   font-size: var(--fontSize-lg, 1.25rem);
   animation: float 3s ease-in-out infinite 1.5s;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -234,7 +234,7 @@ ease-in-out);
   padding-left: var(--padding-xl, 2rem);
   font-size: var(--fontSize-base, 1rem);
   line-height: var(--line-height-relaxed, 1.6);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
   transition: transform var(--transition-fast, 0.15s ease-in-out),
               color var(--transition-fast, 0.15s ease-in-out),
               padding-left var(--transition-fast, 0.15s ease-in-out);
@@ -252,7 +252,7 @@ ease-in-out);
   font-family: 'fa';
   position: absolute;
   left: 0;
-  color: var(--primary, #00ffcc);
+  color: var(--primary, #ffffff);
   font-weight: bold;
   font-size: var(--fontSize-lg, 1.25rem);
   transition: transform var(--transition-fast, 0.15s ease-in-out),
@@ -260,9 +260,9 @@ ease-in-out);
 }
 .experience-description-list:hover {
   padding-left: calc(var(--padding-xl, 2rem) + var(--space-2, 0.5rem));
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
 }
 .experience-description-list:hover::before {
   transform: translateX(6px) scale(1.2);
-  color: var(--accent, #ff00ff);
+  color: var(--accent, #e0e0e0);
 }

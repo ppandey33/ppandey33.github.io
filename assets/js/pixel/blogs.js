@@ -17,10 +17,10 @@ class Blogs extends GenSvg {
 
   async loadBlogs() {
     try {
-      const blogs = await window.App.modules.apiClient.loadJSON("/data/blogs.json");
-      if (!blogs) throw new Error("Failed to load blogs");
+      const data = await window.App.modules.apiClient.loadJSON("/data/blogs.json");
+      if (!data?.blogs) throw new Error("Failed to load blogs");
 
-      this.allBlogs = blogs.map((blog) => ({
+      this.allBlogs = data?.blogs.map((blog) => ({
         id: blog.id,
         title: blog.title,
         excerpt: blog.excerpt,

@@ -14,7 +14,7 @@
   background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-mid), var(--card-bg-end));
   border-radius: var(--radius-xl, 0.75rem);
   padding: var(--padding-xl, 2rem);
-  border: var(--border-1, 0.0625rem) solid var(--border, #2a2a2a);
+  border: var(--border-1, 0.0625rem) solid var(--border, #333333);
   backdrop-filter: blur(var(--card-blur, 30px));
   -webkit-backdrop-filter: blur(var(--card-blur, 30px));
   text-align: center;
@@ -30,7 +30,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   border-radius: var(--radius-xl, 0.75rem) var(--radius-xl, 0.75rem) 0 0;
   transform: scaleX(0);
   transform-origin: left;
@@ -48,7 +48,7 @@
   opacity: var(--opacity-decorative, 0.05);
   transition: opacity var(--transition-base, 0.3s ease-in-out), transform var(--transition-base, 0.3s ease-in-out);
   z-index: 0;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -58,7 +58,7 @@ ease-in-out);
 .contact-text:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
 }
 .contact-text:hover::before {
   transform: scaleX(1);
@@ -75,8 +75,8 @@ ease-in-out);
   line-height: var(--line-height-tight, 1.2);
   background: linear-gradient(
     90deg,
-    var(--primary, #00ffcc),
-    var(--accent, #ff00ff)
+    var(--primary, #ffffff),
+    var(--accent, #e0e0e0)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -87,8 +87,8 @@ ease-in-out);
 .contact-text:hover .contacts-title {
   background: linear-gradient(
     90deg,
-    var(--accent, #ff00ff),
-    var(--primary, #00ffcc)
+    var(--accent, #e0e0e0),
+    var(--primary, #ffffff)
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -103,7 +103,7 @@ ease-in-out);
   background: linear-gradient(135deg, var(--card-bg-start, rgba(42, 54, 84, 0.6)), var(--card-bg-mid, rgba(30, 40, 60, 0.7)), var(--card-bg-end, rgba(26, 31, 58, 0.8)));
   border-radius: var(--radius-xl, 0.75rem);
   padding: var(--padding-lg, 1.5rem);
-  border: var(--border-1, 0.0625rem) solid var(--border, #2a2a2a);
+  border: var(--border-1, 0.0625rem) solid var(--border, #333333);
   backdrop-filter: blur(var(--card-blur, 30px));
   -webkit-backdrop-filter: blur(var(--card-blur, 30px));
   display: flex;
@@ -120,14 +120,14 @@ ease-in-out);
   left: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(180deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(180deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   transform: scaleY(0);
   transition: transform var(--transition-base, 0.3s ease-in-out);
 }
 .contact-item:hover {
   transform: translateX(8px);
   box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
 }
 .contact-item:hover::before {
   transform: scaleY(1);
@@ -135,34 +135,34 @@ ease-in-out);
 .contact-item .icon {
   font-size: var(--fontSize-2xl, 1.953rem);
   font-style: normal;
-  color: var(--primary, #00ffcc);
+  color: var(--primary, #ffffff);
   width: 50px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface, #151b23);
+  background: var(--surface, #252525);
   border-radius: var(--radius-lg, 0.5rem);
-  border: var(--border-1, 0.0625rem) solid var(--borderSecondary, #505050);
+  border: var(--border-1, 0.0625rem) solid var(--borderSecondary, #4a4a4a);
   flex-shrink: 0;
   transition: transform var(--transition-base, 0.3s ease-in-out), background var(--transition-base, 0.3s ease-in-out), box-shadow var(--transition-base, 0.3s ease-in-out);
 }
 .contact-item:hover .icon {
   transform: scale(1.1) rotate(5deg);
-  background: var(--primary, #00ffcc);
+  background: var(--primary, #ffffff);
   color: var(--background, #1a1a1a);
   box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
 }
 .contact-value {
   font-size: var(--fontSize-base, 1rem);
   line-height: var(--line-height-normal, 1.5);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
   flex: 1;
   word-break: break-word;
   transition: color var(--transition-base, 0.3s ease-in-out);
 }
 .contact-item a.contact-value {
-  color: var(--link, #e0e0e0);
+  color: var(--link, #ffffff);
   text-decoration: none;
   position: relative;
   max-width: max-content;
@@ -174,11 +174,11 @@ ease-in-out);
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--primary, #00ffcc);
+  background: var(--primary, #ffffff);
   transition: width var(--transition-base, 0.3s ease-in-out);
 }
 .contact-item:hover a.contact-value {
-  color: var(--primary, #00ffcc);
+  color: var(--primary, #ffffff);
 }
 .contact-item:hover a.contact-value::after {
   width: 100%;

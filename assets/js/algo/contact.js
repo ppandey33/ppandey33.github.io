@@ -72,7 +72,7 @@ class Contacts extends HideComponent {
     header.appendChild(subtitle);
 
     const form = window.App.modules.util.createElement("form", "contact-form");
-    form.setAttribute('autocomplete', 'off');
+    form.setAttribute("autocomplete", "off");
     form.id = "contact-form";
 
     if (contactConfig.group && Array.isArray(contactConfig.group)) {
@@ -216,7 +216,8 @@ class Contacts extends HideComponent {
     }
     this.formStatus.className = "form-status";
     this.formStatus.innerHTML = "";
-    const loadingIcon = "&#xf110;";    this.formButton.disabled = true;
+    const loadingIcon = "&#xf110;";
+    this.formButton.disabled = true;
     this.formButton.classList.add("loading");
     this.formButton.querySelector(".btn-text").textContent = "Sending...";
     this.formButton.querySelector(".btn-icon").innerHTML = loadingIcon;
@@ -276,7 +277,7 @@ class Contacts extends HideComponent {
     this.formStatus.innerHTML = message;
     setTimeout(() => {
       this.formStatus.classList.remove("show");
-    }, 5000);
+    }, 10000);
   }
   submit() {
     if (this.formButton) {

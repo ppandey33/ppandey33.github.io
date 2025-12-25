@@ -98,11 +98,12 @@ class CommonUtilities {
 
   createMobileSidebarControls() {
     if (document.querySelector(".mobile-sidebar-controls")) return;
-    const header = this.createElement("div", "mobile-sidebar-controls");
-    const leftBtn = this.createElement("button", "mobile-sidebar-btn", "👤︎ℹ︎");
-    const rightBtn = this.createElement("button", "mobile-sidebar-btn", "≣");
-    header.appendChild(leftBtn);
-    header.appendChild(rightBtn);
+    const header = this.createElement("div", "mobile-sidebar-controls"),
+      leftBtn = this.createElement("button", "mobile-sidebar-btn fa"),
+      rightBtn = this.createElement("button", "mobile-sidebar-btn fa");
+    leftBtn.innerHTML = "&#xf508;", leftBtn.setAttribute('data-target', 'left-sidebar');
+    rightBtn.innerHTML = "&#xf0c9;", rightBtn.setAttribute('data-target', 'right-sidebar');
+    header.appendChild(leftBtn), header.appendChild(rightBtn);
     const overlay = this.createElement("div");
     overlay.className = "sidebar-overlay";
     document.body.insertBefore(header, document.body.firstChild);

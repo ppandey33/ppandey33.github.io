@@ -3,33 +3,36 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--padding-sm, 0.5rem);
+  gap: var(--gap-xl, 2rem);
 }
 .contact-text {
   flex: 1;
+  max-width: 100%;
 }
 .contacts-description {
-  color: var(--textSecondary, #888888);
+  color: var(--textSecondary, #b0b0b0);
   font-size: var(--fontSize-md, 0.9rem);
   line-height: var(--line-height-loose, 1.8);
   margin-right: 15%;
 }
 .contact-info {
-  border: var(--border-2, 0.125rem) solid var(--border, #2a2a2a);
+  border: var(--border-2, 0.125rem) solid var(--border, #333333);
   padding: var(--padding-xl, 2rem);
   transition: var(--transition-base, 0.3s ease-in-out);
-   border-radius: var(--radius-md, 0.375rem);
+  border-radius: var(--radius-md, 0.375rem);
+  flex-shrink: 0;
 }
 .contact-info:empty {
   display: none;
 }
 .contact-info:hover {
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
   transform: translateY(calc(-1 * var(--space-1, 0.25rem))) !important;
 }
 .contact-text h2 {
   margin-bottom: var(--margin-lg, 1.5rem);
   font-size: var(--fontSize-3xl, 2.441rem);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
 }
 .contact-item {
   display: flex;
@@ -39,20 +42,22 @@
   font-size: var(--fontSize-sm, 0.8rem);
 }
 .contact-item a.contact-value:hover {
-  color: var(--linkHover, #00ff88);
+  color: var(--linkHover, #f0f0f0);
   transform: scale(1.1, 1.1);
   display: inline-block;
 }
 .contact-item .icon {
   font-size: var(--fontSize-lg, 1.25rem);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
   min-width: var(--space-6, 1.5rem);
+  flex-shrink: 0;
 }
 .contact-item a.contact-value {
-  color: var(--link, #c8fcea);
+  color: var(--link, #ffffff);
   transform: scale(1, 1);
   text-decoration: none;
   transition: color var(--transition-fast, 0.15s ease-in-out), transform var(--transition-fast, 0.15s ease-in-out);
+  word-break: break-word;
 }
 .contact-grid {
   top: 50%;
@@ -65,19 +70,20 @@
 .contact-form-wrapper {
   padding: var(--padding-2xl, 3rem);
   margin: var(--margin-xl, 2rem) auto;
+  max-width: 100%;
 }
 .contact-form-header {
   text-align: center;
 }
 .contact-form-title {
-  color: var(--primary);
+  color: var(--primary, #ffffff);
   font-size: var(--fontSize-2xl, 1.953rem);
   font-weight: 700;
   margin: 0 0 var(--margin-sm, 0.5rem) 0;
   text-shadow: 0 var(--space-1, 0.25rem) var(--space-2, 0.5rem) rgba(0, 0, 0, 0.1);
 }
 .contact-form-subtitle {
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
   font-size: var(--fontSize-base, 1rem);
   margin: 0;
 }
@@ -109,48 +115,60 @@
   gap: var(--gap-xs, 0.25rem);
   margin-bottom: var(--margin-sm, 0.5rem);
   font-weight: 600;
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
   font-size: var(--fontSize-sm, 0.875rem);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide, 0.025em);
 }
 .label-required {
-  color: var(--danger);
+  color: var(--danger, #ed0808b0);
   font-size: var(--fontSize-base, 1rem);
 }
 .input-wrapper {
   position: relative;
   border-radius: var(--radius-lg, 0.75rem);
-  border: var(--border-2, 2px) solid var(--border);
+  border: var(--border-2, 2px) solid var(--border, #333333);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--padding-md);
+  padding: 0 var(--padding-md);
   min-height: var(--space-16);
   gap: var(--gap-md);
-  background: var(--background);
+  background: var(--background, #1a1a1a);
+  transition: all var(--transition-base, 0.3s ease-in-out);
+}
+.input-wrapper:has(textarea){
+  padding: var(--padding-md);
 }
 .input-icon {
-  color: var(--primary);
+  color: var(--primary, #ffffff);
   pointer-events: none;
   transition: all var(--transition-base, 0.3s ease-in-out);
   font-size: var(--fontSize-lg, 1.125rem);
+  flex-shrink: 0;
 }
 .textarea-icon {
   transform: none;
   align-self: start;
 }
 .form-input,
-input:-internal-autofill-selected {
+.form-textarea,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
   width: 100%;
   font-size: var(--fontSize-base, 1rem);
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
   background-color: transparent !important;
   background: transparent;
   transition: all var(--transition-base, 0.3s ease-in-out);
   font-family: inherit;
   outline: none;
   border: 0;
+  -webkit-box-shadow: 0 0 0 1000px var(--background, #1a1a1a) inset !important;
+  -webkit-text-fill-color: var(--textSecondary, #b0b0b0) !important;
+  min-height: var(--space-16);
 }
 .form-textarea {
   resize: vertical;
@@ -158,22 +176,23 @@ input:-internal-autofill-selected {
 }
 .input-wrapper:focus,
 .input-wrapper:focus-within {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 var(--shadow-primary-light) var(--shadow-primary-medium);
+  border-color: var(--primary, #ffffff);
+  box-shadow: 0 0 0 3px var(--shadow-primary-light, rgba(0, 255, 204, 0.2));
   transform: translateY(calc(-1 * var(--space-1, 0.25rem)));
 }
 .form-input:focus ~ .input-icon,
 .input-wrapper:focus-within .input-icon {
-  transform: translateY(-50%) scale(var(--scale-hover-medium, 1.1));
+  transform: scale(1.1);
 }
 .textarea-icon {
   transform: none;
 }
 .input-wrapper:focus-within .textarea-icon {
-  transform: scale(var(--scale-hover-medium, 1.1));
+  transform: scale(1.1);
 }
-.form-input::placeholder {
-  color: var(--textMuted);
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--textMuted, #888888);
 }
 .form-actions {
   display: flex;
@@ -182,11 +201,20 @@ input:-internal-autofill-selected {
   animation: slideInLeft var(--animation-fast, 0.5s) ease-out 0.5s both;
 }
 .btn-submit {
-  display: flex !important;
+  display: inline-flex !important;
   gap: var(--gap-md);
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
+  padding: var(--padding-md, 1rem) var(--padding-xl, 2rem);
+  border-radius: var(--radius-md, 0.5rem);
+  background: var(--primary, #ffffff);
+  color: var(--background, #1a1a1a);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base, 0.3s ease-in-out);
 }
 .btn-submit::before {
   content: "";
@@ -195,12 +223,13 @@ input:-internal-autofill-selected {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, var(--background), transparent);
+  background: linear-gradient(90deg, transparent, var(--background, #1a1a1a), transparent);
   transition: left var(--transition-base);
+  opacity: 0.2;
 }
 .btn-submit:hover {
   transform: translateY(calc(-1 * var(--space-1, 0.25rem)));
-  box-shadow: var(--shadow-lg, 0 0.5rem 1rem) var(--shadow-primary-light);
+  box-shadow: 0 0.5rem 1rem var(--shadow-primary-light, rgba(0, 255, 204, 0.3));
 }
 .btn-submit:hover::before {
   left: 100%;
@@ -219,10 +248,10 @@ input:-internal-autofill-selected {
   align-items: center;
 }
 .btn-submit:hover .btn-icon {
-  transform: translateX(var(--space-2, 0.25rem)) rotate(var(--rotate-negative-small, -15deg));
+  transform: translateX(var(--space-2, 0.25rem)) rotate(-15deg);
 }
 .btn-submit.loading .btn-icon {
-  animation: pulse var(--animation-pulse, 1.5s) ease-in-out infinite;
+  animation: pulse 1.5s ease-in-out infinite;
 }
 .form-status {
   margin-top: var(--margin-lg, 1.5rem);
@@ -233,6 +262,9 @@ input:-internal-autofill-selected {
   display: none;
   position: relative;
   overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xl);
 }
 .form-status::before {
   content: "";
@@ -244,61 +276,43 @@ input:-internal-autofill-selected {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
 }
 .form-status.show {
-  display: block;
-  animation: statusSlideIn var(--animation-fast, 0.5s) ease-out;
+  display: flex;
+  animation: statusSlideIn 0.5s ease-out;
 }
 .form-status.success {
   background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
   color: #065f46;
-  border: var(--border-2, 2px) solid #10b981;
-  box-shadow: var(--shadow-md, 0 0.25rem 0.5rem) rgba(16, 185, 129, 0.3);
+  border: 2px solid #10b981;
+  box-shadow: 0 0.25rem 0.5rem rgba(16, 185, 129, 0.3);
 }
 .form-status.success::before {
-  animation: shimmer var(--animation-rotate, 2s) ease-in-out;
+  animation: shimmer 2s ease-in-out;
 }
 .form-status.error {
   background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
   color: #991b1b;
-  border: var(--border-2, 2px) solid #ef4444;
-  box-shadow: var(--shadow-md, 0 0.25rem 0.5rem) rgba(239, 68, 68, 0.3);
+  border: 2px solid #ef4444;
+  box-shadow: 0 0.25rem 0.5rem rgba(239, 68, 68, 0.3);
 }
 .form-status.error::before {
-  animation: shimmer var(--animation-rotate, 2s) ease-in-out;
+  animation: shimmer 2s ease-in-out;
 }
 .status-icon {
   display: inline-block;
   margin-right: var(--margin-sm, 0.5rem);
   font-size: var(--fontSize-xl, 1.25rem);
-  animation: iconBounce var(--animation-base, 0.6s) ease-out;
+  animation: iconBounce 0.6s ease-out;
 }
 .form-status.success .status-icon {
-  animation: iconBounce var(--animation-base, 0.6s) ease-out, rotate var(--animation-base, 0.6s) ease-out;
+  animation: iconBounce 0.6s ease-out, rotate 0.6s ease-out;
 }
 .form-status.error .status-icon {
-  animation: shake var(--animation-fast, 0.5s) ease-out;
-}
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(var(--translate-initial-sm, 1.875rem));
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  animation: shake 0.5s ease-out;
 }
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(calc(-1 * var(--translate-initial-sm, 1.25rem)));
+    transform: translateX(-1.25rem);
   }
   to {
     opacity: 1;
@@ -312,17 +326,17 @@ input:-internal-autofill-selected {
     opacity: 1;
   }
   50% {
-    transform: scale(var(--scale-hover-xl, 1.2));
+    transform: scale(1.2);
     opacity: 0.8;
   }
 }
 @keyframes statusSlideIn {
   0% {
     opacity: 0;
-    transform: translateY(calc(-1 * var(--translate-initial-sm, 1.25rem))) scale(var(--scale-active, 0.95));
+    transform: translateY(-1.25rem) scale(0.95);
   }
   50% {
-    transform: translateY(var(--space-2, 0.3125rem)) scale(1.02);
+    transform: translateY(0.3125rem) scale(1.02);
   }
   100% {
     opacity: 1;
@@ -343,13 +357,13 @@ input:-internal-autofill-selected {
     transform: translateY(0);
   }
   25% {
-    transform: translateY(calc(-1 * var(--space-4, 0.625rem)));
+    transform: translateY(-0.625rem);
   }
   50% {
     transform: translateY(0);
   }
   75% {
-    transform: translateY(calc(-1 * var(--space-2, 0.3125rem)));
+    transform: translateY(-0.3125rem);
   }
 }
 @keyframes rotate {
@@ -357,7 +371,7 @@ input:-internal-autofill-selected {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(var(--rotate-large, 360deg));
+    transform: rotate(360deg);
   }
 }
 @keyframes shake {
@@ -366,9 +380,9 @@ input:-internal-autofill-selected {
     transform: translateX(0);
   }
   25% {
-    transform: translateX(calc(-1 * var(--space-4, 0.625rem)));
+    transform: translateX(-0.625rem);
   }
   75% {
-    transform: translateX(var(--space-4, 0.625rem));
+    transform: translateX(0.625rem);
   }
 }

@@ -27,21 +27,21 @@
 .experience-item .experience-header-container {
   padding: var(--space-10);
   padding-bottom: var(--padding-sm);
-  background: rgb(from var(--background) r g b / 0.6) 70%;
-  border-bottom: var(--border-1) var(--border) solid;
-  border-left: var(--border-1) var(--border) solid;
+  background: rgb(from var(--background, #1a1a1a) r g b / 0.6) 70%;
+  border-bottom: var(--border-1) var(--border, #333333) solid;
+  border-left: var(--border-1) var(--border, #333333) solid;
 }
 .experience-header {
   margin-bottom: var(--margin-md);
 }
 .experience-title {
   font-size: var(--fontSize-lg);
-  color: var(--primary);
+  color: var(--primary, #ffffff);
   margin-bottom: var(--margin-sm);
 }
 .experience-company {
   font-size: var(--fontSize-lg);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
   margin-bottom: var(--margin-sm);
 }
 .experience-meta {
@@ -49,7 +49,7 @@
   gap: var(--gap-xl);
   margin-bottom: var(--margin-lg);
   font-size: var(--fontSize-md);
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
 }
 .experience-description {
   list-style: none;
@@ -65,7 +65,7 @@
   top: 0;
   width: var(--border-4);
   height: 100%;
-  background: linear-gradient(to top, rgb(from var(--border) r g b / 0.1), var(--borderSecondary));
+  background: linear-gradient(to top, rgb(from var(--border, #333333) r g b / 0.1), var(--borderSecondary, #4a4a4a));
 }
 .experience-description::after {
   content: "";
@@ -74,15 +74,15 @@
   top: calc(-1 * var(--space-3));
   width: var(--space-4);
   height: var(--space-4);
-  background: var(--background);
-  border: var(--space-1) solid var(--primary);
+  background: var(--background, #1a1a1a);
+  border: var(--space-1) solid var(--primary, #ffffff);
   border-radius: 50%;
 }
 .experience-description li {
   padding: var(--padding-sm) 0;
   padding-left: var(--padding-lg);
   position: relative;
-  color: var(--textTertiary);
+  color: var(--textTertiary, #d0d0d0);
   line-height: var(--line-height-relaxed);
   font-size: var(--fontSize-sm);
 }
@@ -91,7 +91,7 @@
   font-family: 'fa';
   position: absolute;
   left: 0;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -132,17 +132,17 @@
   border: none;
 }
 .experience-item {
-  border: var(--border-2) solid var(--border);
+  border: var(--border-2) solid var(--border, #333333);
   transition: var(--transition-base);
 }
 .experience-item:hover {
   transform: translateY(calc(-1 * var(--space-1))) !important;
 }
 .experience-item:hover .experience-description::before {
-  background: linear-gradient(to top, rgb(from var(--primary) r g b / 0.1), var(--primary));
+  background: linear-gradient(to top, rgb(from var(--primary, #ffffff) r g b / 0.1), var(--primary, #ffffff));
   height: 100%;
 }
 .experience-item:hover .experience-description::after{
   border-color: transparent;
-  background-color: var(--primary);
+  background-color: var(--primary, #ffffff);
 }

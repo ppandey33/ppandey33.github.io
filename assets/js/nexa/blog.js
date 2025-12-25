@@ -4,6 +4,7 @@ class Blog {
     this.BLOGS_PATH = `${this.prefix}data/blogs.json`;
     this.SHARE_PATH = `${this.prefix}data/share.json`;
     this.eventListeners = [];
+    this.goat = "";
   }
 
   getDataPathPrefix() {
@@ -20,18 +21,18 @@ class Blog {
 
   async initBlogPostPage() {
     try {
-      const blogs = await window.App.modules.apiClient.loadJSON(this.BLOGS_PATH);
-      if (!blogs) throw new Error("Failed to load blogs");
-
+      const data = await window.App.modules.apiClient.loadJSON(this.BLOGS_PATH);
+      if (!data?.blogs) throw new Error("Failed to load blogs");
+      this.goat = data?.goat;
       const blogInfo = this.getCurrentBlogInfo();
       if (!blogInfo) return console.error("Could not determine blog info from URL");
 
-      const currentBlog = blogs.find((b) => b.slug === blogInfo.slug && b.categorySlug === blogInfo.categorySlug);
+      const currentBlog = data?.blogs.find((b) => b.slug === blogInfo.slug && b.categorySlug === blogInfo.categorySlug);
       if (!currentBlog) return console.error("Blog not found");
 
       this.populateMetadata(currentBlog);
       this.populateTags(currentBlog.tags);
-      this.setupNavigation(blogs, currentBlog, blogInfo.categorySlug);
+      this.setupNavigation(data?.blogs, currentBlog, blogInfo.categorySlug);
       await this.setupShareButtons(currentBlog);
     } catch (error) {
       console.error("Error loading blog post:", error);
@@ -153,15 +154,13 @@ class Blog {
           btn.addEventListener("click", handler);
           this.eventListeners.push({ el: btn, type: "click", handler });
           container.appendChild(btn);
-          if (button?.data?.goat) {
-            await this.getGoatCount(`${button?.data?.goat}${encodeURIComponent(window.location.pathname)}.json`).then((res) => {
-              const countEl = window.App.modules.util.createElement("i", "", res),
-                msg = window.App.modules.util.createElement("span", "read-Count", ` Reads`);
-              countEl.setAttribute("data-value", res);
-              msg.appendChild(countEl), container.appendChild(msg);
-            });
-          }
         }
+      });
+      this.goat && await this.getGoatCount(`${this.goat}${encodeURIComponent(window.location.pathname)}.json`).then((res) => {
+        const countEl = window.App.modules.util.createElement("i", "", res),
+          msg = window.App.modules.util.createElement("span", "read-Count", ` Reads`);
+        countEl.setAttribute("data-value", res);
+        msg.appendChild(countEl), container.appendChild(msg);
       });
     } catch (error) {
       console.error("Error loading share platforms:", error);

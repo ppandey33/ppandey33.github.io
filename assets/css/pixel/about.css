@@ -8,7 +8,7 @@
   background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-mid), var(--card-bg-end));
   border-radius: var(--radius-xl);
   padding: var(--padding-2xl);
-  border: var(--border-1) solid var(--border);
+  border: var(--border-1) solid var(--border, #333333);
   backdrop-filter: blur(var(--card-blur));
   -webkit-backdrop-filter: blur(var(--card-blur));
   transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
@@ -23,7 +23,7 @@
   left: 0;
   right: 0;
   height: var(--gradient-bar-md);
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   transform: scaleX(0);
   transform-origin: left;
@@ -40,7 +40,7 @@
   opacity: var(--opacity-decorative, 0.05);
   transition: opacity var(--transition-base), transform var(--transition-base);
   z-index: 0;
-  background: linear-gradient(90deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -49,7 +49,7 @@
 .about-content [data-about]:hover {
   transform: translateY(var(--translate-y-hover));
   box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
-  border-color: var(--primary);
+  border-color: var(--primary, #ffffff);
 }
 .about-content [data-about]:hover::before {
   transform: scaleX(1);
@@ -66,7 +66,7 @@
   letter-spacing: var(--letter-spacing-tight);
   position: relative;
   display: inline-block;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -75,7 +75,7 @@
   animation-delay: 0.2s;
 }
 .about-content [data-about]:hover .about-title {
-  background: linear-gradient(90deg, var(--accent), var(--primary));
+  background: linear-gradient(90deg, var(--accent, #e0e0e0), var(--primary, #ffffff));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -87,7 +87,7 @@
   left: 0;
   width: var(--decoration-underline);
   height: var(--gradient-bar-md);
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   border-radius: var(--radius-sm);
   animation: expandLine var(--transition-slow) ease-in-out;
   animation-delay: 0.4s;
@@ -118,7 +118,7 @@
 .about-paragraph {
   font-size: var(--fontSize-base, 1rem);
   line-height: var(--line-height-relaxed);
-  color: var(--textPrimary);
+  color: var(--textPrimary, #ffffff);
   margin: 0;
   text-align: justify;
   position: relative;
@@ -142,7 +142,7 @@
   top: var(--space-2);
   width: var(--gradient-bar-md);
   height: calc(100% - var(--space-4));
-  background: linear-gradient(180deg, var(--primary), transparent);
+  background: linear-gradient(180deg, var(--primary, #ffffff), transparent);
   border-radius: var(--radius-sm);
   transition: height var(--transition-fast), background var(--transition-fast);
 }
@@ -152,22 +152,22 @@
 .about-paragraph:hover::before {
   height: 100%;
   top: 0;
-  background: linear-gradient(180deg, var(--primary), var(--accent));
+  background: linear-gradient(180deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
 }
 .about-paragraph:first-child {
   font-size: var(--fontSize-lg);
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
   font-weight: 500;
 }
 .about-paragraph:first-child::before {
-  background: linear-gradient(180deg, var(--primary), var(--accent), transparent);
+  background: linear-gradient(180deg, var(--primary, #ffffff), var(--accent, #e0e0e0), transparent);
   width: var(--gradient-bar-lg);
 }
 .about-paragraph:first-child:hover::before {
-  background: linear-gradient(180deg, var(--accent), var(--primary));
+  background: linear-gradient(180deg, var(--accent, #e0e0e0), var(--primary, #ffffff));
 }
 .about-paragraph strong,
 .about-paragraph b {
-  color: var(--primary);
+  color: var(--primary, #ffffff);
   font-weight: 600;
 }

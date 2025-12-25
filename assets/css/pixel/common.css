@@ -5,7 +5,7 @@ body {
 .no-results{
   text-align: center;
   padding: var(--padding-lg);
-  color: var(--textMuted);
+  color: var(--textMuted, #888888);
   font-size: var(--fontSize-2xl);
 }
 .status-bar {
@@ -31,7 +31,7 @@ body {
   margin: 0 auto;
 }
 .nav-container {
-  background-color: var(--surfaceOpacity, #151b239a);
+  background-color: var(--surfaceOpacity, #25252599);
 }
 .section {
   padding: var(--padding-2xl, 3rem);
@@ -67,10 +67,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface, #151b23);
-  border: var(--border-1, 0.0625rem) solid var(--borderSecondary, #505050);
+  background: var(--surface, #252525);
+  border: var(--border-1, 0.0625rem) solid var(--borderSecondary, #4a4a4a);
   border-radius: var(--radius-md, 0.375rem);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
   font-size: var(--fontSize-xl, 1.563rem);
   cursor: pointer;
   transition: all var(--transition-base, 0.3s ease-in-out);
@@ -81,13 +81,13 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(135deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   opacity: 0;
   transition: opacity var(--transition-base, 0.3s ease-in-out);
   z-index: -1;
 }
 .pager-btn:hover:not(.disabled) {
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
   color: var(--background, #1a1a1a);
   transform: scale(1.15) rotate(5deg);
   box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
@@ -104,8 +104,8 @@ body {
 .pager-indicator {
   width: 12px;
   height: 12px;
-  background: var(--surface, #151b23);
-  border: var(--border-2, 0.125rem) solid var(--borderSecondary, #505050);
+  background: var(--surface, #252525);
+  border: var(--border-2, 0.125rem) solid var(--borderSecondary, #4a4a4a);
   border-radius: 2px;
   cursor: pointer;
   transition: all var(--transition-base, 0.3s ease-in-out);
@@ -117,7 +117,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--primary, #00ffcc), var(--accent, #ff00ff));
+  background: linear-gradient(135deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
   opacity: 0;
   transform: scale(0.5);
   transition: all var(--transition-base, 0.3s ease-in-out);
@@ -126,7 +126,7 @@ body {
   content: "";
   position: absolute;
   inset: -4px;
-  background: linear-gradient(135deg, var(--primary, #00ffcc), var(--accent, #ff00ff)) border-box;
+  background: linear-gradient(135deg, var(--primary, #ffffff), var(--accent, #e0e0e0)) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -136,7 +136,7 @@ body {
 }
 .pager-indicator:hover:not(.active) {
   transform: scale(1.3);
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
 }
 .pager-indicator:hover:not(.active)::before {
   opacity: 0.3;
@@ -167,23 +167,23 @@ body {
   align-items: center;
   gap: var(--gap-xs, 0.25rem);
   font-size: var(--fontSize-lg, 1.25rem);
-  color: var(--textSecondary, #888888);
+  color: var(--textSecondary, #b0b0b0);
   font-weight: 500;
   padding: 0 var(--padding-sm, 0.5rem);
 }
 .pager-info span:first-child {
-  color: var(--primary, #00ffcc);
+  color: var(--primary, #ffffff);
   font-weight: 600;
   font-size: var(--fontSize-base, 1rem);
 }
 .image-shades {
   background: linear-gradient(
     to bottom,
-    rgb(from var(--background) r g b / 0.5) 10%,
-    rgb(from var(--background) r g b / 0.25) 30%,
-    rgb(from var(--background) r g b / 0.45) 55%,
-    rgb(from var(--background) r g b / 0.85) 80%,
-    var(--background) 100%
+    rgb(from var(--background, #1a1a1a) r g b / 0.5) 10%,
+    rgb(from var(--background, #1a1a1a) r g b / 0.25) 30%,
+    rgb(from var(--background, #1a1a1a) r g b / 0.45) 55%,
+    rgb(from var(--background, #1a1a1a) r g b / 0.85) 80%,
+    var(--background, #1a1a1a) 100%
   );
   position: absolute;
   height: 100%;

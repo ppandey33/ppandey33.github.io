@@ -386,7 +386,7 @@ defaults:
     values:
       permalink: /blogs/algo.html
       layout: algo/blog
-      modules: blog
+      modules: [blog, info]
       stylesheets: [blog, info, contact]
       basestyle: [giscus, coffee]
 

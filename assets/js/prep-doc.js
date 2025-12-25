@@ -596,7 +596,6 @@ class PrepDoc {
   }
 
   generatePDF(data) {
-    // For mobile devices, offer alternative download methods
     if (this.isMobile) {
       this.generatePDFMobile(data);
       return;
@@ -641,8 +640,6 @@ class PrepDoc {
 
   generatePDFMobile(data) {
     const html = this.generateResumeHTML(data);
-
-    // Create a full HTML document as blob
     const fullHTML = `
     <!DOCTYPE html>
     <html>
@@ -680,12 +677,9 @@ class PrepDoc {
 
     const blob = new Blob([fullHTML], { type: "text/html" });
     const url = URL.createObjectURL(blob);
-
-    // Open in new window for mobile viewing and printing
     const printWindow = window.open(url, "_blank");
 
     if (!printWindow) {
-      // Fallback: Download as HTML file
       const link = document.createElement("a");
       link.href = url;
       link.download = `${data.personal.name.replace(/ /g, "_")}_Resume.html`;
@@ -736,8 +730,6 @@ class PrepDoc {
       throw new Error(`Unsupported format: ${format}`);
     }
   }
-
-  // Helper method to check if pop-ups are blocked
   isPopupBlocked() {
     const testWindow = window.open("", "_blank");
     if (!testWindow || testWindow.closed || typeof testWindow.closed === "undefined") {
