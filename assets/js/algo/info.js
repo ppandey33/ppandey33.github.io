@@ -14,6 +14,8 @@ class Info extends GenSvg {
     if (this.isHome) {
       await this.loadSkills();
       await this.updateSiteInfo();
+      const info = document.querySelectorAll("[data-img]");
+      info && info.forEach((e)=> e.remove());
     } else {
       const info = document.querySelectorAll("[data-clean-panel]");
       info && info.forEach((e)=> e.remove());

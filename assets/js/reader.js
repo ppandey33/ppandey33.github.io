@@ -4,7 +4,7 @@ export class Reader {
     this.db = null;
     this.readingTimer = null;
     this.timeSpent = 0;
-    this.storageType = null; // 'indexedDB', 'localStorage', or 'memory'
+    this.storageType = null;
     this.isMinimized = false;
     this.highlightColors = {
       yellow: "#fff59d",
