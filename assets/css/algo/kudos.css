@@ -6,11 +6,11 @@
 .achievement-item {
   padding: var(--padding-xl);
   text-align: center;
-  border: var(--border-2) solid var(--border);
+  border: var(--border-2) solid var(--border, #333333);
   transition: var(--transition-base);
 }
 .achievement-item:hover {
-  border-color: var(--primary);
+  border-color: var(--primary, #ffffff);
   transform: translateY(calc(-1 * var(--space-1))) !important;
 }
 .achievement-icon {
@@ -49,9 +49,9 @@
 .achievement-title {
   font-size: var(--fontSize-lg);
   margin-bottom: var(--margin-sm);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
 }
 .achievement-description {
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
   font-size: var(--fontSize-md);
 }

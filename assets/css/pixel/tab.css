@@ -12,7 +12,7 @@
   text-align: center;
   cursor: pointer;
   position: relative;
-  color: var(--textPrimary);
+  color: var(--textPrimary, #ffffff);
   transition: color var(--transition-base);
   border: none;
   background: none;
@@ -20,7 +20,7 @@
   font-weight: 500;
 }
 .tab.active {
-  background: linear-gradient(90deg, var(--accent, #ff00ff), var(--primary, #00ffcc));
+  background: linear-gradient(90deg, var(--accent, #e0e0e0), var(--primary, #ffffff));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -33,7 +33,7 @@
     transform: translateX(0%);
     width: 0;
     height: calc(var(--space-1) / 1.5);
-    background: linear-gradient(90deg, var(--primary, #151b23) 0%, var(--accent, #1eeb1e) 100%);
+    background: linear-gradient(90deg, var(--primary, #ffffff) 0%, var(--accent, #e0e0e0) 100%);
     transition: width var(--transition-base), transform var(--transition-base);
 }
 .tab.active::after {

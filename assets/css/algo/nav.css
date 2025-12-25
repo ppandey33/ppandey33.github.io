@@ -15,18 +15,18 @@
 .brand-link {
   display: flex;
   flex-direction: column;
-  border-bottom: var(--border-1) inset var(--border);
+  border-bottom: var(--border-1) inset var(--border, #333333);
   margin-bottom: var(--margin-lg);
   padding-bottom: var(--padding-lg);
   align-items: center;
   gap: var(--gap-sm);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
   font-weight: 600;
   font-size: var(--fontSize-lg);
   text-decoration: none;
 }
 .brand-symbol {
-  color: var(--primary);
+  color: var(--primary, #ffffff);
 }
 .nav-container {
   height: 100vh;
@@ -40,7 +40,6 @@
   right: 0;
   padding: var(--padding-sm, 0.5rem);
   z-index: var(--z-base);
-  overflow: overlay;
 }
 .site-nav {
   max-width: fit-content;
@@ -49,7 +48,9 @@ nav {
   display: flex;
   justify-content: right;
   align-items: center;
-  border-bottom: var(--border-1) inset var(--border);
+  border-bottom: var(--border-1) inset var(--border, #333333);
+  margin-bottom: var(--margin-lg);
+  padding-bottom: var(--padding-lg);
 }
 .nav-list {
   display: flex;
@@ -67,10 +68,10 @@ nav {
   pointer-events: none;
 }
 .nav-list a {
-  color: var(--link);
+  color: var(--link, #ffffff);
   text-decoration: none;
   font-size: var(--fontSize-lg, 1.25rem);
-  border: var(--border-1) solid var(--border);
+  border: var(--border-1) solid var(--border, #333333);
   border-radius: var(--radius-full, 50%);
   width: 100%;
   line-height: var(--line-height-tight);
@@ -86,9 +87,9 @@ nav {
 }
 .nav-list a:hover,
 .nav-list a.active {
-  color: var(--linkHover);
-  background: var(--surface);
-  border: var(--border-1) solid var(--link);
+  color: var(--linkHover, #f0f0f0);
+  background: var(--surface, #252525);
+  border: var(--border-1) solid var(--link, #ffffff);
   transform: scale(1.1, 1.1);
 }
 .header-controls {

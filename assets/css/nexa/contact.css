@@ -3,18 +3,19 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--padding-sm, 0.5rem);
+    gap: var(--gap-xl, 2rem);
 }
 .contact-text {
   flex: 1;
 }
 .contacts-description {
-  color: var(--textSecondary, #888888);
+  color: var(--textSecondary, #b0b0b0);
   font-size: var(--fontSize-md, 0.9rem);
   line-height: var(--line-height-loose, 1.8);
   margin-right: 15%;
 }
 .contact-info {
-  border: var(--border-2, 0.125rem) solid var(--border, #2a2a2a);
+  border: var(--border-2, 0.125rem) solid var(--border, #333333);
   padding: var(--padding-xl, 2rem);
   transition: var(--transition-base, 0.3s ease-in-out);
 }
@@ -22,13 +23,13 @@
   display: none;
 }
 .contact-info:hover {
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
   transform: translateY(calc(-1 * var(--space-1, 0.25rem))) !important;
 }
 .contact-text h2 {
   margin-bottom: var(--margin-lg, 1.5rem);
   font-size: var(--fontSize-3xl, 2.441rem);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
 }
 .contact-item {
   display: flex;
@@ -38,17 +39,17 @@
   font-size: var(--fontSize-sm, 0.8rem);
 }
 .contact-item a.contact-value:hover {
-  color: var(--linkHover, #00ff88);
+  color: var(--linkHover, #f0f0f0);
   transform: scale(1.1, 1.1);
   display: inline-block;
 }
 .contact-item .icon {
   font-size: var(--fontSize-lg, 1.25rem);
-  color: var(--textPrimary, #e6e6e6);
+  color: var(--textPrimary, #ffffff);
   min-width: var(--space-6, 1.5rem);
 }
 .contact-item a.contact-value {
-  color: var(--link, #c8fcea);
+  color: var(--link, #ffffff);
   transform: scale(1, 1);
   text-decoration: none;
   transition: color var(--transition-fast, 0.15s ease-in-out), transform var(--transition-fast, 0.15s ease-in-out);
@@ -69,14 +70,14 @@
   text-align: center;
 }
 .contact-form-title {
-  color: var(--primary);
+  color: var(--primary, #ffffff);
   font-size: var(--fontSize-2xl, 1.953rem);
   font-weight: 700;
   margin: 0 0 var(--margin-sm, 0.5rem) 0;
   text-shadow: 0 var(--space-1, 0.25rem) var(--space-2, 0.5rem) rgba(0, 0, 0, 0.1);
 }
 .contact-form-subtitle {
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
   font-size: var(--fontSize-base, 1rem);
   margin: 0;
 }
@@ -108,29 +109,32 @@
   gap: var(--gap-xs, 0.25rem);
   margin-bottom: var(--margin-sm, 0.5rem);
   font-weight: 600;
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
   font-size: var(--fontSize-sm, 0.875rem);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide, 0.025em);
 }
 .label-required {
-  color: var(--danger);
+  color: var(--danger, #ed0808b0);
   font-size: var(--fontSize-base, 1rem);
 }
 .input-wrapper {
   position: relative;
   border-radius: var(--radius-lg, 0.75rem);
-  border: var(--border-2, 2px) solid var(--border);
+  border: var(--border-2, 2px) solid var(--border, #333333);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--padding-md);
+  padding: 0 var(--padding-md);
   min-height: var(--space-16);
   gap: var(--gap-md);
-  background: var(--background);
+  background: var(--background, #1a1a1a);
+}
+.input-wrapper:has(textarea){
+  padding: var(--padding-md);
 }
 .input-icon {
-  color: var(--primary);
+  color: var(--primary, #ffffff);
   pointer-events: none;
   transition: all var(--transition-base, 0.3s ease-in-out);
   font-size: var(--fontSize-lg, 1.125rem);
@@ -140,16 +144,21 @@
   align-self: start;
 }
 .form-input,
-input:-internal-autofill-selected {
+.form-textarea,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
   width: 100%;
   font-size: var(--fontSize-base, 1rem);
-  color: var(--textSecondary);
+  color: var(--textSecondary, #b0b0b0);
   background-color: transparent !important;
   background: transparent;
   transition: all var(--transition-base, 0.3s ease-in-out);
   font-family: inherit;
   outline: none;
   border: 0;
+  min-height: var(--space-16);
 }
 .form-textarea {
   resize: vertical;
@@ -157,7 +166,7 @@ input:-internal-autofill-selected {
 }
 .input-wrapper:focus,
 .input-wrapper:focus-within {
-  border-color: var(--primary);
+  border-color: var(--primary, #ffffff);
   box-shadow: 0 0 0 var(--shadow-primary-light) var(--shadow-primary-medium);
   transform: translateY(calc(-1 * var(--space-1, 0.25rem)));
 }
@@ -172,7 +181,7 @@ input:-internal-autofill-selected {
   transform: scale(var(--scale-hover-medium, 1.1));
 }
 .form-input::placeholder {
-  color: var(--textMuted);
+  color: var(--textMuted, #888888);
 }
 .form-actions {
   display: flex;
@@ -194,7 +203,7 @@ input:-internal-autofill-selected {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, var(--background), transparent);
+  background: linear-gradient(90deg, transparent, var(--background, #1a1a1a), transparent);
   transition: left var(--transition-base);
 }
 .btn-submit:hover {
@@ -232,6 +241,9 @@ input:-internal-autofill-selected {
   display: none;
   position: relative;
   overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xl);
 }
 .form-status::before {
   content: "";
@@ -243,7 +255,7 @@ input:-internal-autofill-selected {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
 }
 .form-status.show {
-  display: block;
+  display: flex;
   animation: statusSlideIn var(--animation-fast, 0.5s) ease-out;
 }
 .form-status.success {

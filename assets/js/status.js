@@ -231,10 +231,10 @@ class Status extends Device {
 
     this.networkBars.forEach((bar, index) => {
       if (index < activeBars) {
-        bar.style.fill = "var(--textTertiary, #b0b0b0)";
+        bar.style.fill = "var(--textTertiary, #d0d0d0)";
         bar.style.opacity = "1";
       } else {
-        bar.style.fill = "var(--textMuted)";
+        bar.style.fill = "var(--textMuted, #888888)";
         bar.style.opacity = "0.6";
       }
     });
@@ -254,14 +254,14 @@ class Status extends Device {
     const level = state.battery.level;
     const width = (level / 100) * 18;
     this.batteryFill.setAttribute("width", width);
-    let color = "var(--textPrimary)";
+    let color = "var(--textPrimary, #ffffff)";
     if (state.battery.charging) {
-      color = "var(--success, #b0b0b0)";
+      color = "var(--success, #00ff1596)";
       this.batteryFill.classList.add("charging-pulse");
     } else {
       this.batteryFill.classList.remove("charging-pulse");
-      if (level < 20) color = "var(--danger, #cd7f32)";
-      else if (level < 50) color = "var(--warning, #ffd700)";
+      if (level < 20) color = "var(--danger, #ed0808b0)";
+      else if (level < 50) color = "var(--warning, #ffef1091)";
       else color = "var(--dimond, #b0b0b0)";
     }
     this.batteryFill.style.fill = color;
@@ -314,10 +314,10 @@ class Status extends Device {
     const progress = document.getElementById("batteryProgress");
     progress.style.width = `${level}%`;
 
-    let progressColor = "var(--success)";
-    if (charging) progressColor = "var(--diamond)";
-    else if (level < 20) progressColor = "var(--danger)";
-    else if (level < 50) progressColor = "var(--warning)";
+    let progressColor = "var(--success, #00ff1596)";
+    if (charging) progressColor = "var(--diamond, #38e471)";
+    else if (level < 20) progressColor = "var(--danger, #ed0808b0)";
+    else if (level < 50) progressColor = "var(--warning, #ffef1091)";
     progress.style.background = progressColor;
     const qualityBadge = document.getElementById("batteryQuality");
     qualityBadge.textContent = quality;
@@ -367,7 +367,7 @@ class Status extends Device {
     outline.setAttribute("width", "22");
     outline.setAttribute("height", "11");
     outline.setAttribute("rx", "2.5");
-    outline.style.stroke = "var(--textPrimary)";
+    outline.style.stroke = "var(--textPrimary, #ffffff)";
     outline.setAttribute("stroke-opacity", "0.35");
     outline.setAttribute("fill", "none");
     svg.appendChild(outline);
@@ -377,7 +377,7 @@ class Status extends Device {
     terminal.setAttribute("width", "3");
     terminal.setAttribute("height", "5");
     terminal.setAttribute("rx", "1");
-    terminal.style.fill = "var(--textPrimary)";
+    terminal.style.fill = "var(--textPrimary, #ffffff)";
     terminal.setAttribute("fill-opacity", "0.4");
     svg.appendChild(terminal);
     const fill = document.createElementNS("http://www.w3.org/2000/svg", "rect");
@@ -387,7 +387,7 @@ class Status extends Device {
     fill.setAttribute("width", "18");
     fill.setAttribute("height", "8");
     fill.setAttribute("rx", "1.5");
-    fill.style.fill = "var(--textPrimary)";
+    fill.style.fill = "var(--textPrimary, #ffffff)";
     svg.appendChild(fill);
 
     return svg;

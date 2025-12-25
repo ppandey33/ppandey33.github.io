@@ -15,23 +15,23 @@
   flex: 9;
 }
 .skill-category {
-  border: var(--border-2) solid var(--border, #2a2a2a);
+  border: var(--border-2) solid var(--border, #333333);
   transition: var(--transition-base);
   min-width: 15rem;
   max-width: fit-content;
   height: fit-content;
 }
 .skill-category:hover {
-  border-color: var(--primary, #00ffcc);
+  border-color: var(--primary, #ffffff);
   transform: translateY(calc(-1 * var(--space-1))) !important;
 }
 .skill-category h3 {
-  color: var(--textPrimary, #e6e6e6)
+  color: var(--textPrimary, #ffffff)
   font-size: var(--fontSize-lg);
   margin-bottom: var(--margin-sm);
   padding: var(--padding-md);
-  background: rgb(from var(--cardHeader, #000000) r g b / 0.2);
-  border-bottom: var(--border-1) var(--border, #2a2a2a) solid;
+  background: rgb(from var(--cardHeader, #0a0a0a) r g b / 0.2);
+  border-bottom: var(--border-1) var(--border, #333333) solid;
 }
 .skill-list {
   list-style: none;
@@ -41,7 +41,7 @@
 .skill-list li {
   padding: var(--space-1) 0;
   font-size: var(--fontSize-md, 0.9rem);
-  color: var(--textSecondary, #888888);
+  color: var(--textSecondary, #b0b0b0);
   display: flex;
   gap: var(--gap-xl);
   align-items: center;
@@ -49,7 +49,7 @@
 .skill-level {
   margin-left: auto;
   display: inline-block;
-  border: var(--border-1) solid var(--border, #2a2a2a);
+  border: var(--border-1) solid var(--border, #333333);
   padding: var(--space-1) var(--padding-sm);
   margin-right: var(--margin-sm);
   margin-bottom: var(--space-1);
@@ -70,19 +70,19 @@
   position: relative;
 }
 .expert::before {
-  border-bottom: var(--space-2) solid var(--diamond);
+  border-bottom: var(--space-2) solid var(--diamond, #38e471);
   top: 0;
 }
 .proficient::before {
-  border-bottom: var(--space-2) solid var(--gold);
+  border-bottom: var(--space-2) solid var(--gold, #ffe554);
   top: 0;
 }
 .intermediate::before {
-  border-top: var(--space-2) solid var(--silver);
+  border-top: var(--space-2) solid var(--silver, #c0c0c0);
   bottom: calc(-1 * var(--space-1));
 }
 .beginner::before {
-  border-top: var(--space-2) solid var(--bronze);
+  border-top: var(--space-2) solid var(--bronze, #f8b26b);
   bottom: calc(-1 * var(--space-1));
 }
 .stack-top-grid {

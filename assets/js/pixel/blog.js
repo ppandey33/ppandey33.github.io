@@ -37,8 +37,8 @@ class Blog {
 
     async initBlogPostPage() {
       try {
-        const blogs = await window.App.modules.apiClient.loadJSON(this.BLOGS_PATH);
-        if (!blogs) {
+        const data = await window.App.modules.apiClient.loadJSON(this.BLOGS_PATH);
+        if (!data?.blogs) {
           throw new Error("Failed to load blogs");
         }
         
@@ -48,7 +48,7 @@ class Blog {
           return;
         }
 
-        this.currentBlog = blogs.find((blog) => 
+        this.currentBlog = data?.blogs.find((blog) => 
           blog.slug === blogInfo.slug && blog.categorySlug === blogInfo.categorySlug
         );
 
@@ -59,7 +59,7 @@ class Blog {
 
         this.populateMetadata(this.currentBlog);
         this.populateTags(this.currentBlog.tags);
-        this.setupNavigation(blogs, this.currentBlog, blogInfo.categorySlug);
+        this.setupNavigation(data?.blogs, this.currentBlog, blogInfo.categorySlug);
         await this.setupShareButtons(this.currentBlog);
       } catch (error) {
         console.error("Error loading blog post:", error);
