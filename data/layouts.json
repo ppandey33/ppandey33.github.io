@@ -3,20 +3,14 @@
     {
       "id": "nexa",
       "name": "Nexa Style (Default)",
-      "description": "Dark theme with geometric patterns and side navigation",
+      "description": "A classic layout with modern geometric accents and clean top navigation.",
       "preview": "/assets/images/layout-nexa.png"
     },
     {
       "id": "algo",
       "name": "Algo minimal Clean",
-      "description": "Simple, clean layout with centered content",
+      "description": "Minimal, clean layout based on a three-panel design.",
       "preview": "/assets/images/layout-algo.png"
-    },
-    {
-      "id": "pixel",
-      "name": "Pixel Modern Portfolio",
-      "description": "Pixel Modern card-based layout with smooth transitions",
-      "preview": "/assets/images/layout-pixel.png"
     }
   ],
   "default": "nexa"

@@ -149,7 +149,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  width: 100%;
+   width: 100%;
   font-size: var(--fontSize-base, 1rem);
   color: var(--textSecondary, #b0b0b0);
   background-color: transparent !important;
@@ -158,6 +158,8 @@ input:-webkit-autofill:active {
   font-family: inherit;
   outline: none;
   border: 0;
+  -webkit-box-shadow: 0 0 0 1000px var(--background, #1a1a1a) inset !important;
+  -webkit-text-fill-color: var(--textSecondary, #b0b0b0) !important;
   min-height: var(--space-16);
 }
 .form-textarea {

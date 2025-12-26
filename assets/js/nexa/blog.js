@@ -1,3 +1,4 @@
+import { Reader } from "../reader.js";
 class Blog {
   constructor() {
     this.prefix = this.getDataPathPrefix();
@@ -5,6 +6,7 @@ class Blog {
     this.SHARE_PATH = `${this.prefix}data/share.json`;
     this.eventListeners = [];
     this.goat = "";
+    this.readingFeatures = null;
   }
 
   getDataPathPrefix() {
@@ -34,6 +36,9 @@ class Blog {
       this.populateTags(currentBlog.tags);
       this.setupNavigation(data?.blogs, currentBlog, blogInfo.categorySlug);
       await this.setupShareButtons(currentBlog);
+
+      this.readingFeatures = new Reader(currentBlog.slug);
+      await this.readingFeatures.loadReaders();
     } catch (error) {
       console.error("Error loading blog post:", error);
     }
@@ -156,12 +161,13 @@ class Blog {
           container.appendChild(btn);
         }
       });
-      this.goat && await this.getGoatCount(`${this.goat}${encodeURIComponent(window.location.pathname)}.json`).then((res) => {
-        const countEl = window.App.modules.util.createElement("i", "", res),
-          msg = window.App.modules.util.createElement("span", "read-Count", ` Reads`);
-        countEl.setAttribute("data-value", res);
-        msg.appendChild(countEl), container.appendChild(msg);
-      });
+      this.goat &&
+        (await this.getGoatCount(`${this.goat}${encodeURIComponent(window.location.pathname)}.json`).then((res) => {
+          const countEl = window.App.modules.util.createElement("i", "", res),
+            msg = window.App.modules.util.createElement("span", "read-Count", ` Reads`);
+          countEl.setAttribute("data-value", res);
+          msg.appendChild(countEl), container.appendChild(msg);
+        }));
     } catch (error) {
       console.error("Error loading share platforms:", error);
     }
@@ -321,6 +327,7 @@ class Blog {
       nextBtn.style.display = "none";
       nextBtn.onclick = null;
     }
+    this.readingFeatures && this.readingFeatures.destroy();
   }
 }
 

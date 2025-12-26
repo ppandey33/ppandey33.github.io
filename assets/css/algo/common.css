@@ -29,10 +29,6 @@
   padding: var(--padding-sm);
   min-width: var(--space-2);
 }
-.btn-secondary {
-  background-color: var(--background, #1a1a1a);
-  color: var(--link, #ffffff);
-}
 .btn[data-tooltip]::before {
   content: attr(data-tooltip);
   position: absolute;
@@ -186,7 +182,6 @@
   font-size: 16px;
 }
 .btn {
-  display: inline-block;
   padding: var(--space-3) var(--padding-lg);
   border: var(--border-1) solid var(--primary, #ffffff);
   color: var(--primary, #ffffff);
@@ -206,6 +201,14 @@
 .btn:hover {
   background: var(--primary, #ffffff);
   color: var(--background, #1a1a1a);
+}
+.btn-secondary{
+  background-color: var(--primary, #ffffff);
+  color: var(--background, #1a1a1a);
+}
+.btn-secondary:hover{
+  background-color: var(--background, #ffffff);
+  color: var(--primary, #1a1a1a);
 }
 .view-all {
   color: var(--link, #ffffff);
@@ -392,8 +395,8 @@ section[data-service-card] {
   margin: auto 0 0;
   gap: var(--gap-sm, 0.5rem);
   align-items: center;
-  margin-bottom: var(--margin-lg);
-  padding-bottom: var(--padding-lg);
+  margin-bottom: var(--margin-sm);
+  padding-bottom: var(--padding-sm);
 }
 .status-bar-left {
   display: flex;

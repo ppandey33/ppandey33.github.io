@@ -224,12 +224,12 @@ class Contacts extends HideComponent {
 
     try {
       const data = new FormData(this.form);
-      const actionURL = this.config.contact.on;
+      const actionURL = this.config?.contact?.on;
       if (!actionURL) {
         throw new Error("Form action URL not configured");
       }
 
-      const response = await fetch(actionURL, {
+      const response = await window.App.modules.apiClient.post(actionURL, {
         method: "POST",
         body: data,
         headers: {

@@ -199,7 +199,11 @@ class Layouts {
     if (this.submenuPlaceholder && this.layoutDropdown && this.layoutDropdown.parentElement === this.submenuPlaceholder) {
       this.originalParent.appendChild(this.layoutDropdown);
     }
-
+    
+    if (window?.App?.modules?.loader) {
+      window.App.modules.loader.isLoaderOn = false;
+      window?.App?.modules?.loader?.show?.();
+    }
     this.clearAllScript();
     setTimeout(() => this.reloadApp(), 1000);
   }

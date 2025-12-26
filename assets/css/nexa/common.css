@@ -234,9 +234,13 @@ body {
   padding: var(--padding-sm);
   min-width: var(--space-2);
 }
-.btn-secondary {
-  background-color: var(--background, #1a1a1a);
-  color: var(--link, #ffffff);
+.btn-secondary{
+  background-color: var(--primary, #ffffff);
+  color: var(--background, #1a1a1a);
+}
+.btn-secondary:hover{
+  background-color: var(--background, #ffffff);
+  color: var(--primary, #1a1a1a);
 }
 .btn[data-tooltip]::before {
   content: attr(data-tooltip);
@@ -387,17 +391,20 @@ body {
   font-size: var(--space-4);
 }
 .btn {
-  display: inline-block;
-  padding: var(--space-3) var(--padding-lg);
-  border: var(--border-1) solid var(--primary, #ffffff);
-  color: var(--primary, #ffffff);
-  text-decoration: none;
-  transition: var(--transition-base);
-  background: transparent;
-  cursor: pointer;
-  margin: var(--margin-sm) 0;
-  font-size: var(--fontSize-base);
-  position: relative;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-3) var(--padding-lg);
+    border: var(--border-1) solid var(--primary, #ffffff);
+    color: var(--primary, #ffffff);
+    text-decoration: none;
+    transition: var(--transition-base);
+    background: transparent;
+    cursor: pointer;
+    margin: var(--margin-sm) 0;
+    font-size: var(--fontSize-base);
+    position: relative;
+    max-width: max-content;
 }
 .btn:hover {
   background: var(--primary, #ffffff);

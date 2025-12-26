@@ -186,13 +186,6 @@ class CommonUtilities {
     };
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
-        console.log("Element observed:", {
-          isIntersecting: entry.isIntersecting,
-          intersectionRatio: entry.intersectionRatio,
-          target: entry.target,
-          boundingRect: entry.boundingClientRect,
-          rootBounds: entry.rootBounds,
-        });
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
         } else {

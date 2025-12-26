@@ -317,7 +317,7 @@
   color: var(--primary, #ffffff);
 }
 .read-Count i {
-  color: var(--background, #1a1a1a);
+  color: var(--textSecondary, #b0b0b0);
 }
 .read-Count i[data-value="∞"] {
   font-size: var(--fontSize-2xl);
@@ -376,7 +376,7 @@
 }
 .toolbar-section {
   display: flex;
-    gap: var(--gap-sm);
+  gap: var(--gap-sm);
   align-items: center;
   justify-content: space-between;
   min-width: max-content;
@@ -410,15 +410,31 @@
   gap: var(--gap-xs);
   flex-wrap: wrap;
 }
+.timer-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-md);
+}
+div[data-header-progress] {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-md);
+}
+div[data-header-progress] #reading-progress-container {
+  margin: 0;
+}
 .color-btn:hover {
   transform: scale(1.1);
 }
 .color-btn.active {
   border-color: var(--link);
-  box-shadow: 0 0 0 2px var(--shadow-primary-light), 0 0 0 4px var(--shadow-primary-dark);
+  box-shadow: 0 0 0 2px var(--shadow-primary-light), 0 0 0 4px var(--shadow-primary-strong);
 }
 .blog-highlight {
-  color: var(--primary);
+  color: #000;
 }
 .stats-display {
   display: flex;

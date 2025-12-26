@@ -228,7 +228,7 @@ class Contacts extends HideComponent {
         throw new Error("Form action URL not configured");
       }
 
-      const response = await window.App.modules.util.loadJSON(actionURL, {
+      const response = await window.App.modules.apiClient.post(actionURL, {
         method: "POST",
         body: data,
         headers: {
