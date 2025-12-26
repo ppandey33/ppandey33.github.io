@@ -83,13 +83,14 @@
         "icon": "&#xf0e0;",
         "class": "fa",
         "value": "pawan4email@gmail.com",
-        "link": "mailto:pawan4email@gmail.com"
+        "link": "mailto:pawan4email@gmail.com; pawan@pawan.net.in"
       },
       {
         "type": "WhatsApp",
         "icon": "&#xf232;",
         "class": "fab",
-        "value": "+91-8285814645"
+        "value": "+91-8285814645",
+        "link": "tel: +91-8285814645"
       },
       {
         "type": "Location",
@@ -180,7 +181,7 @@
     },
     {
       "title": "email",
-      "url": "mailto:pawan4email@gmail.com",
+      "url": "mailto:pawan4email@gmail.com; pawan@pawan.net.in",
       "icon": "&#xf0e0;",
       "class": "fa"
     },
