@@ -10,13 +10,14 @@
   }
 }
 @media (max-width: 1350px) and (min-width: 1193px) {
-    .mobile-sidebar-controls {
+  .mobile-sidebar-controls {
     position: fixed;
     top: var(--space-0);
     left: 0;
     right: 0;
     display: flex;
-    justify-content: flex-start;     padding: var(--padding-sm) var(--padding-md);
+    justify-content: flex-start;
+    padding: var(--padding-sm) var(--padding-md);
     background: var(--background, #1a1a1a);
     border-bottom: var(--border-1) solid var(--border, #333333);
     z-index: calc(var(--z-fixed) + 1);
@@ -24,7 +25,7 @@
     box-shadow: 0 var(--space-2) var(--space-6) rgb(from var(--cardHeader, #0a0a0a) r g b / 0.3);
     max-height: var(--space-15, 3.75rem);
   }
-    .mobile-sidebar-btn[data-target="right-sidebar"] {
+  .mobile-sidebar-btn[data-target="right-sidebar"] {
     display: none;
   }
   .mobile-sidebar-btn {
@@ -57,7 +58,7 @@
     width: var(--space-5);
     height: var(--space-5);
   }
-    .left-sidebar-card {
+  .left-sidebar-card {
     position: fixed;
     top: var(--space-15, 3.75rem);
     left: 0;
@@ -80,11 +81,11 @@
   .left-sidebar-card.active {
     transform: translateX(0);
   }
-    .right-sidebar-card {
+  .right-sidebar-card {
     position: relative;
     display: flex;
   }
-    .sidebar-overlay {
+  .sidebar-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -109,7 +110,7 @@
   body:has(.sidebar-overlay.active) {
     overflow: hidden;
   }
-    .page-container {
+  .page-container {
     gap: var(--gap-lg);
   }
   .main-content {
@@ -385,6 +386,10 @@
   .status-bar-right {
     gap: var(--gap-xs);
   }
+  .status-icons {
+    margin-bottom: var(--margin-lg);
+    padding-bottom: var(--padding-lg);
+  }
   .header-container {
     padding: 0 var(--padding-md);
     min-height: 3.5em;
@@ -627,9 +632,9 @@
     min-height: var(--space-12, 3rem);
     gap: var(--gap-sm, 0.5rem);
   }
-  .input-wrapper:has(textarea){
-  padding: var(--padding-sm);
-}
+  .input-wrapper:has(textarea) {
+    padding: var(--padding-sm);
+  }
   .form-input,
   .form-textarea {
     font-size: var(--fontSize-sm, 0.875rem);
@@ -646,7 +651,7 @@
     padding: var(--padding-sm, 0.75rem) var(--padding-md, 1rem);
     font-size: var(--fontSize-sm, 0.875rem);
   }
-    .contact-info:hover {
+  .contact-info:hover {
     transform: none !important;
   }
   .input-wrapper:focus,
