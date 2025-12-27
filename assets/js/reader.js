@@ -564,15 +564,16 @@ export class Reader {
     if (this.selectionMenu) return;
     this.selectionMenu = window.App.modules.util.createElement("div", "mobile-selection-menu");
     const colors = [
-      { name: "yellow", color: "#fff59d", icon: "🟡" },
-      { name: "green", color: "#a5d6a7", icon: "🟢" },
-      { name: "pink", color: "#f48fb1", icon: "🔴" },
-      { name: "blue", color: "#81d4fa", icon: "🔵" },
+      { name: "yellow", color: "#fff59d", icon: "&#xf111;" },
+      { name: "green", color: "#a5d6a7", icon: "&#xf111;" },
+      { name: "pink", color: "#f48fb1", icon: "&#xf111;" },
+      { name: "blue", color: "#81d4fa", icon: "&#xf111;" },
     ];
     colors.forEach((colorInfo) => {
-      const btn = window.App.modules.util.createElement("button", "selection-color-btn");
+      const btn = window.App.modules.util.createElement("button", "selection-color-btn fa");
       btn.innerHTML = colorInfo.icon;
       btn.style.backgroundColor = colorInfo.color;
+      btn.style.color = colorInfo.color;
       btn.addEventListener("click", async () => {
         if (this.selectedRange) {
           this.currentColor = colorInfo.name;
@@ -584,14 +585,12 @@ export class Reader {
       });
       this.selectionMenu.appendChild(btn);
     });
-    const copyBtn = window.App.modules.util.createElement("button", "selection-action-btn");
-    copyBtn.innerHTML = "📋";
+    const copyBtn = window.App.modules.util.createElement("button", "selection-action-btn fa");
+    copyBtn.innerHTML = "&#xf0c5;";
     copyBtn.addEventListener("click", () => {
       const text = this.selectedRange.toString();
-      navigator.clipboard.writeText(text).then(() => {
-        this.showNotification("Copied!", "success");
-        this.hideSelectionMenu();
-      });
+      this.copyToClipboard(text);
+      this.hideSelectionMenu();
     });
     this.selectionMenu.appendChild(copyBtn);
     document.body.appendChild(this.selectionMenu);
@@ -601,7 +600,7 @@ export class Reader {
     if (!this.selectionMenu) return;
     const menuHeight = 50;
     const menuWidth = 250;
-    let top = rect.top - menuHeight - 10;
+    let top = rect.top - menuHeight + 30;
     let left = rect.left + rect.width / 2 - menuWidth / 2;
     if (top < 0) {
       top = rect.bottom + 10;
@@ -1111,6 +1110,50 @@ export class Reader {
       localStorage.setItem("blog_reader_preferences", JSON.stringify(prefs));
     } catch (e) {
       console.error("Error saving preferences:", e);
+    }
+  }
+
+  copyToClipboard(text) {
+    // Try modern Clipboard API first (requires HTTPS or localhost)
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          this.showNotification("Copied!", "success");
+        })
+        .catch((err) => {
+          console.warn("Clipboard API failed:", err);
+          this.fallbackCopyToClipboard(text);
+        });
+    } else {
+      // Fallback for HTTP or older browsers
+      this.fallbackCopyToClipboard(text);
+    }
+  }
+
+  fallbackCopyToClipboard(text) {
+    // Create temporary textarea
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.top = "-9999px";
+    textarea.style.left = "-9999px";
+    textarea.setAttribute("readonly", "");
+    document.body.appendChild(textarea);
+    try {
+      textarea.select();
+      textarea.setSelectionRange(0, text.length);
+      
+      const successful = document.execCommand("copy");
+      if (successful) {
+        this.showNotification("Copied!", "success");
+      } else {
+        this.showNotification("Copy failed. Please copy manually.", "error");
+      }
+    } catch (err) {
+      console.error("Fallback copy failed:", err);
+      this.showNotification("Copy not supported. Please copy manually.", "warning");
+    } finally {
+      document.body.removeChild(textarea);
     }
   }
 }
