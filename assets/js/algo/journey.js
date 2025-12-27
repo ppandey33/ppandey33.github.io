@@ -1,5 +1,5 @@
 import { HideComponent } from "../hide-component.js";
-import { onComponentLoaded } from "../paginator.js";
+import { onComponentLoaded, initPaginator } from "../paginator.js";
 
 class Journey extends HideComponent {
   constructor() {
@@ -7,6 +7,7 @@ class Journey extends HideComponent {
   }
 
   async init() {
+    initPaginator('experience');
     await this.loadExperience();
   }
 

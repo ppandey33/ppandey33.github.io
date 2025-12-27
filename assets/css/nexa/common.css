@@ -89,7 +89,7 @@ body {
 }
 .dropdown .option.show {
   background-color: var(--hover, #2d2d2d);
-  color: var(--primary, #ffffff);
+  color: var(--textPrimary, #ffffff);
 }
 .dropdown .option .option-name {
   font-weight: 600;
@@ -234,11 +234,11 @@ body {
   padding: var(--padding-sm);
   min-width: var(--space-2);
 }
-.btn-secondary{
+.btn-secondary {
   background-color: var(--primary, #ffffff);
   color: var(--background, #1a1a1a);
 }
-.btn-secondary:hover{
+.btn-secondary:hover {
   background-color: var(--background, #ffffff);
   color: var(--primary, #1a1a1a);
 }
@@ -312,7 +312,7 @@ body {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.btn-dropdown-main .btn-content{
+.btn-dropdown-main .btn-content {
   pointer-events: none;
 }
 .btn-dropdown .btn[data-tooltip]::before {
@@ -392,19 +392,19 @@ body {
 }
 .btn {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: var(--space-3) var(--padding-lg);
-    border: var(--border-1) solid var(--primary, #ffffff);
-    color: var(--primary, #ffffff);
-    text-decoration: none;
-    transition: var(--transition-base);
-    background: transparent;
-    cursor: pointer;
-    margin: var(--margin-sm) 0;
-    font-size: var(--fontSize-base);
-    position: relative;
-    max-width: max-content;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-3) var(--padding-lg);
+  border: var(--border-1) solid var(--primary, #ffffff);
+  color: var(--primary, #ffffff);
+  text-decoration: none;
+  transition: var(--transition-base);
+  background: transparent;
+  cursor: pointer;
+  margin: var(--margin-sm) 0;
+  font-size: var(--fontSize-base);
+  position: relative;
+  max-width: max-content;
 }
 .btn:hover {
   background: var(--primary, #ffffff);
@@ -517,6 +517,11 @@ body {
   font-size: var(--fontSize-lg);
   min-width: var(--space-15);
   text-align: center;
+}
+#bmc-wbtn {
+  right: 6rem !important;
+  bottom: 6rem !important;
+  z-index: var(--z-dropdown);
 }
 @supports not (backdrop-filter: blur(var(--space-1))) {
   .blur-box {

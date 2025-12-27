@@ -596,7 +596,7 @@ section[data-service-card] {
 }
 .dropdown .option.show {
   background-color: var(--hover, #2d2d2d);
-  color: var(--primary, #ffffff);
+  color: var(--textPrimary, #ffffff);
 }
 .dropdown .option .option-name {
   font-weight: 600;

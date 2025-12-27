@@ -1,5 +1,5 @@
 import { HideComponent } from "../hide-component.js";
-import { onComponentLoaded } from "../paginator.js";
+import { onComponentLoaded, initPaginator } from "../paginator.js";
 class Dev extends HideComponent {
   constructor() {
     super({ currentPath: "/dev" });
@@ -12,6 +12,7 @@ class Dev extends HideComponent {
   }
 
   async init() {
+    initPaginator('project');
     await this.renderProjects();
     this.setupFilters();
   }

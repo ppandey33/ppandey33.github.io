@@ -1,5 +1,5 @@
 import { GenSvg } from "../gen-svg.js";
-import { onComponentLoaded } from "../paginator.js";
+import { onComponentLoaded, initPaginator } from "../paginator.js";
 class Blogs extends GenSvg {
   constructor() {
     super({ currentPath: "/blogs" });
@@ -13,6 +13,7 @@ class Blogs extends GenSvg {
   }
 
   async init() {
+    initPaginator("blog");
     await this.loadBlogs();
     this.setupFilters();
     this.manageDOM();

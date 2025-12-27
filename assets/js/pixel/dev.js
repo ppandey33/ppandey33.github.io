@@ -1,4 +1,4 @@
-import { onComponentLoaded } from "../paginator.js";
+import { onComponentLoaded, initPaginator } from "../paginator.js";
 class Dev {
   constructor() {
     this.allRepos = [];
@@ -9,6 +9,7 @@ class Dev {
   }
 
   async init() {
+    initPaginator('project');
     await this.renderProjects();
     this.setupFilters();
   }
