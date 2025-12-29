@@ -129,6 +129,7 @@ class Themes {
 
     requestAnimationFrame(() => {
       this.updateUI();
+      this.updateAllMetaTags();
     });
   }
 
@@ -330,6 +331,56 @@ class Themes {
     const sysThemeCheckbox = document.querySelector("[data-sys-theme-checkbox]");
     if (sysThemeCheckbox) {
       sysThemeCheckbox.checked = this.sysTheme;
+    }
+  }
+
+  async updateAllMetaTags() {
+    try {
+      const elements = document.querySelectorAll(`[data-update-change]`);
+      const grouped = {
+        "content-theme": [],
+        "content-color": [],
+        "content-url": [],
+        "href-url": [],
+      };
+      const values = {
+        "content-theme": this.currentTheme,
+        "content-color": getComputedStyle(document.body).getPropertyValue("--primary").trim() || getComputedStyle(document.documentElement).getPropertyValue("--primary").trim() || "#00ffcc",
+        "content-url": `?theme=${this.currentTheme}`,
+      };
+      elements.forEach((element) => {
+        const updateType = element.getAttribute("data-update-change");
+        if (grouped[updateType]) {
+          grouped[updateType].push(element);
+        }
+      });
+      Object.keys(grouped).forEach((key) => {
+        grouped[key].forEach((element) => {
+          if (key == "href-url") {
+            if (!element.href) return;
+            const url = new URL(element.href, location.origin);
+            url.pathname = url.pathname
+              .replace(/\/[^/]+_favicon\.ico$/, `/${this.currentTheme}_favicon.ico`)
+              .replace(/\/[^/]+_32x32\.png$/, `/${this.currentTheme}_32x32.png`)
+              .replace(/\/[^/]+_512x512\.png$/, `/${this.currentTheme}_512x512.png`);
+            url.search = "";
+            element.href = url.toString();
+            //this.updateMetaTag(element, url.toString(), "href");
+            return;
+          }
+          const value = key == "content-url" ? `${element.getAttribute("content")}${values[key]}` : values[key];
+          this.updateMetaTag(element, value, "content");
+        });
+      });
+    } catch (error) {}
+  }
+
+  updateMetaTag(element, newContent, type) {
+    try {
+      element.setAttribute(type, newContent);
+      return true;
+    } catch (error) {
+      return false;
     }
   }
 

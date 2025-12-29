@@ -452,6 +452,23 @@
   .modal-msg {
     font-size: var(--fontSize-sm);
   }
+  #reading-toolbar {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  .reader-btn-container {
+    flex-direction: row;
+  }
+  .stats-display {
+    display: none;
+  }
+  .reader-notification {
+    left: 20px;
+    right: 20px;
+  }
 }
 @media (max-width: 768px) and (orientation: landscape) {
   .hero {

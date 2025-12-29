@@ -766,6 +766,100 @@
   .universe-track {
     gap: var(--gap-sm);
   }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead {
+    display: none;
+  }
+  tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border, #333333);
+    padding: 10px;
+    border-radius: 8px;
+  }
+  td {
+    display: flex !important;
+    justify-content: space-between;
+    padding: 8px 5px;
+    position: relative;
+  }
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #666;
+  }
+  .post-header .post-header-container {
+    max-width: calc(100% - var(--space-5));
+    flex-direction: column;
+    padding: 0 var(--padding-sm);
+  }
+  .post-share {
+    margin: 0;
+    align-items: center;
+  }
+  .post-header {
+    padding: var(--space-6) 0;
+  }
+  .post-title {
+    font-size: var(--fontSize-2xl);
+  }
+  .post-excerpt {
+    font-size: var(--fontSize-base);
+  }
+  .post-meta {
+    gap: var(--gap-md);
+  }
+  .content-wrapper {
+    margin-bottom: var(--space-12);
+  }
+  .content-wrapper h1 {
+    font-size: var(--fontSize-2xl);
+  }
+  .content-wrapper h2 {
+    font-size: var(--fontSize-xl);
+  }
+  .content-wrapper h3 {
+    font-size: var(--fontSize-lg);
+  }
+  .post-navigation {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn {
+    width: fit-content;
+    justify-content: center;
+  }
+  .share-buttons {
+    flex-direction: row;
+    opacity: 1;
+    min-height: 50px;
+    width: auto;
+    padding: 0;
+  }
+  .share-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  #reading-toolbar {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  .reader-notification {
+    left: 20px;
+    right: 20px;
+  }
+  .reader-btn-container {
+    flex-direction: row;
+  }
+  .stats-display {
+    display: none;
+  }
 }
 @media (max-width: 480px) {
   :root {
@@ -889,6 +983,17 @@
   }
   .form-textarea {
     min-height: var(--space-20, 5rem);
+  }
+  .post-title {
+    font-size: var(--fontSize-xl);
+  }
+  .breadcrumb {
+    font-size: var(--fontSize-xs);
+  }
+  .post-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-sm);
   }
 }
 @media (max-height: 600px) and (orientation: landscape) {
