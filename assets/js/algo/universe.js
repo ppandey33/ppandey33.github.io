@@ -8,12 +8,10 @@ class Universe {
     this.currentSection = null;
     this.subscription = null;
   }
-
   async init() {
     await this.loadServiceCard();
     this.setupNavigationListener();
   }
-
   setupNavigationListener() {
     this.subscription = onNavigation.subscribe({
       next: (data) => {
@@ -25,19 +23,16 @@ class Universe {
         }
       },
       error: (err) => console.error("Universe navigation error:", err),
-      complete: () => console.log("Universe navigation completed"),
+      complete: () => console.log(""),
     });
   }
-
   addListener(target, event, handler) {
     this.listeners.push({ target, event, handler });
     target.addEventListener(event, handler);
   }
-
   async loadServiceCard() {
     const data = await window.App.modules.apiClient.loadJSON("/data/navigation.json"),
       container = document.querySelector("[data-service-card]");
-
     if (!data || !container) return;
     this.filteredItems = data.items.filter((item) => item?.full_title && item?.desc);
     const serviceCard = window.App.modules.util.createElement("div", "services-section"),
@@ -61,13 +56,11 @@ class Universe {
       card.appendChild(desc);
       grid.appendChild(card);
     });
-
     serviceCard.appendChild(mainTitle);
     serviceCard.appendChild(mainDesc);
     serviceCard.appendChild(grid);
     container.appendChild(serviceCard);
   }
-
   navigateToSection(item) {
     const sectionId = item.url.replace(/^\/#/, "").replace(/^\//, "");
     if (window.App?.modules?.nav) {
@@ -76,7 +69,6 @@ class Universe {
       this.fallbackNavigate(sectionId);
     }
   }
-
   fallbackNavigate(sectionId) {
     const targetSection = document.getElementById(sectionId);
     const track = document.querySelector("[data-universe-track]");
@@ -103,10 +95,8 @@ class Universe {
       track.style.height = `${targetSection.offsetHeight}px`;
     });
   }
-
   setupBackButtons(section) {
     this.removeBackButtonListeners();
-
     const backButtons = section.querySelectorAll("[data-return-to-universe]");
     backButtons.forEach((btn) => {
       const handler = (e) => {
@@ -118,7 +108,6 @@ class Universe {
       btn.addEventListener("click", handler);
     });
   }
-
   returnToUniverse() {
     if (window.App?.modules?.nav) {
       window.App.modules.nav.returnToUniverse();
@@ -126,11 +115,9 @@ class Universe {
       this.fallbackReturn();
     }
   }
-
   fallbackReturn() {
     const track = document.querySelector("[data-universe-track]");
     if (!track) return;
-
     const mainSection = document.querySelector("section[data-service-card]");
     if (mainSection) {
       mainSection.style.opacity = "1";
@@ -140,28 +127,23 @@ class Universe {
       mainSection.style.position = "relative";
       mainSection.style.zIndex = "1";
     }
-
     track.classList.remove("universe-track-shifted");
     track.style.removeProperty("height");
-
     const allSections = document.querySelectorAll(".universe-sections .section[id]");
     allSections.forEach((section) => {
       section.classList.remove("active");
     });
-
     this.currentSection = null;
     this.removeBackButtonListeners();
     history.replaceState(null, null, window.location.pathname);
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
-
   removeBackButtonListeners() {
     this.backButtonListeners.forEach(({ target, event, handler }) => {
       target.removeEventListener(event, handler);
     });
     this.backButtonListeners = [];
   }
-
   cleanup() {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -172,13 +154,11 @@ class Universe {
     });
     this.listeners = [];
     this.removeBackButtonListeners();
-
     const track = document.querySelector("[data-universe-track]");
     if (track) {
       track.classList.remove("universe-track-shifted");
       track.style.removeProperty("height");
     }
-
     const mainSection = document.querySelector("section[data-service-card]");
     if (mainSection) {
       mainSection.style.opacity = "";
@@ -188,22 +168,18 @@ class Universe {
       mainSection.style.position = "";
       mainSection.style.zIndex = "";
     }
-
     const allSections = document.querySelectorAll(".universe-sections .section[id]");
     allSections.forEach((section) => {
       section.classList.remove("active");
     });
-
     const container = document.querySelector("[data-service-card]");
     if (container) {
       container.innerHTML = "";
     }
-
     this.filteredItems = [];
     this.currentSection = null;
   }
 }
-
 function initUniverse() {
   if (window.App?.modules?.universe) {
     window.App.modules.universe.cleanup?.();
@@ -212,11 +188,9 @@ function initUniverse() {
   window.App.register("universe", universeModule, "initUniverse");
   universeModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initUniverse);
 } else {
   initUniverse();
 }
-
 export { Universe, initUniverse };

@@ -1,5 +1,4 @@
 import { PGlite } from "./@electric-sql/pglite/dist/index.js";
-
 export class Reader {
   constructor(articleId, options = {}) {
     this.articleId = articleId;
@@ -30,11 +29,9 @@ export class Reader {
     };
     this.storagePreference = options.storagePreference || ["pglite", "indexedDB", "localStorage", "memory"];
   }
-
   detectMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
   }
-
   checkIndexedDB() {
     try {
       return !!(window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB);
@@ -42,7 +39,6 @@ export class Reader {
       return false;
     }
   }
-
   checkLocalStorage() {
     try {
       const test = "__storage_test__";
@@ -53,7 +49,6 @@ export class Reader {
       return false;
     }
   }
-
   async loadReaders() {
     await this.initStorage();
     await this.loadReadingState();
@@ -68,26 +63,22 @@ export class Reader {
     this.setupUI();
     this.startReadingTimer();
   }
-
   async initStorage() {
     for (const storage of this.storagePreference) {
       try {
         if (storage === "pglite" && this.features.pglite) {
           await this.initPGlite();
           this.storageType = "pglite";
-          console.log("✅ Using PGlite (PostgreSQL in browser!)");
           return;
         }
         if (storage === "indexedDB" && this.features.indexedDB) {
           await this.initIndexedDB();
           this.storageType = "indexedDB";
-          console.log("✅ Using IndexedDB");
           return;
         }
         if (storage === "localStorage" && this.features.localStorage) {
           this.initLocalStorage();
           this.storageType = "localStorage";
-          console.log("✅ Using localStorage");
           return;
         }
       } catch (e) {
@@ -97,7 +88,6 @@ export class Reader {
     this.initMemoryStorage();
     console.warn("⚠️ Using memory storage - data will be lost on refresh");
   }
-
   async initPGlite() {
     try {
       this.db = await PGlite.create({
@@ -127,13 +117,11 @@ export class Reader {
           completed BOOLEAN DEFAULT FALSE
         );
       `);
-      console.log("✅ PGlite database initialized");
     } catch (error) {
       console.error("PGlite initialization failed:", error);
       throw error;
     }
   }
-
   async saveToPGlite(type, data) {
     try {
       if (type === "highlights") {
@@ -164,7 +152,6 @@ export class Reader {
       throw error;
     }
   }
-
   async loadFromPGlite(type, articleId) {
     try {
       if (type === "highlights") {
@@ -203,7 +190,6 @@ export class Reader {
       return type === "highlights" ? [] : null;
     }
   }
-
   async getPGliteAnalytics() {
     try {
       const statsResult = await this.db.query(`
@@ -226,7 +212,6 @@ export class Reader {
       return null;
     }
   }
-
   initIndexedDB() {
     return new Promise((resolve, reject) => {
       const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
@@ -251,7 +236,6 @@ export class Reader {
       };
     });
   }
-
   saveToIndexedDB(storeName, data) {
     return new Promise((resolve, reject) => {
       try {
@@ -265,7 +249,6 @@ export class Reader {
       }
     });
   }
-
   loadFromIndexedDB(storeName, articleId) {
     return new Promise((resolve, reject) => {
       try {
@@ -286,7 +269,6 @@ export class Reader {
       }
     });
   }
-
   getFromIndexedDB(storeName, articleId) {
     return new Promise((resolve, reject) => {
       try {
@@ -300,7 +282,6 @@ export class Reader {
       }
     });
   }
-
   initLocalStorage() {
     this.storageType = "localStorage";
     this.db = {
@@ -309,7 +290,6 @@ export class Reader {
       stats: this.getFromLocalStorage("stats") || {},
     };
   }
-
   getFromLocalStorage(key) {
     try {
       const data = localStorage.getItem(`blog_reading_${key}`);
@@ -319,7 +299,6 @@ export class Reader {
       return null;
     }
   }
-
   setToLocalStorage(key, value) {
     try {
       localStorage.setItem(`blog_reading_${key}`, JSON.stringify(value));
@@ -330,12 +309,10 @@ export class Reader {
       }
     }
   }
-
   initMemoryStorage() {
     this.storageType = "memory";
     this.db = { highlights: [], progress: {}, stats: {} };
   }
-
   async saveHighlight(text, range) {
     const position = this.serializeRange(range);
     const highlight = {
@@ -360,7 +337,6 @@ export class Reader {
     }
     return highlight;
   }
-
   async loadHighlights() {
     let highlights = [];
     switch (this.storageType) {
@@ -389,7 +365,6 @@ export class Reader {
     });
     return highlights;
   }
-
   async saveProgress() {
     const progress = {
       articleId: this.articleId,
@@ -410,7 +385,6 @@ export class Reader {
         this.db.progress[this.articleId] = progress;
     }
   }
-
   async getProgress() {
     switch (this.storageType) {
       case "pglite":
@@ -424,7 +398,6 @@ export class Reader {
         return this.db.progress[this.articleId];
     }
   }
-
   async saveStats() {
     const stats = {
       articleId: this.articleId,
@@ -446,7 +419,6 @@ export class Reader {
         this.db.stats[this.articleId] = stats;
     }
   }
-
   serializeRange(range) {
     return {
       startOffset: range.startOffset,
@@ -456,7 +428,6 @@ export class Reader {
       text: range.toString(),
     };
   }
-
   getNodePath(node) {
     const path = [];
     let current = node;
@@ -470,7 +441,6 @@ export class Reader {
     }
     return path;
   }
-
   deserializeRange(position) {
     try {
       const startNode = this.getNodeByPath(position.startPath);
@@ -484,7 +454,6 @@ export class Reader {
       return null;
     }
   }
-
   getNodeByPath(path) {
     let node = document.body;
     for (const index of path) {
@@ -496,7 +465,6 @@ export class Reader {
     }
     return node;
   }
-
   setupHighlighting() {
     const contentArea = document.querySelector(".blog-content, article, main");
     if (!contentArea) return;
@@ -512,7 +480,6 @@ export class Reader {
       }
     });
   }
-
   setupMobileHighlighting() {
     const contentArea = document.querySelector(".blog-content, article, main");
     if (!contentArea) return;
@@ -537,7 +504,6 @@ export class Reader {
       }
     });
   }
-
   handleLongPress(e) {
     if (navigator.vibrate) {
       navigator.vibrate(50);
@@ -546,7 +512,6 @@ export class Reader {
       this.handleMobileSelection();
     }, 100);
   }
-
   handleMobileSelection() {
     const selection = window.getSelection();
     const text = selection.toString().trim();
@@ -559,7 +524,6 @@ export class Reader {
       this.hideSelectionMenu();
     }
   }
-
   createSelectionMenu() {
     if (this.selectionMenu) return;
     this.selectionMenu = window.App.modules.util.createElement("div", "mobile-selection-menu");
@@ -595,7 +559,6 @@ export class Reader {
     this.selectionMenu.appendChild(copyBtn);
     document.body.appendChild(this.selectionMenu);
   }
-
   showSelectionMenu(rect) {
     if (!this.selectionMenu) return;
     const menuHeight = 50;
@@ -614,14 +577,12 @@ export class Reader {
     this.selectionMenu.style.left = `${left}px`;
     this.selectionMenu.style.display = "flex";
   }
-
   hideSelectionMenu() {
     if (this.selectionMenu) {
       this.selectionMenu.style.display = "none";
     }
     this.selectedRange = null;
   }
-
   applyHighlight(range, color) {
     const span = document.createElement("span");
     span.className = "blog-highlight";
@@ -657,7 +618,6 @@ export class Reader {
       console.warn("Could not apply highlight:", e);
     }
   }
-
   setupReadingProgress() {
     let scrollTimeout;
     window.addEventListener("scroll", () => {
@@ -673,7 +633,6 @@ export class Reader {
       this.saveStats();
     });
   }
-
   checkReadingCompletion() {
     const percentage = this.getReadingPercentage();
     if (percentage >= 99 && !this.isPaused) {
@@ -681,7 +640,6 @@ export class Reader {
       this.showCompletionDialog();
     }
   }
-
   showCompletionDialog() {
     const minutes = Math.floor(this.timeSpent / 60);
     const seconds = this.timeSpent % 60;
@@ -710,7 +668,6 @@ export class Reader {
       '<i class="fa-solid fa-flag-checkered"></i>'
     );
   }
-
   async loadReadingState() {
     const progress = await this.getProgress();
     if (progress && progress.scrollPosition > 100) {
@@ -723,7 +680,6 @@ export class Reader {
     }
     await this.loadHighlights();
   }
-
   showResumeDialog(progress) {
     const checkboxId = "dont-ask-resume-" + Date.now();
     this.showDialog(
@@ -762,7 +718,6 @@ export class Reader {
       '<i class="fa-solid fa-book"></i>'
     );
   }
-
   getReadingPercentage() {
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
@@ -770,7 +725,6 @@ export class Reader {
     const percentage = (scrollTop / (documentHeight - windowHeight)) * 100;
     return Math.min(100, Math.max(0, percentage));
   }
-
   updateProgressBar() {
     const progressBar = document.getElementById("reading-progress-bar");
     const headerProgressBar = document.getElementById("header-reading-progress-bar");
@@ -782,7 +736,6 @@ export class Reader {
       headerProgressBar.style.width = `${percentage}%`;
     }
   }
-
   startReadingTimer() {
     this.readingTimer = setInterval(() => {
       if (document.visibilityState === "visible" && !this.isPaused) {
@@ -791,7 +744,6 @@ export class Reader {
       }
     }, 1000);
   }
-
   pauseTimer() {
     this.isPaused = true;
     const pauseBtn = document.getElementById("header-timer-toggle");
@@ -800,7 +752,6 @@ export class Reader {
       pauseBtn.setAttribute("title", "Resume Timer");
     }
   }
-
   resumeTimer() {
     this.isPaused = false;
     const pauseBtn = document.getElementById("header-timer-toggle");
@@ -809,7 +760,6 @@ export class Reader {
       pauseBtn.setAttribute("title", "Pause Timer");
     }
   }
-
   toggleTimer() {
     if (this.isPaused) {
       this.resumeTimer();
@@ -817,7 +767,6 @@ export class Reader {
       this.pauseTimer();
     }
   }
-
   updateTimeDisplay() {
     const minutes = Math.floor(this.timeSpent / 60);
     const seconds = this.timeSpent % 60;
@@ -831,12 +780,10 @@ export class Reader {
       headerDisplay.textContent = timeStr;
     }
   }
-
   setupUI() {
     this.createToolbar();
     this.updateProgressBar();
   }
-
   createHeaderProgressBar() {
     const header = document.querySelector("[data-header-progress]");
     const render = document.querySelectorAll("[data-move-to-header]");
@@ -845,7 +792,6 @@ export class Reader {
       header.appendChild(el);
     });
   }
-
   clearHeaderProgressBar() {
     const content = document.querySelector("#toolbar-content");
     const reader = document.querySelector("#reader-btn-container");
@@ -861,7 +807,6 @@ export class Reader {
         }
       });
   }
-
   toggleMinimize() {
     const toolbar = document.getElementById("reading-toolbar");
     const content = document.getElementById("toolbar-content");
@@ -882,7 +827,6 @@ export class Reader {
       this.clearHeaderProgressBar();
     }
   }
-
   createToolbar() {
     if (document.getElementById("reading-toolbar")) return;
     const toolbar = window.App.modules.util.createElement("div", "glass-card");
@@ -969,7 +913,6 @@ export class Reader {
       }
     }, 1000);
   }
-
   async exportHighlights() {
     let highlights = [];
     switch (this.storageType) {
@@ -1006,7 +949,6 @@ export class Reader {
     this.showNotification(`Exported ${highlights.length} highlights!`, "success");
     return exportData;
   }
-
   destroy() {
     if (this.readingTimer) {
       clearInterval(this.readingTimer);
@@ -1024,7 +966,6 @@ export class Reader {
     this.saveProgress();
     this.saveStats();
   }
-
   showDialog(title, message, buttons = [], icon = "⚠️") {
     let overlay = document.getElementById("reader-dialog-overlay");
     if (!overlay) {
@@ -1064,7 +1005,6 @@ export class Reader {
       }
     });
   }
-
   showNotification(message, type = "info") {
     const notification = window.App.modules.util.createElement("div", "reader-notification");
     const icons = {
@@ -1085,7 +1025,6 @@ export class Reader {
       }
     }, 3000);
   }
-
   getPreference(key) {
     try {
       const prefs = localStorage.getItem("blog_reader_preferences");
@@ -1098,7 +1037,6 @@ export class Reader {
     }
     return null;
   }
-
   setPreference(key, value) {
     try {
       let prefs = {};
@@ -1112,9 +1050,7 @@ export class Reader {
       console.error("Error saving preferences:", e);
     }
   }
-
   copyToClipboard(text) {
-    // Try modern Clipboard API first (requires HTTPS or localhost)
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text)
         .then(() => {
@@ -1125,13 +1061,10 @@ export class Reader {
           this.fallbackCopyToClipboard(text);
         });
     } else {
-      // Fallback for HTTP or older browsers
       this.fallbackCopyToClipboard(text);
     }
   }
-
   fallbackCopyToClipboard(text) {
-    // Create temporary textarea
     const textarea = document.createElement("textarea");
     textarea.value = text;
     textarea.style.position = "fixed";
@@ -1142,7 +1075,6 @@ export class Reader {
     try {
       textarea.select();
       textarea.setSelectionRange(0, text.length);
-      
       const successful = document.execCommand("copy");
       if (successful) {
         this.showNotification("Copied!", "success");

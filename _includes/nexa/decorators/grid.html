@@ -4,18 +4,14 @@
 {% assign radius = include.radius | default: 2 %}
 {% assign gap   = include.gap | default: 6 %}
 {% assign color = include.color | default: "var(--primary, #ffffff)" %}
-
 {% assign svg_width  = cols | times: gap %}
 {% assign svg_height = rows | times: gap %}
-
 {% assign svg_class  = include.svg_class  | default: "grid" %}
-
 <svg xmlns="http://www.w3.org/2000/svg"
      width="{{ svg_width }}"
      height="{{ svg_height }}"
      viewBox="0 0 {{ svg_width }} {{ svg_height }}"
      fill="none" {% if svg_class != '' %}class="{{ svg_class }}"{% endif %}>
-
   {% for r in (0..rows) %}
     {% if r > 0 %}
       {% for c in (0..cols) %}
@@ -30,5 +26,4 @@
       {% endfor %}
     {% endif %}
   {% endfor %}
-
 </svg>

@@ -24,13 +24,11 @@
     filter: blur(0);
     z-index: calc(var(--z-modal, 10000) + 1);
   }
-
   .spiral-grid circle {
     opacity: 0;
     transform-origin: center;
     animation: spiralInfinite var(--total-duration) ease-in-out infinite;
   }
-
   @keyframes spiralInfinite {
     0% {
       opacity: 0;
@@ -58,11 +56,9 @@
       transform: scale(0.4);
     }
   }
-
   .msg-rotate {
     min-width: 25rch;
   }
-
   .msg-rotate span {
     position: absolute;
     opacity: 0;
@@ -71,27 +67,21 @@
     color: var(--primary, #ffffff);
     font-size: var(--fontSize-base, 1rem);
   }
-
   .msg-rotate span:nth-child(1) {
     animation-delay: 0s;
   }
-
   .msg-rotate span:nth-child(2) {
     animation-delay: 2s;
   }
-
   .msg-rotate span:nth-child(3) {
     animation-delay: 4s;
   }
-
   .msg-rotate span:nth-child(4) {
     animation-delay: 6s;
   }
-  
   .msg-rotate span:nth-child(5) {
     animation-delay: 8s;
   }
-
   @keyframes matrixDrop {
     0% {
       opacity: 0;
@@ -125,12 +115,10 @@
   {% assign speed = include.speed | default: 0.07 %}
   <!---->
   {% assign svg_class = include.svg_class | default: "spiral-grid" %}
-
   <!---->
   {% assign side = size | times: gap %}
   <!---->
   {% assign coords = "" | split: "" %}
-
   <!---->
   {% assign top = 0 %}
   <!---->
@@ -139,10 +127,8 @@
   {% assign bottom = size | minus: 1 %}
   <!---->
   {% assign right = size | minus: 1 %}
-
   <!---->
   {% assign max_iterations = size | times: size %}
-
   <!---->
   {% for iteration in (1..max_iterations) %}
   <!---->
@@ -152,7 +138,6 @@
   <!---->
   {% endif %}
   <!---->
-
   <!---->
   {% comment %} RIGHT: Move along top row {% endcomment %}
   <!---->
@@ -166,7 +151,6 @@
   <!---->
   {% assign top = top | plus: 1 %}
   <!---->
-
   <!---->
   {% if top > bottom or left > right %}
   <!---->
@@ -174,7 +158,6 @@
   <!---->
   {% endif %}
   <!---->
-
   <!---->
   {% comment %} DOWN: Move along right column {% endcomment %}
   <!---->
@@ -188,7 +171,6 @@
   <!---->
   {% assign right = right | minus: 1 %}
   <!---->
-
   <!---->
   {% if top > bottom or left > right %}
   <!---->
@@ -196,7 +178,6 @@
   <!---->
   {% endif %}
   <!---->
-
   <!---->
   {% comment %} LEFT: Move along bottom row {% endcomment %}
   <!---->
@@ -210,7 +191,6 @@
   <!---->
   {% assign bottom = bottom | minus: 1 %}
   <!---->
-
   <!---->
   {% if top > bottom or left > right %}
   <!---->
@@ -218,7 +198,6 @@
   <!---->
   {% endif %}
   <!---->
-
   <!---->
   {% comment %} UP: Move along left column {% endcomment %}
   <!---->
@@ -233,7 +212,6 @@
   {% assign left = left | plus: 1 %}
   <!---->
   {% endfor %}
-
   <svg xmlns="http://www.w3.org/2000/svg" width="{{ side }}" height="{{ side }}" class="{{ svg_class }}" viewBox="0 0 {{ side }} {{ side }}">
     <!---->
     {% for coord in coords %}

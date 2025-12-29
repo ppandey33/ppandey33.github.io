@@ -9,18 +9,15 @@ class Blogs extends GenSvg {
     this.itemsPerPage = 9;
     this.svgGenerator = null;
   }
-
   async init() {
     initPaginator('blog');
     await this.loadBlogs();
     this.setupFilters();
   }
-
   async loadBlogs() {
     try {
       const data = await window.App.modules.apiClient.loadJSON("/data/blogs.json");
       if (!data?.blogs) throw new Error("Failed to load blogs");
-
       this.allBlogs = data?.blogs.map((blog) => ({
         id: blog.id,
         title: blog.title,
@@ -36,7 +33,6 @@ class Blogs extends GenSvg {
         categorySlug: blog.categorySlug,
       }));
       this.allBlogs.sort((a, b) => b.dateObj - a.dateObj);
-
       this.filteredBlogs = [...this.allBlogs];
       this.renderPage();
     } catch (error) {
@@ -44,7 +40,6 @@ class Blogs extends GenSvg {
       this.showError();
     }
   }
-
   setupFilters() {
     const filterContainer = document.querySelector("[data-blog-filter]");
     if (!filterContainer) return;
@@ -56,12 +51,10 @@ class Blogs extends GenSvg {
     searchWrapper.appendChild(searchInput);
     const categoryWrapper = window.App.modules.util.createElement("div", "blog-category-wrapper");
     const categorySelect = window.App.modules.util.createElement("select", "blog-category-select");
-
     const categories = this.getUniqueCategories();
     const allOption = window.App.modules.util.createElement("option", "", "All Categories");
     allOption.value = "all";
     categorySelect.appendChild(allOption);
-
     categories.forEach((category) => {
       const option = window.App.modules.util.createElement("option", "", category);
       option.value = category;
@@ -76,14 +69,12 @@ class Blogs extends GenSvg {
       { value: "title-asc", label: "Title (A-Z)" },
       { value: "title-desc", label: "Title (Z-A)" },
     ];
-
     sortOptions.forEach((opt) => {
       const option = window.App.modules.util.createElement("option", "", opt.label);
       option.value = opt.value;
       sortSelect.appendChild(option);
     });
     sortWrapper.appendChild(sortSelect);
-
     filterContainer.appendChild(searchWrapper);
     filterContainer.appendChild(categoryWrapper);
     filterContainer.appendChild(sortWrapper);
@@ -91,12 +82,10 @@ class Blogs extends GenSvg {
     categorySelect.addEventListener("change", (e) => this.handleCategoryFilter(e.target.value));
     sortSelect.addEventListener("change", (e) => this.handleSort(e.target.value));
   }
-
   getUniqueCategories() {
     const categories = [...new Set(this.allBlogs.map((blog) => blog.category))];
     return categories.sort();
   }
-
   handleSearch(query) {
     const searchTerm = query.toLowerCase();
     this.filteredBlogs = this.allBlogs.filter(
@@ -109,7 +98,6 @@ class Blogs extends GenSvg {
     this.currentPage = 1;
     this.renderPage();
   }
-
   handleCategoryFilter(category) {
     if (category === "all") {
       this.filteredBlogs = [...this.allBlogs];
@@ -119,7 +107,6 @@ class Blogs extends GenSvg {
     this.currentPage = 1;
     this.renderPage();
   }
-
   handleSort(sortBy) {
     this.filteredBlogs.sort((a, b) => {
       switch (sortBy) {
@@ -138,39 +125,31 @@ class Blogs extends GenSvg {
     this.currentPage = 1;
     this.renderPage();
   }
-
   renderPage() {
     const blogContainer = document.querySelector("[data-post-content]");
     if (!blogContainer) return;
-
     blogContainer.innerHTML = "";
-
     const startIdx = (this.currentPage - 1) * this.itemsPerPage;
     const endIdx = startIdx + this.itemsPerPage;
     const pageBlogs = this.filteredBlogs.slice(startIdx, endIdx);
-
     if (pageBlogs.length === 0) {
       const noResults = window.App.modules.util.createElement("p", "blog-no-results", "No blog posts found");
       blogContainer.appendChild(noResults);
       this.renderPagination();
       return;
     }
-
     pageBlogs.forEach((blog, index) => {
       const card = this.createBlogCard(blog, index);
       blogContainer.appendChild(card);
     });
-
     this.renderPagination();
   }
-
   createBlogCard(blog, index) {
     const card = window.App.modules.util.createElement("article", `blog-card ${index % 3 === 0 ? "fade-left" : index % 3 === 2 ? "fade-right" : "zoom"}`);
     let imageContainer = window.App.modules.util.createElement("div", "blog-image");
     if (this.displayMultiTextSVG) {
       this.displayMultiTextSVG(blog?.tags.slice(0, 6) || ["No Image"], imageContainer).then((img) => {
         imageContainer = img;
-
         const categoryBadge = window.App.modules.util.createElement("div", "blog-category-badge", blog.category);
         imageContainer.appendChild(categoryBadge);
         const shades = window.App.modules.util.createElement("div", "image-shades");
@@ -180,9 +159,7 @@ class Blogs extends GenSvg {
       const categoryBadge = window.App.modules.util.createElement("div", "blog-category-badge", blog.category);
       imageContainer.appendChild(categoryBadge);
     }
-
     card.appendChild(imageContainer);
-
     const info = window.App.modules.util.createElement("div", "blog-info"),
       meta = window.App.modules.util.createElement("div", "blog-meta"),
       date = window.App.modules.util.createElement("span", "blog-date"),
@@ -190,13 +167,11 @@ class Blogs extends GenSvg {
     dateIcon.innerHTML = "&#xf133;";
     date.appendChild(dateIcon);
     date.appendChild(document.createTextNode(this.formatDate(blog.dateObj)));
-
     const readTime = window.App.modules.util.createElement("span", "blog-read-time"),
       timeIcon = window.App.modules.util.createElement("span", "blog-meta-icon fa fa-regular");
     timeIcon.innerHTML = "&#xf34e;";
     readTime.appendChild(timeIcon);
     readTime.appendChild(document.createTextNode(blog.readTime));
-
     meta.appendChild(date);
     meta.appendChild(readTime);
     info.appendChild(meta);
@@ -213,25 +188,20 @@ class Blogs extends GenSvg {
       info.appendChild(tagsContainer);
     }
     const footer = window.App.modules.util.createElement("div", "blog-footer");
-
     const author = window.App.modules.util.createElement("div", "blog-author");
     const avatar = window.App.modules.util.createElement("div", "blog-author-avatar", blog.author.charAt(0).toUpperCase());
     const authorName = window.App.modules.util.createElement("span", "", blog.author);
     author.appendChild(avatar);
     author.appendChild(authorName);
-
     const readMore = window.App.modules.util.createElement("a", "blog-read-more", "Read more");
     const blogUrl = blog.categorySlug ? `/blogs/${blog.categorySlug}/${blog.slug}/` : `#blog-${blog.id}`;
     readMore.href = blogUrl;
-
     footer.appendChild(author);
     footer.appendChild(readMore);
     info.appendChild(footer);
-
     card.appendChild(info);
     return card;
   }
-
   renderPagination() {
     onComponentLoaded.next({
       type: "pagination",
@@ -247,42 +217,35 @@ class Blogs extends GenSvg {
       },
     });
   }
-
   scrollToTop() {
     const section = document.querySelector("#blogs");
     if (section) {
       section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
-
   formatDate(date) {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return date.toLocaleDateString("en-US", options);
   }
-
   showError() {
     const blogContainer = document.querySelector("[data-post-content]");
     if (blogContainer) {
       blogContainer.innerHTML = '<p class="blog-no-results">Failed to load blog posts. Please try again later.</p>';
     }
   }
-
   cleanup() {
     const blogContainer = document.querySelector("[data-post-content]");
     const filterContainer = document.querySelector("[data-blog-filter]");
     const paginationContainers = document.querySelectorAll("[data-blog-pager]");
-
     if (blogContainer) blogContainer.innerHTML = "";
     if (filterContainer) filterContainer.innerHTML = "";
     paginationContainers.forEach((container) => (container.innerHTML = ""));
-
     this.allBlogs = [];
     this.filteredBlogs = [];
     this.currentPage = 1;
     this.svgGenerator = null;
   }
 }
-
 function initBlogs() {
   if (window.App?.modules?.blogs) {
     window.App.modules.blogs.cleanup?.();
@@ -291,11 +254,9 @@ function initBlogs() {
   window.App.register("blogs", blogsModule, "initBlogs");
   blogsModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initBlogs);
 } else {
   initBlogs();
 }
-
 export { Blogs, initBlogs };

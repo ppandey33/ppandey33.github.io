@@ -1,11 +1,9 @@
 if (typeof activeRequests === 'undefined') {
   var activeRequests = new Map();
 }
-
 self.addEventListener("fetch", (event) => {
   const url = event.request.url;
   const id = Math.random().toString(36).slice(2);
-  
   activeRequests.set(id, url);
   self.clients.matchAll().then(clients => {
     clients.forEach(client => {
@@ -16,13 +14,11 @@ self.addEventListener("fetch", (event) => {
       });
     });
   });
-
   event.respondWith(
     (async () => {
       try {
         const response = await fetch(event.request);
         activeRequests.delete(id);
-        
         self.clients.matchAll().then(clients => {
           clients.forEach(client => {
             client.postMessage({
@@ -32,11 +28,9 @@ self.addEventListener("fetch", (event) => {
             });
           });
         });
-        
         return response;
       } catch (err) {
         activeRequests.delete(id);
-        
         self.clients.matchAll().then(clients => {
           clients.forEach(client => {
             client.postMessage({
@@ -46,19 +40,14 @@ self.addEventListener("fetch", (event) => {
             });
           });
         });
-        
         throw err;
       }
     })()
   );
 });
-
 self.addEventListener('install', (event) => {
-
   self.skipWaiting();
 });
-
 self.addEventListener('activate', (event) => {
-
   event.waitUntil(self.clients.claim());
 });

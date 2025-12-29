@@ -1,6 +1,5 @@
 ---
 ---
-
 .page-container {
   width: 100% !important;
   padding: 0rem !important;
@@ -131,7 +130,6 @@
   line-height: var(--line-height-relaxed);
   color: var(--textPrimary, #ffffff);
   margin-bottom: var(--space-16);
-
   h1,
   h2,
   h3,
@@ -229,7 +227,6 @@
     background: var(--surface, #252525);
     font-weight: 600;
   }
-  
 .x-hide-title tr td:nth-child(odd) {
   display: none;
   background: var(--surface, #252525);
@@ -241,16 +238,13 @@
     padding: var(--padding-xl, 2rem);
     margin-bottom: var(--space-12);
   }
-
-  /* === HIERARCHY VISUAL === */
-  .hierarchy-visual {
+    .hierarchy-visual {
     background: var(--cardBg, #252525);
     border: var(--border-2) solid var(--border, #333333);
     border-radius: var(--radius-md, 0.5rem);
     padding: var(--padding-xl, 2rem);
     margin: var(--space-10) 0;
   }
-
   .tree-container {
     display: flex;
     flex-direction: column;
@@ -258,13 +252,11 @@
     gap: var(--gap-sm, 0.75rem);
     margin: var(--space-6) 0;
   }
-
   .tree-level {
     text-align: center;
     width: 100%;
     max-width: 500px;
   }
-
   .tree-box {
     background: linear-gradient(135deg, var(--surface, #252525), var(--cardBg, #1a1a1a));
     border: var(--border-2) solid var(--primary, #ffffff);
@@ -275,19 +267,16 @@
     color: var(--textPrimary, #ffffff);
     margin-bottom: var(--space-2);
   }
-
   .tree-description {
     color: var(--textSecondary, #b0b0b0);
     font-size: var(--fontSize-sm, 0.875rem);
   }
-
   .tree-arrow {
     font-size: var(--fontSize-xl, 1.25rem);
     color: var(--primary, #ffffff);
     font-weight: 600;
     margin: var(--space-2) 0;
   }
-
   .key-note {
     background: var(--surface, #252525);
     border-left: var(--border-4) solid var(--primary, #ffffff);
@@ -295,18 +284,11 @@
     margin-top: var(--space-6);
     border-radius: var(--radius-sm, 0.25rem);
   }
-
    .diagram-container{
     text-align: center;
   }
   svg, img, svg *, img * {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Standard property (Chrome, Opera, etc.) */
-  }
+    -webkit-touch-callout: none;     -webkit-user-select: none;     -khtml-user-select: none;     -moz-user-select: none;     -ms-user-select: none;     user-select: none;   }
 }
 .post-footer {
   border-top: var(--border-1) solid var(--border, #333333);
@@ -638,20 +620,15 @@ div[data-header-progress] #reading-progress-container {
   max-width: 25rem;
   animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s;
 }
-
-/* Highlight styles */
 .blog-highlight {
   padding: var(--padding-sm);
   border-radius: var(--radius-xs);
   cursor: pointer;
   transition: opacity 0.2s;
 }
-
 .blog-highlight:hover {
   opacity: 0.8;
 }
-
-/* Mobile selection menu */
 .mobile-selection-menu {
   position: absolute;
   display: none;
@@ -665,7 +642,6 @@ div[data-header-progress] #reading-progress-container {
   z-index: var(--z-modal);
   border: var(--border-1) solid var(--border);
 }
-
 .selection-color-btn,
 .selection-action-btn {
   width: var(--space-5);
@@ -676,11 +652,9 @@ div[data-header-progress] #reading-progress-container {
   cursor: pointer;
   transition: all var(--transition-base, 0.3s) ease;
 }
-
 .selection-color-btn:active {
   transform: scale(0.95);
 }
-
 @keyframes slideInRight {
   from {
     opacity: 0;

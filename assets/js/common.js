@@ -10,17 +10,14 @@ class CommonUtilities {
     this.documentClickHandler = null;
     this.dropdownEventListeners = [];
   }
-
   init() {
     this.setup();
   }
-
   setup() {
     this.setupMobileMenu();
     this.initScrollReveal();
     this.setupHeaderScroll();
   }
-
   createElement(tag, className, content) {
     const el = document.createElement(tag);
     if (className) el.className = className;
@@ -33,7 +30,6 @@ class CommonUtilities {
     }
     return el;
   }
-
   debounce(func, wait) {
     let timeout;
     return function (...args) {
@@ -44,7 +40,6 @@ class CommonUtilities {
       }, wait);
     };
   }
-
   formatDate(dateString) {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -52,24 +47,20 @@ class CommonUtilities {
       day: "numeric",
     });
   }
-
   smoothScroll(target) {
     const itemHash = target.includes("#") ? "#" + target.split("#")[1] : null;
     if (!itemHash) return;
-
     const el = document.querySelector(itemHash);
     if (el) {
       const headerOffset = 80;
       const elementPosition = el?.offsetTop || el?.offsetParent?.offsetTop;
       const offsetPosition = elementPosition - headerOffset;
-
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
       });
     }
   }
-
   setupMobileMenu() {
     this.mobileMenuToggle = document.querySelector("[mobile-menu-toggle]");
     this.siteNav = document.querySelector("[data-nav]");
@@ -77,25 +68,20 @@ class CommonUtilities {
       this.createMobileSidebarControls();
       return;
     }
-
     if (!this.siteNav) return;
-
     this.mobileMenuClickHandler = () => {
       this.siteNav.classList.toggle("active");
       this.mobileMenuToggle.classList.toggle("active");
     };
-
     this.documentClickHandler = (e) => {
       if (!this.mobileMenuToggle.contains(e.target) && !this.siteNav.contains(e.target)) {
         this.siteNav.classList.remove("active");
         this.mobileMenuToggle.classList.remove("active");
       }
     };
-
     this.mobileMenuToggle.addEventListener("click", this.mobileMenuClickHandler);
     document.addEventListener("click", this.documentClickHandler);
   }
-
   createMobileSidebarControls() {
     if (document.querySelector(".mobile-sidebar-controls")) return;
     const header = this.createElement("div", "mobile-sidebar-controls"),
@@ -119,7 +105,6 @@ class CommonUtilities {
     this.sidebarOverlay = overlay;
     this.setupSidebarToggleListeners();
   }
-
   setupSidebarToggleListeners() {
     this.leftSidebarBtn.addEventListener("click", () => {
       const isActive = this.leftSidebar.classList.contains("active");
@@ -145,7 +130,6 @@ class CommonUtilities {
         this.sidebarOverlay.classList.remove("active");
       }
     });
-
     this.sidebarOverlay.addEventListener("click", () => {
       this.leftSidebar.classList.remove("active");
       this.rightSidebar.classList.remove("active");
@@ -153,7 +137,6 @@ class CommonUtilities {
       this.rightSidebarBtn.classList.remove("active");
       this.sidebarOverlay.classList.remove("active");
     });
-
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         this.leftSidebar.classList.remove("active");
@@ -164,7 +147,6 @@ class CommonUtilities {
       }
     });
   }
-
   moveNetworkDropdownToStatusBar() {
     if (window.innerWidth > 768) return;
     const navContainer = document.querySelector(".nav-container");
@@ -174,7 +156,6 @@ class CommonUtilities {
     if (!statusBar) return;
     statusBar.appendChild(networkSubmenu);
   }
-
   initScrollReveal() {
     const revealElements = document.querySelectorAll(".reveal");
     if (revealElements.length === 0) return;
@@ -201,21 +182,16 @@ class CommonUtilities {
       revealElements[0].classList.add("visible");
     }
   }
-
   setupHeaderScroll() {
     const header = document.querySelector(".site-header");
     if (!header) return;
-
     let lastScroll = 0;
-
     this.headerScrollHandler = () => {
       const currentScroll = window.pageYOffset;
-
       if (currentScroll <= 0) {
         header.classList.remove("scroll-up");
         return;
       }
-
       if (currentScroll > lastScroll && !header.classList.contains("scroll-down")) {
         header.classList.remove("scroll-up");
         header.classList.add("scroll-down");
@@ -223,13 +199,10 @@ class CommonUtilities {
         header.classList.remove("scroll-down");
         header.classList.add("scroll-up");
       }
-
       lastScroll = currentScroll;
     };
-
     window.addEventListener("scroll", this.headerScrollHandler);
   }
-
   createSimpleButton(button, type) {
     const btn = this.createElement("a");
     btn.className = `btn btn-${button.style}`;
@@ -258,7 +231,6 @@ class CommonUtilities {
     }
     return btn;
   }
-
   createDropdownButton(button, type) {
     const dropdownWrapper = this.createElement("div", "btn-dropdown");
     const defaultChild = button.child.find((child) => child.default) || button.child[0];
@@ -292,7 +264,6 @@ class CommonUtilities {
         childLink.appendChild(icon);
         childLink.appendChild(document.createTextNode(" "));
       }
-
       childLink.appendChild(document.createTextNode(childBtn.text));
       const checkmark = this.createElement("i", "fa checkmark");
       checkmark.innerHTML = "&#xf00c;";
@@ -333,14 +304,11 @@ class CommonUtilities {
       type: "click",
       handler: outsideClickHandler,
     });
-
     dropdownWrapper.appendChild(mainBtn);
     dropdownWrapper.appendChild(toggleBtn);
     dropdownWrapper.appendChild(dropdownMenu);
-
     return dropdownWrapper;
   }
-
   updateButtonContent(container, button, text, type) {
     if (button?.icon && type == "icon") {
       const iconElement = this.createElement("i", button.class || "fa");
@@ -350,7 +318,6 @@ class CommonUtilities {
     }
     container.appendChild(document.createTextNode(text));
   }
-
   async closeDialog(e, type) {
     const modal = document.getElementById(`${type}Modal`);
     if (modal) {
@@ -360,7 +327,6 @@ class CommonUtilities {
     }
     return false;
   }
-
   async openDialog(type) {
     const modal = document.getElementById(`${type}Modal`);
     if (modal) {
@@ -370,7 +336,6 @@ class CommonUtilities {
     }
     return false;
   }
-
   share(title) {
     const preferences = {
       t: localStorage.getItem("theme") || "charcoal",
@@ -389,7 +354,6 @@ class CommonUtilities {
       });
     }
   }
-
   cleanup() {
     this.dropdownEventListeners.forEach(({ element, type, handler }) => {
       element.removeEventListener(type, handler);
@@ -423,7 +387,6 @@ class CommonUtilities {
     this.scrollTimeout = null;
   }
 }
-
 function initCommon() {
   if (window.App?.modules?.util) {
     window.App.modules.util.cleanup?.();
@@ -432,11 +395,9 @@ function initCommon() {
   window.App.register("util", utilModule, "initCommon");
   utilModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initCommon);
 } else {
   initCommon();
 }
-
 export { CommonUtilities, initCommon };

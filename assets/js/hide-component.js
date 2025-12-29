@@ -2,16 +2,13 @@ class HideComponent {
   constructor(options = {}) {
     this.options = options;
   }
-
   get isHome() {
     return !window.location.pathname.includes(this.options?.currentPath || "");
   }
-
   get currentBlock() {
     const currentBlockEl = document.querySelector(`section[id="${(this.options?.currentPath || "").replace(/^\//, "")}"]`);
     return (currentBlockEl || document.documentElement);
   }
-
   async manageDOM(options) {
     if (this.isHome) {
       await this.disableNonCurrent();
@@ -27,19 +24,16 @@ class HideComponent {
       await this.removeStyleCurrent();
     }
   }
-
   async disableCurrent() {
     if (this.isHome) return;
     const disableLinks = this.currentBlock.querySelectorAll("[data-disable-current]");
     disableLinks.forEach((link) => link.remove());
   }
-
   async disableNonCurrent() {
     if (!this.isHome) return;
     const enableLinks = this.currentBlock.querySelectorAll("[data-enable-current]");
     enableLinks.forEach((link) => link.remove());
   }
-
   async applyClassCurrent() {
     if (this.isHome) return;
     const cEl = this.currentBlock.querySelectorAll("[data-apply-current-class]");
@@ -48,7 +42,6 @@ class HideComponent {
       value && el.classList.add(...value.split(" "));
     });
   }
-
   async applyClassNonCurrent() {
     if (!this.isHome) return;
     const cEl = this.currentBlock.querySelectorAll("[data-apply-noncurrent-class]");
@@ -57,7 +50,6 @@ class HideComponent {
       value && el.classList.add(...value.split(" "));
     });
   }
-
   async removeClassCurrent() {
     if (this.isHome) return;
     const rCel = this.currentBlock.querySelectorAll("[data-remove-current-class]");
@@ -66,7 +58,6 @@ class HideComponent {
       value && el.classList.remove(...value.split(" "));
     });
   }
-
   async removeClassNonCurrent() {
     if (!this.isHome) return;
     const rCel = this.currentBlock.querySelectorAll("[data-remove-noncurrent-class]");
@@ -75,7 +66,6 @@ class HideComponent {
       value && el.classList.remove(...value.split(" "));
     });
   }
-
   async applyStyleCurrent() {
     if (this.isHome) return;
     const elements = this.currentBlock.querySelectorAll("[data-apply-current-style]");
@@ -90,7 +80,6 @@ class HideComponent {
       });
     });
   }
-
   async applyStyleNonCurrent() {
     if (!this.isHome) return;
     const elements = this.currentBlock.querySelectorAll("[data-apply-noncurrent-style]");
@@ -105,7 +94,6 @@ class HideComponent {
       });
     });
   }
-
   async removeStyleCurrent() {
     if (this.isHome) return;
     const elements = this.currentBlock.querySelectorAll("[data-remove-current-style]");
@@ -120,7 +108,6 @@ class HideComponent {
       });
     });
   }
-
   async removeStyleNonCurrent() {
     if (!this.isHome) return;
     const elements = this.currentBlock.querySelectorAll("[data-remove-noncurrent-style]");
@@ -135,11 +122,9 @@ class HideComponent {
       });
     });
   }
-
   cleanup() {
   }
 }
-
 function initHideComponent(options = {}) {
   if (window.App?.modules?.hideComp) {
     window.App.modules.hideComp.cleanup?.();
@@ -148,5 +133,4 @@ function initHideComponent(options = {}) {
   window.App.register("hideComp", hideCompModule, "initHideComponent");
   return hideCompModule;
 }
-
 export { HideComponent, initHideComponent };

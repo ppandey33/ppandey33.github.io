@@ -1,21 +1,16 @@
 import { PrepDoc } from "../prep-doc.js"
-
 class Iam {
   constructor() {
     this.docGenerator = new PrepDoc();
   }
-
   async init() {
     await this.loadSiteConfig();
     await this.renderButtons();
   }
-
   async loadSiteConfig() {
     this.config = await window.App.modules.apiClient.loadJSON("/data/site-config.json");
     const iamElements = document.querySelectorAll("[data-iam]");
-
     if (!iamElements.length || !this.config?.hero) return;
-
     iamElements.forEach((el) => {
       const prop = el.getAttribute("data-iam");
       if (prop && this.config.hero[prop]) {
@@ -23,7 +18,6 @@ class Iam {
       }
     });
   }
-
   async renderButtons() {
     const placeholders = document.querySelectorAll("[data-btn-placeholder]");
     placeholders.forEach((placeholder) => {
@@ -32,7 +26,6 @@ class Iam {
       const type = placeholder.getAttribute("type") || 'icon';
       const btnContainer = window.App.modules.util.createElement("div");
       btnContainer.className = "btn-container";
-      
       btnIndices.forEach((index) => {
         if (buttons[index]) {
           const button = buttons[index];
@@ -64,7 +57,6 @@ class Iam {
       placeholder.parentNode.replaceChild(btnContainer, placeholder);
     });
   }
-
   async handleButtonAction(rel, childText) {
     switch (rel) {
       case "portfolio":
@@ -76,7 +68,6 @@ class Iam {
       default:
     }
   }
-
   async downloadResume(format) {
     try {
       const resumeData = await window.App.modules.apiClient.loadJSON("/data/resume-data.json");
@@ -86,7 +77,6 @@ class Iam {
       alert("Failed to generate resume. Please try again.");
     }
   }
-
   cleanup() {
     const btnContainers = document.querySelectorAll(".btn-container");
     btnContainers.forEach((container) => {
@@ -97,7 +87,6 @@ class Iam {
     iamElements.forEach((el) => (el.textContent = ""));
   }
 }
-
 function initIam() {
   if (window.App?.modules?.iam) {
     window.App.modules.iam.cleanup?.();
@@ -106,11 +95,9 @@ function initIam() {
   window.App.register("iam", iamModule, "initIam");
   iamModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initIam);
 } else {
   initIam();
 }
-
 export { Iam, initIam };

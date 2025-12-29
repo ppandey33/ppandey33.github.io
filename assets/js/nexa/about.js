@@ -1,14 +1,11 @@
 import { HideComponent } from "../hide-component.js";
-
 class About extends HideComponent {
   constructor() {
     super({ currentPath: "/about" });
   }
-
   async init() {
     await this.loadAboutContent();
   }
-
   async loadAboutContent() {
     const config = await window.App.modules.apiClient.loadJSON("/data/site-config.json");
     if (!config?.about) return;
@@ -27,7 +24,6 @@ class About extends HideComponent {
     }
     this.manageDOM();
   }
-
   cleanup() {
     const container = document.querySelector("[data-about]");
     if (container) {
@@ -35,7 +31,6 @@ class About extends HideComponent {
     }
   }
 }
-
 function initAbout() {
   if (window.App?.modules?.about) {
     window.App.modules.about.cleanup?.();
@@ -44,11 +39,9 @@ function initAbout() {
   window.App.register("about", aboutModule, 'initAbout');
   aboutModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initAbout());
 } else {
   initAbout();
 }
-
 export { About, initAbout };

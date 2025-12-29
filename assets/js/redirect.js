@@ -5,15 +5,12 @@ class Redirect {
     this.timeoutIds = [];
     this.isActive = true;
   }
-
   async init() {
     const theme = localStorage.getItem("layout") || "nexa";
     await this.applyTemplate(`${window.location.origin}/blogs/${theme}.html`);
   }
-
   async fallBack() {
     this.abortController = new AbortController();
-    
     fetch(`${window.location.origin}/404.html`, {
       signal: this.abortController.signal
     })
@@ -42,10 +39,8 @@ class Redirect {
         }
       });
   }
-
   async applyTemplate(templateFile) {
     this.abortController = new AbortController();
-    
     fetch(templateFile, {
       signal: this.abortController.signal
     })
@@ -65,7 +60,6 @@ class Redirect {
         if (mainHTML?.body) {
           mainHTML.body.style.opacity = "0";
         }
-        
         const sourceElements = this.getElementsBetweenComments(document.head, "replaceable start", "replaceable end");
         const currentElements = this.getElementsBetweenComments(mainHTML.head, "replaceable start", "replaceable end");
         currentElements.forEach((el) => el.remove());
@@ -84,7 +78,6 @@ class Redirect {
         document.open();
         document.write(html);
         document.close();
-        
         const timeoutId = setTimeout(() => {
           if (this.isActive && document?.body) {
             document.body.removeAttribute("style");
@@ -97,10 +90,8 @@ class Redirect {
         this.fallBack();
       });
   }
-
   findComment(parent, commentText) {
     const walker = document.createTreeWalker(parent, NodeFilter.SHOW_COMMENT, null, false);
-
     let node;
     while ((node = walker.nextNode())) {
       if (node.nodeValue.trim() === commentText) {
@@ -109,14 +100,11 @@ class Redirect {
     }
     return null;
   }
-
   getElementsBetweenComments(parent, startText, endText) {
     const elements = [];
     const walker = document.createTreeWalker(parent, NodeFilter.SHOW_ALL, null, false);
-
     let node;
     let collecting = false;
-
     while ((node = walker.nextNode())) {
       if (node.nodeType === Node.COMMENT_NODE) {
         if (node.nodeValue.trim() === startText) {
@@ -127,15 +115,12 @@ class Redirect {
           break;
         }
       }
-
       if (collecting && node.nodeType === Node.ELEMENT_NODE) {
         elements.push(node);
       }
     }
-
     return elements;
   }
-
   cleanup() {
     this.isActive = false;
     if (this.abortController) {
@@ -150,7 +135,6 @@ class Redirect {
     this.eventListeners = [];
   }
 }
-
 function initRedirect() {
   if (window.App?.modules?.redirect) {
     window.App.modules.redirect.cleanup?.();
@@ -159,11 +143,9 @@ function initRedirect() {
   window.App.register("redirect", redirectModule, "initRedirect");
   redirectModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initRedirect);
 } else {
   initRedirect();
 }
-
 export { Redirect, initRedirect };

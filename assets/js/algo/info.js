@@ -9,7 +9,6 @@ class Info extends GenSvg {
     this.goat = "";
     this.allBlogs = [];
   }
-
   async init() {
     if (this.isHome) {
       await this.loadSkills();
@@ -22,12 +21,10 @@ class Info extends GenSvg {
       await this.loadBlogs();
     }
   }
-
   async loadSkills() {
     const data = await window.App.modules.apiClient.loadJSON("/data/skills.json");
     if (!data) return;
     const container = document.querySelector("[data-skills-info]");
-
     if (container) {
       container.innerHTML = "";
       data.forEach((skillsData) => {
@@ -50,17 +47,14 @@ class Info extends GenSvg {
           skillItem.appendChild(skillLevel);
           skillList.appendChild(skillItem);
         });
-
         categoryCard.appendChild(skillList);
         container.appendChild(categoryCard);
       });
     }
   }
-
   async updateSiteInfo() {
     this.config = await window.App.modules.apiClient.loadJSON("/data/site-config.json");
     if (!this.config) return;
-
     document.querySelectorAll("[data-social]").forEach((el) => {
       el.innerHTML = "";
       this.config.social
@@ -74,13 +68,11 @@ class Info extends GenSvg {
         });
     });
   }
-
   async loadBlogs() {
     try {
       const data = await window.App.modules.apiClient.loadJSON("/data/blogs.json");
       this.goat = data?.goat;
       if (!data?.blogs) throw new Error("Failed to load blogs");
-
       this.allBlogs = data?.blogs.map((blog) => ({
         id: blog.id,
         title: blog.title,
@@ -97,11 +89,9 @@ class Info extends GenSvg {
         slug: blog.slug,
         categorySlug: blog.categorySlug,
       }));
-
       this.allBlogs.sort((a, b) => b.dateObj - a.dateObj);
       this.filteredBlogs = [...this.allBlogs];
       const segments = window.location.pathname.split("/").filter(Boolean);
-
       if (segments.length > 1 && segments[0] == "blogs") {
         this.filteredBlogs = this.allBlogs.filter((blog) => blog.categorySlug.toLowerCase().includes(segments[1].toLowerCase()));
       }
@@ -115,13 +105,11 @@ class Info extends GenSvg {
       console.error("Error loading blogs:", error);
     }
   }
-
   async renderInfoBlogs() {
     const container = document.querySelector("[data-skills-info]");
     const startIdx = (this.currentPage - 1) * this.itemsPerPage;
     const endIdx = startIdx + this.itemsPerPage;
     const pageBlogs = this.filteredBlogs.slice(startIdx, endIdx);
-
     if (container && pageBlogs.length > 0) {
       const blogsByCategory = pageBlogs.reduce((acc, blog) => {
         const category = blog.category || "Uncategorized";
@@ -149,7 +137,6 @@ class Info extends GenSvg {
             blogsContainer.appendChild(blogItem);
           });
         });
-
         categoryCard.appendChild(blogsContainer);
         container.appendChild(categoryCard);
         container.appendChild(window.App.modules.util.createElement("p", "cat-border"));
@@ -159,7 +146,6 @@ class Info extends GenSvg {
       container.appendChild(noResults);
     }
   }
-
   async getGoatCount(page) {
     try {
       const res = await window.App.modules.apiClient.loadJSON(page);
@@ -183,12 +169,10 @@ class Info extends GenSvg {
       return "∞";
     }
   }
-
   async createBlogItem(blog) {
     const blogItem = window.App.modules.util.createElement("a", "info-blog-item");
     const blogUrl = blog.categorySlug ? `/blogs/${blog.categorySlug}/${blog.slug}/` : `#blog-${blog.id}`;
     blogItem.href = blogUrl;
-
     const title = window.App.modules.util.createElement("h4", "info-blog-title", blog.title);
     const readCount = await this.getGoatCount(`${this.goat}${encodeURIComponent("blogs/" + blog?.categorySlug)}/${encodeURIComponent(blog?.slug)}.json`);
     const meta = window.App.modules.util.createElement("div", "info-blog-meta");
@@ -197,13 +181,10 @@ class Info extends GenSvg {
     <span class="info-blog-read-time">${blog.readTime}</span>
     <span class="info-blog-reads">${readCount} Reads</span>
   `;
-
     blogItem.appendChild(title);
     blogItem.appendChild(meta);
-
     return blogItem;
   }
-
   cleanup() {
     const container = document.querySelector("[data-skills-info]");
     if (container) container.innerHTML = "";
@@ -213,7 +194,6 @@ class Info extends GenSvg {
     this.config = null;
   }
 }
-
 function initInfo() {
   if (window.App?.modules?.info) {
     window.App.modules.info.cleanup?.();
@@ -222,11 +202,9 @@ function initInfo() {
   window.App.register("info", infoModule, "initInfo");
   infoModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initInfo);
 } else {
   initInfo();
 }
-
 export { Info, initInfo };

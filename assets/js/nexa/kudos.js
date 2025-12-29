@@ -1,19 +1,15 @@
 import { HideComponent } from "../hide-component.js";
-
 class Kudos extends HideComponent {
   constructor() {
     super({ currentPath: "/kudos" });
   }
-
   async init() {
     await this.loadAchievements();
   }
-
   async loadAchievements() {
     const data = await window.App.modules.apiClient.loadJSON("/data/achievements.json");
     if (!data) return;
     const container = document.querySelector("[data-achievements]");
-
     if (container) {
       container.innerHTML = "";
       data.forEach((achievement, index, list) => {
@@ -31,13 +27,11 @@ class Kudos extends HideComponent {
     }
     this.manageDOM();
   }
-
   cleanup() {
     const container = document.querySelector("[data-achievements]");
     if (container) container.innerHTML = "";
   }
 }
-
 function initKudos() {
   if (window.App?.modules?.kudos) {
     window.App.modules.kudos.cleanup?.();
@@ -46,11 +40,9 @@ function initKudos() {
   window.App.register("kudos", kudosModule, "initKudos");
   kudosModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initKudos);
 } else {
   initKudos();
 }
-
 export { Kudos, initKudos };
