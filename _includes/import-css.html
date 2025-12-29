@@ -1,6 +1,4 @@
 
-<!-- <link rel="preload" href="{{ site.baseurl }}/assets/css/variables.css?v={{ site.version }}" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-<noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/variables.css?v={{ site.version }}" /></noscript> -->
  {% assign layout = page.layout | split: "/" | first %}
 <link rel="preload" href="{{ site.baseurl }}/assets/css/all.min.css?v={{ layout }}" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
 <noscript><link rel="stylesheet" href="{{ site.baseurl }}/assets/css/all.min.css?v={{ layout }}"></noscript>

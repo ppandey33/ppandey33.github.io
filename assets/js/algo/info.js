@@ -113,7 +113,6 @@ class Info extends GenSvg {
       await this.renderInfoBlogs();
     } catch (error) {
       console.error("Error loading blogs:", error);
-      this.showError();
     }
   }
 

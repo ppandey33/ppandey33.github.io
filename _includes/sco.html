@@ -85,11 +85,6 @@
 <meta property="og:type" content="{{ page.type | default: 'website' }}" />
 
 {% if page.path == "blogs" or page.url contains "/blogs/" %}
-    {% comment %}
-    Extract slug from URL path
-    Example: /blogs/csharp/all-generics/index.html → csharp-all-generics
-    {% endcomment %}
-    
     {% assign url_parts = page.url | split: "/" %}
     {% assign slug_parts = "" | split: "" %}
     {% assign in_blogs = false %}
@@ -105,16 +100,11 @@
     {% assign page_slug = slug_parts | join: "-" %}
     {% assign encoded_token = site.data.og-tokens[page_slug] %}
     
-    {% comment %}Debug - Remove in production{% endcomment %}
-    <!-- Generated slug: {{ page_slug }} -->
-    <!-- Token found: {{ encoded_token | slice: 0, 20 }}... -->
-    
     <meta property="og:image" content="{{ site.og_image}}/{{ encoded_token | default: 'default' }}.png"/>
     <meta property="og:image:secure_url" content="{{ site.og_image}}/{{ encoded_token | default: 'default' }}.png"/>
     <meta name="twitter:image" content="{{ site.og_image}}/{{ encoded_token | default: 'default' }}.png" />
     <meta name="twitter:image:secure_url" content="{{ site.og_image}}/{{ encoded_token | default: 'default' }}.png" />
   {% else %}
-    <!-- Default OG image for non-blog pages -->
     <meta property="og:image" content="{{ site.og_image}}/default.png">
     <meta property="og:image:secure_url" content="{{ site.og_image}}/default.png">
     <meta name="twitter:image" content="{{ site.og_image}}/default.png" />
@@ -128,7 +118,6 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:alt" content="{{ page.params.title | default: page.title | default: site.title }}">
 
-<!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ page.params.title | default: page.title | default: site.title }}" />
 <meta name="twitter:description"  content="{{ page.params.desc | default: page.desc | default: site.description }}" /> 

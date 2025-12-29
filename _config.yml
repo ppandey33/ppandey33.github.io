@@ -58,6 +58,9 @@ version: "1.0.0"
 theme: minima
 markdown: kramdown
 
+sass:
+  style: compressed
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag

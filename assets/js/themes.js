@@ -32,15 +32,16 @@ class Themes {
     if (this.sysTheme) {
       this.applySystemOverlay();
     }
-    
+
     this.setupUI();
-    
+
     window.addEventListener("storage", (event) => {
       this.handleThemeChange(event);
     });
-    
+
     this.subscription = handleURLEvent.subscribe((event) => {
       event.theme && this.handleThemeChange(event.theme);
+      event.sysTheme && this.handleThemeChange(event.sysTheme);
     });
   }
 
@@ -97,9 +98,10 @@ class Themes {
         this.setupUI();
       }
     }
-    
+
     if (event.key === "sysTheme") {
       this.sysTheme = event.newValue === "true";
+      localStorage.setItem("sysTheme", this.sysTheme.toString());
       if (this.sysTheme) {
         this.applySystemOverlay();
       } else {
@@ -124,7 +126,7 @@ class Themes {
     if (this.sysTheme) {
       this.applySystemOverlay();
     }
-    
+
     requestAnimationFrame(() => {
       this.updateUI();
     });
@@ -133,13 +135,13 @@ class Themes {
   toggleSystemTheme(enabled) {
     this.sysTheme = enabled;
     localStorage.setItem("sysTheme", enabled.toString());
-    
+
     if (enabled) {
       this.applySystemOverlay();
     } else {
       this.removeSystemOverlay();
     }
-    
+
     this.updateUI();
   }
 
@@ -283,20 +285,20 @@ class Themes {
     const separator = window.App.modules.util.createElement("div", "option-separator");
     container.appendChild(separator);
     const sysThemeOption = window.App.modules.util.createElement("div", "option sys-theme-toggle");
-    
+
     const label = window.App.modules.util.createElement("span", "option-name", "OS Theme Sync");
-    
+
     const toggleWrapper = window.App.modules.util.createElement("label", "toggle-switch");
     const checkbox = window.App.modules.util.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = this.sysTheme;
     checkbox.setAttribute("data-sys-theme-checkbox", "");
-    
+
     const slider = window.App.modules.util.createElement("span", "toggle-slider");
-    
+
     toggleWrapper.appendChild(checkbox);
     toggleWrapper.appendChild(slider);
-    
+
     sysThemeOption.appendChild(label);
     sysThemeOption.appendChild(toggleWrapper);
 
@@ -404,4 +406,4 @@ if (document.readyState === "loading") {
   initThemes();
 }
 
-export { Themes, initThemes }
+export { Themes, initThemes };

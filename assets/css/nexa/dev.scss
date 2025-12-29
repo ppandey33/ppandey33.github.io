@@ -1,0 +1,168 @@
+---
+---
+.projects-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+[data-filter] {
+  display: flex;
+  gap: var(--gap-md);
+  margin-bottom: var(--margin-2xl);
+  flex-wrap: wrap;
+  align-items: center;
+}
+.search-wrapper {
+  flex: 1;
+  min-width: 250px;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  padding: var(--space-3) var(--padding-lg);
+  font-size: var(--fontSize-md, 0.9rem);
+  border: var(--border-2) solid var(--border, #333333);
+  background: var(--background, #1a1a1a);
+  color: var(--textPrimary, #ffffff);
+  transition: var(--transition-base);
+  outline: none;
+}
+.search-input:focus {
+  border-color: var(--borderSecondary, #4a4a4a);
+}
+.search-input::placeholder {
+  color: var(--textSecondary, #b0b0b0);
+}
+.sort-wrapper {
+  position: relative;
+  min-width: 200px;
+}
+.sort-select {
+  width: 100%;
+  padding: var(--space-3) var(--space-10) var(--space-3) var(--padding-lg);
+  font-size: var(--fontSize-md, 0.9rem);
+  border: var(--border-2) solid var(--border, #333333);
+  background: var(--background, #1a1a1a);
+  color: var(--textPrimary, #ffffff);
+  cursor: pointer;
+  transition: var(--transition-base);
+  outline: none;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+}
+.sort-wrapper::after {
+  content: "▾";
+  font-family: "fa";
+  color: var(--primary, #ffffff);
+  position: absolute;
+  right: 0px;
+  height: var(--space-8);
+  width: var(--space-8);
+  font-size: var(--fontSize-xl);
+  line-height: var(--line-height-loose);
+  font-weight: bolder;
+  top: 0px;
+  pointer-events: none;
+}
+.sort-select:hover {
+  border-color: var(--borderSecondary, #4a4a4a);
+}
+.sort-select:focus {
+  border-color: var(--borderSecondary, #4a4a4a);
+}
+.no-results {
+  text-align: center;
+  padding: var(--padding-2xl) var(--padding-md);
+  color: var(--textSecondary, #b0b0b0);
+  font-size: var(--fontSize-lg, 1.25rem);
+}
+[data-projects] {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc((100% / 3) - var(--gap-xl)), max-content));
+  gap: var(--gap-xl);
+  justify-content: center;
+}
+.project-card {
+  border: var(--border-2) solid var(--border, #333333);
+  transition: var(--transition-base);
+  overflow: hidden;
+}
+.project-card:hover {
+  border-color: var(--primary, #ffffff);
+  transform: translateY(calc(-1 * var(--space-1))) !important;
+}
+.project-image {
+  width: 100%;
+  height: 12.5rem;
+  background: var(--background, #1a1a1a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+[data-theme="charcoal"] .project-image img,
+[data-theme="lavender"] .project-image img {
+  filter: grayscale(100%) brightness(40%) sepia(0%) hue-rotate(214deg) saturate(70%);
+}
+.project-info {
+  padding: var(--padding-lg);
+}
+.project-tags {
+  font-size: var(--fontSize-sm, 0.8rem);
+  color: var(--textSecondary, #b0b0b0);
+  margin-bottom: var(--margin-sm);
+}
+.project-tags .project-tag {
+  display: inline-block;
+  border: var(--border-1) solid var(--border, #333333);
+  padding: var(--space-1) var(--padding-sm);
+  margin-right: var(--margin-sm);
+  margin-bottom: var(--space-1);
+}
+.project-title {
+  color: var(--textPrimary, #ffffff);
+  font-size: var(--fontSize-lg, 1.25rem);
+  margin-bottom: var(--margin-sm);
+}
+.project-description {
+  font-size: var(--fontSize-md, 0.9rem);
+  color: var(--textMuted, #888888);
+  margin-bottom: var(--margin-md);
+}
+.project-links {
+  display: flex;
+  gap: var(--gap-sm);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.project-links:has(> .project-link:only-child) {
+  justify-content: flex-start;
+}
+.project-link {
+  padding: var(--padding-sm) var(--padding-md);
+  border: var(--border-1) solid var(--primary, #ffffff);
+  color: var(--primary, #ffffff);
+  text-decoration: none;
+  font-size: var(--fontSize-md, 0.9rem);
+  transition: var(--transition-base);
+  white-space: nowrap;
+}
+.project-link:hover {
+  background: var(--primary, #ffffff);
+  color: var(--background, #1a1a1a);
+}
+.dev-grid {
+  top: 50%;
+  left: calc(-1 * var(--padding-xl));
+}
+.dev-rect {
+  top: 50%;
+  right: calc(-1 * var(--padding-xl));
+}
