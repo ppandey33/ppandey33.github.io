@@ -1,0 +1,431 @@
+---
+type: blog
+url: /blogs/maths/number-system-1/
+params:
+  title: Number Systems Part 1- Basic Number Sets
+  subtitle: The Foundation of Mathematical Computation
+  desc: In the world of artificial intelligence and machine learning, everything begins with numbers. Before we can train a neural network, optimize an algorithm, or process data, we must understand the fundamental building blocks of mathematics—the basic number sets. This article explores the hierarchy of numbers from their simplest form to their most complex representations.
+  author: Pawan Pandey
+  date: Dec-20-2025
+  readtime: 18 mins
+---
+
+<article class="blog-post">
+  <div class="content-wrapper">
+    <h1>Number Systems Part 1: Basic Number Sets</h1>
+
+    <p><strong>Author:</strong> Pawan Pandey | <strong>Date:</strong> November 17, 2024 | <strong>Read Time:</strong> 18 min</p>
+
+    <h2>Introduction: The Foundation of Mathematical Computation</h2>
+
+    <p>
+      In the world of artificial intelligence and machine learning, everything begins with numbers. Before we can train a neural network, optimize an algorithm, or process data, we must understand the
+      fundamental building blocks of mathematics—the basic number sets. This article explores the hierarchy of numbers from their simplest form to their most complex representations.
+    </p>
+
+    <h3>Learning Objectives</h3>
+
+    <p>By the end of this article, you will understand:</p>
+
+    <ul>
+      <li>The hierarchical structure of number systems</li>
+      <li>How each number set builds upon the previous</li>
+      <li>Real-world applications in computing and AI</li>
+      <li>The mathematical properties that make each set unique</li>
+      <li>How these numbers power modern machine learning algorithms</li>
+    </ul>
+
+    <h2>The Number Hierarchy: A Building Block Approach</h2>
+
+    <p>
+      Think of number systems as a skyscraper. Each floor is built upon the foundation below it, adding new capabilities while retaining all the properties of the floors beneath. This hierarchical
+      structure is crucial for understanding how different types of numbers relate to each other.
+    </p>
+
+    <pre><code>The Number Hierarchy (Bottom to Top):
+
+Natural Numbers (N) ──────────────────── Floor 1: Counting
+    ↓ (Add zero)
+Whole Numbers (W) ────────────────────── Floor 2: Includes nothing
+    ↓ (Add negatives)
+Integers (Z) ──────────────────────────── Floor 3: Direction matters
+    ↓ (Add fractions)
+Rational Numbers (Q) ─────────────────── Floor 4: Division opens up
+    ↓ (Add non-repeating decimals)
+Real Numbers (R) ─────────────────────── Floor 5: The number line
+    ↓ (Add imaginary unit)
+Complex Numbers (C) ──────────────────── Floor 6: Beyond the line
+
+Each level includes ALL numbers from levels below it!</code></pre>
+
+    <h2>1. Natural Numbers (N): Where Counting Begins</h2>
+
+    <h3>Definition and Mathematical Properties</h3>
+
+    <p><strong>Formal Definition:</strong> Natural numbers are the set of positive integers used for counting.</p>
+
+    <p><strong>Set Notation:</strong> N = {1, 2, 3, 4, 5, 6, ...}</p>
+
+    <p><strong>Cardinality:</strong> Infinite (countably infinite)</p>
+
+    <p><strong>Closure Properties:</strong> Closed under addition and multiplication</p>
+
+    <h3>Key Properties</h3>
+
+    <pre><code>✓ Addition Closure: a + b ∈ N (if a, b ∈ N)
+  Example: 5 + 7 = 12 ✓
+
+✓ Multiplication Closure: a × b ∈ N (if a, b ∈ N)
+  Example: 5 × 7 = 35 ✓
+
+✗ Subtraction Closure: a - b may not be in N
+  Example: 5 - 7 = -2 ✗ (not a natural number)
+
+✗ Division Closure: a ÷ b may not be in N
+  Example: 5 ÷ 2 = 2.5 ✗ (not a natural number)
+
+✓ Well-Ordered: Every non-empty subset has a smallest element
+✓ No Maximum: Always can add 1 to get a larger number</code></pre>
+
+    <h4>ML Applications of Natural Numbers</h4>
+
+    <ul>
+      <li><strong>Epoch Counting:</strong> Training iterations in neural networks (epoch 1, 2, 3...)</li>
+      <li><strong>Layer Indexing:</strong> Numbering layers in deep learning architectures</li>
+      <li><strong>Batch Sizes:</strong> Number of samples processed together (32, 64, 128...)</li>
+      <li><strong>Feature Counts:</strong> Number of input features in a dataset</li>
+      <li><strong>Class Labels:</strong> Discrete classification categories (0, 1, 2, 3...)</li>
+    </ul>
+
+    <h3>The Zero Debate</h3>
+
+    <blockquote>
+      <p>
+        Mathematicians debate whether 0 should be included in natural numbers. The traditional view (N): {1, 2, 3, 4, ...} is used in number theory, while the modern view (N₀): {0, 1, 2, 3, ...} is
+        used in computer science. In this article, we follow the traditional definition. Zero is introduced with whole numbers.
+      </p>
+    </blockquote>
+
+    <h2>2. Whole Numbers (W): Adding the Concept of Nothing</h2>
+
+    <h3>Definition and Significance</h3>
+
+    <p><strong>Formal Definition:</strong> Whole numbers are natural numbers including zero.</p>
+
+    <p><strong>Set Notation:</strong> W = {0, 1, 2, 3, 4, 5, ...}</p>
+
+    <p><strong>Relationship:</strong> W = N ∪ {0}</p>
+
+    <h3>The Revolutionary Concept of Zero</h3>
+
+    <p>
+      Zero is one of the most important mathematical discoveries in human history. Introduced by ancient Indian mathematicians around the 5th century, zero revolutionized mathematics and made modern
+      computing possible.
+    </p>
+
+    <pre><code>Why Zero Matters:
+
+1. Placeholder: Distinguishes 5, 50, 500, 5000
+   Without zero: ||||| (5), ||||||||||  (50) - Confusing!
+   With zero: 5, 50, 500, 5000 - Clear!
+
+2. Identity Element for Addition: a + 0 = a
+   Example: 42 + 0 = 42
+
+3. Absorbing Element for Multiplication: a × 0 = 0
+   Example: 1000000 × 0 = 0
+
+4. Base for Coordinate Systems: Origin point (0,0)
+
+5. Enables Binary: 0 and 1 form the foundation of computing</code></pre>
+
+    <h4>ML Applications of Whole Numbers</h4>
+
+    <ul>
+      <li><strong>Zero-Indexing:</strong> Array and list indices start at 0 in most programming languages</li>
+      <li><strong>Bias Initialization:</strong> Neural network biases often initialized to 0</li>
+      <li><strong>Padding Values:</strong> Zero-padding in CNNs for image processing</li>
+      <li><strong>Sparse Representations:</strong> Most values are 0 in sparse matrices</li>
+      <li><strong>Binary Classification:</strong> Classes represented as 0 and 1</li>
+    </ul>
+
+    <h2>3. Integers (Z): Introducing Direction and Debt</h2>
+
+    <h3>Definition and Mathematical Structure</h3>
+
+    <p><strong>Formal Definition:</strong> Integers include all whole numbers and their negative counterparts.</p>
+
+    <p><strong>Set Notation:</strong> Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}</p>
+
+    <p><strong>Etymology:</strong> 'Z' comes from German "Zahlen" (numbers)</p>
+
+    <p><strong>Structure:</strong> Forms a ring with addition and multiplication</p>
+
+    <h3>Categories of Integers</h3>
+
+    <pre><code>Integer Classification:
+
+Negative Integers: {..., -4, -3, -2, -1}
+    ↓
+Zero: {0} ← The boundary
+    ↓
+Positive Integers: {1, 2, 3, 4, ...} (Same as Natural Numbers)
+
+Number Line Representation:
+    
+    ←─────────────┼─────────────→
+  Negative        Zero        Positive
+  (Direction: Left)          (Direction: Right)</code></pre>
+
+    <h3>Properties and Operations</h3>
+
+    <pre><code>Closure Properties of Integers:
+
+✓ Addition: -5 + 3 = -2 ∈ Z
+✓ Subtraction: 5 - 8 = -3 ∈ Z (NEW!)
+✓ Multiplication: -5 × 3 = -15 ∈ Z
+✗ Division: 5 ÷ 2 = 2.5 ∉ Z
+
+Sign Rules:
+  Positive × Positive = Positive:  5 × 3 = 15
+  Negative × Negative = Positive: -5 × -3 = 15
+  Positive × Negative = Negative:  5 × -3 = -15
+  Negative × Positive = Negative: -5 × 3 = -15
+
+Division by Zero: UNDEFINED
+  5 ÷ 0 = ERROR (Cannot divide by zero!)</code></pre>
+
+    <h4>ML Applications of Integers</h4>
+
+    <ul>
+      <li><strong>Signed Activations:</strong> Neurons can output negative values (tanh, Leaky ReLU)</li>
+      <li><strong>Loss Gradients:</strong> Can be positive or negative to update weights</li>
+      <li><strong>Data Encoding:</strong> Label encoding with negative values for certain classes</li>
+      <li><strong>Time Series:</strong> Representing change/difference (stock price changes)</li>
+      <li><strong>Coordinate Systems:</strong> Negative coordinates in feature space</li>
+    </ul>
+
+    <h2>4. Rational Numbers (Q): The World of Fractions</h2>
+
+    <h3>Definition and Mathematical Foundation</h3>
+
+    <p><strong>Formal Definition:</strong> A rational number is any number that can be expressed as p/q where p and q are integers and q ≠ 0.</p>
+
+    <p><strong>Set Notation:</strong> Q = {p/q | p, q ∈ Z, q ≠ 0}</p>
+
+    <p><strong>Etymology:</strong> 'Q' comes from "quotient"</p>
+
+    <p><strong>Density:</strong> Between any two rational numbers, infinitely many other rationals exist</p>
+
+    <h3>Types of Rational Numbers</h3>
+
+    <pre><code>1. Proper Fractions: Numerator < Denominator
+   Examples: 3/4, 5/7, 2/9
+   Value: Always less than 1
+
+2. Improper Fractions: Numerator ≥ Denominator
+   Examples: 7/4, 9/5, 5/5
+   Value: Greater than or equal to 1
+
+3. Mixed Numbers: Whole number + fraction
+   Example: 2¾ = 2 + 3/4 = 11/4
+
+4. Terminating Decimals: End after finite digits
+   Examples: 0.5, 0.75, 0.125
+   3/4 = 0.75 (stops)
+
+5. Repeating Decimals: Pattern repeats infinitely
+   Examples: 0.333..., 0.666...
+   1/3 = 0.333... (repeats)</code></pre>
+
+    <h4>ML Applications of Rational Numbers</h4>
+
+    <ul>
+      <li><strong>Probabilities:</strong> All probabilities are rational (or approximated as such)</li>
+      <li><strong>Learning Rates:</strong> Often expressed as fractions (1/10, 1/100)</li>
+      <li><strong>Precision/Recall:</strong> Performance metrics as ratios</li>
+      <li><strong>Dropout Rates:</strong> Fraction of neurons to drop (0.5 = 50%)</li>
+      <li><strong>Train/Test Split:</strong> 80/20, 70/30 ratios</li>
+    </ul>
+
+    <h2>5. Irrational Numbers: Beyond Fractions</h2>
+
+    <h3>Definition and Characteristics</h3>
+
+    <p><strong>Formal Definition:</strong> Irrational numbers cannot be expressed as a ratio of two integers.</p>
+
+    <p><strong>Decimal Form:</strong> Non-terminating, non-repeating decimals</p>
+
+    <h3>Famous Irrational Numbers</h3>
+
+    <pre><code>1. Square Root of 2 (√2)
+   Value: 1.41421356237309504880168872420969...
+   Context: Diagonal of unit square
+
+2. Pi (π)
+   Value: 3.14159265358979323846264338327950...
+   Context: Ratio of circle circumference to diameter
+   NOT equal to 22/7 (common approximation)
+
+3. Euler's Number (e)
+   Value: 2.71828182845904523536028747135266...
+   Context: Base of natural logarithm
+
+4. Golden Ratio (φ)
+   Value: 1.61803398874989484820458683436563...
+   Formula: φ = (1 + √5) / 2
+   Found in nature, art, architecture</code></pre>
+
+    <h4>ML Applications of Irrational Numbers</h4>
+
+    <ul>
+      <li><strong>Activation Functions:</strong> e^x in sigmoid, softmax uses Euler's number</li>
+      <li><strong>Geometric Calculations:</strong> π in circular/spherical computations</li>
+      <li><strong>Information Theory:</strong> Natural log (base e) in entropy calculations</li>
+      <li><strong>Gaussian Distributions:</strong> e in normal distribution formula</li>
+    </ul>
+
+    <h2>6. Real Numbers (R): The Complete Number Line</h2>
+
+    <h3>Definition and Comprehensiveness</h3>
+
+    <p><strong>Formal Definition:</strong> Real numbers include all rational and irrational numbers.</p>
+
+    <p><strong>Set Notation:</strong> R = Q ∪ Q'</p>
+
+    <p><strong>Geometric Representation:</strong> Every point on the number line</p>
+
+    <p><strong>Cardinality:</strong> Uncountably infinite</p>
+
+    <h4>ML Applications of Real Numbers</h4>
+
+    <ul>
+      <li><strong>Neural Network Weights:</strong> Can be any real number</li>
+      <li><strong>Continuous Features:</strong> Temperature, height, price (all real-valued)</li>
+      <li><strong>Loss Functions:</strong> Output real numbers to minimize</li>
+      <li><strong>Gradient Descent:</strong> Updates weights by real-valued amounts</li>
+      <li><strong>Feature Scaling:</strong> Normalizing to real number ranges</li>
+    </ul>
+
+    <h2>7. Complex Numbers (C): Beyond the Real Line</h2>
+
+    <h3>The Problem That Led to Complex Numbers</h3>
+
+    <p>
+      For centuries, mathematicians struggled with equations like x² + 1 = 0. This equation has no solution in real numbers because no real number squared gives -1. The invention of complex numbers
+      solved this problem and opened entirely new branches of mathematics.
+    </p>
+
+    <p><strong>The Imaginary Unit:</strong> i is defined as √(-1), where i² = -1</p>
+
+    <p><strong>Complex Number Form:</strong> z = a + bi</p>
+
+    <h3>Understanding Imaginary Numbers</h3>
+
+    <pre><code>Powers of i (Cyclic Pattern):
+
+i⁰ = 1
+i¹ = i
+i² = -1
+i³ = i² × i = -1 × i = -i
+i⁴ = i² × i² = -1 × -1 = 1
+
+Pattern repeats every 4: {1, i, -1, -i, 1, i, -1, -i, ...}</code></pre>
+
+    <h3>Complex Number Operations</h3>
+
+    <pre><code>Addition:
+(a + bi) + (c + di) = (a + c) + (b + d)i
+Example: (3 + 2i) + (1 + 4i) = 4 + 6i
+
+Multiplication:
+(a + bi)(c + di) = (ac - bd) + (ad + bc)i
+Example: (3 + 2i)(1 + 4i) = -5 + 14i</code></pre>
+
+    <h4>ML Applications of Complex Numbers</h4>
+
+    <ul>
+      <li><strong>Fourier Transforms:</strong> Converting signals to frequency domain</li>
+      <li><strong>Signal Processing:</strong> Audio, image, and video processing</li>
+      <li><strong>Quantum Machine Learning:</strong> Quantum states use complex amplitudes</li>
+      <li><strong>Phase Information:</strong> Preserving phase in speech processing</li>
+    </ul>
+
+    <h2>The Relationship Between Number Sets</h2>
+
+    <p>Each set is contained within the next:</p>
+
+    <pre><code>N ⊂ W ⊂ Z ⊂ Q ⊂ R ⊂ C
+
+Natural ⊂ Whole ⊂ Integer ⊂ Rational ⊂ Real ⊂ Complex</code></pre>
+
+    <h2>Summary: Number Sets Comparison</h2>
+
+    <table>
+      <tr>
+        <th>Number Set</th>
+        <th>Symbol</th>
+        <th>Example</th>
+        <th>ML Application</th>
+      </tr>
+      <tr>
+        <td>Natural</td>
+        <td>N</td>
+        <td>1, 2, 3, ...</td>
+        <td>Counting, indices</td>
+      </tr>
+      <tr>
+        <td>Whole</td>
+        <td>W</td>
+        <td>0, 1, 2, ...</td>
+        <td>Zero-indexing</td>
+      </tr>
+      <tr>
+        <td>Integer</td>
+        <td>Z</td>
+        <td>..., -1, 0, 1, ...</td>
+        <td>Signed values</td>
+      </tr>
+      <tr>
+        <td>Rational</td>
+        <td>Q</td>
+        <td>3/4, 0.5</td>
+        <td>Probabilities</td>
+      </tr>
+      <tr>
+        <td>Irrational</td>
+        <td>Q'</td>
+        <td>π, √2, e</td>
+        <td>Activations</td>
+      </tr>
+      <tr>
+        <td>Real</td>
+        <td>R</td>
+        <td>All above</td>
+        <td>Weights, features</td>
+      </tr>
+      <tr>
+        <td>Complex</td>
+        <td>C</td>
+        <td>3 + 4i</td>
+        <td>Signal processing</td>
+      </tr>
+    </table>
+
+    <h2>Conclusion</h2>
+
+    <p>
+      Understanding basic number sets is fundamental to mastering mathematics, computer science, and machine learning. Each number set builds upon the previous one, adding new capabilities and solving
+      new problems. In machine learning and AI, we use all these number types constantly, from counting training epochs to computing complex-valued Fourier transforms. These fundamental mathematical
+      structures underpin everything we do in modern computing.
+    </p>
+
+    <h3>Next Steps</h3>
+
+    <ul>
+      <li><strong>Part 2:</strong> Special Numbers & Classifications (Prime, Perfect, Amicable numbers)</li>
+      <li><strong>Part 3:</strong> Figurate Numbers & Famous Sequences (Fibonacci, Factorials)</li>
+      <li><strong>Complete Guide:</strong> Comprehensive overview of all number systems</li>
+    </ul>
+  </div>
+</article>

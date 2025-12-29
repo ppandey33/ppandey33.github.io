@@ -79,6 +79,112 @@
       "image": "/assets/images/zero-mathematics.png",
       "tags": ["Mathematics", "Zero", "Binary", "AI/ML", "Computer Science", "Neural Networks", "History of Math", "Number Theory"],
       "originalUrl": ""
+    },
+    {
+      "type": "blog",
+      "id": "number-systems-complete-guide",
+      "title": "3. Number Systems – Complete Guide",
+      "subtitle": "Let's Walk Together in the Jungle of Number Theory",
+      "slug": "number-system",
+      "url": "/blogs/maths/number-system/",
+      "category": "Mathematics For AI/ML",
+      "categorySlug": "maths",
+      "categoryIcon": "&#xf698;",
+      "categoryClass": "fa",
+      "excerpt": "Numbers are the foundation of mathematics, computing, AI, and our understanding of the universe. This complete guide brings together basic number sets, special numbers, famous sequences, and computational systems.",
+      "description": "Numbers are the foundation of mathematics, computing, artificial intelligence, and our understanding of the universe. This comprehensive guide explores the entire number theory landscape—from basic counting and number sets to cryptography, algorithms, neural networks, and even quantum computing. It serves as a unified entry point to the complete Number Systems series.",
+      "author": "Pawan Pandey",
+      "date": "2025-12-19",
+      "readTime": "20 mins",
+      "image": "/assets/images/number-systems-complete.png",
+      "tags": ["Mathematics", "Number System", "Number Theory", "Math Foundation", "AI/ML", "Computer Science", "Algorithms", "Cryptography", "Neural Networks"],
+      "series": {
+        "name": "Number Systems",
+        "type": "hub"
+      },
+      "children": [
+        {
+          "title": "Number Systems Part 1 – Basic Number Sets",
+          "url": "/blogs/maths/number-system-1/"
+        },
+        {
+          "title": "Number Systems Part 2 – Special Numbers & Classifications",
+          "url": "/blogs/maths/number-system-2/"
+        },
+        {
+          "title": "Number Systems Part 3 – Figurate Numbers & Famous Sequences",
+          "url": "/blogs/maths/number-system-3/"
+        }
+      ],
+      "originalUrl": ""
+    },
+    {
+      "type": "blog",
+      "id": "number-system-1",
+      "title": "3.1 Number Systems Part 1 – Basic Number Sets",
+      "subtitle": "The Foundation of Mathematical Computation",
+      "slug": "number-system-1",
+      "url": "/blogs/maths/number-system-1/",
+      "category": "Mathematics For AI/ML",
+      "categorySlug": "maths",
+      "categoryIcon": "&#xf698;",
+      "categoryClass": "fa",
+      "excerpt": "In the world of artificial intelligence and machine learning, everything begins with numbers. Before we can train a neural network, optimize an algorithm, or process data, we must understand the fundamental building blocks of mathematics—the basic number sets.",
+      "description": "In the world of artificial intelligence and machine learning, everything begins with numbers. Before we can train a neural network, optimize an algorithm, or process data, we must understand the fundamental building blocks of mathematics—the basic number sets. This article explores the hierarchy of numbers from their simplest form to their most complex representations.",
+      "author": "Pawan Pandey",
+      "date": "2025-12-20",
+      "readTime": "18 mins",
+      "image": "/assets/images/number-systems-basic.png",
+      "tags": ["Mathematics", "Number System", "Basic Number Sets", "Math Foundation", "AI/ML", "Computer Science"],
+      "originalUrl": ""
+    },
+    {
+      "type": "blog",
+      "id": "number-system-2",
+      "title": "3.2 Number Systems Part 2 – Special Numbers & Classifications",
+      "subtitle": "Beyond Basic Classification",
+      "slug": "number-system-2",
+      "url": "/blogs/maths/number-system-2/",
+      "category": "Mathematics For AI/ML",
+      "categorySlug": "maths",
+      "categoryIcon": "&#xf698;",
+      "categoryClass": "fa",
+      "excerpt": "While natural numbers, integers, and real numbers form the foundation of mathematics, there exist special categories of numbers with unique properties that play a vital role in computer science, cryptography, and artificial intelligence.",
+      "description": "While natural numbers, integers, and real numbers form the foundation of mathematics, there exist special categories of numbers with unique properties that make them incredibly useful in computer science, cryptography, and artificial intelligence. This article explores numbers classified by their divisibility, relationships, and special properties—from prime numbers securing online transactions to perfect numbers that have fascinated mathematicians for millennia.",
+      "author": "Pawan Pandey",
+      "date": "2025-12-21",
+      "readTime": "20 mins",
+      "image": "/assets/images/number-systems-special.png",
+      "tags": ["Mathematics", "Number System", "Special Numbers", "Prime Numbers", "Perfect Numbers", "Number Theory", "Cryptography", "AI/ML", "Computer Science"],
+      "series": {
+        "name": "Number Systems",
+        "part": 2
+      },
+      "originalUrl": ""
+    },
+    {
+      "type": "blog",
+      "id": "number-system-3",
+      "title": "3.3 Number Systems Part 3 – Figurate Numbers & Famous Sequences",
+      "subtitle": "Where Geometry Meets Arithmetic",
+      "slug": "number-system-3",
+      "url": "/blogs/maths/number-system-3/",
+      "category": "Mathematics For AI/ML",
+      "categorySlug": "maths",
+      "categoryIcon": "&#xf698;",
+      "categoryClass": "fa",
+      "excerpt": "Figurate numbers bridge the visual and numerical worlds, revealing how geometric patterns and famous sequences like Fibonacci connect mathematics, nature, and computation.",
+      "description": "Figurate numbers bridge the visual and numerical worlds, representing quantities that can be arranged into regular geometric shapes. From triangular numbers studied by ancient Greek mathematicians to the Fibonacci sequence found throughout nature, these patterns reveal deep connections between mathematics, nature, and computation. This article explores how such elegant sequences influence modern algorithms and inspire AI architecture design.",
+      "author": "Pawan Pandey",
+      "date": "2025-12-22",
+      "readTime": "16 mins",
+      "image": "/assets/images/number-systems-figurate.png",
+      "tags": ["Mathematics", "Number System", "Figurate Numbers", "Fibonacci Sequence", "Triangular Numbers", "Number Theory", "Mathematical Patterns", "AI/ML", "Computer Science"],
+      "series": {
+        "name": "Number Systems",
+        "part": 3
+      },
+      "originalUrl": ""
     }
   ],
   "goat": "https://pawan.goatcounter.com/counter/"

@@ -136,6 +136,7 @@ defaults:
     values:
       permalink: /nexa/
       layout: nexa/default
+      index: "/"
       # baseModules: [observable, paginator]
       modules: [about, contact, learning, stack, kudos, journey, dev, iam, social]
       stylesheets: [about, contact, learning, stack, kudos, journey, dev, iam, social]
@@ -145,6 +146,7 @@ defaults:
     values:
       permalink: /nexa/stack/
       layout: nexa/default
+      index: "/stack"
       modules: stack
       stylesheets: [stack, social]
   - scope:
@@ -153,6 +155,7 @@ defaults:
     values:
       permalink: /nexa/journey/
       layout: nexa/default
+      index: "/journey"
       modules: [journey]
       stylesheets: [journey, social]
   - scope:
@@ -161,6 +164,7 @@ defaults:
     values:
       permalink: /nexa/learning/
       layout: nexa/default
+      index: "/learning"
       modules: [learning]
       stylesheets: [learning, social]
   - scope:
@@ -169,6 +173,7 @@ defaults:
     values:
       permalink: /nexa/kudos/
       layout: nexa/default
+      index: "/kudos"
       modules: [kudos]
       stylesheets: [kudos, social]
   - scope:
@@ -177,6 +182,7 @@ defaults:
     values:
       permalink: /nexa/about/
       layout: nexa/default
+      index: "/about"
       modules: [about]
       stylesheets: [about, social]
   - scope:
@@ -185,6 +191,7 @@ defaults:
     values:
       permalink: /nexa/contact/
       layout: nexa/default
+      index: "/contact"
       modules: [contact]
       stylesheets: [contact, social]
   - scope:
@@ -193,6 +200,7 @@ defaults:
     values:
       permalink: /nexa/dev/
       layout: nexa/default
+      index: "/dev"
       # baseModules: [observable, paginator]
       modules: dev
       stylesheets: [dev, social]
@@ -202,6 +210,7 @@ defaults:
     values:
       permalink: /nexa/blogs/
       layout: nexa/blogs
+      index: "/blogs"
       # baseModules: [gen-svg, observable, paginator]
       modules: [blogs]
       stylesheets: [blogs, social]
@@ -212,6 +221,7 @@ defaults:
     values:
       permalink: /pixel/
       layout: pixel/default
+      index: "/"
       # baseModules: [gen-svg, observable, paginator]
       modules: [tab, iam, stack, journey, learning, kudos, about, contact, social, dev, blogs]
       stylesheets: [status, profile, tab, iam, stack, journey, learning, kudos, about, contact, dev, blogs]
@@ -221,6 +231,7 @@ defaults:
     values:
       permalink: /pixel/stack/
       layout: pixel/default
+      index: "/stack"
       modules: stack
       stylesheets: [stack, profile, tab]
   - scope:
@@ -229,6 +240,7 @@ defaults:
     values:
       permalink: /pixel/journey/
       layout: pixel/default
+      index: "/journey"
       modules: [journey]
       stylesheets: [journey, profile, tab]
   - scope:
@@ -237,6 +249,7 @@ defaults:
     values:
       permalink: /pixel/learning/
       layout: pixel/default
+      index: "/learning"
       modules: [learning]
       stylesheets: [learning, profile, tab]
   - scope:
@@ -245,6 +258,7 @@ defaults:
     values:
       permalink: /pixel/kudos/
       layout: pixel/default
+      index: "/kudos"
       modules: [kudos]
       stylesheets: [kudos, profile, tab]
   - scope:
@@ -253,6 +267,7 @@ defaults:
     values:
       permalink: /pixel/about/
       layout: pixel/default
+      index: "/about"
       modules: [about]
       stylesheets: [about, profile, tab]
   - scope:
@@ -261,6 +276,7 @@ defaults:
     values:
       permalink: /pixel/contact/
       layout: pixel/default
+      index: "/contact"
       modules: [contact]
       stylesheets: [contact, profile, tab]
   - scope:
@@ -269,6 +285,7 @@ defaults:
     values:
       permalink: /pixel/dev/
       layout: pixel/default
+      index: "/dev"
       # baseModules: [observable, paginator]
       modules: [dev, tab]
       stylesheets: [dev, profile, tab]
@@ -278,6 +295,7 @@ defaults:
     values:
       permalink: /pixel/blogs/
       layout: pixel/blogs
+      index: "/blogs"
       # baseModules: [gen-svg, observable, paginator]
       modules: [blogs, tab]
       stylesheets: [blogs, profile, tab]
@@ -288,6 +306,7 @@ defaults:
     values:
       permalink: /algo/
       layout: algo/default
+      index: "/"
       # baseModules: []
       modules: [iam, info, stack, universe, contact, about, learning, kudos, journey, dev, blogs]
       stylesheets: [iam, info, stack, universe, contact, about, learning, kudos, journey, dev, blogs]
@@ -297,6 +316,7 @@ defaults:
     values:
       permalink: /algo/stack/
       layout: algo/default
+      index: "/stack"
       modules: [stack, info, iam, contact]
       stylesheets: [stack, info, contact]
   - scope:
@@ -305,6 +325,7 @@ defaults:
     values:
       permalink: /algo/journey/
       layout: algo/default
+      index: "/journey"
       modules: [journey, info, iam, contact]
       stylesheets: [journey, info, contact]
   - scope:
@@ -313,6 +334,7 @@ defaults:
     values:
       permalink: /algo/learning/
       layout: algo/default
+      index: "/learning"
       modules: [learning, info, iam, contact]
       stylesheets: [learning, info, contact]
   - scope:
@@ -321,6 +343,7 @@ defaults:
     values:
       permalink: /algo/kudos/
       layout: algo/default
+      index: "/kudos"
       modules: [kudos, info, iam, contact]
       stylesheets: [kudos, info, contact]
   - scope:
@@ -329,6 +352,7 @@ defaults:
     values:
       permalink: /algo/about/
       layout: algo/default
+      index: "/about"
       modules: [about, info, iam, contact]
       stylesheets: [about, info, contact]
   - scope:
@@ -337,6 +361,7 @@ defaults:
     values:
       permalink: /algo/contact/
       layout: algo/default
+      index: "/contact"
       modules: [contact, info]
       stylesheets: [contact, info, iam]
   - scope:
@@ -345,6 +370,7 @@ defaults:
     values:
       permalink: /algo/dev/
       layout: algo/default
+      index: "/dev"
       # baseModules: [observable, paginator]
       modules: [dev, info, iam, contact]
       stylesheets: [dev, info, contact]
@@ -354,6 +380,7 @@ defaults:
     values:
       permalink: /algo/blogs/
       layout: algo/blogs
+      index: "/blogs"
       # baseModules: [gen-svg, observable, paginator]
       modules: [blogs, info, iam]
       stylesheets: [blogs, info]
