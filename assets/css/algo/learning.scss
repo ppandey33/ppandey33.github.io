@@ -1,0 +1,83 @@
+---
+---
+.education-item {
+  border: var(--border-2) solid var(--border, #333333);
+  transition: var(--transition-base);
+  min-width: 8.75rem;
+  max-width: fit-content;
+}
+.education-item:hover {
+  border-color: var(--primary, #ffffff);
+  transform: translateY(calc(-1 * var(--space-1))) !important;
+}
+.education-item h3 {
+  margin-bottom: var(--margin-sm);
+  color: var(--textPrimary, #ffffff);
+  font-size: var(--fontSize-lg);
+  padding: var(--padding-md);
+  background: var(--cardHeader-20, rgba(10, 10, 10, 0.2));
+  border-bottom: var(--border-1) var(--border, #333333) solid;
+}
+.education-institution {
+  color: var(--textTertiary, #d0d0d0);
+  font-size: var(--fontSize-base);
+}
+.education-period {
+  color: var(--textSecondary, #b0b0b0);
+  font-size: var(--fontSize-md);
+}
+.education-score {
+  font-size: var(--fontSize-lg, 1.5rem);
+  font-style: italic;
+}
+.education-info {
+  list-style: none;
+  padding: var(--padding-lg);
+  font-size: var(--fontSize-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+.education-meta {
+  display: flex;
+  gap: var(--gap-sm);
+  justify-content: space-between;
+}
+.education-content {
+  display: flex;
+  gap: var(--gap-3xl);
+  align-items: center;
+}
+.education-image {
+  position: relative;
+  flex: 3;
+  align-self: stretch;
+}
+.education-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--gap-lg);
+  flex: 7;
+}
+.learning-top-grid {
+  top: 15%;
+  left: 0%;
+}
+.learning-bottom-grid {
+  top: 35%;
+  right: 30%;
+}
+.learning-top-rect {
+  top: 5%;
+  left: 60%;
+}
+.learning-bottom-rect {
+  right: 0;
+  bottom: 10%;
+}
+.learning-bottom-union {
+  bottom: 13%;
+  left: 4%;
+}

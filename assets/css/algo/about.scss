@@ -1,0 +1,57 @@
+---
+---
+.about-content {
+  display: flex;
+  gap: var(--gap-3xl);
+  align-items: center;
+}
+.about-text {
+  flex: 6;
+  padding: var(--padding-sm);
+}
+.about-text h2 {
+  color: var(--textPrimary, #ffffff);
+  font-size: var(--fontSize-3xl);
+  margin-bottom: var(--margin-lg);
+}
+.about-paragraph {
+  margin-bottom: var(--margin-lg);
+  color: var(--textSecondary, #b0b0b0);
+  font-size: var(--fontSize-base, 1rem);
+  text-align: justify;
+}
+.about-paragraph:first-child {
+  font-size: calc(var(--fontSize-lg) - 0.1rem);
+  color: var(--textSecondary, #b0b0b0);
+  font-weight: 500;
+}
+.about-image {
+  flex: 4;
+  position: relative;
+}
+.about-image img {
+  width: 100%;
+  filter: grayscale(100%);
+}
+.about-paragraph:nth-child(even) {
+  padding-left: 15%;
+}
+.about-paragraph:nth-child(odd) {
+  padding-right: 15%;
+}
+.about-rect {
+  right: calc(-1 * var(--gap-3xl));
+  top: 10%;
+}
+.about-grid-1 {
+  left: 0%;
+  top: 30%;
+}
+.about-grid-2 {
+  left: 10%;
+  top: 50%;
+}
+.about-grid-3 {
+  left: 25%;
+  top: 70%;
+}

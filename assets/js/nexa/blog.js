@@ -91,7 +91,7 @@ class Blog {
   }
 
   populateTags(tags) {
-    const container = document.querySelector("blog-tags");
+    const container = document.querySelector("#blog-tags");
     if (container && tags?.length) {
       container.innerHTML = tags.map((tag) => `<span class="tag">${this.escapeHtml(tag)}</span>`).join("");
     }
@@ -309,7 +309,7 @@ class Blog {
     const shareContainer = document.querySelector("[data-blog-share]");
     if (shareContainer) shareContainer.innerHTML = "";
 
-    const tagsContainer = document.querySelector("blog-tags");
+    const tagsContainer = document.querySelector("#blog-tags");
     if (tagsContainer) tagsContainer.innerHTML = "";
 
     const giscusContainer = document.querySelector("[data-giscus-content]");

@@ -1,0 +1,26 @@
+---
+---
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-dropdown);
+  background-color: var(--background, #1a1a1a);
+  box-shadow: 0 var(--border-2) var(--space-2) var(--cardHeader-60, rgba(10, 10, 10, 0.6)) 70%;
+  transition: var(--transition-base);
+}
+.site-header.scroll-down {
+  transform: translateY(-100%);
+}
+.site-header.scroll-up {
+  transform: translateY(0);
+  box-shadow: 0 var(--border-2) var(--space-4) var(--cardHeader-15, rgba(10, 10, 10, 0.15)) 70%;
+}
+.site-header.scroll-up,
+.site-header.scroll-down {
+  backdrop-filter: blur(var(--space-2));
+  background-color: var(--background-60, rgba(26, 26, 26, 0.6)) 70%;
+}
+body {
+  padding-top: var(--space-15); }

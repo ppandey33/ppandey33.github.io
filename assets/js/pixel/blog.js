@@ -103,7 +103,7 @@ class Blog {
     }
 
     populateTags(tags) {
-      const tagsContainer = document.querySelector("blog-tags");
+      const tagsContainer = document.querySelector("#blog-tags");
       if (!tagsContainer || !tags || tags.length === 0) return;
 
       tagsContainer.innerHTML = tags.map((tag) => 

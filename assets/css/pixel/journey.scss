@@ -1,0 +1,270 @@
+---
+---
+.experience-content {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.experience-slider {
+  width: 100%;
+}
+.experience-track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xl, 3rem);
+  position: relative;
+}
+.experience-item {
+  background: linear-gradient(
+    135deg,
+    var(--card-bg-start),
+    var(--card-bg-mid),
+    var(--card-bg-end)
+  );
+  border-radius: var(--radius-xl, 0.75rem);
+  padding: var(--padding-xl, 2rem);
+  border: var(--border-1, 0.0625rem) solid var(--border, #333333);
+  transition: transform var(--transition-base, 0.3s ease-in-out),
+              box-shadow var(--transition-base, 0.3s ease-in-out),
+              border-color var(--transition-base, 0.3s ease-in-out);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+.experience-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.experience-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.experience-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.experience-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    var(--primary, #ffffff),
+    var(--accent, #e0e0e0)
+  );
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--transition-base, 0.3s ease-in-out);
+}
+.experience-item::after {
+  content: "💼︎";
+  font-family: 'fa';
+  position: absolute;
+  top: var(--space-4, 1rem);
+  right: var(--space-4, 1rem);
+  font-size: var(--fontSize-4xl, 3.052rem);
+  opacity: var(--opacity-decorative, 0.05);
+  transition: opacity var(--transition-base, 0.3s ease-in-out),
+              transform var(--transition-base, 0.3s ease-in-out);
+              background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: background var(--transition-base, 0.3s 
+ease-in-out);
+}
+.experience-item:hover {
+  transform: translateX(-4px) scale(1.01);
+  box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
+  border-color: var(--primary, #ffffff);
+}
+.experience-item:hover::before {
+  transform: scaleY(1);
+}
+.experience-item:hover::after {
+  opacity: var(--opacity-decorative-hover, 0.25);
+  transform: rotate(10deg) scale(1.1);
+}
+.experience-item .timeline-dot {
+  position: absolute;
+  left: calc(-1 * var(--space-8, 2rem));
+  top: var(--space-8, 2rem);
+  width: 16px;
+  height: 16px;
+  background: var(--primary, #ffffff);
+  border-radius: 50%;
+  border: 3px solid var(--background, #1a1a1a);
+  box-shadow: var(--shadow-lg) var(--shadow-primary-subtle);
+  animation: pulse 2s ease-in-out infinite;
+}
+.experience-header-container {
+  margin-bottom: var(--margin-lg, 1.5rem);
+  padding: var(--padding-lg, 1.5rem);
+  border-radius: var(--radius-lg, 0.5rem);
+  background: var(--surface, #252525);
+  border: var(--border-1, 0.0625rem) solid var(--borderSecondary, #4a4a4a);
+  transition: border-color var(--transition-base, 0.3s ease-in-out),
+              transform var(--transition-base, 0.3s ease-in-out);
+  position: relative;
+  overflow: hidden;
+}
+.experience-header-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--shimmer-opacity),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+.experience-item:hover .experience-header-container {
+  border-color: var(--primary, #ffffff);
+  transform: translateY(-2px);
+}
+.experience-item:hover .experience-header-container::before {
+  left: 100%;
+}
+.experience-header {
+  margin-bottom: var(--margin-md, 1rem);
+}
+.experience-title {
+  font-size: var(--fontSize-xl, 1.563rem);
+  font-weight: 600;
+  margin: 0 0 var(--margin-sm, 0.5rem) 0;
+  line-height: var(--line-height-tight, 1.2);
+  background: linear-gradient(
+    90deg,
+    var(--primary, #ffffff),
+    var(--accent, #e0e0e0)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: background var(--transition-base, 0.3s ease-in-out);
+}
+.experience-item:hover .experience-title {
+  background: linear-gradient(
+    90deg,
+    var(--accent, #e0e0e0),
+    var(--primary, #ffffff)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.experience-company {
+  font-size: var(--fontSize-lg, 1.25rem);
+  color: var(--textSecondary, #b0b0b0);
+  font-weight: 500;
+  line-height: var(--line-height-normal, 1.5);
+  transition: color var(--transition-base, 0.3s ease-in-out);
+}
+.experience-item:hover .experience-company {
+  color: var(--textTertiary, #d0d0d0);
+}
+.experience-meta {
+  display: flex;
+  gap: var(--gap-lg, 1.5rem);
+  flex-wrap: wrap;
+  font-size: var(--fontSize-md, 0.8rem);
+  color: var(--textMuted, #888888);
+}
+.experience-period,
+.experience-location {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-sm, 0.5rem);
+  position: relative;
+  padding: var(--padding-xs, 0.25rem) var(--padding-sm, 0.5rem);
+  padding-left: var(--padding-xl, 2rem);
+  background: var(--surfaceOpacity, #25252599);
+  border-radius: var(--radius-sm, 0.25rem);
+  border: var(--border-1, 0.0625rem) solid transparent;
+  transition: border-color var(--transition-base, 0.3s ease-in-out),
+              background var(--transition-base, 0.3s ease-in-out);
+}
+.experience-item:hover .experience-period,
+.experience-item:hover .experience-location {
+  border-color: var(--borderSecondary, #4a4a4a);
+  background: var(--surface, #252525);
+}
+.experience-period::before {
+  content: "\f133";
+  font-family: 'fa';
+  position: absolute;
+  left: var(--space-2, 0.5rem);
+  font-size: var(--fontSize-lg, 1.25rem);
+  animation: float 3s ease-in-out infinite;
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: background var(--transition-base, 0.3s 
+ease-in-out);
+}
+.experience-location::before {
+  content: "<i class="fas fa-map-pin"></i>︎";
+  font-family: 'fa';
+  position: absolute;
+  left: var(--space-2, 0.5rem);
+  font-size: var(--fontSize-lg, 1.25rem);
+  animation: float 3s ease-in-out infinite 1.5s;
+  background: linear-gradient(90deg, var(--primary, #ffffff), var(--accent, #e0e0e0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: background var(--transition-base, 0.3s 
+ease-in-out);
+}
+.experience-description {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md, 1rem);
+}
+.experience-description-list {
+  position: relative;
+  padding-left: var(--padding-xl, 2rem);
+  font-size: var(--fontSize-base, 1rem);
+  line-height: var(--line-height-relaxed, 1.6);
+  color: var(--textPrimary, #ffffff);
+  transition: transform var(--transition-fast, 0.15s ease-in-out),
+              color var(--transition-fast, 0.15s ease-in-out),
+              padding-left var(--transition-fast, 0.15s ease-in-out);
+  opacity: 0;
+  animation: slideInLeft 0.4s ease-out forwards;
+}
+.experience-description-list:nth-child(1) { animation-delay: 0.1s; }
+.experience-description-list:nth-child(2) { animation-delay: 0.15s; }
+.experience-description-list:nth-child(3) { animation-delay: 0.2s; }
+.experience-description-list:nth-child(4) { animation-delay: 0.25s; }
+.experience-description-list:nth-child(5) { animation-delay: 0.3s; }
+.experience-description-list:nth-child(6) { animation-delay: 0.35s; }
+.experience-description-list::before {
+  content: "→";
+  font-family: 'fa';
+  position: absolute;
+  left: 0;
+  color: var(--primary, #ffffff);
+  font-weight: bold;
+  font-size: var(--fontSize-lg, 1.25rem);
+  transition: transform var(--transition-fast, 0.15s ease-in-out),
+              color var(--transition-fast, 0.15s ease-in-out);
+}
+.experience-description-list:hover {
+  padding-left: calc(var(--padding-xl, 2rem) + var(--space-2, 0.5rem));
+  color: var(--textPrimary, #ffffff);
+}
+.experience-description-list:hover::before {
+  transform: translateX(6px) scale(1.2);
+  color: var(--accent, #e0e0e0);
+}
