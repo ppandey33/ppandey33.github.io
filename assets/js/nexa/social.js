@@ -2,18 +2,14 @@ class Social {
   constructor() {
     this.visibilityTimeout = null;
   }
-
   async init() {
     await this.renderSocial();
   }
-
   async renderSocial() {
     const config = await window.App.modules.apiClient.loadJSON("/data/site-config.json");
     if (!config?.social) return;
-
     const topContainer = document.querySelector("[data-social-container]");
     const container = document.querySelector("[data-social]");
-
     if (container && config?.social) {
       container.innerHTML = "";
       config.social
@@ -25,7 +21,6 @@ class Social {
           aEl.innerHTML = socialData.icon;
           container.appendChild(aEl);
         });
-
       if (topContainer && config.social.filter((s) => s.url && s.url !== "").length > 0) {
         this.visibilityTimeout = setTimeout(() => {
           topContainer.classList.add("visible");
@@ -33,7 +28,6 @@ class Social {
       }
     }
   }
-
   cleanup() {
     if (this.visibilityTimeout) {
       clearTimeout(this.visibilityTimeout);
@@ -42,7 +36,6 @@ class Social {
     if (container) container.innerHTML = "";
   }
 }
-
 function initSocial() {
   if (window.App?.modules?.social) {
     window.App.modules.social.cleanup?.();

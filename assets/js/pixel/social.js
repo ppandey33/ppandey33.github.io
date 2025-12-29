@@ -2,15 +2,12 @@ class Social {
   constructor() {
     this.config = null;
   }
-
   async init() {
     await this.updateSiteInfo();
   }
-
   async updateSiteInfo() {
     this.config = await window.App.modules.apiClient.loadJSON("/data/site-config.json");
     if (!this.config) return;
-
     document.querySelectorAll("[data-footer-links]").forEach((el) => {
       el.innerHTML = "";
       this.config.social
@@ -24,7 +21,6 @@ class Social {
         });
     });
   }
-
   cleanup() {
     document.querySelectorAll("[data-footer-links]").forEach((el) => {
       el.innerHTML = "";
@@ -32,7 +28,6 @@ class Social {
     this.config = null;
   }
 }
-
 function initSocial() {
   if (window.App?.modules?.social) {
     window.App.modules.social.cleanup?.();

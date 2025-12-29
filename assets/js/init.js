@@ -1,6 +1,5 @@
 (function () {
   "use strict";
-
   function getInitFunctionName(filename) {
     const nameWithoutExt = filename.replace(".js", "");
     const camelCase = nameWithoutExt
@@ -10,10 +9,8 @@
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
       })
       .join("");
-
     return "init" + camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
   }
-
   window.App = {
     modules: {},
     initializedModules: new Set(),
@@ -27,19 +24,16 @@
       this.modules[name] = module;
       if (moduleInitializer != "") this.initializedModules.add(moduleInitializer);
     },
-
     get(name) {
       if (!this.modules[name]) {
         console.warn(`Module ${name} not found`);
       }
       return this.modules[name];
     },
-
     clear() {
       this.reset();
       this.modules = {};
     },
-
     reset() {
       Object.keys(this.modules).forEach((name) => {
         if (this.modules[name].cleanup) {
@@ -49,13 +43,11 @@
       this.modules = {};
       this.initializedModules.clear();
     },
-
     async initModuleFile() {
       const moduleScripts = document.querySelectorAll('script[type="module"]');
       const results = { initialized: 0, skipped: 0, failed: 0 };
       for (const script of moduleScripts) {
         if (!script.src) continue;
-
         try {
           const url = new URL(script.src, window.location.href);
           const pathname = url.pathname;
@@ -68,7 +60,6 @@
             continue;
           }
           const initFunction = module[initFunctionName];
-
           if (initFunction) {
             if (typeof initFunction === "function") {
               await initFunction();

@@ -68,10 +68,7 @@ nav {
 }
 .nav-list a.active::before,
 .nav-list a.active::after {
-  /* height: var(--border-2);
-  display: block;
-  min-height: max-content; */
-  color: var(--link, #ffffff);
+    color: var(--link, #ffffff);
 }
 .nav-list a.active::before {
   content: "<";

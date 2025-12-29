@@ -1,11 +1,9 @@
 import { Observable } from "./observable.js";
 const handleURLEvent = new Observable();
-
 class HandleUrl {
   constructor() {
     this.decodedParams = new Map();
   }
-
   decodeBase64Url(token) {
     try {
       const base64 = token.replace(/-/g, "+").replace(/_/g, "/");
@@ -15,25 +13,20 @@ class HandleUrl {
           .map((c) => "%" + c.charCodeAt(0).toString(16).padStart(2, "0"))
           .join("")
       );
-
       const preferences = JSON.parse(json);
-
       return new Map(Object.entries(preferences));
     } catch (error) {
       console.error("Failed to decode base64:", error);
       return new Map();
     }
   }
-
   isBase64Url(str) {
     return /^[A-Za-z0-9\-_]+$/.test(str) && str.length > 20;
   }
-
   init() {
     this.handleURLParams();
     window.addEventListener("hashchange", () => this.handleURLParams());
   }
-
   handleURLParams() {
     const payload = {};
     const { params, isHashURL, pathPart } = this.parseURL();
@@ -63,7 +56,6 @@ class HandleUrl {
       handleURLEvent.next(payload);
     }
   }
-
   parseURL() {
     const hash = window.location.hash;
     if (hash && hash.includes("?")) {
@@ -83,17 +75,13 @@ class HandleUrl {
     }
     return { params: null, isHashURL: false, pathPart: null };
   }
-
   cleanURL(params, isHashURL = false, pathPart = window.location.pathname) {
     const url = new URL(window.location.href);
-
     params.forEach((_value, key) => {
       url.searchParams.delete(key);
     });
-
     window.history.replaceState(null, "", url.pathname + url.hash);
   }
-
   cleanup() {
     if (this.hashChangeHandler) {
       window.removeEventListener("hashchange", this.hashChangeHandler);
@@ -102,7 +90,6 @@ class HandleUrl {
     this.decodedParams = new Map();
   }
 }
-
 function initHandleUrl() {
   if (window.App?.modules?.handleUrl) {
     window.App.modules.handleUrl.cleanup?.();
@@ -111,11 +98,9 @@ function initHandleUrl() {
   window.App.register("handleUrl", handledModule, "initHandleUrl");
   handledModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initHandleUrl);
 } else {
   initHandleUrl();
 }
-
 export { HandleUrl, initHandleUrl, handleURLEvent };

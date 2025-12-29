@@ -3,7 +3,6 @@ permalink: /404.html
 layout: common
 ignore: true
 ---
-
 <style>
   .error-page {
     min-height: 80vh;
@@ -15,7 +14,6 @@ ignore: true
     position: relative;
     overflow: hidden;
   }
-
   .error-page::before {
     content: "";
     position: absolute;
@@ -25,7 +23,6 @@ ignore: true
     background-size: 50px 50px;
     animation: float 20s linear infinite;
   }
-
   @keyframes float {
     0% {
       transform: translate(0, 0);
@@ -34,7 +31,6 @@ ignore: true
       transform: translate(50px, 50px);
     }
   }
-
   .error-container {
     background: var(--surface, #252525);
     border-radius: var(--radius-3xl, 24px);
@@ -47,7 +43,6 @@ ignore: true
     z-index: var(--z-content, 1);
     animation: slideUp var(--animation-base, 0.6s) ease-out;
   }
-
   @keyframes slideUp {
     from {
       opacity: 0;
@@ -58,14 +53,12 @@ ignore: true
       transform: translateY(0);
     }
   }
-
   .error-emoji {
     font-size: var(--fontSize-4xl, 8rem);
     margin-bottom: var(--margin-md, 1rem);
     animation: bounce 2s ease-in-out infinite;
     display: inline-block;
   }
-
   @keyframes bounce {
     0%,
     100% {
@@ -75,7 +68,6 @@ ignore: true
       transform: translateY(-20px);
     }
   }
-
   .error-code {
     font-size: var(--fontSize-4xl, 6rem);
     font-weight: 800;
@@ -87,21 +79,18 @@ ignore: true
     line-height: var(--line-height-tight, 1);
     letter-spacing: var(--letter-spacing-tight, -2px);
   }
-
   .error-title {
     font-size: var(--fontSize-2xl, 2rem);
     font-weight: 700;
     color: var(--textPrimary, #ffffff);
     margin: var(--margin-lg, 1.5rem) 0 var(--margin-md, 1rem);
   }
-
   .error-message {
     font-size: var(--fontSize-lg, 1.125rem);
     color: var(--textSecondary, #b0b0b0);
     margin-bottom: var(--margin-xl, 2rem);
     line-height: var(--line-height-relaxed, 1.6);
   }
-
   .error-actions {
     display: flex;
     gap: var(--gap-md, 1rem);
@@ -109,7 +98,6 @@ ignore: true
     flex-wrap: wrap;
     margin-top: var(--margin-xl, 2rem);
   }
-
   .btn-primary,
   .btn-secondary {
     padding: var(--padding-md, 0.875rem) var(--padding-xl, 2rem);
@@ -124,49 +112,41 @@ ignore: true
     border: none;
     cursor: pointer;
   }
-
   .btn-primary {
     background: radial-gradient(circle, var(--background, #1a1a1a) 1px, transparent 1px);
     color: var(--link, #ffffff);
     border: var(--border-2, 2px) solid var(--border, #333333);
   }
-
   .btn-primary:hover {
     transform: translateY(var(--translate-y-hover-sm, -2px));
     color: var(--linkHover, #f0f0f0);
   }
-
   .btn-secondary {
     background: var(--background, #1a1a1a);
     color: var(--textSecondary, #b0b0b0);
     border: var(--border-2, 2px) solid var(--border, #333333);
   }
-
   .btn-secondary:hover {
     background: var(--hover, #2d2d2d);
     border-color: var(--borderSecondary, #4a4a4a);
     transform: translateY(var(--translate-y-hover-sm, -2px));
   }
-
   .suggestions {
     margin-top: var(--margin-2xl, 2.5rem);
     padding-top: var(--padding-xl, 2rem);
     border-top: var(--border-2, 2px) solid var(--border, #333333);
   }
-
   .suggestions h3 {
     font-size: var(--fontSize-xl, 1.25rem);
     color: var(--textPrimary, #ffffff);
     margin-bottom: var(--margin-md, 1rem);
     font-weight: 600;
   }
-
   .suggestions-list {
     display: grid;
     gap: var(--gap-md, 0.75rem);
     text-align: left;
   }
-
   .suggestion-item {
     display: flex;
     align-items: center;
@@ -178,47 +158,37 @@ ignore: true
     text-decoration: none;
     color: var(--textSecondary, #b0b0b0);
   }
-
   .suggestion-item:hover {
     background: var(--hover, #2d2d2d);
     transform: translateX(var(--translate-x-hover-sm, 5px));
   }
-
   .suggestion-icon {
     font-size: var(--fontSize-xl, 1.5rem);
     flex-shrink: 0;
   }
-
   .suggestion-text {
     font-weight: 500;
     color: var(--link, #ffffff);
   }
-
   .suggestion-text:hover {
     color: var(--linkHover, #f0f0f0);
   }
-
   @media (max-width: 768px) {
     .error-emoji {
       font-size: var(--fontSize-3xl, 5rem);
     }
-
     .error-code {
       font-size: var(--fontSize-3xl, 4rem);
     }
-
     .error-title {
       font-size: var(--fontSize-xl, 1.5rem);
     }
-
     .error-container {
       padding: var(--padding-xl, 2rem) var(--padding-lg, 1.5rem);
     }
-
     .error-actions {
       flex-direction: column;
     }
-
     .btn-primary,
     .btn-secondary {
       color: var(--link, #ffffff);
@@ -242,12 +212,10 @@ ignore: true
     <h1 class="error-code">404</h1>
     <h2 class="error-title">Oops! Page Not Found</h2>
     <p class="error-message">The page you're looking for seems to have wandered off into the digital void. Don't worry though, we'll help you find your way back! <i class="fas fa-rocket"></i></p>
-
     <div class="error-actions">
       <a href="/" class="btn-primary"> <i class="fas fa-home"></i> Go Home </a>
       <a href="javascript:history.back()" class="btn-secondary"> <i class="fas fa-arrow-left"></i> Go Back </a>
     </div>
-
     <div class="suggestions">
       <h3><i class="fas fa-space-shuttle"></i> Try These Instead:</h3>
       <div class="suggestions-list">

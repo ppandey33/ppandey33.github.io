@@ -5,36 +5,28 @@ class Contacts {
     this.formButton = null;
     this.formStatus = null;
   }
-
   async init() {
     await this.loadContacts();
     this.renderContactForm();
   }
-
   async loadContacts() {
     this.config = await window.App.modules.apiClient.loadJSON("/data/site-config.json");
     if (!this.config?.contacts) return;
-
     this.renderContactInfo();
     this.renderContactDetails();
   }
-
   renderContactInfo() {
     const containerInfo = document.querySelector("[data-contacts-info]");
     if (!containerInfo) return;
-
     containerInfo.innerHTML = "";
     const heading = window.App.modules.util.createElement("h2", "contacts-title", this.config.contacts.title);
     const desc = window.App.modules.util.createElement("p", "contacts-description", this.config.contacts.description);
-
     containerInfo.appendChild(heading);
     containerInfo.appendChild(desc);
   }
-
   renderContactDetails() {
     const container = document.querySelector("[data-contacts]");
     if (!container || !this.config?.contacts?.details) return;
-
     container.innerHTML = "";
     this.config.contacts.details.forEach((contact) => {
       const contactItem = window.App.modules.util.createElement("div", "contact-item"),
@@ -48,13 +40,11 @@ class Contacts {
       } else {
         value = window.App.modules.util.createElement("span", "contact-value", contact?.value);
       }
-
       contactItem.appendChild(icon);
       contactItem.appendChild(value);
       container.appendChild(contactItem);
     });
   }
-
   renderContactForm() {
     const formContainer = document.querySelector("[data-contact-form]");
     if (!formContainer || !this.config?.contact) return;
@@ -66,10 +56,8 @@ class Contacts {
     const subtitle = window.App.modules.util.createElement("p", "contact-form-subtitle", contactConfig["sub-title"] || "I'll get back to you as soon as possible");
     header.appendChild(title);
     header.appendChild(subtitle);
-    
     const form = window.App.modules.util.createElement("form", "contact-form");
     form.id = "contact-form";
-    
     if (contactConfig.group && Array.isArray(contactConfig.group)) {
       contactConfig.group.forEach((field) => {
         let fieldGroup;
@@ -98,15 +86,12 @@ class Contacts {
     this.injectStyles();
     this.setupFormHandler();
   }
-
   createFormGroup(field) {
     const group = window.App.modules.util.createElement("div", "form-group");
     const label = window.App.modules.util.createElement("label", "form-label");
     label.htmlFor = field.id;
-
     const labelSpan = window.App.modules.util.createElement("span", "label-text", field.label);
     label.appendChild(labelSpan);
-
     if (field.required) {
       const requiredSpan = window.App.modules.util.createElement("span", "label-required", "*");
       label.appendChild(requiredSpan);
@@ -129,24 +114,18 @@ class Contacts {
         if (rule.pattern) input.pattern = rule.pattern;
       });
     }
-
     inputWrapper.appendChild(icon);
     inputWrapper.appendChild(input);
-
     group.appendChild(label);
     group.appendChild(inputWrapper);
-
     return group;
   }
-
   createTextareaGroup(field) {
     const group = window.App.modules.util.createElement("div", "form-group");
     const label = window.App.modules.util.createElement("label", "form-label");
     label.htmlFor = field.id;
-
     const labelSpan = window.App.modules.util.createElement("span", "label-text", field.label);
     label.appendChild(labelSpan);
-
     if (field.required) {
       const requiredSpan = window.App.modules.util.createElement("span", "label-required", "*");
       label.appendChild(requiredSpan);
@@ -166,36 +145,27 @@ class Contacts {
         if (rule["max-length"]) textarea.maxLength = rule["max-length"];
       });
     }
-
     inputWrapper.appendChild(icon);
     inputWrapper.appendChild(textarea);
-
     group.appendChild(label);
     group.appendChild(inputWrapper);
-
     return group;
   }
-
   createButton(btn) {
     const button = window.App.modules.util.createElement("button", "btn-submit");
     button.type = "button";
     button.id = btn.id || "contact-form-button";
-
     const btnText = window.App.modules.util.createElement("span", "btn-text", btn.text || "Submit");
     const btnIcon = window.App.modules.util.createElement("i", `btn-icon ${btn.class || ""}`);
     btnIcon.innerHTML = btn.icon || "";
-
     button.appendChild(btnText);
     button.appendChild(btnIcon);
-
     return button;
   }
-
   setupFormHandler() {
     this.form = document.getElementById("contact-form");
     this.formButton = document.querySelector('.btn-submit');
     this.formStatus = document.getElementById("contact-form-status");
-
     if (!this.form || !this.formButton) return;
     this.formButton.addEventListener("click", (event) => this.handleSubmit(event));
     this.form.addEventListener("submit", (event) => {
@@ -203,7 +173,6 @@ class Contacts {
       this.handleSubmit(event);
     });
   }
-
   async handleSubmit(event) {
     event.preventDefault();
     if (!this.form.checkValidity()) {
@@ -216,14 +185,12 @@ class Contacts {
     this.formButton.classList.add("loading");
     this.formButton.querySelector(".btn-text").textContent = "Sending...";
     this.formButton.querySelector(".btn-icon").innerHTML = loadingIcon;
-
     try {
       const data = new FormData(this.form);
       const actionURL = this.config.contact.on;
       if (!actionURL) {
         throw new Error("Form action URL not configured");
       }
-
       const response = await fetch(actionURL, {
         method: "POST",
         body: data,
@@ -231,12 +198,10 @@ class Contacts {
           Accept: "application/json",
         },
       });
-
       if (response.ok) {
         const successMsg = this.config.contact.messages?.find((m) => m.type === "success");
         const icon = successMsg?.icon || "&#xf164;";
         const message = successMsg?.message || "Thanks for your message! I'll get back to you soon.";
-
         this.showStatus("success", `<i class="status-icon ${successMsg?.class || "fa"}">${icon}</i>${message}`);
         this.form.reset();
       } else {
@@ -244,11 +209,9 @@ class Contacts {
         const errorMsg = this.config.contact.messages?.find((m) => m.type === "error");
         const icon = errorMsg?.icon || "&#xf5b4;";
         let message = errorMsg?.message || "Oops! There was a problem submitting your form";
-
         if (errorData.errors) {
           message = errorData.errors.map((error) => error.message).join(", ");
         }
-
         this.showStatus("error", `<i class="status-icon ${errorMsg?.class || "fa"}">${icon}</i>${message}`);
       }
     } catch (error) {
@@ -256,7 +219,6 @@ class Contacts {
       const errorMsg = this.config.contact.messages?.find((m) => m.type === "error");
       const icon = errorMsg?.icon || "&#xf5b4;";
       const message = errorMsg?.message || "Oops! There was a problem submitting your form";
-
       this.showStatus("error", `<i class="status-icon ${errorMsg?.class || "fa"}">${icon}</i>${message}`);
     } finally {
       const submitBtn = this.config.contact.buttons?.find((b) => b.type === "submit");
@@ -266,7 +228,6 @@ class Contacts {
       this.formButton.querySelector(".btn-icon").innerHTML = submitBtn?.icon || "&#xe4e8;";
     }
   }
-
   showStatus(type, message) {
     this.formStatus.className = `form-status ${type} show`;
     this.formStatus.innerHTML = message;
@@ -287,25 +248,21 @@ class Contacts {
     if (!this.form) return false;
     return this.form.checkValidity();
   }
-
   cleanup() {
     const containerInfo = document.querySelector("[data-contacts-info]");
     const container = document.querySelector("[data-contacts]");
     const formContainer = document.querySelector("[data-contact-form]");
-
     if (containerInfo) containerInfo.innerHTML = "";
     if (container) container.innerHTML = "";
     if (formContainer) formContainer.innerHTML = "";
     const styles = document.getElementById("contact-form-styles");
     if (styles) styles.remove();
-
     this.config = null;
     this.form = null;
     this.formButton = null;
     this.formStatus = null;
   }
 }
-
 function initContact() {
   if (window.App?.modules?.contacts) {
     window.App.modules.contacts.cleanup?.();
@@ -314,11 +271,9 @@ function initContact() {
   window.App.register("contacts", contactsModule, "initContact");
   contactsModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initContact);
 } else {
   initContact();
 }
-
 export { Contacts, initContact };

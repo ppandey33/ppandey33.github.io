@@ -16,10 +16,8 @@ class LoaderManager {
     this.lastUserActivityTime = Date.now();
     this.isUserIdle = false;
   }
-
   init() {
     this.loader = document.querySelector(this.loaderSelector);
-
     if (!this.loader) {
       console.warn("⚠︎ Loader element not found:", this.loaderSelector);
       return;
@@ -33,17 +31,14 @@ class LoaderManager {
     this.setupUserIdleDetection();
     this.setupLoadListeners();
   }
-
   setupPerformanceObserver() {
     if (!window.PerformanceObserver) {
       console.warn("⚠︎ PerformanceObserver not supported");
       return;
     }
-
     try {
       this.performanceObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-
         entries.forEach((entry) => {
           if (entry.entryType === "resource") {
             this.handleResourceTiming(entry);
@@ -53,7 +48,6 @@ class LoaderManager {
           }
         });
       });
-
       this.performanceObserver.observe({
         entryTypes: ["resource", "navigation"],
       });
@@ -61,10 +55,8 @@ class LoaderManager {
       console.error("❌ Error setting up PerformanceObserver:", error);
     }
   }
-
   handleResourceTiming(entry) {
     const isLoading = entry.responseEnd === 0 || entry.responseEnd - entry.fetchStart > 0;
-
     if (isLoading) {
       this.updateActivity();
     }
@@ -72,13 +64,11 @@ class LoaderManager {
     if (duration > 1000) {
     }
   }
-
   handleNavigationTiming(entry) {
     if (entry.loadEventEnd > 0) {
       this.checkIdleState();
     }
   }
-
   setupIframeTracking() {
     const existingIframes = document.querySelectorAll("iframe");
     existingIframes.forEach((iframe) => this.trackIframe(iframe));
@@ -95,13 +85,11 @@ class LoaderManager {
         });
       });
     });
-
     this.iframeObserver.observe(document.documentElement, {
       childList: true,
       subtree: true,
     });
   }
-
   trackIframe(iframe) {
     if (this.trackedIframes.has(iframe)) {
       return;
@@ -109,7 +97,6 @@ class LoaderManager {
     if (!iframe.src || iframe.src === "about:blank" || iframe.src === "") {
       return;
     }
-
     this.trackedIframes.add(iframe);
     this.increment();
     let loadHandled = false;
@@ -137,7 +124,6 @@ class LoaderManager {
         }
       });
     });
-
     srcObserver.observe(iframe, { attributes: true, attributeFilter: ["src"] });
     setTimeout(() => {
       if (!loadHandled) {
@@ -145,7 +131,6 @@ class LoaderManager {
       }
     }, 5000);
   }
-
   setupIdleDetection() {
     if ("requestIdleCallback" in window) {
       this.scheduleIdleCheck();
@@ -161,16 +146,13 @@ class LoaderManager {
       }
     });
   }
-
   scheduleIdleCheck() {
     if (this.idleCallbackId) {
       cancelIdleCallback(this.idleCallbackId);
     }
-
     this.idleCallbackId = requestIdleCallback(
       (deadline) => {
         const timeRemaining = deadline.timeRemaining();
-
         if (timeRemaining > 0) {
           this.checkIdleState();
         }
@@ -179,7 +161,6 @@ class LoaderManager {
       { timeout: 1000 }
     );
   }
-
   setupLoadListeners() {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", () => {
@@ -195,7 +176,6 @@ class LoaderManager {
   }
   setupUserIdleDetection() {
     const activityEvents = ["mousedown", "mousemove", "keypress", "scroll", "touchstart", "click", "contextmenu", "wheel"];
-
     const resetUserIdle = () => {
       const wasIdle = this.isUserIdle;
       this.lastUserActivityTime = Date.now();
@@ -204,7 +184,6 @@ class LoaderManager {
         window.dispatchEvent(new CustomEvent("user:active"));
       }
     };
-
     activityEvents.forEach((event) => {
       document.addEventListener(event, resetUserIdle, {
         passive: true,
@@ -216,10 +195,8 @@ class LoaderManager {
     }, 30000);
     this.checkUserIdleState();
   }
-
   checkUserIdleState() {
     const idleTime = Date.now() - this.lastUserActivityTime;
-
     if (idleTime >= this.userIdleThreshold && !this.isUserIdle) {
       this.isUserIdle = true;
       const idleData = this.getIdleTimeInfo();
@@ -236,7 +213,6 @@ class LoaderManager {
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
-
     let formatted = "";
     if (days > 0) {
       formatted = `${days} day${days > 1 ? "s" : ""} ${hours % 24} hour${hours % 24 !== 1 ? "s" : ""}`;
@@ -247,7 +223,6 @@ class LoaderManager {
     } else {
       formatted = `${seconds} second${seconds !== 1 ? "s" : ""}`;
     }
-
     return {
       milliseconds: idleTime,
       seconds,
@@ -273,7 +248,6 @@ class LoaderManager {
   updateActivity() {
     this.lastActivityTime = Date.now();
   }
-
   checkIdleState() {
     const timeSinceActivity = Date.now() - this.lastActivityTime;
     const isIdle = timeSinceActivity > this.idleThreshold;
@@ -284,20 +258,16 @@ class LoaderManager {
       window.dispatchEvent(new CustomEvent("app:idle"));
     }
   }
-
   checkPendingRequests() {
     if (!window.performance || !window.performance.getEntriesByType) {
       return false;
     }
-
     const resources = performance.getEntriesByType("resource");
     const recentResources = resources.filter((entry) => {
       return entry.responseEnd === 0 || Date.now() - entry.responseEnd < 100;
     });
-
     return recentResources.length > 0;
   }
-
   show() {
     if (this.loader && !this.isLoaderOn) {
       this.loader.style.display = "flex";
@@ -305,7 +275,6 @@ class LoaderManager {
       this.updateActivity();
     }
   }
-
   hide() {
     if (this.loader && this.isLoaderOn) {
       this.loader.style.display = "none";
@@ -317,13 +286,11 @@ class LoaderManager {
     this.updateActivity();
     this.show();
   }
-
   decrement() {
     this.activeRequests--;
     if (this.activeRequests < 0) {
       this.activeRequests = 0;
     }
-
     if (this.activeRequests === 0) {
       setTimeout(() => this.checkIdleState(), 100);
     }
@@ -332,9 +299,7 @@ class LoaderManager {
     if (!window.performance) {
       return null;
     }
-
     const navigation = performance.getEntriesByType("navigation")[0];
-
     if (!navigation) {
       return {
         isIdle: Date.now() - this.lastActivityTime > this.idleThreshold,
@@ -343,7 +308,6 @@ class LoaderManager {
         pageVisible: !document.hidden,
       };
     }
-
     return {
       pageLoadTime: navigation.loadEventEnd,
       domContentLoaded: navigation.domContentLoadedEventEnd,
@@ -369,39 +333,32 @@ class LoaderManager {
       },
     };
   }
-
   reset() {
     this.activeRequests = 0;
     this.lastActivityTime = Date.now();
     this.hide();
   }
-
   cleanup() {
     if (this.performanceObserver) {
       this.performanceObserver.disconnect();
       this.performanceObserver = null;
     }
-
     if (this.iframeObserver) {
       this.iframeObserver.disconnect();
       this.iframeObserver = null;
     }
-
     if (this.idleCallbackId) {
       cancelIdleCallback(this.idleCallbackId);
       this.idleCallbackId = null;
     }
-
     if (this.checkInterval) {
       clearInterval(this.checkInterval);
       this.checkInterval = null;
     }
-
     if (this.userIdleCheckInterval) {
       clearInterval(this.userIdleCheckInterval);
       this.userIdleCheckInterval = null;
     }
-
     this.reset();
     this.loader = null;
   }
@@ -413,39 +370,31 @@ class APIClient {
     this.baseURL = baseURL || window.APP_BASEURL || "";
     this.loaderManager = loaderManager;
   }
-
   async loadJSON(url, header = null) {
     const fullURL = url.includes("http") ? url : `${this.baseURL}${url}`;
-
     if (this.cachedData.has(fullURL)) {
       return this.cachedData.get(fullURL);
     }
-
     if (this.pendingRequests.has(fullURL)) {
       return this.pendingRequests.get(fullURL);
     }
-
     if (this.loaderManager) {
       this.loaderManager.increment();
     }
     const markName = `fetch-start-${Date.now()}`;
     performance.mark(markName);
-
     const requestPromise = (async () => {
       try {
         const response = header ? await fetch(fullURL, header) : await fetch(fullURL);
-
         if (!response.ok) {
           throw new Error(`Failed to load ${fullURL}: ${response.status}`);
         }
-
         const data = await response.json();
         const endMarkName = `fetch-end-${Date.now()}`;
         performance.mark(endMarkName);
         try {
           performance.measure(`fetch-${fullURL}`, markName, endMarkName);
         } catch (e) {}
-
         this.cachedData.set(fullURL, data);
         return data;
       } catch (error) {
@@ -458,43 +407,32 @@ class APIClient {
         }
       }
     })();
-
     this.pendingRequests.set(fullURL, requestPromise);
     return requestPromise;
   }
-
   async loadText(url, header = null) {
     const fullURL = url.includes("http") ? url : `${this.baseURL}${url}`;
-
     if (this.loaderManager) {
       this.loaderManager.increment();
     }
-
     try {
       const response = header ? await fetch(fullURL, header) : await fetch(fullURL);
-
       if (!response.ok) {
         throw new Error(`Failed to load ${fullURL}: ${response.status}`);
       }
-
       const text = await response.text();
-
       if (this.loaderManager) {
         this.loaderManager.decrement();
       }
-
       return text;
     } catch (error) {
       console.error("❌ Error loading text:", error);
-
       if (this.loaderManager) {
         this.loaderManager.decrement();
       }
-
       return null;
     }
   }
-
   async post(url, data, header = null) {
     const fullURL = url.includes("http") ? url : `${this.baseURL}${url}`;
     if (this.loaderManager) {
@@ -513,9 +451,6 @@ class APIClient {
         options.body = JSON.stringify(data);
       }
       const response = await fetch(fullURL, options);
-      // if (!response.ok) {
-      //   throw new Error(`POST failed ${fullURL}: ${response.status}`);
-      // }
       const result = await response.json();
       if (this.loaderManager) {
         this.loaderManager.decrement();
@@ -529,7 +464,6 @@ class APIClient {
       return {'error' : 'Response Error !!!'};
     }
   }
-
   clearCache(url = null) {
     if (url) {
       const fullURL = url.includes("http") ? url : `${this.baseURL}${url}`;
@@ -538,7 +472,6 @@ class APIClient {
       this.cachedData.clear();
     }
   }
-
   cleanup() {
     this.cachedData.clear();
     this.pendingRequests.clear();
@@ -556,10 +489,8 @@ class IdlePopupManager {
     this.messageElement = null;
     this.closeButton = null;
     this.isVisible = false;
-
     this.loaderManager = null;
   }
-
   init(loaderManager) {
     this.loaderManager = loaderManager;
     this.popup = document.getElementById(this.popupId);
@@ -567,7 +498,6 @@ class IdlePopupManager {
     if (!this.popup && this.autoCreatePopup) {
       this.createPopup();
     }
-
     if (this.popup) {
       this.messageElement = this.popup.querySelector(this.messageSelector);
       this.closeButton = this.popup.querySelector(this.closeButtonSelector);
@@ -594,7 +524,6 @@ class IdlePopupManager {
       this.hide();
     });
   }
-
   createPopup() {
     this.overlay = document.createElement("div");
     this.overlay.id = this.overlayId;
@@ -656,54 +585,44 @@ class IdlePopupManager {
         </button>
       </div>
     `;
-
     this.overlay.appendChild(this.popup);
     document.body.appendChild(this.overlay);
     this.messageElement = this.popup.querySelector(this.messageSelector);
     this.closeButton = this.popup.querySelector(this.closeButtonSelector);
   }
-
   handleUserIdle(idleData) {
     if (this.messageElement && idleData) {
       this.messageElement.textContent = `You've been idle for ${idleData.formatted}. Click continue to keep working.`;
     }
-
     this.show();
   }
-
   show() {
     if (!this.overlay || !this.popup) {
       console.warn("⚠︎ Idle popup elements not found");
       return;
     }
-
     this.overlay.style.display = "flex";
     this.isVisible = true;
     window.dispatchEvent(new CustomEvent("idle-popup:shown"));
   }
-
   hide() {
     if (!this.overlay) {
       return;
     }
-
     this.overlay.style.display = "none";
     this.isVisible = false;
     window.dispatchEvent(new CustomEvent("idle-popup:hidden"));
   }
-
   updateMessage(message) {
     if (this.messageElement) {
       this.messageElement.textContent = message;
     }
   }
-
   setIdleThreshold(minutes) {
     if (this.loaderManager) {
       this.loaderManager.setUserIdleThreshold(minutes * 60 * 1000);
     }
   }
-
   destroy() {
     if (this.overlay && this.overlay.parentNode) {
       this.overlay.parentNode.removeChild(this.overlay);
@@ -719,26 +638,20 @@ function initLoader(loaderSelector = "[data-app-loader]") {
   if (window.App?.modules?.loader) {
     window.App.modules.loader.cleanup?.();
   }
-
   const loaderModule = new LoaderManager(loaderSelector);
-
   if (window.App?.modules?.apiClient) {
     window.App.modules.apiClient.cleanup?.();
   }
-
   const apiClient = new APIClient(window.APP_BASEURL || "", loaderModule);
   if (window.App?.modules?.idlePopup) {
     window.App.modules.idlePopup.destroy?.();
   }
-
   const idlePopupManager = new IdlePopupManager({
     autoCreatePopup: true,
   });
-
   window.App.register("loader", loaderModule);
   window.App.register("apiClient", apiClient, "initLoader");
   window.App.register("idlePopup", idlePopupManager);
-
   loaderModule.init();
   idlePopupManager.init(loaderModule);
   window.checkIdleState = () => loaderModule.getMetrics();
@@ -747,11 +660,9 @@ function initLoader(loaderSelector = "[data-app-loader]") {
     idleTime: loaderManager.getCurrentIdleTime(),
   });
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initLoader);
 } else {
   initLoader();
 }
-
 export { LoaderManager, APIClient, IdlePopupManager, initLoader };

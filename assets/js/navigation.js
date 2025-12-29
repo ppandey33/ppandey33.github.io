@@ -1,7 +1,5 @@
 import { createObservable } from "./observable.js";
-
 const onNavigation = createObservable('onNavigation');
-
 class Navigation {
   constructor() {
     this.navData = null;
@@ -10,7 +8,6 @@ class Navigation {
     this.universeTrack = null;
     this.universeVisible = true;
   }
-
   async init() {
     await this.loadNavigation();
     this.renderNavigation();
@@ -22,12 +19,10 @@ class Navigation {
     this.updateSiteInfo();
     this.handleInitialHash();
   }
-
   async loadNavigation() {
     const navDetails = await window.App.modules.apiClient.loadJSON("/data/navigation.json");
     this.navData = navDetails?.items;
   }
-
   resolvePath(path) {
     if (path.startsWith("http")) return path;
     if (path.startsWith("/")) {
@@ -39,7 +34,6 @@ class Navigation {
     }
     return path;
   }
-
   closeMobileSidebars() {
     const leftSidebar = document.querySelector(".left-sidebar-card"),
       rightSidebar = document.querySelector(".right-sidebar-card"),
@@ -54,7 +48,6 @@ class Navigation {
     if (overlay) overlay.classList.remove("active");
     if (hamburger) hamburger.classList.remove("active");
   }
-
   renderNavigation() {
     const navList = document.querySelector("[data-nav-items]");
     if (navList && this.navData) {
@@ -74,7 +67,6 @@ class Navigation {
       });
     }
   }
-
   renderSectionNav() {
     const sectionNavList = document.querySelector("[data-section-nav-items]");
     if (sectionNavList && this.navData) {
@@ -87,46 +79,37 @@ class Navigation {
         a.addEventListener("click", () => {
           this.closeMobileSidebars();
         });
-
         li.appendChild(a);
         sectionNavList.appendChild(li);
       });
     }
   }
-
   setupScrollSpy() {
     const sections = document.querySelectorAll(".section[id]");
     const navLinks = document.querySelectorAll(".nav-link[data-section]");
     const sectionNavLinks = document.querySelectorAll(".section-nav-link[data-section]");
-
     this.observer = new IntersectionObserver(
       (entries) => {
         if (this.isNavigating || !this.universeVisible) return;
-
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio > 0) {
             const sectionId = entry.target.id;
-
             let maxRatio = entry.intersectionRatio;
             let mostVisibleSection = sectionId;
-
             sections.forEach((section) => {
               const rect = section.getBoundingClientRect();
               const viewportHeight = window.innerHeight;
               const sectionTop = rect.top;
               const sectionBottom = rect.bottom;
-
               const visibleTop = Math.max(0, Math.min(viewportHeight, sectionBottom));
               const visibleBottom = Math.max(0, Math.min(viewportHeight, viewportHeight - sectionTop));
               const visibleHeight = Math.max(0, Math.min(visibleTop, visibleBottom));
               const ratio = visibleHeight / viewportHeight;
-
               if (ratio > maxRatio) {
                 maxRatio = ratio;
                 mostVisibleSection = section.id;
               }
             });
-
             if (mostVisibleSection === sectionId) {
               this.updateActiveSection(sectionId, navLinks, sectionNavLinks);
             }
@@ -138,10 +121,8 @@ class Navigation {
         rootMargin: "-80px 0px -20% 0px",
       }
     );
-
     sections.forEach((section) => this.observer.observe(section));
   }
-
   updateActiveSection(sectionId, navLinks, sectionNavLinks) {
     this.currentSection = sectionId;
     if (window.location.pathname === "/" || window.location.pathname.endsWith("/index.html")) {
@@ -154,11 +135,9 @@ class Navigation {
       link.classList.toggle("active", link.getAttribute("data-section") === sectionId);
     });
   }
-
   updateActiveNavForUniverseSection(sectionId) {
     const navLinks = document.querySelectorAll(".nav-link[data-section]");
     const sectionNavLinks = document.querySelectorAll(".section-nav-link[data-section]");
-
     this.currentSection = sectionId;
     navLinks.forEach((link) => {
       link.classList.toggle("active", link.getAttribute("data-section") === sectionId);
@@ -167,17 +146,14 @@ class Navigation {
       link.classList.toggle("active", link.getAttribute("data-section") === sectionId);
     });
   }
-
   setupSmoothScroll() {
     document.addEventListener("click", (e) => {
       const anchor = e.target.closest('a[href^="#"], a[href^="/#"]');
       if (!anchor) return;
-
       const href = anchor.getAttribute("href");
       if (!href || href === "#") return;
       const hash = href.startsWith("/#") ? href.substring(2) : href.substring(1);
       const targetSection = document.getElementById(hash);
-
       if (targetSection) {
         e.preventDefault();
         this.navigateToSection(hash);
@@ -186,7 +162,6 @@ class Navigation {
       }
     });
   }
-
   setupHashNavigation() {
     window.addEventListener("hashchange", (e) => {
       e.preventDefault();
@@ -207,7 +182,6 @@ class Navigation {
       }
     });
   }
-
   handleInitialHash() {
     const hash = window.location.hash.substring(1);
     if (hash) {
@@ -216,12 +190,10 @@ class Navigation {
       }, 100);
     }
   }
-
   setupUniverseNavigation() {
     this.universeTrack = document.querySelector("[data-universe-track]");
     this.setupUniverseBackButtons();
   }
-
   setupUniverseBackButtons() {
     document.querySelectorAll("[data-return-to-universe]").forEach((link) => {
       link.addEventListener("click", (e) => {
@@ -232,7 +204,6 @@ class Navigation {
       });
     });
   }
-
   getSectionIdFromTitle(title) {
     const sectionMap = {
       "Tech DNA": "stack",
@@ -245,7 +216,6 @@ class Navigation {
     };
     return sectionMap[title] || null;
   }
-
   showUniverseSection(sectionId) {
     const mainSection = document.querySelector("section[data-service-card]");
     if (mainSection) {
@@ -281,13 +251,11 @@ class Navigation {
       onNavigation.next({ section: sectionId, type: "universe" });
     }
   }
-
   setupSectionBackButtons(section) {
     const backButtons = section.querySelectorAll("[data-return-to-universe]");
     backButtons.forEach((btn) => {
       const newBtn = btn.cloneNode(true);
       btn.parentNode?.replaceChild(newBtn, btn);
-
       newBtn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -296,7 +264,6 @@ class Navigation {
       });
     });
   }
-
   returnToUniverse() {
     const mainSection = document.querySelector("section[data-service-card]");
     if (mainSection) {
@@ -313,7 +280,6 @@ class Navigation {
     document.querySelectorAll(".universe-section").forEach((section) => {
       section.classList.remove("active");
     });
-
     this.universeVisible = true;
     this.currentSection = null;
     document.querySelectorAll(".nav-link[data-section]").forEach((link) => {
@@ -328,12 +294,10 @@ class Navigation {
     window.scrollTo({ top: universeEl?.offsetTop || 0, behavior: "smooth" });
     onNavigation.next({ section: null, type: "universe-main" });
   }
-
   navigateToSection(sectionId, animate = true) {
     const targetSection = document.getElementById(sectionId);
     if (!targetSection) return;
     const isUniverseSection = targetSection.classList.contains("universe-section");
-
     if (isUniverseSection) {
       this.showUniverseSection(sectionId);
     } else {
@@ -348,7 +312,6 @@ class Navigation {
     }
     this.closeMobileSidebars();
   }
-
   performRegularNavigation(sectionId, animate = true) {
     const targetSection = document.getElementById(sectionId);
     if (!targetSection) return;
@@ -375,7 +338,6 @@ class Navigation {
     );
     onNavigation.next({ section: sectionId, type: "regular" });
   }
-
   cleanup() {
     if (this.observer) {
       this.observer.disconnect();
@@ -385,7 +347,6 @@ class Navigation {
       this.universeTrack.style.removeProperty("height");
     }
     this.closeMobileSidebars();
-
     const navList = document.querySelector("[data-nav-items]");
     if (navList) navList.innerHTML = "";
     const sectionNavList = document.querySelector("[data-section-nav-items]");
@@ -394,22 +355,18 @@ class Navigation {
       el.innerHTML = "";
     });
   }
-
   async updateSiteInfo() {
     const siteConfig = await window.App.modules.apiClient.loadJSON("/data/site-config.json");
     if (siteConfig) {
       document.querySelectorAll("[data-site-name]").forEach((el) => {
         el.textContent = siteConfig.short_title;
       });
-
       document.querySelectorAll("[data-footer-site-name]").forEach((el) => {
         el.textContent = siteConfig.title;
       });
-
       document.querySelectorAll("[data-tagline]").forEach((el) => {
         el.textContent = siteConfig.description;
       });
-
       document.querySelectorAll("[data-footer-links]").forEach((el) => {
         siteConfig?.social
           ?.filter((s) => s.url && s.url !== "")
@@ -421,7 +378,6 @@ class Navigation {
             el.appendChild(aEl);
           });
       });
-
       document.querySelectorAll("[data-copyright-year]").forEach((el) => {
         el.textContent = `© ${new Date().getFullYear()} `;
         el.nextElementSibling.textContent = siteConfig.title;
@@ -429,7 +385,6 @@ class Navigation {
     }
   }
 }
-
 function initNavigation() {
   if (window.App?.modules?.nav) {
     window.App.modules.nav.cleanup?.();
@@ -438,11 +393,9 @@ function initNavigation() {
   window.App.register("nav", navigationModule, "initNavigation");
   navigationModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initNavigation);
 } else {
   initNavigation();
 }
-
 export { Navigation, initNavigation };

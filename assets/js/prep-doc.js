@@ -3,11 +3,9 @@ class PrepDoc {
     this.styles = this.getStyles();
     this.isMobile = this.detectMobile();
   }
-
   detectMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
-
   getStyles() {
     return {
       pdf: `
@@ -246,7 +244,6 @@ class PrepDoc {
           body { padding: 15px; }
           .section { page-break-inside: avoid; }
         }
-        
         @media screen and (max-width: 768px) {
           body { 
             padding: 15px; 
@@ -442,7 +439,6 @@ class PrepDoc {
       `,
     };
   }
-
   generateResumeHTML(data) {
     return `
     <div class="header">
@@ -520,7 +516,6 @@ class PrepDoc {
         )
         .join("")}
     </div>
-
     <div class="section">
       <div class="section-title">Education</div>
         <div class="grid">
@@ -552,7 +547,6 @@ class PrepDoc {
           .join("")}
       </div>
     </div>
-
     ${
       data.achievements && data.achievements.length > 0
         ? `
@@ -575,7 +569,6 @@ class PrepDoc {
     `
         : ""
     }
-
     ${
       data.personalDetails
         ? `
@@ -594,22 +587,17 @@ class PrepDoc {
     }
   `;
   }
-
   generatePDF(data) {
     if (this.isMobile) {
       this.generatePDFMobile(data);
       return;
     }
-
     const printWindow = window.open("", "_blank");
-
     if (!printWindow) {
       alert("Pop-up blocked! Please allow pop-ups to download the PDF.");
       return;
     }
-
     const html = this.generateResumeHTML(data);
-
     printWindow.document.write(`
     <!DOCTYPE html>
     <html>
@@ -622,9 +610,7 @@ class PrepDoc {
     <body>${html}</body>
     </html>
   `);
-
     printWindow.document.close();
-
     setTimeout(() => {
       printWindow.print();
       printWindow.onafterprint = function () {
@@ -637,7 +623,6 @@ class PrepDoc {
       }, 1000);
     }, 250);
   }
-
   generatePDFMobile(data) {
     const html = this.generateResumeHTML(data);
     const fullHTML = `
@@ -674,11 +659,9 @@ class PrepDoc {
     </body>
     </html>
     `;
-
     const blob = new Blob([fullHTML], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     const printWindow = window.open(url, "_blank");
-
     if (!printWindow) {
       const link = document.createElement("a");
       link.href = url;
@@ -686,16 +669,12 @@ class PrepDoc {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
       alert("Opening resume in new tab. Use your browser's print function to save as PDF.");
     }
-
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
-
   generateDOCX(data) {
     const html = this.generateResumeHTML(data);
-
     const docContent = `
     <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
     <head>
@@ -706,11 +685,9 @@ class PrepDoc {
     <body>${html}</body>
     </html>
   `;
-
     const blob = new Blob(["\ufeff", docContent], {
       type: "application/msword",
     });
-
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
@@ -720,7 +697,6 @@ class PrepDoc {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   }
-
   generate(data, format) {
     if (format === "PDF") {
       this.generatePDF(data);
@@ -739,7 +715,6 @@ class PrepDoc {
     return false;
   }
 }
-
 function initPrepDoc() {
   if (window.App?.modules?.docGenerator) {
     return;
@@ -747,5 +722,4 @@ function initPrepDoc() {
   const prepDocModule = new PrepDoc();
   window.App.register("prepDoc", prepDocModule, "initPrepDoc");
 }
-
 export { PrepDoc, initPrepDoc };

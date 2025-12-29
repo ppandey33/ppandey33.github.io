@@ -15,7 +15,6 @@ class Layouts {
     this.scrollHandler = null;
     this.subscription = null;
   }
-
   async init() {
     await this.loadLayouts();
     this.applyLayout(this.currentLayout);
@@ -27,7 +26,6 @@ class Layouts {
       event.layout && this.handleLayoutChange(event.layout);
     });
   }
-
   handleLayoutChange(event) {
     if (event.key === "layout" && event.newValue && event.newValue !== this.currentLayout) {
       if (this.layouts.find((l) => l.id === event.newValue)) {
@@ -41,7 +39,6 @@ class Layouts {
       }
     }
   }
-
   async loadLayouts() {
     if (this.layouts && this.layouts.length > 0) return;
     const data = await window.App.modules.apiClient.loadJSON("/data/layouts.json");
@@ -49,36 +46,30 @@ class Layouts {
       this.layouts = data.layouts;
     }
   }
-
   applyLayout(layoutId) {
     document.body.setAttribute("data-layout", layoutId);
     this.currentLayout = layoutId;
     localStorage.setItem("layout", layoutId);
     requestAnimationFrame(() => this.updateUI());
   }
-
   positionSubmenu() {
     if (!this.submenuPlaceholder || !this.layoutDropdown.classList.contains("show")) return;
-
     const triggerRect = this.layoutToggle.getBoundingClientRect();
     const dropdownRect = this.layoutDropdown.getBoundingClientRect();
     const triggerStyle = window.getComputedStyle(this.layoutToggle);
     const dropdownStyle = window.getComputedStyle(this.layoutDropdown);
-
     const triggerMargin = {
       top: parseFloat(triggerStyle.marginTop) || 0,
       right: parseFloat(triggerStyle.marginRight) || 0,
       bottom: parseFloat(triggerStyle.marginBottom) || 0,
       left: parseFloat(triggerStyle.marginLeft) || 0,
     };
-
     const dropdownMargin = {
       top: parseFloat(dropdownStyle.marginTop) || 0,
       right: parseFloat(dropdownStyle.marginRight) || 0,
       bottom: parseFloat(dropdownStyle.marginBottom) || 0,
       left: parseFloat(dropdownStyle.marginLeft) || 0,
     };
-
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     const gap = 8;
@@ -86,7 +77,6 @@ class Layouts {
     if (this.layoutDropdown.parentElement !== this.submenuPlaceholder) {
       this.submenuPlaceholder.appendChild(this.layoutDropdown);
     }
-
     this.layoutDropdown.style.position = "fixed";
     this.layoutDropdown.style.zIndex = "9999";
     let left = triggerRect.right + triggerMargin.right + gap - dropdownMargin.left;
@@ -105,101 +95,78 @@ class Layouts {
     }
     left = Math.max(viewportMargin, Math.min(left, viewportWidth - dropdownRect.width - dropdownMargin.right - viewportMargin));
     top = Math.max(viewportMargin, Math.min(top, viewportHeight - dropdownRect.height - dropdownMargin.bottom - viewportMargin));
-
     this.layoutDropdown.style.left = `${left}px`;
     this.layoutDropdown.style.top = `${top}px`;
   }
-
   setupUI() {
     this.layoutToggle = document.querySelector("[data-layout-toggle]");
     this.layoutDropdown = document.querySelector("[data-layout-dropdown]");
     this.layoutList = document.querySelector("[data-layout-list]");
-
     if (!this.layoutToggle || !this.layoutDropdown || !this.layoutList) return;
-
     this.originalParent = this.layoutDropdown.parentElement;
     this.submenuPlaceholder = document.querySelector("[data-submenu-item]");
-
     if (this.submenuPlaceholder) {
       this.resizeHandler = () => this.positionSubmenu();
       this.scrollHandler = () => this.positionSubmenu();
       window.addEventListener("resize", this.resizeHandler);
       window.addEventListener("scroll", this.scrollHandler, true);
     }
-
     this.renderLayoutList(this.layoutList);
-
     this.toggleClickHandler = (e) => {
       if (this.layoutDropdown.classList.contains("show")) {
         this.layoutDropdown.classList.remove("show");
         this.layoutToggle.classList.remove("active");
-
         if (this.submenuPlaceholder && this.layoutDropdown.parentElement === this.submenuPlaceholder) {
           this.originalParent.appendChild(this.layoutDropdown);
         }
       } else {
         this.layoutDropdown.classList.add("show");
         this.layoutToggle.classList.add("active");
-
         if (this.submenuPlaceholder) {
           this.positionSubmenu();
         }
       }
     };
-
     this.documentClickHandler = (e) => {
       if (e.target !== this.layoutToggle && !this.layoutDropdown.contains(e.target)) {
         this.layoutDropdown.classList.remove("show");
         this.layoutToggle.classList.remove("active");
-
         if (this.submenuPlaceholder && this.layoutDropdown.parentElement === this.submenuPlaceholder) {
           this.originalParent.appendChild(this.layoutDropdown);
         }
       }
     };
-
     this.dropdownClickHandler = (e) => {
       e.stopPropagation();
     };
-
     this.layoutToggle.addEventListener("click", this.toggleClickHandler);
     document.addEventListener("click", this.documentClickHandler);
     this.layoutDropdown.addEventListener("click", this.dropdownClickHandler);
   }
-
   renderLayoutList(container) {
     container.innerHTML = "";
-
     this.layouts.forEach((layout) => {
       const option = window.App.modules.util.createElement("div", "option");
       option.setAttribute("data-layout-id", layout.id);
-
       if (layout.id === this.currentLayout) {
         option.classList.add("show");
       }
-
       const name = window.App.modules.util.createElement("div", "option-name", layout.name);
       const desc = window.App.modules.util.createElement("div", "option-desc", layout.description);
-
       option.appendChild(name);
       option.appendChild(desc);
-
       option.addEventListener("click", () => {
         this.reloadNextLayout(layout.id);
       });
-
       container.appendChild(option);
     });
   }
-
   reloadNextLayout(layoutId, reloadFull = false) {
     this.applyLayout(layoutId);
     this.layoutDropdown && this.layoutDropdown.classList.remove("show"), this.layoutToggle && this.layoutToggle.classList.remove("active");
-
     if (this.submenuPlaceholder && this.layoutDropdown && this.layoutDropdown.parentElement === this.submenuPlaceholder) {
       this.originalParent.appendChild(this.layoutDropdown);
     }
-    
     if (window?.App?.modules?.loader) {
       window.App.modules.loader.isLoaderOn = false;
       window?.App?.modules?.loader?.show?.();
@@ -207,7 +174,6 @@ class Layouts {
     this.clearAllScript();
     setTimeout(() => this.reloadApp(), 1000);
   }
-
   updateUI() {
     document.querySelectorAll("[data-layout-id]").forEach((option) => {
       const layoutId = option.getAttribute("data-layout-id");
@@ -218,7 +184,6 @@ class Layouts {
       }
     });
   }
-
   clearAllScript() {
     if (window.App && window.App.reset) {
       window.App.reset();
@@ -230,7 +195,6 @@ class Layouts {
       });
     }
   }
-
   callBack() {
     fetch(`${window.location.origin}/404.html`)
       .then((response) => {
@@ -253,7 +217,6 @@ class Layouts {
         document.body.innerHTML = "<h1>Page not found</h1>";
       });
   }
-
   themeName(path) {
     const ignoreTheme = ["blogs"];
     const theme = localStorage.getItem("layout") || "nexa";
@@ -263,13 +226,10 @@ class Layouts {
     if (startsWithIgnoredTheme && moreSegments) {
       return "";
     }
-
     return `/${theme}`;
   }
-
   reloadApp() {
     let pagePath = window.location.pathname;
-
     if (pagePath === "/" || pagePath === "/index.html") {
       pagePath = "/index.html";
     }
@@ -301,7 +261,6 @@ class Layouts {
         this.callBack();
       });
   }
-
   cleanup() {
     if (this.resizeHandler) {
       window.removeEventListener("resize", this.resizeHandler);
@@ -311,7 +270,6 @@ class Layouts {
       window.removeEventListener("scroll", this.scrollHandler, true);
       this.scrollHandler = null;
     }
-
     if (this.layoutToggle && this.toggleClickHandler) {
       this.layoutToggle.removeEventListener("click", this.toggleClickHandler);
     }
@@ -321,11 +279,9 @@ class Layouts {
     if (this.layoutDropdown && this.dropdownClickHandler) {
       this.layoutDropdown.removeEventListener("click", this.dropdownClickHandler);
     }
-
     if (this.layoutDropdown && this.originalParent && this.layoutDropdown.parentElement !== this.originalParent) {
       this.originalParent.appendChild(this.layoutDropdown);
     }
-
     if (this.layoutList) {
       this.layoutList.innerHTML = "";
     }
@@ -340,7 +296,6 @@ class Layouts {
     this.originalParent = null;
   }
 }
-
 function initLayouts(options = {}) {
   if (window.App?.modules?.layout) {
     window.App.modules.layout.cleanup?.();
@@ -349,7 +304,6 @@ function initLayouts(options = {}) {
   window.App.register("layout", layoutModule, "initLayouts");
   layoutModule.init();
 }
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initLayouts);
 } else {
