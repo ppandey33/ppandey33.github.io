@@ -136,14 +136,14 @@
       "degree": "Senior Secondary (12th)",
       "school": "MSDIC",
       "location": "Deoria, Uttar Pradesh, India",
-      "year": "2008 - 2010",
+      "year": "2005 - 2006",
       "score": "57.4%"
     },
     {
       "degree": "Secondary School (10th)",
       "school": "GIC",
       "location": "Deoria, Uttar Pradesh, India",
-      "year": "2006 - 2008",
+      "year": "2003 - 2004",
       "score": "52.5%"
     }
   ],
@@ -165,7 +165,7 @@
       "LINQ"
     ],
     "Frontend Technologies": [
-      "Angular (4, 8, 15)",
+      "Angular",
       "AngularJS",
       "React",
       "TypeScript",
