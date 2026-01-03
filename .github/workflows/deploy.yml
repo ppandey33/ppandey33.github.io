@@ -3,10 +3,10 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main  # Change to 'master' if that's your default branch
+      - 'feature/2'
   pull_request:
     branches:
-      - main
+      - 'feature/2'
 
 # Allow one concurrent deployment
 concurrency:
@@ -26,11 +26,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install JavaScript minification tools
+        run: npm install -g terser clean-css-cli html-minifier
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1' # Match the Ruby version you're using
-          bundler-cache: true # Automatically runs 'bundle install' and caches gems
+          ruby-version: '3.1'
+          bundler-cache: false
+
+      - name: Update Bundler and fix platform
+        run: |
+          gem update --system
+          gem install bundler
+
+      - name: Install dependencies
+        run: |
+          bundle config set --local deployment 'false'
+          bundle config set --local path 'vendor/bundle'
+          bundle lock --add-platform x86_64-linux
+          bundle install --jobs 4 --retry 3
 
       - name: Setup Pages
         id: pages
@@ -40,6 +60,14 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+
+      - name: Minify JavaScript files
+        run: |
+          echo "Minifying JavaScript files..."
+          find _site -name "*.js" ! -name "*.js" -type f | while read file; do
+            echo "Minifying: $file"
+            terser "$file" --compress --mangle --output "$file"
+          done
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
