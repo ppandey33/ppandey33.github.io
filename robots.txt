@@ -1,0 +1,61 @@
+# robots.txt for pawan.net.in
+# Generated on: 2026-01-05
+
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Disallow crawling of hash-based URLs to prevent duplicate content
+Disallow: /#
+
+# Disallow common system/admin directories (add if you have these)
+# Disallow: /admin/
+# Disallow: /api/
+# Disallow: /config/
+# Disallow: /.git/
+# Disallow: /node_modules/
+
+# Disallow search result pages if you add search functionality
+# Disallow: /search?
+# Disallow: /*?q=
+
+# Allow CSS and JS files (important for Google to render your page properly)
+Allow: /*.css
+Allow: /*.js
+
+# Allow images (important for Google Images)
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+
+# Sitemap location
+Sitemap: https://pawan.net.in/sitemap.xml
+
+# Optional: Crawl-delay for aggressive bots (uncomment if needed)
+# Crawl-delay: 10
+
+# Optional: Specific rules for different bots
+
+# Google Bot - No restrictions
+User-agent: Googlebot
+Allow: /
+
+# Bing Bot - No restrictions
+User-agent: Bingbot
+Allow: /
+
+# Block bad bots (uncomment if you experience issues)
+# User-agent: AhrefsBot
+# Disallow: /
+
+# User-agent: SemrushBot
+# Disallow: /
+
+# User-agent: MJ12bot
+# Disallow: /
+
+# User-agent: DotBot
+# Disallow: /
