@@ -3,23 +3,28 @@ layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>{{ site.title | xml_escape }}</title>
-  <subtitle>{{ site.description | xml_escape }}</subtitle>
-  <link href="{{ site.url }}/feed.xml" rel="self"/>
-  <link href="{{ site.url }}/"/>
+  <title>Pawan Pandey - Lead .Net Full Stack Developer</title>
+  <subtitle>11+ years of experience in designing, developing, and deploying enterprise-grade web applications.</subtitle>
+  <link href="https://pawan.net.in/feed.xml" rel="self"/>
+  <link href="https://pawan.net.in/"/>
   <updated>{{ site.time | date_to_xmlschema }}</updated>
-  <id>{{ site.url }}/</id>
+  <id>https://pawan.net.in/</id>
   <author>
     <name>Pawan Pandey</name>
   </author>
 
-  {% for post in site.posts limit:20 %}
+  {% assign blog_posts = site.pages | where: "type", "blog" | sort: "params.date" | reverse %}
+  {% for post in blog_posts limit:20 %}
   <entry>
-    <title>{{ post.title | xml_escape }}</title>
-    <link href="{{ site.url }}{{ post.url }}"/>
-    <updated>{{ post.date | date_to_xmlschema }}</updated>
-    <id>{{ site.url }}{{ post.id }}</id>
+    <title>{{ post.params.title | xml_escape }}</title>
+    <link href="https://pawan.net.in{{ post.url }}"/>
+    <updated>{{ post.params.date | date_to_xmlschema | default: site.time | date_to_xmlschema }}</updated>
+    <id>https://pawan.net.in{{ post.url }}</id>
+    <summary>{{ post.params.desc | xml_escape }}</summary>
     <content type="html">{{ post.content | xml_escape }}</content>
+    <author>
+      <name>{{ post.params.author | default: "Pawan Pandey" }}</name>
+    </author>
   </entry>
   {% endfor %}
 </feed>
