@@ -28,6 +28,13 @@
     }    
   },
   {
+    "id": "subscribe",
+    "text": "Subscribe via RSS",
+    "icon": "&#xf09e;",
+    "class": "fa",
+    "url": "https://pawan.net.in/feed.xml"
+  },
+  {
     "id": "coffee",
     "text": "Support",
     "icon": "&#xf7b6;",

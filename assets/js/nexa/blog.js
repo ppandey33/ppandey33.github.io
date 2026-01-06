@@ -133,12 +133,14 @@ class Blog {
           }
         } else {
           const btn = window.App.modules.util.createSimpleButton(button, type);
-          const handler = (e) => {
-            e.preventDefault();
-            this.handleButtonAction(button.rel, button.data);
-          };
-          btn.addEventListener("click", handler);
-          this.eventListeners.push({ el: btn, type: "click", handler });
+          if (!btn?.url) {
+            const handler = (e) => {
+              e.preventDefault();
+              this.handleButtonAction(button.rel, button.data);
+            };
+            btn.addEventListener("click", handler);
+            this.eventListeners.push({ el: btn, type: "click", handler });
+          }
           container.appendChild(btn);
         }
       });

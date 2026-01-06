@@ -28,7 +28,7 @@ class Iam {
     placeholders.forEach((placeholder) => {
       const buttons = this.config?.hero?.buttons || [];
       const btnIndices = (placeholder.getAttribute("data-blog-share") || [...Array(buttons.length).keys()].join(",")).split(",").map(Number);
-      const type = placeholder.getAttribute("type") || 'icon';
+      const type = placeholder.getAttribute("type") || "icon";
       const btnContainer = window.App.modules.util.createElement("div");
       btnContainer.className = "btn-container";
       btnIndices.forEach((index) => {
@@ -51,10 +51,12 @@ class Iam {
             }
           } else {
             const btn = window.App.modules.util.createSimpleButton(button, type);
-            btn.addEventListener("click", (e) => {
-              e.preventDefault();
-              this.handleButtonAction(button.rel);
-            });
+            if (!btn?.url) {
+              btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.handleButtonAction(button.rel);
+              });
+            }
             btnContainer.appendChild(btn);
           }
         }
