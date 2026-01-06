@@ -133,7 +133,7 @@ class Blog {
           }
         } else {
           const btn = window.App.modules.util.createSimpleButton(button, type);
-          if (!btn?.url) {
+          if (!button?.url) {
             const handler = (e) => {
               e.preventDefault();
               this.handleButtonAction(button.rel, button.data);

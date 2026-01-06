@@ -51,7 +51,7 @@ class Iam {
             }
           } else {
             const btn = window.App.modules.util.createSimpleButton(button, type);
-            if (!btn?.url) {
+            if (!button?.url) {
               btn.addEventListener("click", (e) => {
                 e.preventDefault();
                 this.handleButtonAction(button.rel);
