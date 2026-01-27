@@ -208,6 +208,8 @@ class CommonUtilities {
     btn.className = `btn btn-${button.style}`;
     if (button.url) {
       btn.href = button.url;
+      button?.target && btn.setAttribute('target', button?.target);
+      button?.linkoption && btn.setAttribute('rel', button?.linkoption);
     } else if (button.rel) {
       btn.href = "#";
     }
