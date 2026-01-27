@@ -32,6 +32,8 @@
     "text": "Subscribe via RSS",
     "icon": "&#xf09e;",
     "class": "fa",
+    "target": "_blank",
+    "linkoption": "noopener noreferrer",
     "url": "https://pawan.net.in/feed.xml"
   },
   {
