@@ -86,11 +86,18 @@
         "link": "mailto:pawan4email@gmail.com; pawan@pawan.net.in"
       },
       {
+        "type": "Mobile",
+        "icon": "&#xf2a0;",
+        "class": "fas",
+        "value": "+91-8285814645",
+        "link": "tel: +91-8285814645"
+      },
+      {
         "type": "WhatsApp",
         "icon": "&#xf232;",
         "class": "fab",
-        "value": "+91-8285814645",
-        "link": "tel: +91-8285814645"
+        "value": "Send Message",
+        "link": "https://api.whatsapp.com/send/?phone=918285814645&text=Hi%20[Your%20Name],%20We%20have%20a%20requirement%20for%20[Role]%20at%20[Company%20Name]%20and%20found%20your%20profile%20suitable.%20Are%20you%20available%20to%20connect?&type=phone_number"
       },
       {
         "type": "Location",
