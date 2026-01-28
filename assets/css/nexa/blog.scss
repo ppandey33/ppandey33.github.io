@@ -655,6 +655,19 @@ div[data-header-progress] #reading-progress-container {
 .selection-color-btn:active {
   transform: scale(0.95);
 }
+.lcm-table {
+  width: fit-content;
+  tr td:first-child {
+    border: 0;
+    border-right: var(--border-1) solid var(--border, #333);
+    border-bottom: var(--border-1) solid var(--border, #333);
+  }
+  tr td:last-child {
+     border: 0;
+    border-bottom: var(--border-1) solid var(--border, #333);
+    min-width: 6rem;
+  }
+}
 @keyframes slideInRight {
   from {
     opacity: 0;
